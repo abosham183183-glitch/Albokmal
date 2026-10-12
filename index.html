@@ -38,6 +38,11 @@ h1,h2,h3,h4{font-family:'Cairo',sans-serif}
 svg.lucide{display:inline-block;vertical-align:-.15em;width:1em;height:1em;stroke-width:2;flex:none}
 a{color:inherit;text-decoration:none}
 
+/* مؤشر التحميل الصغير للشبكة */
+.loading-grid{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:.8rem;padding:3rem;color:var(--muted)}
+.spinner{width:2.5rem;height:2.5rem;border:3px solid var(--line);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 /* ═══════ الهيدر الأزرق ═══════ */
 .topbar{position:sticky;top:0;z-index:100;background:linear-gradient(120deg,var(--navy) 0%,var(--navy2) 60%,var(--blue) 130%);color:#fff;box-shadow:0 4px 24px var(--shadow)}
 .tbwrap{max-width:1240px;margin:auto;display:flex;align-items:center;gap:.9rem;padding:.55rem 1rem;flex-wrap:wrap}
@@ -46,16 +51,13 @@ a{color:inherit;text-decoration:none}
 .brand-txt h1{font-size:1.55rem;line-height:1.1;font-weight:900;letter-spacing:.3px}
 .brand-txt span{font-size:.68rem;color:var(--gold2);font-weight:700;letter-spacing:1.5px}
 .tb-space{flex:1}
-/* الساعة */
 .clockbox{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:.45rem .9rem;backdrop-filter:blur(6px)}
 .clockbox svg{color:var(--gold2);width:1.15rem;height:1.15rem}
 .clock-time{font-weight:800;font-size:1.05rem;letter-spacing:1px;direction:ltr;font-variant-numeric:tabular-nums}
 .clock-date{font-size:.66rem;color:#BFD0EA;font-weight:700;line-height:1.4}
-/* زر الليل/النهار */
 .theme-toggle{width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);color:var(--gold2);display:grid;place-items:center;transition:.3s}
 .theme-toggle:hover{transform:rotate(-15deg) scale(1.08);background:rgba(255,255,255,.16)}
 .theme-toggle svg{width:1.3rem;height:1.3rem}
-/* زر القائمة الجانبية */
 .menu-btn{width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;transition:.3s}
 .menu-btn:hover{background:var(--gold);color:#1a1200}
 .menu-btn svg{width:1.3rem;height:1.3rem}
@@ -104,7 +106,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(212,160,23,.55)}
 .btn-outline{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-weight:800;padding:.85rem 1.6rem;border-radius:14px;display:inline-flex;align-items:center;gap:.5rem;transition:.25s}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
-/* معاينة البطاقة داخل الهيرو */
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 .preview-card{width:min(320px,80vw);background:var(--surface);border-radius:22px;padding:1.3rem;color:var(--ink);box-shadow:0 30px 60px rgba(0,0,0,.4);transform:rotateY(-12deg) rotateX(6deg);transition:transform .6s cubic-bezier(.2,.9,.3,1.2);position:relative;overflow:hidden}
 .preview-card::before{content:"";position:absolute;top:0;right:0;left:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
@@ -160,7 +161,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .cards-meta b{color:var(--gold)}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
 
-/* البطاقة الحقيقية */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
@@ -296,7 +296,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7}
 .note.warn{color:var(--red)}
 
-/* عرض البطاقة الكامل */
 .detail-gallery .main{height:300px;border-radius:16px;overflow:hidden;background:var(--bg);display:grid;place-items:center;position:relative}
 .detail-gallery .main img{width:100%;height:100%;object-fit:contain;cursor:zoom-in}
 .zoomhint{position:absolute;bottom:10px;left:10px;background:rgba(10,30,60,.8);color:#fff;border-radius:99px;padding:.3rem .8rem;font-size:.68rem;font-weight:800;display:flex;align-items:center;gap:.3rem;pointer-events:none}
@@ -314,7 +313,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .da-call{background:var(--navy2)}
 .da-wa{background:var(--wa)}
 
-/* Lightbox */
 .lightbox{position:fixed;inset:0;z-index:400;background:rgba(4,10,22,.96);display:none}
 .lightbox.open{display:block}
 .lb-stage{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab}
@@ -329,14 +327,12 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .lb-nav.prev{right:10px}.lb-nav.next{left:10px}
 .lb-count{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;border-radius:99px;padding:.25rem .9rem;font-size:.8rem;font-weight:800;z-index:5}
 
-/* Toast */
 .toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%) translateY(20px);background:var(--navy);color:#fff;padding:.8rem 1.5rem;border-radius:14px;font-weight:800;font-size:.9rem;z-index:500;opacity:0;transition:.35s;pointer-events:none;box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:88vw;display:flex;align-items:center;gap:.5rem}
 .toast.show{opacity:1;transform:translateX(50%) translateY(0)}
 .toast svg{color:var(--gold2);width:1.1rem;height:1.1rem}
 .toast.error{background:var(--red)}
 .toast.error svg{color:#fff}
 
-/* Footer */
 footer{background:var(--navy);color:#BFD0EA;margin-top:2rem}
 .fwrap{max-width:1240px;margin:auto;padding:2rem 1rem;display:grid;grid-template-columns:1.4fr 1fr;gap:2rem}
 footer h4{font-family:'Cairo';color:var(--gold2);font-size:1.15rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
@@ -345,14 +341,6 @@ footer a{display:flex;align-items:center;gap:.5rem;font-size:.85rem;padding:.2re
 footer a svg{color:var(--gold2);width:.85rem;height:.85rem}
 footer a:hover{color:var(--gold2)}
 .fbottom{border-top:1px solid rgba(255,255,255,.1);text-align:center;padding:1.1rem;font-size:.8rem}
-
-.loader{display:inline-block;width:1.2rem;height:1.2rem;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.full-load{position:fixed;inset:0;background:var(--bg);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
-.full-load .loader{width:3rem;height:3rem;border-color:var(--line);border-top-color:var(--blue)}
-.full-load img{width:110px;height:110px;object-fit:contain;border-radius:20px}
-.full-load b{color:var(--navy);font-family:'Cairo'}
-[data-theme="dark"] .full-load b{color:var(--gold2)}
 
 @media(max-width:860px){
   .hero-inner{grid-template-columns:1fr}
@@ -371,12 +359,6 @@ footer a:hover{color:var(--gold2)}
 </style>
 </head>
 <body data-theme="light">
-
-<div class="full-load" id="fullLoad">
-  <img src="logo.png" alt="الكل هنا" onerror="this.style.display='none'">
-  <div class="loader"></div>
-  <b>الكل هنا — جاري التحميل...</b>
-</div>
 
 <!-- ═══════ الهيدر ═══════ -->
 <header class="topbar">
@@ -511,7 +493,9 @@ footer a:hover{color:var(--gold2)}
   <section class="section" id="allCardsSec">
     <div class="sec-title"><i data-lucide="layers"></i> كل المعلمين والحرفيين</div>
     <p class="sec-sub">بطاقات تظهر بشكل عشوائي من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
-    <div class="cards-grid" id="allCardsGrid"></div>
+    <div class="cards-grid" id="allCardsGrid">
+      <div class="loading-grid"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>
+    </div>
   </section>
 
   <!-- ═══════ الأقسام (المهن) ═══════ -->
@@ -525,7 +509,7 @@ footer a:hover{color:var(--gold2)}
   <section class="section report-band" id="reports">
     <div class="rb-txt">
       <h3><i data-lucide="shield-alert"></i> قسم الشكاوى والدعم</h3>
-      <p>واجهت إعلاناً مخالفاً أو محاولة احتيال؟ عندك مشكلة تقنية؟ راسل إدارة «الكل هنا» مباشرة عبر واتساب على الرقم المعتمد — بنراجع كل بلاغ ونتخذ الإجراء اللازم خلال وقت قصير.</p>
+      <p>واجهت إعلاناَ مخالفاً أو محاولة احتيال؟ عندك مشكلة تقنية؟ راسل إدارة «الكل هنا» مباشرة عبر واتساب على الرقم المعتمد — بنراجع كل بلاغ ونتخذ الإجراء اللازم خلال وقت قصير.</p>
     </div>
     <a class="report-wa" id="supportWa" href="#" target="_blank" rel="noopener" title="راسل الإدارة"><i data-lucide="message-circle"></i></a>
   </section>
@@ -671,17 +655,17 @@ const PROFESSIONS = [
 const DHIKR = [
   {t:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ', s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},
   {t:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', s:'أفضل الذكر — لا إله إلا الله'},
-  {t:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ', s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجاً ومن كل ضيقٍ مخرجاً'},
+  {t:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ', s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},
   {t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', s:'كنز من كنوز الجنة'},
-  {t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ', s:'من صلى عليَّ صلاةً واحدةً صلى الله عليه عشر صلوات'},
-  {t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ', s:'أحب الكلام إلى اللهthese الأربع'},
-  {t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ', s:'من قالها كفاه الله ما أهمّه من أمر الدنيا والآخرة'},
+  {t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ', s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},
+  {t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ', s:'أحب الكلام إلى الله هذه الأربع'},
+  {t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ', s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},
   {t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ', s:'من أدعية القرآن الجامعة'}
 ];
 
 /* ═══════ الحالة العامة ═══════ */
-let CARDS = [];           // كل البطاقات
-let session = null;       // جلسة المدير
+let CARDS = [];
+let session = null;
 let filter = { prov:null, prof:null };
 let workImgs = [], avaImg = null;
 let curDetail = null;
@@ -701,7 +685,7 @@ function toast(msg, type=''){
 function waLink(phone, name){
   let d = String(phone||'').replace(/\D/g,'');
   if(/^09\d{8}$/.test(d)) d = '963' + d.slice(1);
-  return 'https://wa.me/' + d + '?text=' + encodeURIComponent('مرحباً أستاذ ' + name + '، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏');
+  return 'https://wa.me/' + d + '?text=' + encodeURIComponent('مرحبا أستاذ ' + name + '، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏');
 }
 function telLink(phone){ return 'tel:+963' + String(phone||'').replace(/\D/g,'').replace(/^0/,''); }
 function trunc(s, n){ s = String(s||''); return s.length > n ? s.slice(0,n) + '…' : s; }
@@ -825,6 +809,7 @@ function renderResults(){
 
 /* ═══════ تحميل البيانات ═══════ */
 async function loadCards(){
+  $('allCardsGrid').innerHTML = '<div class="loading-grid"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>';
   const snap = await db.collection('cards').orderBy('createdAt','desc').limit(500).get();
   CARDS = snap.docs.map(d => ({ id:d.id, ...d.data() }));
   renderAll();
@@ -905,7 +890,6 @@ async function submitCard(){
   const btn = $('saveBtn'); const orig = btn.innerHTML;
   btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري النشر...';
   try {
-    /* فحص الحد اليومي والكلي لهذا الرقم */
     const todayStr = new Date().toISOString().slice(0,10);
     const dSnap = await db.collection('daily').doc(phone).get();
     const dData = dSnap.exists ? dSnap.data() : {};
@@ -1088,18 +1072,20 @@ function startDhikr(){
   dhikrTimer = setInterval(() => showDhikr((dhikrIdx+1) % DHIKR.length), 7000);
 }
 
-/* ═══════ الإقلاع ═══════ */
+/* ═══════ الإقلاع — بدون شاشة تحميل ═══════ */
 async function boot(){
   tickClock();
-  $('supportWa').href = 'https://wa.me/' + SUPPORT_WA + '?text=' + encodeURIComponent('مرحباً إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:');
+  $('supportWa').href = 'https://wa.me/' + SUPPORT_WA + '?text=' + encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:');
   startDhikr();
+  
+  /* ✅ الموقع يظهر فوراً — لا يوجد fullLoad */
+  
   try {
     await loadCards();
   } catch(e){
     console.error(e);
     $('allCardsGrid').innerHTML = emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.');
   }
-  $('fullLoad').style.display='none';
   icons();
   route();
 }
