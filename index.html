@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بلحظه ⚡ | دليل الأسطوات والصناعيين</title>
 <meta name="description" content="بلحظه — دليل الأسطوات والصناعيين بسوريا: كهرباء، سباكة، نجارة، حدادة وأكثر. اتصل أو واتساب مباشرة.">
-<link rel="icon" type="image/gif" href="logo5.gif">
+<link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
@@ -252,7 +252,7 @@ footer a:hover{color:var(--saffron)}
 <div class="adbar"><div class="adbar-track" id="adbarTrack"></div></div>
 
 <div class="full-load" id="fullLoad">
-  <img src="logo5.gif" alt="بلحظه" onerror="this.style.display='none'">
+  <img src="logo5.png" alt="بلحظه" onerror="this.style.display='none'">
   <div class="loader"></div>
   <div id="loadMsg" style="font-weight:800;color:var(--green)">بلحظه — جاري تحميل الدليل...</div>
 </div>
@@ -260,7 +260,7 @@ footer a:hover{color:var(--saffron)}
 <header id="mainHeader">
   <div class="hwrap">
     <a class="logo" href="#/">
-      <img class="logo-img" src="logo5.gif" alt="بلحظه" onerror="this.style.display='none'">
+      <img class="logo-img" src="logo5.png" alt="بلحظه" onerror="this.style.display='none'">
       <span><b>بلحظه</b><small>دليل الأسطوات والصناعيين</small></span>
     </a>
     <div class="hspace"></div>
@@ -283,7 +283,7 @@ footer a:hover{color:var(--saffron)}
   <section class="view" id="view-home">
     <div class="opening">
       <span class="eyebrow"><span class="dot"></span> دليل الحرفيين الأول بسوريا — بدون وسطاء</span>
-      <h1>كل أسطى وصانع…<br><span class="gold">بلحظة</span> ⚡ توصلك فيه</h1>
+      <h1>كل أسطى وصانع…<br><span class="gold">بلحظة</span>  توصلك فيه</h1>
       <p>كهربائي، سباك، نجار، حداد، دهان… سجّل ملفك بصورتك و١٠ صور من أعمالك، وخلّي الزباين يوصلوك مباشرة باتصال أو واتساب.</p>
       <div class="stats">
         <div class="stat"><b id="stCrafts">0</b><span>أسطى وصانع</span></div>
@@ -344,7 +344,7 @@ footer a:hover{color:var(--saffron)}
   </div>
   <div class="fwrap">
     <div>
-      <h4><img class="flogo" src="logo5.gif" alt="" onerror="this.style.display='none'"> بلحظه</h4>
+      <h4><img class="flogo" src="logo5.png" alt="" onerror="this.style.display='none'"> بلحظه</h4>
       <p style="font-size:.85rem;line-height:1.9">دليل مفتوح يجمع الأسطوات والصناعيين من كل المحافظات السورية — ملف واحد فيه صورتك وشغلك ورقمك، والزبون بيوصلك مباشرة بدون وسيط.</p>
     </div>
     <div>
@@ -442,7 +442,7 @@ function supportLink(msg){ return 'https://wa.me/' + SUPPORT_WA + '?text=' + enc
 function waCraftLink(phone, name, prof){
   let d = String(phone||'').replace(/\D/g,'');
   if(/^09\d{8}$/.test(d)) d = '963' + d.slice(1);
-  return 'https://wa.me/' + d + '?text=' + encodeURIComponent('مرحباً أسطى ' + name + '، شفت ملفك بمهنة ' + prof + ' على بلحظه وبدي أستفسر 🙏');
+  return 'https://wa.me/' + d + '?text=' + encodeURIComponent('مرحباً أسطى ' + name + '، شفت ملفك بمهنة ' + prof + ' على بلحظه وبدي أستفسر ');
 }
 
 let DB = { craftsmen: [] };
@@ -518,7 +518,7 @@ function craftCard(c){
   const imgs = (c.images||[]).map((u,i) => '<img src="' + u + '" loading="lazy" alt="عمل ' + esc(c.name) + '" onclick="openLightbox(DB.craftsmen[' + idx + '].images,' + i + ')">').join('');
   return '<article class="craft-card rv">' +
     '<div class="craft-top">' +
-      '<span class="avatar-pulse"><img src="' + (c.avatar || 'logo5.gif') + '" alt="' + esc(c.name) + '" onerror="this.src=\'logo5.gif\'"><i class="ring"></i><i class="ring r2"></i></span>' +
+      '<span class="avatar-pulse"><img src="' + (c.avatar || 'logo5.png') + '" alt="' + esc(c.name) + '" onerror="this.src=\'logo5.png\'"><i class="ring"></i><i class="ring r2"></i></span>' +
       '<span class="who"><h3>' + esc(c.name) + '</h3><span class="prof-chip"><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span></span>' +
     '</div>' +
     '<div class="strip-hint"><i data-lucide="move-horizontal"></i> مرّر يمين/يسار لتشوف أعماله (' + (c.images||[]).length + ' صور)</div>' +
@@ -668,7 +668,7 @@ function renderAdminList(q){
   }
   $('adminList').innerHTML = list.map(c =>
     '<div class="adminrow ' + (c.active !== false ? '' : 'hidden-row') + '">' +
-      '<img class="mini-ava" src="' + (c.avatar||'logo5.gif') + '" onerror="this.src=\'logo5.gif\'">' +
+      '<img class="mini-ava" src="' + (c.avatar||'logo5.png') + '" onerror="this.src=\'logo5.png\'">' +
       '<span class="who"><b>' + esc(c.name) + '</b><span>' +
         '<span><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span>' +
         '<span><i data-lucide="phone"></i> <span style="direction:ltr">' + esc(c.phone) + '</span></span>' +
