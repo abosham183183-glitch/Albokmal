@@ -350,10 +350,80 @@ footer a svg{color:var(--gold2);width:.85rem;height:.85rem}
 footer a:hover{color:var(--gold2)}
 .fbottom{border-top:1px solid rgba(255,255,255,.1);text-align:center;padding:1.1rem;font-size:.8rem}
 
+/* ═══════ صفحة تسجيل دخول المعلمين ═══════ */
+.login-page{max-width:480px;margin:2rem auto;background:var(--surface);border-radius:24px;padding:2rem;box-shadow:0 20px 50px var(--shadow);position:relative;overflow:hidden}
+.login-page::before{content:"";position:absolute;top:0;right:0;left:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.login-header{text-align:center;margin-bottom:1.5rem}
+.login-header img{width:80px;height:80px;border-radius:20px;object-fit:contain;background:var(--bg);padding:4px;margin:0 auto 1rem;display:block;box-shadow:0 8px 20px var(--shadow)}
+.login-header h2{font-size:1.5rem;color:var(--navy);margin-bottom:.3rem}
+[data-theme="dark"] .login-header h2{color:var(--gold2)}
+.login-header p{font-size:.85rem;color:var(--muted);font-weight:600}
+.login-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem}
+.tab-btn{flex:1;padding:.7rem;border-radius:12px;font-weight:800;font-size:.9rem;transition:.2s;background:var(--bg);color:var(--muted);border:1.5px solid var(--line)}
+.tab-btn.active{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-color:transparent}
+.login-form{display:none}
+.login-form.active{display:block}
+.form-group{margin-bottom:1rem}
+.form-group label{display:flex;align-items:center;gap:.4rem;font-weight:800;font-size:.82rem;margin-bottom:.4rem;color:var(--navy)}
+[data-theme="dark"] .form-group label{color:var(--gold2)}
+.form-group label svg{color:var(--gold);width:.9rem;height:.9rem}
+.form-group input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.7rem .85rem;outline:none;background:var(--surface);transition:.2s}
+.form-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 20%,transparent)}
+.login-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1200;border-radius:14px;padding:.9rem;font-weight:900;font-size:1.02rem;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 6px 18px rgba(212,160,23,.4);transition:.25s;margin-top:1rem}
+.login-submit:hover{transform:translateY(-2px)}
+.login-link{text-align:center;margin-top:1rem;font-size:.85rem;color:var(--muted)}
+.login-link a{color:var(--blue);font-weight:800;text-decoration:underline}
+[data-theme="dark"] .login-link a{color:var(--sky)}
+.secret-key-display{background:color-mix(in srgb,var(--gold) 15%,transparent);border:1.5px solid var(--gold);border-radius:12px;padding:.8rem;text-align:center;margin:1rem 0;font-family:monospace;font-size:1.1rem;font-weight:800;color:var(--navy);word-break:break-all}
+[data-theme="dark"] .secret-key-display{color:var(--gold2)}
+.copy-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--navy2);color:#fff;border:none;border-radius:8px;padding:.4rem .8rem;font-weight:800;font-size:.8rem;cursor:pointer;margin-top:.5rem;transition:.2s}
+.copy-btn:hover{background:var(--blue)}
+
+/* ═══════ لوحة تحكم المعلم ═══════ */
+.teacher-dashboard{max-width:900px;margin:2rem auto;background:var(--surface);border-radius:24px;padding:2rem;box-shadow:0 20px 50px var(--shadow);position:relative;overflow:hidden}
+.teacher-dashboard::before{content:"";position:absolute;top:0;right:0;left:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.dashboard-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.dashboard-user{display:flex;align-items:center;gap:.8rem}
+.dashboard-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);background:var(--bg)}
+.dashboard-info h3{font-size:1.2rem;color:var(--navy);margin-bottom:.2rem}
+[data-theme="dark"] .dashboard-info h3{color:var(--gold2)}
+.dashboard-info p{font-size:.8rem;color:var(--muted);font-weight:600}
+.dashboard-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.dash-btn{border-radius:10px;padding:.6rem 1rem;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;gap:.4rem;transition:.2s}
+.dash-btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1200;box-shadow:0 4px 12px rgba(212,160,23,.3)}
+.dash-btn.secondary{background:var(--bg);color:var(--ink);border:1.5px solid var(--line)}
+.dash-btn.danger{background:var(--red);color:#fff}
+.dash-btn:hover{transform:translateY(-2px)}
+.dashboard-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.stat-card{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat-card b{font-family:'Cairo';font-size:1.5rem;color:var(--navy);display:block;line-height:1}
+[data-theme="dark"] .stat-card b{color:var(--gold2)}
+.stat-card span{font-size:.75rem;color:var(--muted);font-weight:700}
+.dashboard-section{margin-bottom:1.5rem}
+.dashboard-section h4{font-size:1.1rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+[data-theme="dark"] .dashboard-section h4{color:var(--gold2)}
+.dashboard-section h4 svg{color:var(--gold);width:1.1rem;height:1.1rem}
+.dashboard-images{display:flex;gap:.6rem;flex-wrap:wrap}
+.dashboard-images .pv{width:100px;height:75px}
+.logout-confirm{position:fixed;inset:0;background:rgba(6,13,28,.8);backdrop-filter:blur(5px);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem}
+.logout-confirm.open{display:flex}
+.confirm-modal{background:var(--surface);border-radius:20px;padding:1.5rem;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.confirm-modal h3{font-size:1.2rem;color:var(--navy);margin-bottom:.8rem}
+[data-theme="dark"] .confirm-modal h3{color:var(--gold2)}
+.confirm-modal p{font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.8}
+.confirm-actions{display:flex;gap:.8rem;justify-content:center}
+.confirm-btn{border-radius:10px;padding:.7rem 1.2rem;font-weight:800;font-size:.9rem;transition:.2s}
+.confirm-btn.cancel{background:var(--bg);color:var(--ink);border:1.5px solid var(--line)}
+.confirm-btn.confirm{background:var(--red);color:#fff}
+.confirm-btn:hover{transform:translateY(-2px)}
+
 @media(max-width:860px){
   .hero-inner{grid-template-columns:1fr}
   .hero-card-wrap{order:-1}
   .fwrap{grid-template-columns:1fr}
+  .teacher-dashboard{padding:1.5rem}
+  .dashboard-header{flex-direction:column;align-items:flex-start}
+  .dashboard-actions{width:100%;justify-content:flex-start}
 }
 @media(max-width:600px){
   .tbwrap{gap:.6rem}
@@ -363,6 +433,10 @@ footer a:hover{color:var(--gold2)}
   .logo-big{width:50px;height:50px}
   .frow{grid-template-columns:1fr}
   .prov-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .login-page{margin:1rem;padding:1.5rem}
+  .teacher-dashboard{margin:1rem;padding:1.2rem}
+  .dashboard-stats{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -409,6 +483,10 @@ footer a:hover{color:var(--gold2)}
     <a class="dr-item" href="#admin" id="adminLink" style="display:none"><i data-lucide="shield-check"></i> لوحة الإدارة</a>
     <a class="dr-item" href="#" onclick="doLogin();return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
     <a class="dr-item" href="#" onclick="doLogout();return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
+    <div class="dr-sep"></div>
+    <a class="dr-item" href="#teacher-login" id="teacherLoginLink"><i data-lucide="user-lock"></i> دخول المعلمين</a>
+    <a class="dr-item" href="#teacher-dashboard" id="teacherDashLink" style="display:none"><i data-lucide="layout-dashboard"></i> لوحة تحكيمي</a>
+    <a class="dr-item" href="#" onclick="teacherLogout();return false" id="teacherLogoutLink" style="display:none"><i data-lucide="log-out"></i> خروج من حسابي</a>
   </div>
   <div class="dr-foot">© 2026 الكل هنا — جميع الحقوق محفوظة</div>
 </nav>
@@ -525,101 +603,173 @@ footer a:hover{color:var(--gold2)}
   <!-- ═══════ شريط الأذكار ═══════ -->
   <section class="section dhikr-band" id="dhikrSec">
     <div class="dhikr-head"><i data-lucide="book-heart"></i><b>أذكار وتسبيحات</b></div>
-    <div class="dhikr-quote" id="dhikrQuote">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div>
+    <div class="dhikr-quote" id="dhikrQuote">سُبْحَانَ اللَهَ وَبِحَمْدِهِ</div>
     <div class="dhikr-src" id="dhikrSrc">— ذكر الله —</div>
     <div class="dhikr-dots" id="dhikrDots"></div>
   </section>
 
-  <!-- ═══════ لوحة الإدارة ═══════ -->
-  <section class="section" id="adminSec" style="display:none">
-    <div class="sec-title"><i data-lucide="shield-check"></i> لوحة الإدارة</div>
-    <div class="admin-hero">
-      <h2><i data-lucide="shield-check"></i> مركز التحكم بالبطاقات</h2>
-      <p>ابحث عن أي بطاقة برقم الـ ID أو الاسم أو الهاتف، واحذف منشورات الأشخاص المخالفين نهائيا من المنصة.</p>
+  <!-- ═══════ صفحة تسجيل دخول المعلمين ═══════ -->
+  <section class="section login-page" id="teacherLoginPage" style="display:none">
+    <div class="login-header">
+      <img src="logo5.png" alt="" onerror="this.style.display='none'">
+      <h2>دخول المعلمين والحرفيين</h2>
+      <p>سجّل دخولك لإدارة بطاقتك المهنية وتعديل بياناتك</p>
     </div>
-    <div class="admin-stats">
-      <div class="astat"><i data-lucide="credit-card"></i><b id="adTotal">0</b><span>إجمالي البطاقات</span></div>
-      <div class="astat"><i data-lucide="map-pin"></i><b id="adProvs">0</b><span>محافظات ممثلة</span></div>
-      <div class="astat"><i data-lucide="wrench"></i><b id="adCats">0</b><span>مهن مختلفة</span></div>
-      <div class="astat"><i data-lucide="images"></i><b id="adImgs">0</b><span>صور منشورة</span></div>
+    
+    <div class="login-tabs">
+      <button class="tab-btn active" onclick="switchLoginTab('register')">إنشاء حساب جديد</button>
+      <button class="tab-btn" onclick="switchLoginTab('login')">تسجيل الدخول</button>
     </div>
-    <div class="admin-search">
-      <i data-lucide="search"></i>
-      <input id="adminQ" type="search" placeholder="ابحث: ID:100042 أو اسم أو رقم هاتف..." oninput="adminSearch(this.value)">
-    </div>
-    <div id="adminList"></div>
+    
+    <!-- نموذج التسجيل -->
+    <form class="login-form active" id="registerForm" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label><i data-lucide="user"></i> الاسم الثلاثي *</label>
+        <input type="text" id="regName" placeholder="مثال: محمد أحمد العلي" required>
+      </div>
+      <div class="form-group">
+        <label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label>
+        <input type="tel" id="regPhone" placeholder="09XXXXXXXX" pattern="^09\d{8}$" required style="direction:ltr">
+      </div>
+      <div class="form-group">
+        <label><i data-lucide="lock"></i> كلمة المرور *</label>
+        <input type="password" id="regPass" placeholder="••••••••" minlength="6" required>
+      </div>
+      <div class="form-group">
+        <label><i data-lucide="mail"></i> البريد الإلكتروني (اختياري)</label>
+        <input type="email" id="regEmail" placeholder="example@mail.com" style="direction:ltr">
+      </div>
+      <button type="submit" class="login-submit"><i data-lucide="user-plus"></i> إنشاء الحساب</button>
+      <div class="login-link">
+        <p>بعد الإنشاء ستظهر لك <strong>رمز سري مكون من 16 حرفا</strong>. احفظه جيدا لأنه مطلوب للدخول!</p>
+      </div>
+    </form>
+    
+    <!-- نموذج الدخول -->
+    <form class="login-form" id="loginForm" onsubmit="handleTeacherLogin(event)">
+      <div class="form-group">
+        <label><i data-lucide="phone"></i> رقم الهاتف *</label>
+        <input type="tel" id="loginPhone" placeholder="09XXXXXXXX" pattern="^09\d{8}$" required style="direction:ltr">
+      </div>
+      <div class="form-group">
+        <label><i data-lucide="key-round"></i> الرمز السري (16 حرف) *</label>
+        <input type="text" id="loginSecret" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" required style="direction:ltr;text-transform:uppercase">
+      </div>
+      <button type="submit" class="login-submit"><i data-lucide="log-in"></i> تسجيل الدخول</button>
+      <div class="login-link">
+        <a href="#" onclick="forgotSecret();return false">نسيت الرمز السري؟</a>
+      </div>
+    </form>
   </section>
-</main>
 
-<footer>
-  <div class="fwrap">
-    <div>
-      <h4><img src="logo5.png" alt="" onerror="this.style.display='none'"> الكل هنا</h4>
-      <p style="font-size:.85rem;line-height:1.9;max-width:46ch">منصة خدمية تجمع أصحاب المهن مع أصحاب العمل من كل المحافظات السورية. أنشئ بطاقتك المهنية، اعرض أعمالك، وخلّي الزبون يوصلك مباشرة.</p>
-    </div>
-    <div>
-      <h4>روابط سريعة</h4>
-      <a href="#" onclick="openCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
-      <a href="#provinces" onclick="document.getElementById('provSec').scrollIntoView({behavior:'smooth'});return false"><i data-lucide="map-pin"></i> المحافظات</a>
-      <a href="#categories" onclick="document.getElementById('catSec').scrollIntoView({behavior:'smooth'});return false"><i data-lucide="layout-grid"></i> الأقسام</a>
-      <a href="#reports" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'});return false"><i data-lucide="shield-alert"></i> الشكاوى</a>
-    </div>
-  </div>
-  <div class="fbottom">© 2026 الكل هنا — جميع الحقوق محفوظة</div>
-</footer>
-
-<!-- ═══════ نافذة إنشاء البطاقة ═══════ -->
-<div class="overlay" id="createModal">
-  <div class="modal wide">
-    <div class="mhead"><h3><i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية</h3><button class="xbtn" onclick="closeModal('createModal')"><i data-lucide="x"></i></button></div>
-    <div class="mbody">
-      <div class="field"><label><i data-lucide="user"></i> الاسم الثلاثي *</label><input id="cName" placeholder="مثال: محمد أحمد العلي"></div>
-      <div class="frow">
-        <div class="field"><label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label><input id="cPhone" placeholder="09XXXXXXXX" style="direction:ltr"></div>
-        <div class="field"><label><i data-lucide="map-pin"></i> المحافظة *</label><select id="cProv"></select></div>
+  <!-- ═══════ لوحة تحكم المعلم ═══════ -->
+  <section class="section teacher-dashboard" id="teacherDashboard" style="display:none">
+    <div class="dashboard-header">
+      <div class="dashboard-user">
+        <img class="dashboard-avatar" id="dashAvatar" src="logo5.png" alt="">
+        <div class="dashboard-info">
+          <h3 id="dashName">مرحبا بك</h3>
+          <p id="dashPhone">09XXXXXXXX</p>
+        </div>
       </div>
-      <div class="field"><label><i data-lucide="wrench"></i> المهنة *</label><select id="cProf"></select></div>
-      <div class="field" id="profOtherWrap" style="display:none"><label><i data-lucide="pencil"></i> اكتب مهنتك *</label><input id="cProfOther" placeholder="مثال: صناعات رخام"></div>
-      <div class="field"><label><i data-lucide="align-right"></i> وصف مختصر عنك وعن خبرتك</label><textarea id="cDesc" maxlength="600" placeholder="اكتب نبذة عن حرفتك وسنوات خبرتك والخدمات التي تقدمها..."></textarea></div>
-      <div class="field"><label><i data-lucide="image"></i> صورتك الشخصية أو شعارك</label>
-        <div class="imgdrop" onclick="document.getElementById('cAvatar').click()"><i data-lucide="camera"></i> اختر الصورة الشخصية</div>
-        <input type="file" id="cAvatar" accept="image/*" hidden onchange="onAvaPick(this)">
-        <div class="previews" id="avaPreview"></div>
+      <div class="dashboard-actions">
+        <button class="dash-btn primary" onclick="editMyCard()"><i data-lucide="edit-3"></i> تعديل بطاقتي</button>
+        <button class="dash-btn secondary" onclick="addImagesToCard()"><i data-lucide="images"></i> إضافة صور</button>
+        <button class="dash-btn danger" onclick="showDeleteConfirm()"><i data-lucide="trash-2"></i> حذف البطاقة</button>
       </div>
-      <div class="field"><label><i data-lucide="images"></i> صور من أعمالك</label>
-        <div class="imgdrop" onclick="document.getElementById('cImgs').click()"><i data-lucide="plus"></i> أضف صور أعمال جديدة</div>
-        <input type="file" id="cImgs" accept="image/*" multiple hidden onchange="onWorkPick(this)">
-        <div class="note" id="workNote">اليوم: 0 / 3 صور · المجموع الكلي: 0 / 50 صورة</div>
-        <div class="previews" id="previews"></div>
+    </div>
+    
+    <div class="dashboard-stats">
+      <div class="stat-card"><b id="statId">---</b><span>رقم الهوية</span></div>
+      <div class="stat-card"><b id="statProf">---</b><span>المهنة</span></div>
+      <div class="stat-card"><b id="statProv">---</b><span>المحافظة</span></div>
+      <div class="stat-card"><b id="statImgs">0</b><span>عدد الصور</span></div>
+    </div>
+    
+    <div class="dashboard-section">
+      <h4><i data-lucide="align-left"></i> الوصف الحالي</h4>
+      <p id="dashDesc" style="color:var(--muted);font-size:.9rem;line-height:1.8">لم يتم إضافة وصف بعد.</p>
+    </div>
+    
+    <div class="dashboard-section">
+      <h4><i data-lucide="images"></i> معرض الصور (<span id="imgCount">0</span>/50)</h4>
+      <div class="dashboard-images" id="dashImages">
+        <div class="empty-state" style="padding:1rem"><i data-lucide="image-off"></i>لا توجد صور بعد</div>
       </div>
-      <button class="submit" id="saveBtn" onclick="submitCard()"><i data-lucide="rocket"></i> انشر بطاقتي</button>
+    </div>
+    
+    <div class="dashboard-section">
+      <h4><i data-lucide="shield-check"></i> معلومات الأمان</h4>
+      <div class="secret-key-display" id="mySecretKey">XXXXXXXXXXXXXXXX</div>
+      <button class="copy-btn" onclick="copySecretKey()"><i data-lucide="copy"></i> نسخ الرمز السري</button>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:.5rem">⚠️ هذا الرمز هو مفتاح الدخول الوحيد لبطاقتك. لا تشاركه مع أحد!</p>
+    </div>
+  </section>
+
+  <!-- ═══════ نافذة إنشاء البطاقة ═══════ -->
+  <div class="overlay" id="createModal">
+    <div class="modal wide">
+      <div class="mhead"><h3><i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية</h3><button class="xbtn" onclick="closeModal('createModal')"><i data-lucide="x"></i></button></div>
+      <div class="mbody">
+        <div class="field"><label><i data-lucide="user"></i> الاسم الثلاثي *</label><input id="cName" placeholder="مثال: محمد أحمد العلي"></div>
+        <div class="frow">
+          <div class="field"><label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label><input id="cPhone" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+          <div class="field"><label><i data-lucide="map-pin"></i> المحافظة *</label><select id="cProv"></select></div>
+        </div>
+        <div class="field"><label><i data-lucide="wrench"></i> المهنة *</label><select id="cProf"></select></div>
+        <div class="field" id="profOtherWrap" style="display:none"><label><i data-lucide="pencil"></i> اكتب مهنتك *</label><input id="cProfOther" placeholder="مثال: صناعات رخام"></div>
+        <div class="field"><label><i data-lucide="align-right"></i> وصف مختصر عنك وعن خبرتك</label><textarea id="cDesc" maxlength="600" placeholder="اكتب نبذة عن حرفتك وسنوات خبرتك والخدمات التي تقدمها..."></textarea></div>
+        <div class="field"><label><i data-lucide="image"></i> صورتك الشخصية أو شعارك</label>
+          <div class="imgdrop" onclick="document.getElementById('cAvatar').click()"><i data-lucide="camera"></i> اختر الصورة الشخصية</div>
+          <input type="file" id="cAvatar" accept="image/*" hidden onchange="onAvaPick(this)">
+          <div class="previews" id="avaPreview"></div>
+        </div>
+        <div class="field"><label><i data-lucide="images"></i> صور من أعمالك</label>
+          <div class="imgdrop" onclick="document.getElementById('cImgs').click()"><i data-lucide="plus"></i> أضف صور أعمال جديدة</div>
+          <input type="file" id="cImgs" accept="image/*" multiple hidden onchange="onWorkPick(this)">
+          <div class="note" id="workNote">اليوم: 0 / 3 صور · المجموع الكلي: 0 / 50 صورة</div>
+          <div class="previews" id="previews"></div>
+        </div>
+        <button class="submit" id="saveBtn" onclick="submitCard()"><i data-lucide="rocket"></i> انشر بطاقتي</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════ نافذة عرض البطاقة ═══════ -->
-<div class="overlay" id="detailModal">
-  <div class="modal wide">
-    <div class="mhead"><h3><i data-lucide="contact"></i> تفاصيل البطاقة</h3><button class="xbtn" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button></div>
-    <div class="mbody"><div id="detailBody"></div></div>
+  <!-- ═══════ نافذة عرض البطاقة ═══════ -->
+  <div class="overlay" id="detailModal">
+    <div class="modal wide">
+      <div class="mhead"><h3><i data-lucide="contact"></i> تفاصيل البطاقة</h3><button class="xbtn" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button></div>
+      <div class="mbody"><div id="detailBody"></div></div>
+    </div>
   </div>
-</div>
 
-<!-- ═══════ Lightbox ═══════ -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-x" onclick="closeLightbox()"><i data-lucide="x"></i></button>
-  <div class="lb-tools">
-    <button onclick="lbZoom(1.25)"><i data-lucide="zoom-in"></i></button>
-    <button onclick="lbZoom(0.8)"><i data-lucide="zoom-out"></i></button>
-    <button onclick="lbReset()"><i data-lucide="maximize"></i></button>
+  <!-- ═══════ Lightbox ═══════ -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-x" onclick="closeLightbox()"><i data-lucide="x"></i></button>
+    <div class="lb-tools">
+      <button onclick="lbZoom(1.25)"><i data-lucide="zoom-in"></i></button>
+      <button onclick="lbZoom(0.8)"><i data-lucide="zoom-out"></i></button>
+      <button onclick="lbReset()"><i data-lucide="maximize"></i></button>
+    </div>
+    <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
+    <button class="lb-nav prev" onclick="lbGo(-1)"><i data-lucide="chevron-right"></i></button>
+    <button class="lb-nav next" onclick="lbGo(1)"><i data-lucide="chevron-left"></i></button>
+    <div class="lb-count" id="lbCount"></div>
   </div>
-  <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
-  <button class="lb-nav prev" onclick="lbGo(-1)"><i data-lucide="chevron-right"></i></button>
-  <button class="lb-nav next" onclick="lbGo(1)"><i data-lucide="chevron-left"></i></button>
-  <div class="lb-count" id="lbCount"></div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <!-- ═══════ تأكيد الحذف ═══════ -->
+  <div class="logout-confirm" id="deleteConfirm">
+    <div class="confirm-modal">
+      <h3>⚠️ حذف نهائي للبطاقة؟</h3>
+      <p>سيتم حذف بطاقتك وكل صورك من المنصة نهائياً. لا يمكن التراجع عن هذا الإجراء.</p>
+      <div class="confirm-actions">
+        <button class="confirm-btn cancel" onclick="hideDeleteConfirm()">إلغاء</button>
+        <button class="confirm-btn confirm" onclick="deleteMyCard()">نعم، احذفها</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
 
 <script>
 /* ═══════ إعدادات Firebase ═══════ */
@@ -661,7 +811,7 @@ const PROFESSIONS = [
   {name:'أخرى', icon:'wrench'}
 ];
 const DHIKR = [
-  {t:'سُبْحَانَ اللَهِ وَبِحَمْدِهِ، سُبْحَانَ اللَهِ الْعَظِيمِ', s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},
+  {t:'سُبْحَانَ اللَهَ وَبِحَمْدِهِ، سُبْحَانَ اللَهَ الْعَظِيمِ', s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},
   {t:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', s:'أفضل الذكر — لا إله إلا الله'},
   {t:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ', s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},
   {t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', s:'كنز من كنوز الجنة'},
@@ -673,12 +823,13 @@ const DHIKR = [
 
 /* ═══════ الحالة العامة ═══════ */
 let CARDS = [];
-let session = null;
+let session = null; // جلسة المدير Google
+let teacherSession = null; // جلسة المعلم المحلي
 let filter = { prov:null, prof:null };
 let workImgs = [], avaImg = null;
 let curDetail = null;
 let dailyUsed = 0, totalUsed = 0;
-let userSecretKey = null; // الرمز السري للمستخدم الحالي
+let editingCardId = null; // عند التعديل
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
@@ -705,6 +856,16 @@ function generateSecretKey(){
   let result = '';
   for(let i=0; i<16; i++) result += chars.charAt(Math.floor(Math.random()*chars.length));
   return result;
+}
+
+/* تنسيق الرمز السري للعرض XXXX-XXXX-XXXX-XXXX */
+function formatSecret(key){
+  return key.match(/.{1,4}/g).join('-');
+}
+
+/* إزالة التنسيق من الرمز السري للإدخال */
+function cleanSecret(input){
+  return String(input||'').replace(/[^A-Za-z0-9]/g,'').toUpperCase();
 }
 
 /* ═══════ الساعة الحيّة ═══════ */
@@ -751,8 +912,27 @@ $$('.dr-item[data-nav]').forEach(a => a.addEventListener('click', () => {
 function parseHash(){ return location.hash.replace(/^#\/?/,''); }
 function route(){
   const h = parseHash();
-  if(h === 'admin'){ showAdmin(); }
-  else { hideAdmin(); }
+  
+  // إخفاء كل الصفحات الخاصة
+  $('teacherLoginPage').style.display = 'none';
+  $('teacherDashboard').style.display = 'none';
+  hideAdmin();
+  
+  if(h === 'admin'){ 
+    showAdmin(); 
+  } else if(h === 'teacher-login'){
+    $('teacherLoginPage').style.display = '';
+    window.scrollTo({top:$('teacherLoginPage').offsetTop - 80, behavior:'smooth'});
+  } else if(h === 'teacher-dashboard'){
+    if(!teacherSession){ 
+      toast('يجب تسجيل الدخول أولا','error'); 
+      location.hash = '#teacher-login'; 
+      return; 
+    }
+    $('teacherDashboard').style.display = '';
+    renderTeacherDashboard();
+    window.scrollTo({top:$('teacherDashboard').offsetTop - 80, behavior:'smooth'});
+  }
 }
 window.addEventListener('hashchange', route);
 
@@ -780,13 +960,13 @@ function cardHTML(c){
   const strip = imgs || '<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>';
   
   // تحديد إذا كان المستخدم الحالي هو صاحب البطاقة
-  const isOwner = userSecretKey && c.secretKey === userSecretKey;
+  const isOwner = teacherSession && teacherSession.phone === c.phone;
   const isAdmin = session && session.email === ADMIN_EMAIL;
   
   let actionsHtml = '';
   if(isOwner || isAdmin){
-    actionsHtml = '<a class="cbtn edit" href="#" onclick="editCard(event,\'' + c.id + '\')" ><i data-lucide="edit-3"></i> تعديل</a>' +
-                  '<a class="cbtn del" href="#" onclick="deleteCardConfirm(event,\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف</a>';
+    actionsHtml = '<a class="cbtn edit" href="#" onclick="quickEditCard(event,\'' + c.id + '\')" ><i data-lucide="edit-3"></i> تعديل</a>' +
+                  '<a class="cbtn del" href="#" onclick="quickDeleteCard(event,\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف</a>';
   } else {
     actionsHtml = '<a class="cbtn call" href="' + telLink(c.phone) + '" onclick="event.stopPropagation()"><i data-lucide="phone"></i> اتصال</a>' +
                   '<a class="cbtn wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i data-lucide="message-circle"></i> واتساب</a>';
@@ -829,12 +1009,26 @@ function setProvince(p){
   renderResults(); 
   buildProvinces(); 
   buildCategories(); 
+  // تمرير تلقائي لقسم النتائج
+  setTimeout(() => {
+    const resultsEl = $('resultsSec');
+    if(resultsEl.style.display !== 'none') {
+      resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }, 100);
 }
 function setProfession(pr){ 
   filter = { prov:null, prof:(filter.prof===pr?null:pr) }; 
   renderResults(); 
   buildProvinces(); 
   buildCategories(); 
+  // تمرير تلقائي لقسم النتائج
+  setTimeout(() => {
+    const resultsEl = $('resultsSec');
+    if(resultsEl.style.display !== 'none') {
+      resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }, 100);
 }
 function clearFilter(){ 
   filter = { prov:null, prof:null }; 
@@ -916,6 +1110,9 @@ function openCreate(){
   workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0;
   $('previews').innerHTML = ''; $('avaPreview').innerHTML = '';
   renderWorkPreviews();
+  editingCardId = null;
+  $('.mhead h3').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
+  $('#saveBtn').onclick = submitCard;
   openModal('createModal');
 }
 function profChanged(){ $('profOtherWrap').style.display = $('cProf').value === 'أخرى' ? '' : 'none'; }
@@ -964,7 +1161,8 @@ async function submitCard(){
     $('cProf').selectedIndex = 0;
     
     // عرض الرمز السري للمستخدم لحفظه
-    alert('تم إنشاء بطاقتك بنجاح!\n\nهذا هو رمزك السري للتعديل والحذف:\n' + secretKey + '\n\nاحتفظ به جيدا!');
+    const formattedKey = formatSecret(secretKey);
+    alert('تم إنشاء بطاقتك بنجاح!\n\nهذا هو رمزك السري للتعديل والحذف:\n' + formattedKey + '\n\nاحتفظ به جيدا!');
     
     toast('تم نشر بطاقتك بنجاح! 🎉');
     await loadCards();
@@ -978,7 +1176,7 @@ function openDetail(id){
   if(!c) return;
   curDetail = id;
   
-  const isOwner = userSecretKey && c.secretKey === userSecretKey;
+  const isOwner = teacherSession && teacherSession.phone === c.phone;
   const isAdmin = session && session.email === ADMIN_EMAIL;
   
   const gallery = (c.images && c.images.length)
@@ -988,8 +1186,8 @@ function openDetail(id){
     
   let actionsHtml = '';
   if(isOwner || isAdmin){
-    actionsHtml = '<a class="da-edit" href="#" onclick="editCard(event,\'' + c.id + '\')"><i data-lucide="edit-3"></i> تعديل البطاقة</a>' +
-                  '<a class="da-del" href="#" onclick="deleteCardConfirm(event,\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف نهائي</a>';
+    actionsHtml = '<a class="da-edit" href="#" onclick="quickEditCard(event,\'' + c.id + '\')"><i data-lucide="edit-3"></i> تعديل البطاقة</a>' +
+                  '<a class="da-del" href="#" onclick="quickDeleteCard(event,\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف نهائي</a>';
   } else {
     actionsHtml = '<a class="da-call" href="' + telLink(c.phone) + '"><i data-lucide="phone"></i> اتصال مباشر</a>' +
                   '<a class="da-wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> واتساب</a>';
@@ -1025,14 +1223,17 @@ window.swapDet = function(el, url){
   el.classList.add('on');
 };
 
-/* ═══════ تعديل وحذف البطاقة ═══════ */
-function editCard(event, id){
+/* ═══════ تعديل وحذف سريع من الشبكة ═══════ */
+function quickEditCard(event, id){
   event.preventDefault();
+  event.stopPropagation();
   const c = CARDS.find(x => x.id === id);
   if(!c) return;
   
-  // التحقق من الملكية
-  if(userSecretKey !== c.secretKey && (!session || session.email !== ADMIN_EMAIL)){
+  const isOwner = teacherSession && teacherSession.phone === c.phone;
+  const isAdmin = session && session.email === ADMIN_EMAIL;
+  
+  if(!isOwner && !isAdmin){
     return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error');
   }
   
@@ -1054,6 +1255,7 @@ function editCard(event, id){
   // تغيير عنوان النافذة وزر الحفظ
   $('.mhead h3').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
   $('#saveBtn').onclick = () => saveEditedCard(id);
+  editingCardId = id;
   
   openModal('createModal');
   icons();
@@ -1085,30 +1287,36 @@ async function saveEditedCard(id){
     $('cProf').selectedIndex = 0;
     toast('تم تحديث بطاقتك بنجاح! ✨');
     await loadCards();
+    if(teacherSession && teacherSession.phone === phone) renderTeacherDashboard();
   } catch(e){ console.error(e); toast('تعذر التحديث: ' + e.message,'error'); }
   finally { btn.disabled=false; btn.innerHTML=orig; icons(); }
 }
 
-function deleteCardConfirm(event, id){
+function quickDeleteCard(event, id){
   event.preventDefault();
+  event.stopPropagation();
   const c = CARDS.find(x => x.id === id);
   if(!c) return;
   
-  if(userSecretKey !== c.secretKey && (!session || session.email !== ADMIN_EMAIL)){
+  const isOwner = teacherSession && teacherSession.phone === c.phone;
+  const isAdmin = session && session.email === ADMIN_EMAIL;
+  
+  if(!isOwner && !isAdmin){
     return toast('ليس لديك صلاحية لحذف هذه البطاقة','error');
   }
   
   if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائياً؟ لا يمكن التراجع.')){
-    deleteCard(id);
+    deleteCardById(id);
   }
 }
 
-async function deleteCard(id){
+async function deleteCardById(id){
   try {
     await db.collection('cards').doc(id).delete();
     toast('تم حذف البطاقة');
     await loadCards();
     if(parseHash() === 'admin') renderAdminStats();
+    if(teacherSession) checkTeacherSessionValid();
   } catch(e){ toast(e.message,'error'); }
 }
 
@@ -1180,6 +1388,301 @@ function updateAuthUI(){
 }
 auth.onAuthStateChanged(user => { session = user; updateAuthUI(); if(!user) hideAdmin(); });
 
+/* ═══════ نظام تسجيل دخول المعلمين ═══════ */
+function switchLoginTab(tab){
+  $$('.tab-btn').forEach(b => b.classList.remove('active'));
+  $$('.login-form').forEach(f => f.classList.remove('active'));
+  if(tab === 'register'){
+    $$('.tab-btn')[0].classList.add('active');
+    $('registerForm').classList.add('active');
+  } else {
+    $$('.tab-btn')[1].classList.add('active');
+    $('loginForm').classList.add('active');
+  }
+}
+
+async function handleRegister(event){
+  event.preventDefault();
+  const name = $('regName').value.trim();
+  const phone = $('regPhone').value.trim().replace(/[\s()-]/g,'');
+  const pass = $('regPass').value;
+  const email = $('regEmail').value.trim().toLowerCase();
+  
+  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
+  if(pass.length < 6) return toast('كلمة المرور قصيرة جدا','error');
+  
+  // التحقق من عدم وجود حساب بنفس الرقم
+  const existing = await db.collection('teachers').where('phone','==',phone).limit(1).get();
+  if(existing.size > 0) return toast('يوجد حساب مسجل بهذا الرقم بالفعل — سجل دخول','error');
+  
+  const secretKey = generateSecretKey();
+  const hashedPass = await hashPassword(pass); // سنستخدم تشفير بسيط
+  
+  try {
+    await db.collection('teachers').add({
+      name, phone, email: email || null,
+      passwordHash: hashedPass,
+      secretKey: secretKey,
+      createdAt: Date.now()
+    });
+    
+    // تسجيل الدخول تلقائياً
+    teacherSession = { name, phone, secretKey };
+    localStorage.setItem('kl_teacher_session', JSON.stringify(teacherSession));
+    
+    alert('تم إنشاء حسابك بنجاح!\n\nرمزك السري للدخول:\n' + formatSecret(secretKey) + '\n\nاحتفظ به جيدا!');
+    
+    toast('مرحبا بك ' + name + ' 👋');
+    location.hash = '#teacher-dashboard';
+    updateTeacherUI();
+  } catch(e){ 
+    console.error(e);
+    toast('تعذر إنشاء الحساب: ' + e.message,'error'); 
+  }
+}
+
+// تشفير كلمة المرور (بسيط للغرض التعليمي)
+async function hashPassword(pass){
+  const encoder = new TextEncoder();
+  const data = encoder.encode(pass);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function handleTeacherLogin(event){
+  event.preventDefault();
+  const phone = $('loginPhone').value.trim().replace(/[\s()-]/g,'');
+  const secretInput = $('loginSecret').value.trim();
+  const secretClean = cleanSecret(secretInput);
+  
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح','error');
+  if(secretClean.length !== 16) return toast('الرمز السري يجب أن يكون 16 حرفا','error');
+  
+  try {
+    const snapshot = await db.collection('teachers').where('phone','==',phone).where('secretKey','==',secretClean).limit(1).get();
+    
+    if(snapshot.empty){
+      return toast('بيانات الدخول غير صحيحة — تحقق من الرقم والرمز السري','error');
+    }
+    
+    const doc = snapshot.docs[0];
+    const teacher = doc.data();
+    
+    teacherSession = { 
+      id: doc.id,
+      name: teacher.name, 
+      phone: teacher.phone, 
+      secretKey: teacher.secretKey 
+    };
+    localStorage.setItem('kl_teacher_session', JSON.stringify(teacherSession));
+    
+    toast('أهلا بك ' + teacher.name + ' 👋');
+    location.hash = '#teacher-dashboard';
+    updateTeacherUI();
+  } catch(e){
+    console.error(e);
+    toast('خطأ في الاتصال بالخادم','error');
+  }
+}
+
+function forgotSecret(){
+  alert('للأسف لا يمكن استعادة الرمز السري.\n\nإذا فقدته، تواصل مع الإدارة عبر واتساب لتقديم شكوى بطلب إعادة تعيين.\n\nرقم الدعم: ' + SUPPORT_WA);
+}
+
+function teacherLogout(){
+  teacherSession = null;
+  localStorage.removeItem('kl_teacher_session');
+  toast('تم تسجيل الخروج من حسابك');
+  updateTeacherUI();
+  location.hash = '#/';
+}
+
+function updateTeacherUI(){
+  const isLoggedIn = !!teacherSession;
+  $('teacherLoginLink').style.display = isLoggedIn ? 'none' : '';
+  $('teacherDashLink').style.display = isLoggedIn ? '' : 'none';
+  $('teacherLogoutLink').style.display = isLoggedIn ? '' : 'none';
+  
+  if(isLoggedIn){
+    // تحديث رأس القائمة الجانبية
+    const drHeadSmall = $('.dr-head small');
+    if(drHeadSmall) drHeadSmall.textContent = 'مرحبا ' + teacherSession.name.split(' ')[0];
+  } else {
+    const drHeadSmall = $('.dr-head small');
+    if(drHeadSmall) drHeadSmall.textContent = 'MANUAL WORKERS HUB';
+  }
+}
+
+// التحقق من صحة الجلسة عند بدء التشغيل
+function restoreTeacherSession(){
+  const saved = localStorage.getItem('kl_teacher_session');
+  if(saved){
+    try {
+      teacherSession = JSON.parse(saved);
+      updateTeacherUI();
+    } catch(e){
+      localStorage.removeItem('kl_teacher_session');
+    }
+  }
+}
+
+// التحقق من أن الحساب لا يزال موجودا (في حال حذفه المدير)
+async function checkTeacherSessionValid(){
+  if(!teacherSession) return;
+  try {
+    const exists = await db.collection('cards').where('phone','==',teacherSession.phone).limit(1).get();
+    if(exists.empty){
+      toast('تم حذف بطاقتك بواسطة الإدارة','error');
+      teacherLogout();
+    }
+  } catch(e){
+    console.error('Session validation error:', e);
+  }
+}
+
+/* ═══════ لوحة تحكم المعلم ═══════ */
+function renderTeacherDashboard(){
+  if(!teacherSession) return;
+  
+  // البحث عن بطاقة المستخدم
+  const myCard = CARDS.find(c => c.phone === teacherSession.phone);
+  
+  if(!myCard){
+    // لا توجد بطاقة — عرض رسالة لإنشائها
+    $('teacherDashboard').innerHTML = `
+      <div class="empty-state" style="padding:4rem 1rem">
+        <i data-lucide="credit-card" style="width:4rem;height:4rem;color:var(--gold);margin-bottom:1rem"></i>
+        <h3 style="font-size:1.3rem;color:var(--navy);margin-bottom:.5rem">لم تنشئ بطاقتك بعد</h3>
+        <p style="color:var(--muted);margin-bottom:1.5rem">ابدأ بإنشاء بطاقتك المهنية لتظهر في الدليل وتستقبل العملاء</p>
+        <button class="btn-gold" onclick="openCreate()" style="margin:0 auto"><i data-lucide="plus"></i> أنشئ بطاقتي الآن</button>
+      </div>`;
+    icons();
+    return;
+  }
+  
+  // تعبئة البيانات
+  $('dashAvatar').src = myCard.avatar || 'logo5.png';
+  $('dashName').textContent = myCard.name;
+  $('dashPhone').textContent = myCard.phone;
+  $('statId').textContent = myCard.numId;
+  $('statProf').textContent = myCard.profession;
+  $('statProv').textContent = myCard.province;
+  $('statImgs').textContent = (myCard.images||[]).length;
+  $('imgCount').textContent = (myCard.images||[]).length;
+  $('dashDesc').textContent = myCard.desc || 'لم يتم إضافة وصف بعد.';
+  $('mySecretKey').textContent = formatSecret(myCard.secretKey);
+  
+  // عرض الصور
+  const imgsContainer = $('dashImages');
+  if(myCard.images && myCard.images.length > 0){
+    imgsContainer.innerHTML = myCard.images.map((url, i) => 
+      `<div class="pv"><img src="${url}" onclick="openLightbox(${JSON.stringify(myCard.images)},${i})"><button class="rm" onclick="removeImageFromCard('${myCard.id}',${i})"><i data-lucide="x"></i></button></div>`
+    ).join('');
+  } else {
+    imgsContainer.innerHTML = '<div class="empty-state" style="padding:1rem"><i data-lucide="image-off"></i>لا توجد صور بعد</div>';
+  }
+  
+  icons();
+}
+
+function copySecretKey(){
+  const key = $('mySecretKey').textContent.replace(/-/g,'');
+  navigator.clipboard.writeText(key).then(() => {
+    toast('تم نسخ الرمز السري ✓');
+  }).catch(() => {
+    toast('تعذر النسخ — انسخه يدوياً','error');
+  });
+}
+
+function editMyCard(){
+  if(!teacherSession) return;
+  const myCard = CARDS.find(c => c.phone === teacherSession.phone);
+  if(!myCard){
+    toast('لا توجد بطاقة لتعديلها','error');
+    return;
+  }
+  quickEditCard(new Event('click'), myCard.id);
+}
+
+function addImagesToCard(){
+  if(!teacherSession) return;
+  const myCard = CARDS.find(c => c.phone === teacherSession.phone);
+  if(!myCard){
+    toast('لا توجد بطاقة لإضافة صور إليها','error');
+    return;
+  }
+  
+  // فتح نافذة إنشاء مع التركيز على إضافة الصور
+  $('cName').value = myCard.name;
+  $('cPhone').value = myCard.phone;
+  $('cProv').value = myCard.province;
+  $('cProf').value = myCard.profession;
+  $('cDesc').value = myCard.desc || '';
+  avaImg = myCard.avatar;
+  workImgs = [...(myCard.images||[])];
+  
+  if(avaImg){
+    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '"></div>';
+  }
+  renderWorkPreviews();
+  
+  $('.mhead h3').innerHTML = '<i data-lucide="images"></i> إضافة صور لبطاقتك';
+  $('#saveBtn').onclick = () => saveEditedCard(myCard.id);
+  editingCardId = myCard.id;
+  
+  openModal('createModal');
+  icons();
+}
+
+async function removeImageFromCard(cardId, index){
+  if(!teacherSession) return;
+  const myCard = CARDS.find(c => c.id === cardId && c.phone === teacherSession.phone);
+  if(!myCard) return toast('غير مصرح لك بحذف صور هذه البطاقة','error');
+  
+  if(!confirm('حذف هذه الصورة من المعرض؟')) return;
+  
+  const updatedImages = [...myCard.images];
+  updatedImages.splice(index, 1);
+  
+  try {
+    await db.collection('cards').doc(cardId).update({ images: updatedImages });
+    toast('تم حذف الصورة');
+    await loadCards();
+    renderTeacherDashboard();
+  } catch(e){
+    toast('تعذر حذف الصورة: ' + e.message,'error');
+  }
+}
+
+function showDeleteConfirm(){
+  $('deleteConfirm').classList.add('open');
+}
+function hideDeleteConfirm(){
+  $('deleteConfirm').classList.remove('open');
+}
+async function deleteMyCard(){
+  hideDeleteConfirm();
+  if(!teacherSession) return;
+  
+  const myCard = CARDS.find(c => c.phone === teacherSession.phone);
+  if(!myCard){
+    toast('لا توجد بطاقة لحذفها','error');
+    return;
+  }
+  
+  try {
+    await db.collection('cards').doc(myCard.id).delete();
+    await db.collection('teachers').doc(teacherSession.id).delete().catch(()=>{}); // حذف حساب المعلم أيضا
+    toast('تم حذف بطاقتك نهائياً');
+    teacherLogout();
+    await loadCards();
+  } catch(e){
+    toast('تعذر الحذف: ' + e.message,'error');
+  }
+}
+
 /* ═══════ Modals & Lightbox ═══════ */
 function openModal(id){ $(id).classList.add('open'); document.body.style.overflow='hidden'; }
 function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow=''; }
@@ -1233,11 +1736,14 @@ async function boot(){
   tickClock();
   $('supportWa').href = 'https://wa.me/' + SUPPORT_WA + '?text=' + encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:');
   startDhikr();
+  restoreTeacherSession();
+  updateTeacherUI();
   
   /* ✅ الموقع يظهر فورا — لا يوجد fullLoad */
   
   try {
     await loadCards();
+    if(teacherSession) await checkTeacherSessionValid();
   } catch(e){
     console.error(e);
     $('allCardsGrid').innerHTML = emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.');
