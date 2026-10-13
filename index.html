@@ -102,103 +102,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pc-call{background:var(--navy2)}.pc-wa{background:var(--wa)}
 .pc-id{position:absolute;bottom:.7rem;left:.9rem;font-size:.62rem;color:var(--muted);font-weight:800}
 
-/* =========================================
-   ✅ SLIDER SECTION (مستقر تماماً وبدون أي فراغ أبيض)
-   ========================================= */
-.slider-section {
-    margin-top: -20px;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-}
-
-.slider-container {
-    width: min(800px, 95vw);
-    height: 380px;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    border: 3px solid var(--gold);
-    background: var(--navy);
-}
-
-.slider-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slider-slide.active {
-    opacity: 1;
-    visibility: visible;
-    z-index: 2;
-}
-
-.slider-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* تأثير الضل اللامع الساطع فوق الصورة */
-.slider-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-    transform: skewX(-25deg);
-    animation: shine-sweep 3s infinite;
-    pointer-events: none;
-    z-index: 10;
-}
-
-@keyframes shine-sweep {
-    0% { left: -150%; }
-    30% { left: 150%; }
-    100% { left: 150%; }
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 12;
-}
-
-.slider-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.5);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.slider-dot.active {
-    background: var(--gold2);
-    width: 26px;
-    border-radius: 10px;
-}
-
-@media(max-width:600px){
-    .slider-container { height: 220px; }
-}
-
 /* About */
 .about{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:2rem 1.6rem;box-shadow:0 12px 34px var(--shadow);position:relative;overflow:hidden}
 .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;position:relative;z-index:1}
@@ -351,7 +254,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .profile-logout-btn{width:100%;background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red);border:1.5px solid var(--red);border-radius:14px;padding:.85rem;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.25s;margin-top:1rem}
 .profile-logout-btn:hover{background:var(--red);color:#fff}
 
-/* Modals */
+/* Modals - محسن للجوال */
 .overlay{position:fixed;inset:0;background:rgba(6,13,28,.75);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:0}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:0;width:100%;max-width:900px;height:100vh;max-height:100vh;display:flex;flex-direction:column;animation:slideInUp .3s cubic-bezier(.2,.9,.3,1) both;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
@@ -368,6 +271,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .mbody{padding:1.5rem;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 @media(max-width:767px){.mbody{padding:1rem}}
 
+/* تنسيق تفاصيل البطاقة الداخلية */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1.5rem}
 @media(min-width:768px){.detail-layout{grid-template-columns:1.2fr 1fr;gap:2rem}}
 .gallery-main{position:relative;width:100%;aspect-ratio:4/3;background:var(--bg);border-radius:16px;overflow:hidden;margin-bottom:.8rem;border:1px solid var(--line)}
@@ -406,6 +310,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   .act-btn{width:100%}
 }
 
+/* حقول الإدخال العامة */
 .field{margin-bottom:1rem}
 .field label{display:flex;align-items:center;gap:.4rem;font-weight:800;font-size:.82rem;margin-bottom:.4rem;color:var(--navy)}
 [data-theme="dark"] .field label{color:var(--gold2)}
@@ -428,6 +333,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7}
 .note.warn{color:var(--red)}
 
+/* Lightbox المحسن */
 .lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(4,10,22,.98); display: none; flex-direction: column; opacity: 0; transition: opacity .3s ease;
 }
@@ -444,6 +350,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .lb-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .8rem; font-weight: 700; text-align: center; pointer-events: none; animation: fadeInOut 4s forwards; }
 @keyframes fadeInOut { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
 
+/* ✅ FOOTER الجديد والمطور */
 footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid var(--gold)}
 .fwrap{max-width:1240px;margin:auto;padding:2.5rem 1rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
 @media(max-width:768px){.fwrap{grid-template-columns:1fr;text-align:center}}
@@ -461,6 +368,83 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 .fs-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;display:grid;place-items:center;transition:.3s}
 .fs-icon:hover{background:var(--gold);color:#1a1200;transform:scale(1.1)}
 .fbotttom{border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:1.5rem;font-size:.85rem;color:#6B7280;background:rgba(0,0,0,.2)}
+
+/* =========================================
+   ✅ MARQUEE SECTION (الشريط المتحرك الجديد)
+   ========================================= */
+.marquee-section {
+    margin-top: -30px; /* سحب للأعلى قليلاً ليتداخل مع الزاوية السفلية للـ Hero */
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 5;
+    overflow: hidden; /* لمنع خروج الصور خارج الإطار */
+    background: transparent;
+}
+
+.marquee-track {
+    display: flex;
+    width: fit-content;
+    animation: marquee-move 25s linear infinite; /* السرعة: كلما قل الرقم زادت السرعة */
+}
+
+/* إيقاف الحركة عند تمرير الماوس (اختياري لتحسين التجربة) */
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    flex: 0 0 auto;
+    margin-left: 1.5rem; /* المسافة بين الصور */
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease;
+}
+
+.marquee-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    border-color: var(--gold);
+}
+
+.marquee-item img {
+    display: block;
+    height: 180px; /* ارتفاع ثابت للصور لتناسب الشريط */
+    width: auto;
+    object-fit: cover;
+}
+
+/* تأثير اللمعان (Shine Effect) */
+.marquee-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg);
+    animation: shine-effect 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine-effect {
+    0% { left: -100%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
+
+@keyframes marquee-move {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } /* يتحرك نصف العرض لأننا كررنا العناصر مرتين */
+}
+
+@media(max-width:600px){
+    .marquee-item img { height: 140px; }
+    .marquee-track { animation-duration: 20s; } /* أسرع قليلا على الجوال */
+}
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
 @media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.bento-horizontal .card{min-width:260px;max-width:260px}}
@@ -524,18 +508,13 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </section>
 
-    <!-- ✅ SLIDER SECTION START (تم تعديل السلايدر ليعمل بتلاشي مستقر بدون بياض) -->
-    <section class="slider-section">
-        <div class="slider-container" id="sliderContainer">
-            <div class="slider-slide active"><img src="abo1.png" alt="صورة 1" onerror="this.src='logo5.png'"></div>
-            <div class="slider-slide"><img src="abo2.png" alt="صورة 2" onerror="this.src='logo5.png'"></div>
-            <div class="slider-slide"><img src="abo3.png" alt="صورة 3" onerror="this.src='logo5.png'"></div>
-            <div class="slider-slide"><img src="abo4.png" alt="صورة 4" onerror="this.src='logo5.png'"></div>
-            <div class="slider-slide"><img src="abo5.png" alt="صورة 5" onerror="this.src='logo5.png'"></div>
-            <div class="slider-dots" id="sliderDots"></div>
+    <!-- ✅ MARQUEE SECTION START -->
+    <section class="marquee-section">
+        <div class="marquee-track" id="marqueeTrack">
+            <!-- سيتم حقن الصور هنا بواسطة JavaScript لضمان التكرار السلس -->
         </div>
     </section>
-    <!-- ✅ SLIDER SECTION END -->
+    <!-- ✅ MARQUEE SECTION END -->
 
     <section class="section about" id="aboutSec">
       <div class="sec-title"><i data-lucide="info"></i> لماذا «الكل هنا»؟</div>
@@ -621,6 +600,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
       
+      <!-- ✅ زر تسجيل الخروج المضاف داخل الملف الشخصي -->
       <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
@@ -639,8 +619,10 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </section>
 </main>
 
+<!-- ✅ FOOTER المطور والجديد -->
 <footer>
   <div class="fwrap">
+    <!-- العمود الأول: عن المنصة والشعار الصغير -->
     <div class="fcol">
       <h4><img src="logo5.png" alt="Logo" class="f-logo-small"> الكل هنا</h4>
       <p>منصة خدمية مجانية تجمع أصحاب المهن والحرفيين مع أصحاب العمل في كافة المحافظات السورية. أنشئ بطاقتك المهنية، اعرض أعمالك، وخلّي الزبون يوصلك مباشرة.</p>
@@ -651,6 +633,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </div>
 
+    <!-- العمود الثاني: روابط سريعة -->
     <div class="fcol">
       <h4>روابط سريعة</h4>
       <div class="fl-links">
@@ -661,6 +644,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </div>
 
+    <!-- العمود الثالث: تواصل معنا -->
     <div class="fcol">
       <h4>تواصل معنا</h4>
       <div class="fl-links">
@@ -671,7 +655,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     </div>
   </div>
   <div class="fbotttom">
-    © 2026 <strong>الكل هنا</strong> — جميع الحقوق محفوظة. صُنع بحب في سوريا 🇸🇾
+    © 2026 <strong>الكل هنا</strong> — جميع الحقوق محفوظة. صُنع بحب في سوريا 🇸
   </div>
 </footer>
 
@@ -717,6 +701,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </div>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-counter" id="lbCounter">1 / 1</div>
@@ -747,7 +732,7 @@ const auth = firebase.auth();
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّه',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّم صَلِّ وَسَلِّمْ عَلىٰ نَبِيِّنا مُحمَّّد',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللّه وَالْحَمْد لِلّه وَلَا إِلَه إِلَّا اللّه واللّه أَكْبَر',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللّه لَا إِلَه إِلَّا هُوَ عَلَيْه تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيم',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّار',s:'من أدعية القرآن الجامعة'}];
+const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّه',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّم صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّد',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللّه وَالْحَمْد لِلّه وَلَا إِلَه إِلَّا اللّه واللّه أَكْبَر',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللّه لَا إِلَه إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيم',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّار',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let currentUser = null;
@@ -823,7 +808,7 @@ function buildCategories(){
 function navigateTo(path){ location.hash='#'+path; }
 
 function cardHTML(c){ 
-  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onerror="this.src=\'logo5.png\'" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
+  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
   const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
   const isOwner=currentUser&&currentUser.uid===c.ownerUid; 
   const isAdmin=session&&session.email===ADMIN_EMAIL; 
@@ -929,7 +914,7 @@ function compress(file,max,q){
 function onAvaPick(inp){ 
   const f=inp.files[0]; inp.value=''; if(!f)return; 
   compress(f,240,.72).then(d=>{ 
-    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
+    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
   }).catch(()=>toast('تعذرت معالجة الصورة','error')); 
 }
 
@@ -947,7 +932,7 @@ function onWorkPick(inp){
 function renderWorkPreviews(){ 
   const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
   $('workNote').innerHTML='اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة'+(remaining<=0?' — <span class="warn">لا يمكن إضافة المزيد اليوم</span>':''); 
-  $('previews').innerHTML=workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  $('previews').innerHTML=workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
   icons(); 
 }
 
@@ -1108,6 +1093,7 @@ async function submitCard(){
   } 
 }
 
+// ✅ دالة openDetail المحدثة (Responsive & Clean)
 function openDetail(id){ 
   const c = CARDS.find(x => x.id === id); 
   if(!c) return; 
@@ -1116,19 +1102,20 @@ function openDetail(id){
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   
+  // بناء معرض الصور
   let galleryHtml = '';
   if(c.images && c.images.length > 0){
     const mainImg = c.images[0];
     const thumbs = c.images.map((img, idx) => 
       `<div class="thumb-item ${idx===0?'active':''}" onclick="switchGalleryImage('${img}', this)">
-         <img src="${img}" onerror="this.src='logo5.png'" alt="">
+         <img src="${img}" alt="">
        </div>`
     ).join('');
     
     galleryHtml = `
       <div class="gallery-section">
         <div class="gallery-main" onclick="openLightboxById('${c.id}', 0)">
-          <img id="detMainImg" src="${mainImg}" onerror="this.src='logo5.png'" alt="عمل">
+          <img id="detMainImg" src="${mainImg}" alt="عمل">
           <span class="zoom-badge"><i data-lucide="zoom-in"></i> اضغط للتكبير</span>
         </div>
         <div class="thumbs-row">${thumbs}</div>
@@ -1140,6 +1127,7 @@ function openDetail(id){
                    </div>`;
   }
 
+  // بناء الأزرار
   let actionsHtml = '';
   if(isOwner || isAdmin){
     actionsHtml = `
@@ -1153,9 +1141,13 @@ function openDetail(id){
     `;
   }
 
+  // الحقن النهائي في الـ DOM
   $('detailBody').innerHTML = `
     <div class="detail-layout">
+      <!-- القسم الأول: الصور -->
       <div>${galleryHtml}</div>
+      
+      <!-- القسم الثاني: المعلومات والأزرار -->
       <div class="info-panel">
         <div class="user-header">
           <img src="${c.avatar || 'logo5.png'}" onerror="this.src='logo5.png'" class="user-avatar-lg" alt="avatar">
@@ -1167,24 +1159,31 @@ function openDetail(id){
             </div>
           </div>
         </div>
+        
         <div class="description-box">${esc(c.desc || 'لم يضف صاحب البطاقة وصفاً تفصيليا.')}</div>
+        
         <div class="meta-data">
           <span>ID: ${c.numId}</span>
           <span><i data-lucide="calendar"></i> ${new Date(c.createdAt).toLocaleDateString('ar-SY')}</span>
         </div>
+        
         <div class="action-buttons">
           ${actionsHtml}
         </div>
       </div>
     </div>
   `;
+  
   openModal('detailModal'); 
-  icons(); 
+  icons(); // تفعيل الأيقونات الجديدة
 } 
 
+// دالة مساعدة لتغيير الصورة الرئيسية عند الضغط على المصغرات
 window.switchGalleryImage = function(url, el){
   const mainImg = document.getElementById('detMainImg');
   if(mainImg) mainImg.src = url;
+  
+  // إزالة التفعيل من الكل وإضافته للعنصر المضغوط
   document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
 };
@@ -1198,7 +1197,7 @@ function quickEditCard(event, id){
   
   $('cName').value = c.name; $('cPhone').value = c.phone; $('cProv').value = c.province; $('cProf').value = c.profession; $('cDesc').value = c.desc || ''; 
   avaImg = c.avatar; workImgs = [...(c.images || [])]; 
-  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"></div>'; 
+  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '"></div>'; 
   renderWorkPreviews(); 
   
   $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
@@ -1222,7 +1221,7 @@ async function saveEditedCard(id){
   try{ 
     await db.collection('cards').doc(id).update({ name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs }); 
     closeModal('createModal'); 
-    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');$('cProf').selectedIndex = 0; 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); $('cProf').selectedIndex = 0; 
     toast('تم تحديث بطاقتك بنجاح! ✨'); await loadCards(); 
   } catch(e){ 
     toast('تعذر التحديث: '+e.message,'error'); 
@@ -1293,8 +1292,10 @@ async function delCard(id){
 }
 
 function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
+function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
+$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
+// ✅ نظام Lightbox المعدل: إغلاق الصورة فقط عند زر الرجوع دون الخروج من البطاقة
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 let isLightboxActive = false;
 
@@ -1308,10 +1309,12 @@ function initLightbox(){
   window.addEventListener('mouseup', handleMouseUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
   
+  // معالجة زر الرجوع في الهاتف للـ Lightbox فقط
   window.addEventListener('popstate', (e) => {
     if(isLightboxActive){
       isLightboxActive = false;
       $('lightbox').classList.remove('active');
+      // منع انتقال الـ popstate للرئيسية عبر إعادة دفع حالة البطاقة الحالية للتاريخ
       history.pushState({modalOpen: true}, '');
     }
   });
@@ -1423,67 +1426,37 @@ function startDhikr(){
   dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); 
 }
 
-/* =========================================
-   ✅ SLIDER LOGIC (تبديل سلس ومستقر عبر التلاشي Opacity)
-   ========================================= */
-let currentSlideIndex = 0;
-let slideTimer = null;
+// ✅ MARQUEE LOGIC (تشغيل الشريط المتحرك)
+function initMarquee() {
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
 
-function initSlider() {
-    const slides = document.querySelectorAll('.slider-slide');
-    const dotsContainer = document.getElementById('sliderDots');
-    if (!slides.length) return;
+    // قائمة الصور المطلوبة
+    const images = [
+        'abo1.png',
+        'abo2.png',
+        'abo3.png',
+        'abo4.png',
+        'abo5.png'
+    ];
 
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
+    // إنشاء مجموعة أولى من الصور
+    let htmlContent = '';
+    images.forEach(src => {
+        htmlContent += `
+            <div class="marquee-item">
+                <img src="${src}" alt="عمل حرفي" loading="lazy">
+            </div>
+        `;
     });
 
-    startSlideTimer();
+    // تكرار المجموعة مرة أخرى لضمان استمرار الحركة بدون فجوات
+    track.innerHTML = htmlContent + htmlContent;
 }
 
-function nextSlide() {
-    const slides = document.querySelectorAll('.slider-slide');
-    const dots = document.querySelectorAll('.slider-dot');
-    if (!slides.length) return;
-
-    slides[currentSlideIndex].classList.remove('active');
-    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-    slides[currentSlideIndex].classList.add('active');
-
-    dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlideIndex);
-    });
-}
-
-function goToSlide(index) {
-    if (index === currentSlideIndex) return;
-    const slides = document.querySelectorAll('.slider-slide');
-    const dots = document.querySelectorAll('.slider-dot');
-
-    slides[currentSlideIndex].classList.remove('active');
-    currentSlideIndex = index;
-    slides[currentSlideIndex].classList.add('active');
-
-    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlideIndex));
-
-    restartSlideTimer();
-}
-
-function startSlideTimer() {
-    clearInterval(slideTimer);
-    slideTimer = setInterval(nextSlide, 3000);
-}
-
-function restartSlideTimer() {
-    startSlideTimer();
-}
-
+// استدعاء الدالة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
-    initSlider();
+    initMarquee();
 });
 
 async function boot(){ 
