@@ -156,7 +156,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .tag.prov{color:var(--gold);background:color-mix(in srgb,var(--gold) 15%,transparent)}
 .card-strip{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem .1rem .8rem;scroll-snap-type:x mandatory;scrollbar-width:none}
 .card-strip::-webkit-scrollbar{display:none}
-.card-strip img{width:118px;height:88px;object-fit:cover;border-radius:12px;flex:none;scroll-snap-align:start;border:1px solid var(--line);transition:.25s;cursor:pointer} /* ✅ Cursor pointer added */
+.card-strip img{width:118px;height:88px;object-fit:cover;border-radius:12px;flex:none;scroll-snap-align:start;border:1px solid var(--line);transition:.25s;cursor:pointer}
 .card-strip img:hover{transform:scale(1.05);border-color:var(--gold)}
 .strip-empty{width:100%;height:88px;border-radius:12px;border:1.5px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:.75rem;font-weight:700;gap:.4rem}
 .card-desc{font-size:.82rem;color:var(--muted);line-height:1.9;font-weight:600;margin-bottom:.9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
@@ -171,7 +171,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
 .empty-state svg{width:3.2rem;height:3.2rem;color:var(--gold);display:block;margin:0 auto .8rem}
 
-/* ═══════ نظام Bento Grid الجديد ═══════ */
+/* ═══════ Bento Grid الجديد ═══════ */
 .bento-container{display:flex;flex-direction:column;gap:1.5rem}
 .bento-vertical{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
 .bento-horizontal{display:flex;gap:1.2rem;overflow-x:auto;padding:.5rem .2rem 1.5rem;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -302,7 +302,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .detail-actions svg{width:1.2rem;height:1.2rem}
 .da-call{background:var(--navy2)}.da-wa{background:var(--wa)}.da-edit{background:var(--blue)}.da-del{background:var(--red)}
 
-/* ✅ Lightbox المحسن والمستقل تماماً */
+/* ✅ Lightbox المحسن والمستقل تماماً مع دعم زر الرجوع */
 .lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(4,10,22,.98); display: none; flex-direction: column; opacity: 0; transition: opacity .3s ease;
 }
@@ -358,7 +358,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 </nav>
 
 <main>
-  <!-- الصفحة الرئيسية -->
   <div id="homeView" class="page-view">
     <section class="section hero" id="heroSec">
       <div class="hero-inner">
@@ -418,7 +417,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     </section>
   </div>
 
-  <!-- صفحة المحافظة المستقلة -->
   <div id="provinceView" class="page-view" style="display:none">
     <div class="cards-bar">
       <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
@@ -427,7 +425,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     <div id="provinceContainer" class="bento-container"></div>
   </div>
 
-  <!-- صفحة المهنة المستقلة -->
   <div id="professionView" class="page-view" style="display:none">
     <div class="cards-bar">
       <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
@@ -436,16 +433,13 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     <div id="professionContainer" class="bento-container"></div>
   </div>
 
-  <!-- صفحة الملف الشخصي -->
   <div id="profileView" class="page-view" style="display:none">
     <button class="profile-back" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
     <div class="profile-page">
       <div class="profile-header">
         <div style="position:relative;display:inline-block">
           <img class="profile-avatar-lg" id="pfAvatar" src="logo5.png" alt="">
-          <label class="profile-avatar-edit" for="pfAvatarInput" title="تغيير الصورة">
-            <i data-lucide="camera"></i>
-          </label>
+          <label class="profile-avatar-edit" for="pfAvatarInput" title="تغيير الصورة"><i data-lucide="camera"></i></label>
           <input type="file" id="pfAvatarInput" accept="image/*" hidden onchange="onProfileAvatarPick(this)">
         </div>
         <div class="profile-info">
@@ -453,7 +447,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
           <p id="pfEmailDisplay">example@gmail.com</p>
         </div>
       </div>
-      
       <form class="profile-form" onsubmit="saveProfile(event)">
         <div class="profile-field">
           <label><i data-lucide="user"></i> الاسم الكامل *</label>
@@ -468,20 +461,11 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
           <input type="email" id="pfEmail" placeholder="example@mail.com" style="direction:ltr" readonly>
           <small style="color:var(--muted);font-size:.7rem;display:block;margin-top:.3rem">⚠️ البريد مرتبط بحساب Google ولا يمكن تغييره يدويا</small>
         </div>
-        
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
-      
-      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px dashed var(--line)">
-        <h4 style="font-size:.95rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem">
-          <i data-lucide="refresh-cw" style="color:var(--gold);width:1rem;height:1rem"></i> مزامنة تلقائية
-        </h4>
-        <p style="font-size:.82rem;color:var(--muted);line-height:1.8">عند حفظ التعديلات هنا، سيتم تحديث بياناتك تلقائيا في <strong>جميع بطاقاتك المنشورة</strong> على المنصة فورا.</p>
-      </div>
     </div>
   </div>
 
-  <!-- لوحة الإدارة -->
   <section class="section" id="adminSec" style="display:none">
     <div class="sec-title"><i data-lucide="shield-check"></i> لوحة الإدارة</div>
     <div class="admin-hero"><h2><i data-lucide="shield-check"></i> مركز التحكم بالبطاقات</h2><p>ابحث عن أي بطاقة برقم الـ ID أو الاسم أو الهاتف، واحذف منشورات الأشخاص المخالفين نهائيا من المنصة.</p></div>
@@ -504,7 +488,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   <div class="fbottom">© 2026 الكل هنا — جميع الحقوق محفوظة</div>
 </footer>
 
-<!-- نافذة إنشاء البطاقة -->
 <div class="overlay" id="createModal">
   <div class="modal wide">
     <div class="mhead"><h3 id="createModalTitle"><i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية</h3><button class="xbtn" onclick="closeModal('createModal')"><i data-lucide="x"></i></button></div>
@@ -524,7 +507,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   </div>
 </div>
 
-<!-- نافذة عرض البطاقة -->
 <div class="overlay" id="detailModal">
   <div class="modal wide">
     <div class="mhead"><h3><i data-lucide="contact"></i> تفاصيل البطاقة</h3><button class="xbtn" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button></div>
@@ -532,7 +514,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   </div>
 </div>
 
-<!-- نافذة تسجيل الدخول Google -->
 <div class="overlay" id="googleLoginModal">
   <div class="modal google-login-modal">
     <div class="mhead"><h3><i data-lucide="log-in"></i> تسجيل الدخول</h3><button class="xbtn" onclick="closeModal('googleLoginModal')"><i data-lucide="x"></i></button></div>
@@ -549,7 +530,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   </div>
 </div>
 
-<!-- ✅ Lightbox المحسن والمستقل -->
+<!-- ✅ Lightbox المحسن والمستقل مع زر الإغلاق والرجوع -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-counter" id="lbCounter">1 / 1</div>
@@ -557,7 +538,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
       <button class="lb-btn" onclick="lbZoomIn()" title="تكبير"><i data-lucide="zoom-in"></i></button>
       <button class="lb-btn" onclick="lbZoomOut()" title="تصغير"><i data-lucide="zoom-out"></i></button>
       <button class="lb-btn" onclick="lbReset()" title="إعادة تعيين"><i data-lucide="maximize"></i></button>
-      <button class="lb-btn" onclick="closeLightbox()" title="إغلاق"><i data-lucide="x"></i></button>
+      <button class="lb-btn" onclick="closeLightbox(true)" title="إغلاق"><i data-lucide="x"></i></button>
     </div>
   </div>
   <div class="lb-stage" id="lbStage">
@@ -600,9 +581,6 @@ function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
 function telLink(phone){ return 'tel:+963'+String(phone||'').replace(/\D/g,'').replace(/^0/,''); }
 function trunc(s,n){ s=String(s||''); return s.length>n?s.slice(0,n)+'…':s; }
-function generateSecretKey(){ const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; let result=''; for(let i=0;i<16;i++)result+=chars.charAt(Math.floor(Math.random()*chars.length)); return result; }
-function formatSecret(key){ return key.match(/.{1,4}/g).join('-'); }
-function cleanSecret(input){ return String(input||'').replace(/[^A-Za-z0-9]/g,'').toUpperCase(); }
 
 function tickClock(){ const now=new Date(); let h=now.getHours(),ampm=h>=12?'مساءً':'صباحا'; h=h%12||12; const hh=String(h).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0'),ss=String(now.getSeconds()).padStart(2,'0'); $('clkTime').textContent=hh+':'+mm+':'+ss+' '+ampm; try{$('clkDate').textContent=now.toLocaleDateString('ar-SY',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}catch(e){$('clkDate').textContent=now.toDateString();} }
 setInterval(tickClock,1000);
@@ -618,79 +596,49 @@ $('drClose').addEventListener('click',closeDrawer);
 $('drawerOverlay').addEventListener('click',closeDrawer);
 $$('.dr-item[data-nav]').forEach(a=>a.addEventListener('click',()=>{ closeDrawer(); const hash=a.getAttribute('href'); if(hash.startsWith('#/'))location.hash=''; else if(hash.startsWith('#')){ setTimeout(()=>{ const el=$(hash.slice(1)); if(el)el.scrollIntoView({behavior:'smooth'}); },300); } }));
 
-// التوجيه (Routing)
 function parseHash(){ return location.hash.replace(/^#\/?/,''); }
 function route(){ 
   const h=parseHash(); 
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
   
-  if(!h || h===''){ 
-    $('homeView').style.display=''; 
-    window.scrollTo(0,0); 
-    return; 
-  }
-  
+  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo(0,0); return; }
   if(h==='admin'){ showAdmin(); return; }
-  
   if(h==='profile'){ 
     if(!currentUser){ toast('يجب تسجيل الدخول أولا','error'); location.hash='#/'; return; }
-    $('profileView').style.display=''; 
-    loadProfileData();
-    window.scrollTo(0,0); 
-    return; 
+    $('profileView').style.display=''; loadProfileData(); window.scrollTo(0,0); return; 
   }
-  
   if(h.startsWith('province/')){ 
     const prov=decodeURIComponent(h.split('/')[1]); 
-    if(PROVINCES.includes(prov)){ 
-      $('provinceView').style.display=''; 
-      renderProvinceCards(prov); 
-      window.scrollTo(0,0); 
-      return; 
-    } 
+    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo(0,0); return; } 
   }
-  
   if(h.startsWith('profession/')){ 
     const prof=decodeURIComponent(h.split('/')[1]); 
-    if(PROFESSIONS.some(p=>p.name===prof)){ 
-      $('professionView').style.display=''; 
-      renderProfessionCards(prof); 
-      window.scrollTo(0,0); 
-      return; 
-    } 
+    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo(0,0); return; } 
   }
-  
-  $('homeView').style.display=''; 
-  window.scrollTo(0,0); 
+  $('homeView').style.display=''; window.scrollTo(0,0); 
 }
 window.addEventListener('hashchange',route);
 
 function buildProvinces(){ 
   $('provGrid').innerHTML=PROVINCES.map(p=>{ 
     const n=CARDS.filter(c=>c.province===p).length; 
-    return '<button class="prov-btn" onclick="navigateTo(\'province/'+encodeURIComponent(p)+'\')">' + 
-      '<i data-lucide="'+(PROV_ICONS[p]||'map-pin')+'"></i>'+p + 
-      '<span class="prov-count">'+n+' بطاقة</span></button>'; 
+    return '<button class="prov-btn" onclick="navigateTo(\'province/'+encodeURIComponent(p)+'\')"><i data-lucide="'+(PROV_ICONS[p]||'map-pin')+'"></i>'+p+'<span class="prov-count">'+n+' بطاقة</span></button>'; 
   }).join(''); 
   icons(); 
 }
 function buildCategories(){ 
   $('catGrid').innerHTML=PROFESSIONS.map(pr=>{ 
     const n=CARDS.filter(c=>c.profession===pr.name).length; 
-    return '<button class="cat-btn" onclick="navigateTo(\'profession/'+encodeURIComponent(pr.name)+'\')">' + 
-      '<i data-lucide="'+pr.icon+'"></i>'+pr.name + 
-      '<span class="cat-n">'+n+'</span></button>'; 
+    return '<button class="cat-btn" onclick="navigateTo(\'profession/'+encodeURIComponent(pr.name)+'\')"><i data-lucide="'+pr.icon+'"></i>'+pr.name+'<span class="cat-n">'+n+'</span></button>'; 
   }).join(''); 
   icons(); 
 }
 function navigateTo(path){ location.hash='#'+path; }
 
-// ✅ التعديل الجوهري: تمرير ID ورقم الصورة بدلاً من البحث المعقد
+// ✅ دالة توليد بطاقة العرض مع ربط الصور بـ ID البطاقة ومؤشرها لتفادي مشاكل الحذف والتكسير
 function cardHTML(c){ 
-  // نقل الصور مع تمرير معرف البطاقة ومؤشر الصورة
   const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
-  
   const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
   const isOwner=currentUser&&currentUser.uid===c.ownerUid; 
   const isAdmin=session&&session.email===ADMIN_EMAIL; 
@@ -702,7 +650,7 @@ function cardHTML(c){
     actionsHtml='<a class="cbtn call" href="'+telLink(c.phone)+'" onclick="event.stopPropagation()"><i data-lucide="phone"></i> اتصال</a>' + 
                 '<a class="cbtn wa" href="'+waLink(c.phone,c.name)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i data-lucide="message-circle"></i> واتساب</a>'; 
   } 
-  return '<article class="card" onclick="openDetail('+JSON.stringify(c.id)+')">' + 
+  return '<article class="card" onclick="openDetail(\''+c.id+'\')">' + 
     '<div class="card-banner"></div>' + 
     '<div class="card-body">' + 
       '<div class="card-top">' + 
@@ -725,61 +673,46 @@ function cardHTML(c){
       '</div>' + 
     '</div></article>'; 
 }
+
 function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
 
-// ✅ نظام Bento Grid الذكي
 function renderBentoGrid(containerId, cardsList){
   const container = $(containerId);
-  if(!cardsList.length){
-    container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!');
-    return;
-  }
-  
+  if(!cardsList.length){ container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); return; }
   const sorted = shuffle([...cardsList]);
-  let html = '';
-  let idx = 0;
-  
+  let html = ''; let idx = 0;
   while(idx < sorted.length){
     const groupSize = Math.min(10, sorted.length - idx);
     const group = sorted.slice(idx, idx + groupSize);
-    
-    // المجموعة الأولى (0-9): عمود رأسي
     if(idx === 0){
       html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزا</div>';
       html += '<div class="bento-vertical">' + group.map(cardHTML).join('') + '</div>';
-    } 
-    // باقي المجموعات: شرائط أفقية قابلة للتمرير
-    else {
-      const bandNum = Math.floor(idx / 10); // 1, 2, 3...
+    } else {
+      const bandNum = Math.floor(idx / 10);
       html += '<div class="bento-label"><i data-lucide="move-horizontal"></i> المزيد من الحرفيين #' + bandNum + '</div>';
       html += '<div class="bento-horizontal">' + group.map(cardHTML).join('') + '</div>';
     }
-    
     idx += 10;
   }
-  
   container.innerHTML = html;
   icons();
 }
 
-function renderAll(){ 
-  renderBentoGrid('allCardsContainer', CARDS);
-  buildProvinces(); buildCategories(); 
-}
+function renderAll(){ renderBentoGrid('allCardsContainer', CARDS); buildProvinces(); buildCategories(); }
 function emptyState(icon,txt){ return '<div class="empty-state"><i data-lucide="'+icon+'"></i>'+txt+'</div>'; }
 
 function renderProvinceCards(province){ 
   const cards=CARDS.filter(c=>c.province===province); 
   $('provinceTitle').textContent='بطاقات محافظة '+province; 
   $('provinceCount').textContent=cards.length+' بطاقة منشورة'; 
-  renderBentoGrid('provinceContainer', cards);
+  renderBentoGrid('provinceContainer', cards); 
   icons(); 
 }
 function renderProfessionCards(profession){ 
   const cards=CARDS.filter(c=>c.profession===profession); 
   $('professionTitle').textContent='بطاقات مهنة '+profession; 
   $('professionCount').textContent=cards.length+' بطاقة منشورة'; 
-  renderBentoGrid('professionContainer', cards);
+  renderBentoGrid('professionContainer', cards); 
   icons(); 
 }
 
@@ -792,11 +725,9 @@ async function loadCards(){
 
 function compress(file,max,q){ 
   return new Promise((res,rej)=>{ 
-    const r=new FileReader(); 
-    r.onerror=()=>rej(new Error('read')); 
+    const r=new FileReader(); r.onerror=()=>rej(new Error('read')); 
     r.onload=e=>{ 
-      const im=new Image(); 
-      im.onerror=()=>rej(new Error('decode')); 
+      const im=new Image(); im.onerror=()=>rej(new Error('decode')); 
       im.onload=()=>{ 
         const c=document.createElement('canvas'); 
         const m=Math.min(1,max/Math.max(im.width,im.height)); 
@@ -809,19 +740,17 @@ function compress(file,max,q){
     r.readAsDataURL(file); 
   }); 
 }
+
 function onAvaPick(inp){ 
-  const f=inp.files[0]; inp.value=''; 
-  if(!f)return; 
+  const f=inp.files[0]; inp.value=''; if(!f)return; 
   compress(f,240,.72).then(d=>{ 
-    avaImg=d; 
-    $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
-    icons(); 
+    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
   }).catch(()=>toast('تعذرت معالجة الصورة','error')); 
 }
+
 function onWorkPick(inp){ 
   const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
-  const files=[...inp.files].slice(0,Math.max(0,room)); 
-  inp.value=''; 
+  const files=[...inp.files].slice(0,Math.max(0,room)); inp.value=''; 
   if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50)','error'); return; } 
   files.forEach(f=>{ 
     if(!f.type.startsWith('image/')){ toast('ملف غير مدعوم','error'); return; } 
@@ -829,6 +758,7 @@ function onWorkPick(inp){
       .catch(()=>toast('تعذرت معالجة صورة','error')); 
   }); 
 }
+
 function renderWorkPreviews(){ 
   const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
   $('workNote').innerHTML='اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة'+(remaining<=0?' — <span class="warn">لا يمكن إضافة المزيد اليوم</span>':''); 
@@ -836,37 +766,18 @@ function renderWorkPreviews(){
   icons(); 
 }
 
-// ✅ تدفق تسجيل الدخول وإنشاء البطاقة
-function requireLoginThenOpenCreate(){ 
-  if(currentUser){ 
-    openCreate(); 
-  } else { 
-    pendingAction = 'createCard'; 
-    openModal('googleLoginModal'); 
-  } 
-}
+function requireLoginThenOpenCreate(){ if(currentUser){ openCreate(); } else { pendingAction='createCard'; openModal('googleLoginModal'); } }
 
 function performGoogleSignIn(){ 
   const provider = new firebase.auth.GoogleAuthProvider(); 
   provider.setCustomParameters({ prompt: 'select_account' }); 
-  
   auth.signInWithPopup(provider).then(result => { 
-    currentUser = result.user; 
-    
-    closeModal('googleLoginModal'); 
-    
-    if(pendingAction === 'createCard'){ 
-      pendingAction = null; 
-      openCreate(); 
-    } 
-    
+    currentUser = result.user; closeModal('googleLoginModal'); 
+    if(pendingAction==='createCard'){ pendingAction=null; openCreate(); } 
     updateAuthUI(); 
   }).catch(err => { 
-    if(err.code === 'auth/popup-blocked') {
-      toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
-    } else if(err.code !== 'auth/popup-closed-by-user') {
-      toast('فشل الدخول: '+err.message,'error'); 
-    }
+    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
+    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
   }); 
 }
 
@@ -874,22 +785,15 @@ function doGoogleLogin(){
   const provider = new firebase.auth.GoogleAuthProvider(); 
   provider.setCustomParameters({ prompt: 'select_account' }); 
   auth.signInWithPopup(provider).then(result => { 
-    session = result.user; 
-    updateAuthUI(); 
-    toast('أهلا مديرنا 🛡️'); 
+    session = result.user; updateAuthUI(); toast('أهلا مديرنا 🛡️'); 
   }).catch(err => { 
-    if(err.code === 'auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
-    else if(err.code !== 'auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
+    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
+    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
   }); 
 }
 
 async function doLogout(){ 
-  await auth.signOut(); 
-  currentUser = null; 
-  session = null; 
-  pendingAction = null; 
-  updateAuthUI(); 
-  toast('تم تسجيل الخروج'); 
+  await auth.signOut(); currentUser=null; session=null; pendingAction=null; updateAuthUI(); toast('تم تسجيل الخروج'); 
 }
 
 function updateAuthUI(){ 
@@ -897,139 +801,76 @@ function updateAuthUI(){
   $('adminLink').style.display = isAdm ? '' : 'none'; 
   $('loginLink').style.display = session ? 'none' : ''; 
   $('logoutLink').style.display = session ? '' : 'none'; 
-  $('profileLink').style.display = currentUser ? '' : 'none'; // ✅ إظهار رابط الملف الشخصي
-  
+  $('profileLink').style.display = currentUser ? '' : 'none'; 
   const drHeadSmall = $('.dr-head small'); 
   if(drHeadSmall){ 
-    if(currentUser){ 
-      drHeadSmall.textContent = 'مرحبا ' + (currentUser.displayName?.split(' ')[0] || 'بك'); 
-    } else { 
-      drHeadSmall.textContent = 'MANUAL WORKERS HUB'; 
-    } 
+    if(currentUser) drHeadSmall.textContent = 'مرحبا ' + (currentUser.displayName?.split(' ')[0] || 'بك'); 
+    else drHeadSmall.textContent = 'MANUAL WORKERS HUB'; 
   } 
 }
 
 auth.onAuthStateChanged(user => { 
-  if(user && user.email === ADMIN_EMAIL){ 
-    session = user; 
-  } else if(user){ 
-    currentUser = user; 
-  } else { 
-    currentUser = null; 
-    session = null; 
-  } 
-  updateAuthUI(); 
-  if(!session) hideAdmin(); 
+  if(user && user.email===ADMIN_EMAIL) session=user; 
+  else if(user) currentUser=user; 
+  else { currentUser=null; session=null; } 
+  updateAuthUI(); if(!session) hideAdmin(); 
 });
 
-// ✅ نظام الملف الشخصي
 function loadProfileData(){
   if(!currentUser) return;
-  
   $('pfName').value = currentUser.displayName || '';
   $('pfEmail').value = currentUser.email || '';
   $('pfNameDisplay').textContent = currentUser.displayName || 'مرحبا بك';
   $('pfEmailDisplay').textContent = currentUser.email || '';
-  
-  // البحث عن أول بطاقة للمستخدم للحصول على الهاتف والصورة الحالية
   const myFirstCard = CARDS.find(c => c.ownerUid === currentUser.uid);
-  if(myFirstCard){
-    $('pfPhone').value = myFirstCard.phone;
-    $('pfAvatar').src = myFirstCard.avatar || 'logo5.png';
-  } else {
-    $('pfPhone').value = '';
-    $('pfAvatar').src = 'logo5.png';
-  }
-  
-  profileAvatarData = null; // إعادة تعيين المؤقت
-  icons();
+  if(myFirstCard){ $('pfPhone').value = myFirstCard.phone; $('pfAvatar').src = myFirstCard.avatar || 'logo5.png'; }
+  else { $('pfPhone').value = ''; $('pfAvatar').src = 'logo5.png'; }
+  profileAvatarData = null; icons();
 }
 
 function onProfileAvatarPick(inp){
-  const f = inp.files[0]; inp.value='';
-  if(!f) return;
-  compress(f, 240, .72).then(d => {
-    profileAvatarData = d;
-    $('pfAvatar').src = d;
-    toast('تم تحميل الصورة الجديدة ✓');
-  }).catch(()=>toast('تعذرت معالجة الصورة','error'));
+  const f = inp.files[0]; inp.value=''; if(!f) return;
+  compress(f, 240, .72).then(d => { profileAvatarData = d; $('pfAvatar').src = d; toast('تم تحميل الصورة الجديدة ✓'); })
+    .catch(()=>toast('تعذرت معالجة الصورة','error'));
 }
 
 async function saveProfile(event){
-  event.preventDefault();
-  if(!currentUser) return toast('يجب تسجيل الدخول أولا','error');
-  
+  event.preventDefault(); if(!currentUser) return toast('يجب تسجيل الدخول أولا','error');
   const newName = $('pfName').value.trim();
   const newPhone = $('pfPhone').value.trim().replace(/[\s()-]/g,'');
-  
   if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
   if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
   
-  const btn = event.target.querySelector('button[type="submit"]');
-  const origText = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
-  
+  const btn = event.target.querySelector('button[type="submit"]'); const origText = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
   try {
-    // 1. تحديث بيانات المستخدم في Firebase Auth
     await currentUser.updateProfile({ displayName: newName });
-    
-    // 2. تحديث ALL cards belonging to this user
     const userCards = CARDS.filter(c => c.ownerUid === currentUser.uid);
     const batch = db.batch();
-    
     userCards.forEach(cardDoc => {
       const ref = db.collection('cards').doc(cardDoc.id);
       const updates = { name: newName, phone: newPhone };
       if(profileAvatarData) updates.avatar = profileAvatarData;
       batch.update(ref, updates);
     });
-    
     await batch.commit();
-    
-    // 3. إعادة تحميل البيانات وتحديث الواجهة
-    await loadCards();
-    loadProfileData();
-    
+    await loadCards(); loadProfileData();
     toast('✅ تم حفظ التعديلات ومزامنتها مع ' + userCards.length + ' بطاقة بنجاح!');
-    
   } catch(e){
-    console.error(e);
     toast('تعذر الحفظ: ' + e.message, 'error');
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = origText;
-    icons();
+    btn.disabled = false; btn.innerHTML = origText; icons();
   }
 }
 
 function openCreate(){ 
   $('cProv').innerHTML = PROVINCES.map(p => '<option>' + p + '</option>').join(''); 
   $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join(''); 
-  
-  workImgs = []; 
-  avaImg = null; 
-  dailyUsed = 0; 
-  totalUsed = 0; 
-  $('previews').innerHTML = ''; 
-  $('avaPreview').innerHTML = ''; 
-  renderWorkPreviews(); 
-  editingCardId = null; 
-  
-  const modalHeader = $('createModalTitle');
-  if(modalHeader) {
-    modalHeader.innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
-  }
-  
-  const saveButton = $('saveBtn');
-  if(saveButton) {
-    saveButton.onclick = submitCard;
-    saveButton.disabled = false;
-    saveButton.innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي';
-  }
-  
-  openModal('createModal'); 
-  icons(); 
+  workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0; 
+  $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null; 
+  $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
+  $('saveBtn').onclick = submitCard; $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي';
+  openModal('createModal'); icons(); 
 }
 
 function profChanged(){ $('profOtherWrap').style.display = $('cProf').value === 'أخرى' ? '' : 'none'; }
@@ -1037,12 +878,10 @@ $('cProf').addEventListener('change', profChanged);
 
 async function submitCard(){ 
   if(!currentUser) return toast('يجب تسجيل الدخول أولا','error'); 
-  
   const name = $('cName').value.trim(); 
   const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
   const province = $('cProv').value; 
-  let profession = $('cProf').value; 
-  if(profession === 'أخرى') profession = $('cProfOther').value.trim(); 
+  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
@@ -1050,16 +889,12 @@ async function submitCard(){
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
-  const btn = $('saveBtn'); 
-  const orig = btn.innerHTML; 
-  btn.disabled = true; 
-  btn.innerHTML = '<span class="loader"></span> جاري النشر...'; 
-  
+  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري النشر...'; 
   try{ 
     const todayStr = new Date().toISOString().slice(0,10); 
     const dSnap = await db.collection('daily').doc(phone).get(); 
     const dData = dSnap.exists ? dSnap.data() : {}; 
-    const usedToday = (dData.date === todayStr) ? (dData.count || 0) : 0; 
+    const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0; 
     const usedTotal = dData.total || 0; 
     
     if(usedToday + workImgs.length > MAX_DAILY_IMGS) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
@@ -1070,43 +905,29 @@ async function submitCard(){
     
     await db.collection('cards').doc(id).set({
       numId, name, phone, province, profession, desc,
-      avatar: avaImg || null, 
-      images: workImgs,
-      ownerUid: currentUser.uid,
-      createdAt: Date.now()
+      avatar: avaImg||null, images: workImgs, ownerUid: currentUser.uid, createdAt: Date.now()
     }); 
     
     await db.collection('daily').doc(phone).set({
-      date: todayStr, 
-      count: usedToday + workImgs.length, 
-      total: usedTotal + workImgs.length
+      date: todayStr, count: usedToday + workImgs.length, total: usedTotal + workImgs.length
     }, { merge: true }); 
     
     closeModal('createModal'); 
     ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
     $('cProf').selectedIndex = 0; 
-    
-    toast('تم نشر بطاقتك بنجاح! 🎉'); 
-    await loadCards(); 
+    toast('تم نشر بطاقتك بنجاح! 🎉'); await loadCards(); 
   } catch(e){ 
-    console.error(e); 
-    toast('تعذر النشر: ' + e.message,'error'); 
+    toast('تعذر النشر: '+e.message,'error'); 
   } finally{ 
-    btn.disabled = false; 
-    btn.innerHTML = orig; 
-    icons(); 
+    btn.disabled = false; btn.innerHTML = orig; icons(); 
   } 
 }
 
 function openDetail(id){ 
-  const c = CARDS.find(x => x.id === id); 
-  if(!c) return; 
-  curDetail = id; 
-  
+  const c = CARDS.find(x => x.id === id); if(!c) return; curDetail = id; 
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   
-  // ✅ استخدام openLightboxById هنا أيضاً للتنسيق الموحد
   const gallery = (c.images && c.images.length) ? 
     '<div class="detail-gallery"><div class="main"><img id="detMain" src="' + c.images[0] + '" onclick="openLightboxById(\''+c.id+'\',0)"><span class="zoomhint"><i data-lucide="zoom-in"></i> اضغط للتكبير</span></div>' + 
     (c.images.length > 1 ? '<div class="minis">' + c.images.map((u,i) => '<img src="'+u+'" class="'+(i===0?'on':'')+'" onclick="swapDet(this,\''+esc(u)+'\')">').join('') + '</div>' : '') + '</div>' : 
@@ -1128,8 +949,7 @@ function openDetail(id){
         '<div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1rem">' + 
           '<div class="card-ava-wrapper" style="width:70px;height:70px">' + 
             '<img class="card-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' + 
-            '<div class="card-ava-ring"></div>' + 
-            '<div class="card-ava-ring r2"></div>' + 
+            '<div class="card-ava-ring"></div><div class="card-ava-ring r2"></div>' + 
           '</div>' + 
           '<div><h2>' + esc(c.name) + '</h2>' + 
           '<div class="card-tags" style="margin-top:.4rem">' + 
@@ -1143,8 +963,7 @@ function openDetail(id){
       '</div>' + 
     '</div>'; 
     
-  openModal('detailModal'); 
-  icons(); 
+  openModal('detailModal'); icons(); 
 }
 
 window.swapDet = function(el, url){ 
@@ -1154,51 +973,27 @@ window.swapDet = function(el, url){
 };
 
 function quickEditCard(event, id){ 
-  event.preventDefault(); 
-  event.stopPropagation(); 
-  const c = CARDS.find(x => x.id === id); 
-  if(!c) return; 
-  
+  event.preventDefault(); event.stopPropagation(); 
+  const c = CARDS.find(x => x.id === id); if(!c) return; 
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
-  if(!isOwner && !isAdmin){ 
-    return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error'); 
-  } 
+  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error'); 
   
-  $('cName').value = c.name; 
-  $('cPhone').value = c.phone; 
-  $('cProv').value = c.province; 
-  $('cProf').value = c.profession; 
-  $('cDesc').value = c.desc || ''; 
-  avaImg = c.avatar; 
-  workImgs = [...(c.images || [])]; 
-  
-  if(avaImg){ 
-    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '"></div>'; 
-  } 
+  $('cName').value = c.name; $('cPhone').value = c.phone; $('cProv').value = c.province; $('cProf').value = c.profession; $('cDesc').value = c.desc || ''; 
+  avaImg = c.avatar; workImgs = [...(c.images || [])]; 
+  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '"></div>'; 
   renderWorkPreviews(); 
   
-  const header = $('createModalTitle');
-  if(header) header.innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
-  
-  const btn = $('saveBtn');
-  if(btn) {
-    btn.onclick = () => saveEditedCard(id);
-    btn.disabled = false;
-    btn.innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
-  }
-  
-  editingCardId = id; 
-  openModal('createModal'); 
-  icons(); 
+  $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
+  $('saveBtn').onclick = () => saveEditedCard(id); $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
+  editingCardId = id; openModal('createModal'); icons(); 
 }
 
 async function saveEditedCard(id){ 
   const name = $('cName').value.trim(); 
   const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
   const province = $('cProv').value; 
-  let profession = $('cProf').value; 
-  if(profession === 'أخرى') profession = $('cProfOther').value.trim(); 
+  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
@@ -1206,74 +1001,43 @@ async function saveEditedCard(id){
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
-  const btn = $('saveBtn'); 
-  const orig = btn.innerHTML; 
-  btn.disabled = true; 
-  btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
-  
+  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
   try{ 
-    await db.collection('cards').doc(id).update({
-      name, phone, province, profession, desc,
-      avatar: avaImg || null, 
-      images: workImgs
-    }); 
+    await db.collection('cards').doc(id).update({ name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs }); 
     closeModal('createModal'); 
-    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
-    $('cProf').selectedIndex = 0; 
-    toast('تم تحديث بطاقتك بنجاح! ✨'); 
-    await loadCards(); 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); $('cProf').selectedIndex = 0; 
+    toast('تم تحديث بطاقتك بنجاح! ✨'); await loadCards(); 
   } catch(e){ 
-    console.error(e); 
-    toast('تعذر التحديث: ' + e.message,'error'); 
+    toast('تعذر التحديث: '+e.message,'error'); 
   } finally{ 
-    btn.disabled = false; 
-    btn.innerHTML = orig; 
-    icons(); 
+    btn.disabled = false; btn.innerHTML = orig; icons(); 
   } 
 }
 
 function quickDeleteCard(event, id){ 
-  event.preventDefault(); 
-  event.stopPropagation(); 
-  const c = CARDS.find(x => x.id === id); 
-  if(!c) return; 
-  
+  event.preventDefault(); event.stopPropagation(); 
+  const c = CARDS.find(x => x.id === id); if(!c) return; 
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
-  if(!isOwner && !isAdmin){ 
-    return toast('ليس لديك صلاحية لحذف هذه البطاقة','error'); 
-  } 
-  
-  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')){ 
-    deleteCardById(id); 
-  } 
+  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لحذف هذه البطاقة','error'); 
+  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) deleteCardById(id); 
 }
 
 async function deleteCardById(id){ 
   try{ 
     await db.collection('cards').doc(id).delete(); 
-    toast('تم حذف البطاقة'); 
-    await loadCards(); 
+    toast('تم حذف البطاقة'); await loadCards(); 
     if(parseHash() === 'admin') renderAdminStats(); 
-  } catch(e){ 
-    toast(e.message,'error'); 
-  } 
+  } catch(e){ toast(e.message,'error'); } 
 }
 
 function showAdmin(){ 
-  if(!session || session.email !== ADMIN_EMAIL){ 
-    toast('هذه الصفحة للإدارة فقط','error'); 
-    location.hash = ''; 
-    return; 
-  } 
-  $('adminSec').style.display = ''; 
-  renderAdminStats(); 
-  renderAdminList($('adminQ').value.trim()); 
+  if(!session || session.email !== ADMIN_EMAIL){ toast('هذه الصفحة للإدارة فقط','error'); location.hash = ''; return; } 
+  $('adminSec').style.display = ''; renderAdminStats(); renderAdminList($('adminQ').value.trim()); 
   window.scrollTo({ top: $('adminSec').offsetTop - 80, behavior: 'smooth' }); 
 }
 
 function hideAdmin(){ $('adminSec').style.display = 'none'; }
-
 function renderAdminStats(){ 
   $('adTotal').textContent = CARDS.length; 
   $('adProvs').textContent = new Set(CARDS.map(c => c.province)).size; 
@@ -1291,21 +1055,14 @@ function renderAdminList(q){
     list = list.filter(c => (String(c.numId).includes(query) || c.name.toLowerCase().includes(query) || c.phone.includes(query) || c.profession.toLowerCase().includes(query))); 
   } 
   $('adminList').innerHTML = list.map(c => 
-    '<div class="arow">' + 
-      '<img class="mini-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' + 
-      '<div class="awho"><b>' + esc(c.name) + '</b><span>' + 
-        '<span><i data-lucide="hash"></i> ID: ' + c.numId + '</span>' + 
-        '<span><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span>' + 
-        '<span><i data-lucide="map-pin"></i> ' + esc(c.province) + '</span>' + 
-        '<span><i data-lucide="phone"></i> ' + esc(c.phone) + '</span>' + 
-        '<span><i data-lucide="images"></i> ' + (c.images || []).length + ' صورة</span>' + 
-      '</span></div>' + 
-      '<div style="display:flex;gap:.4rem;flex-wrap:wrap">' + 
-        '<a class="abtn call" href="' + telLink(c.phone) + '"><i data-lucide="phone"></i> اتصال</a>' + 
-        '<a class="abtn wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> واتساب</a>' + 
-        '<button class="abtn del" onclick="delCard(\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف المنشور</button>' + 
-      '</div>' + 
-    '</div>' 
+    '<div class="arow"><img class="mini-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' + 
+    '<div class="awho"><b>' + esc(c.name) + '</b><span>' + 
+    '<span><i data-lucide="hash"></i> ID: ' + c.numId + '</span><span><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span>' + 
+    '<span><i data-lucide="map-pin"></i> ' + esc(c.province) + '</span><span><i data-lucide="phone"></i> ' + esc(c.phone) + '</span>' + 
+    '<span><i data-lucide="images"></i> ' + (c.images || []).length + ' صورة</span></span></div>' + 
+    '<div style="display:flex;gap:.4rem;flex-wrap:wrap"><a class="abtn call" href="' + telLink(c.phone) + '"><i data-lucide="phone"></i> اتصال</a>' + 
+    '<a class="abtn wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> واتساب</a>' + 
+    '<button class="abtn del" onclick="delCard(\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف المنشور</button></div></div>' 
   ).join('') || '<div class="empty-state"><i data-lucide="users"></i>لا نتائج مطابقة</div>'; 
   icons(); 
 }
@@ -1314,41 +1071,31 @@ async function delCard(id){
   if(!confirm('حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) return; 
   try{ 
     await db.collection('cards').doc(id).delete(); 
-    toast('تم حذف المنشور'); 
-    await loadCards(); 
-    renderAdminStats(); 
-    renderAdminList($('adminQ').value.trim()); 
-  } catch(e){ 
-    toast(e.message,'error'); 
-  } 
+    toast('تم حذف المنشور'); await loadCards(); renderAdminStats(); renderAdminList($('adminQ').value.trim()); 
+  } catch(e){ toast(e.message,'error'); } 
 }
 
 function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
 $$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
-// ✅ Lightbox المحسن والمستقل (نسخة مبسطة ومضمونة العمل)
+// ✅ نظام Lightbox الاحترافي مع دعم زر الرجوع الفعلي للهاتف وملء الشاشة والتكبير
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 
 function initLightbox(){
   const stage = $('lbStage');
-  const img = $('lbImg');
-  
-  // Touch Events for Mobile
   stage.addEventListener('touchstart', handleTouchStart, {passive:false});
   stage.addEventListener('touchmove', handleTouchMove, {passive:false});
   stage.addEventListener('touchend', handleTouchEnd);
-  
-  // Mouse Events for Desktop
   stage.addEventListener('mousedown', handleMouseDown);
   window.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('mouseup', handleMouseUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
   
-  // Back button support
+  // دعم زر الرجوع للرجوع للخلف وإغلاق الـ Lightbox
   window.addEventListener('popstate', () => {
     if($('lightbox').classList.contains('active')){
-      closeLightbox(true);
+      closeLightbox(false);
     }
   });
 }
@@ -1356,153 +1103,104 @@ function initLightbox(){
 function handleTouchStart(e){
   if(e.touches.length === 1){
     lbTouchStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
-    lbLastTap = Date.now();
-    lbIsDragging = true;
+    lbLastTap = Date.now(); lbIsDragging = true;
   } else if(e.touches.length === 2){
-    lbPinchDist = getDistance(e.touches[0], e.touches[1]);
-    lbIsDragging = false;
+    lbPinchDist = getDistance(e.touches[0], e.touches[1]); lbIsDragging = false;
   }
 }
 
 function handleTouchMove(e){
-  e.preventDefault(); // Prevent scrolling
+  e.preventDefault();
   if(e.touches.length === 1 && lbIsDragging){
     if(lbScale > 1){
-      const dx = e.touches[0].clientX - lbTouchStart.x;
-      const dy = e.touches[0].clientY - lbTouchStart.y;
-      lbX += dx; lbY += dy;
+      lbX += e.touches[0].clientX - lbTouchStart.x;
+      lbY += e.touches[0].clientY - lbTouchStart.y;
       lbTouchStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
       applyTransform();
     }
   } else if(e.touches.length === 2){
     const dist = getDistance(e.touches[0], e.touches[1]);
     if(lbPinchDist > 0){
-      const ratio = dist / lbPinchDist;
-      lbScale = Math.max(1, Math.min(5, lbScale * ratio));
-      applyTransform();
-      lbPinchDist = dist;
+      lbScale = Math.max(1, Math.min(5, lbScale * (dist / lbPinchDist)));
+      applyTransform(); lbPinchDist = dist;
     }
   }
 }
 
 function handleTouchEnd(e){
-  lbIsDragging = false;
-  lbPinchDist = 0;
-  
-  // Double tap detection
-  const now = Date.now();
-  if((now - lbLastTap) < 300 && e.changedTouches.length === 1){
-    if(lbScale > 1){
-      resetZoom();
-    } else {
-      lbScale = 2.5;
-      applyTransform();
-    }
+  lbIsDragging = false; lbPinchDist = 0;
+  if((Date.now() - lbLastTap) < 300 && e.changedTouches.length === 1){
+    if(lbScale > 1) resetZoom();
+    else { lbScale = 2.5; applyTransform(); }
   }
 }
 
 function handleMouseDown(e){
-  if(e.button !== 0) return; // Only left click
-  lbTouchStart = {x:e.clientX, y:e.clientY};
-  lbIsDragging = true;
+  if(e.button !== 0) return;
+  lbTouchStart = {x:e.clientX, y:e.clientY}; lbIsDragging = true;
   $('lbStage').classList.add('grabbing');
 }
 
 function handleMouseMove(e){
   if(!lbIsDragging) return;
   if(lbScale > 1){
-    const dx = e.clientX - lbTouchStart.x;
-    const dy = e.clientY - lbTouchStart.y;
-    lbX += dx; lbY += dy;
+    lbX += e.clientX - lbTouchStart.x;
+    lbY += e.clientY - lbTouchStart.y;
     lbTouchStart = {x:e.clientX, y:e.clientY};
     applyTransform();
   }
 }
 
-function handleMouseUp(){
-  lbIsDragging = false;
-  $('lbStage').classList.remove('grabbing');
-}
-
+function handleMouseUp(){ lbIsDragging = false; $('lbStage').classList.remove('grabbing'); }
 function handleWheel(e){
   e.preventDefault();
-  const factor = e.deltaY < 0 ? 1.15 : 0.87;
-  lbScale = Math.max(1, Math.min(5, lbScale * factor));
+  lbScale = Math.max(1, Math.min(5, lbScale * (e.deltaY < 0 ? 1.15 : 0.87)));
   if(lbScale === 1){ lbX=0; lbY=0; }
   applyTransform();
 }
 
-function getDistance(t1, t2){
-  return Math.sqrt(Math.pow(t2.clientX-t1.clientX,2) + Math.pow(t2.clientY-t1.clientY,2));
-}
+function getDistance(t1, t2){ return Math.sqrt(Math.pow(t2.clientX-t1.clientX,2) + Math.pow(t2.clientY-t1.clientY,2)); }
+function applyTransform(){ $('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`; }
+function resetZoom(){ lbScale = 1; lbX = 0; lbY = 0; applyTransform(); }
+function lbZoomIn(){ lbScale = Math.min(5, lbScale * 1.3); applyTransform(); }
+function lbZoomOut(){ lbScale = Math.max(1, lbScale / 1.3); if(lbScale === 1){ lbX=0; lbY=0; } applyTransform(); }
+function lbReset(){ resetZoom(); }
 
-function applyTransform(){
-  $('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`;
-}
-
-function resetZoom(){
-  lbScale = 1; lbX = 0; lbY = 0;
-  applyTransform();
-}
-
-function lbZoomIn(){
-  lbScale = Math.min(5, lbScale * 1.3);
-  applyTransform();
-}
-
-function lbZoomOut(){
-  lbScale = Math.max(1, lbScale / 1.3);
-  if(lbScale === 1){ lbX=0; lbY=0; }
-  applyTransform();
-}
-
-// ✅ الدالة الجديدة والبسيطة لفتح الصور
 function openLightboxById(cardId, imageIndex) {
   const card = CARDS.find(c => c.id === cardId);
   if (!card || !card.images || !card.images.length) return;
-  
-  lbImgs = card.images;
-  lbIdx = imageIndex || 0;
+  lbImgs = card.images; lbIdx = imageIndex || 0;
   resetZoom();
   
-  // Show lightbox immediately
+  // دفع حالة للتاريخ حتى يستجيب زر الرجوع في الهاتف
+  history.pushState({lightbox: true}, '');
   $('lightbox').classList.add('active');
-  renderLightboxContent();
-  icons();
+  renderLightboxContent(); icons();
 }
 
 function renderLightboxContent(){
-  $('lbImg').src = lbImgs[lbIdx];
-  $('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
-  
-  // Hide nav buttons if only one image
-  const navButtons = document.querySelectorAll('.lb-nav');
-  navButtons.forEach(btn => btn.style.display = lbImgs.length > 1 ? '' : 'none');
+  $('lbImg').src = lbImgs[lbIdx];$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
 }
 
-function closeLightbox(force = false){
+function closeLightbox(backHistory = true){
   $('lightbox').classList.remove('active');
+  if(backHistory && history.state && history.state.lightbox){
+    history.back();
+  }
 }
 
-// Initialize after DOM ready
 setTimeout(initLightbox, 100);
 
 let dhikrIdx=0,dhikrTimer=null;
 function buildDhikrDots(){ $('dhikrDots').innerHTML=DHIKR.map((_,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join(''); }
 function showDhikr(i){ 
-  dhikrIdx=i; 
-  const q=$('dhikrQuote'); 
-  q.classList.add('fade'); 
+  dhikrIdx=i; const q=$('dhikrQuote'); q.classList.add('fade'); 
   setTimeout(()=>{ 
-    q.textContent=DHIKR[i].t; 
-    $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; 
-    q.classList.remove('fade'); 
-    $$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); 
+    q.textContent=DHIKR[i].t; $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; q.classList.remove('fade');$$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); 
   },450); 
 }
 function startDhikr(){ 
-  buildDhikrDots(); showDhikr(0); 
-  clearInterval(dhikrTimer); 
+  buildDhikrDots(); showDhikr(0); clearInterval(dhikrTimer); 
   dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); 
 }
 
@@ -1510,9 +1208,8 @@ async function boot(){
   tickClock(); 
   $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
   startDhikr(); 
-  try{ await loadCards(); }catch(e){ console.error(e); $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
-  icons(); 
-  route(); 
+  try{ await loadCards(); }catch(e){ $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
+  icons(); route(); 
 }
 window.addEventListener('load',boot);
 </script>
