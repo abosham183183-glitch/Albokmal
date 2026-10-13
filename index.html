@@ -302,18 +302,23 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .detail-actions svg{width:1.2rem;height:1.2rem}
 .da-call{background:var(--navy2)}.da-wa{background:var(--wa)}.da-edit{background:var(--blue)}.da-del{background:var(--red)}
 
-/* Lightbox المحسن */
-.lightbox{position:fixed;inset:0;z-index:400;background:rgba(4,10,22,.96);display:none;flex-direction:column}
-.lightbox.open{display:flex}
-.lb-header{display:flex;justify-content:space-between;align-items:center;padding:1rem;color:#fff;flex-shrink:0}
-.lb-counter{font-size:.9rem;font-weight:800;background:rgba(255,255,255,.1);padding:.3rem .8rem;border-radius:99px}
-.lb-controls{display:flex;gap:.5rem}
-.lb-btn{background:rgba(255,255,255,.12);color:#fff;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.2s}
-.lb-btn:hover{background:var(--gold);color:#1a1200}
-.lb-btn svg{width:1.1rem;height:1.1rem}
-.lb-stage{flex:1;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab;position:relative}
-.lb-stage img{max-width:94%;max-height:94%;user-select:none;pointer-events:none;transition:transform .1s ease-out;border-radius:8px}
-.lb-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.8rem;font-weight:700;text-align:center;pointer-events:none}
+/* ✅ Lightbox المحسن والمستقل تماماً */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9999; background: rgba(4,10,22,.98); display: none; flex-direction: column; opacity: 0; transition: opacity .3s ease;
+}
+.lightbox.active { display: flex; opacity: 1; }
+.lb-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; color: #fff; flex-shrink: 0; background: linear-gradient(to bottom, rgba(0,0,0,.8), transparent); }
+.lb-counter { font-size: .9rem; font-weight: 800; background: rgba(255,255,255,.1); padding: .3rem .8rem; border-radius: 99px; backdrop-filter: blur(4px); }
+.lb-controls { display: flex; gap: .5rem; }
+.lb-btn { background: rgba(255,255,255,.1); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; transition: .2s; cursor: pointer; border: 1px solid rgba(255,255,255,.1); }
+.lb-btn:hover { background: var(--gold); color: #1a1200; transform: scale(1.1); }
+.lb-btn svg { width: 1.1rem; height: 1.1rem; }
+.lb-stage { flex: 1; display: grid; place-items: center; overflow: hidden; touch-action: none; cursor: grab; position: relative; }
+.lb-stage.grabbing { cursor: grabbing; }
+.lb-img { max-width: 94%; max-height: 94%; user-select: none; pointer-events: none; transition: transform .1s ease-out; will-change: transform; box-shadow: 0 20px 50px rgba(0,0,0,.5); border-radius: 4px; }
+.lb-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .8rem; font-weight: 700; text-align: center; pointer-events: none; animation: fadeInOut 4s forwards; }
+@keyframes fadeInOut { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}.fwrap{grid-template-columns:1fr}}
 @media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.bento-horizontal .card{min-width:260px;max-width:260px}}
 </style>
@@ -544,7 +549,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   </div>
 </div>
 
-<!-- Lightbox المحسن -->
+<!-- ✅ Lightbox المحسن والمستقل -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-counter" id="lbCounter">1 / 1</div>
@@ -556,7 +561,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     </div>
   </div>
   <div class="lb-stage" id="lbStage">
-    <img id="lbImg" alt="">
+    <img id="lbImg" class="lb-img" alt="">
     <div class="lb-hint">اسحب لتحريك • قرّب إصبعيك للتكبير • انقر مرتين لإعادة التعيين</div>
   </div>
 </div>
@@ -575,7 +580,7 @@ const auth = firebase.auth();
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَهُ لَا شَرِيكَة لَهُ، لَهُ الْمُلْك وَلَهُ الْحَمْد وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوب إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْل وَلَا قُوَّة إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْد لِلَّهِ وَلَا إِلَه إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَه إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
+const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَهُ لَا شَرِيكَ لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let currentUser = null;
@@ -585,7 +590,7 @@ let curDetail = null;
 let dailyUsed = 0, totalUsed = 0;
 let editingCardId = null;
 let pendingAction = null;
-let profileAvatarData = null; // مؤقت للصورة الجديدة
+let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
@@ -737,7 +742,7 @@ function renderBentoGrid(containerId, cardsList){
     
     // المجموعة الأولى (0-9): عمود رأسي
     if(idx === 0){
-      html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزاً</div>';
+      html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزا</div>';
       html += '<div class="bento-vertical">' + group.map(cardHTML).join('') + '</div>';
     } 
     // باقي المجموعات: شرائط أفقية قابلة للتمرير
@@ -949,12 +954,12 @@ function onProfileAvatarPick(inp){
 
 async function saveProfile(event){
   event.preventDefault();
-  if(!currentUser) return toast('يجب تسجيل الدخول أولاً','error');
+  if(!currentUser) return toast('يجب تسجيل الدخول أولا','error');
   
   const newName = $('pfName').value.trim();
   const newPhone = $('pfPhone').value.trim().replace(/[\s()-]/g,'');
   
-  if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملاً','error');
+  if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
   if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
   
   const btn = event.target.querySelector('button[type="submit"]');
@@ -1028,7 +1033,7 @@ function profChanged(){ $('profOtherWrap').style.display = $('cProf').value === 
 $('cProf').addEventListener('change', profChanged);
 
 async function submitCard(){ 
-  if(!currentUser) return toast('يجب تسجيل الدخول أولاً','error'); 
+  if(!currentUser) return toast('يجب تسجيل الدخول أولا','error'); 
   
   const name = $('cName').value.trim(); 
   const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
@@ -1037,7 +1042,7 @@ async function submitCard(){
   if(profession === 'أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   
-  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملاً','error'); 
+  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
   if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
@@ -1054,7 +1059,7 @@ async function submitCard(){
     const usedToday = (dData.date === todayStr) ? (dData.count || 0) : 0; 
     const usedTotal = dData.total || 0; 
     
-    if(usedToday + workImgs.length > MAX_DAILY_IMGS) return toast('يمكنك رفع 3 صور فقط يومياً — لديك '+usedToday+' اليوم','error'); 
+    if(usedToday + workImgs.length > MAX_DAILY_IMGS) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
     if(usedTotal + workImgs.length > MAX_TOTAL_IMGS) return toast('وصلت للحد الكلي 50 صورة','error'); 
     
     const numId = 100000 + Math.floor(Math.random()*900000); 
@@ -1128,7 +1133,7 @@ function openDetail(id){
             '<span class="tag prov"><i data-lucide="map-pin"></i> ' + esc(c.province) + '</span>' + 
           '</div></div>' + 
         '</div>' + 
-        '<div class="desc-full">' + esc(c.desc || 'لم يضف صاحب البطاقة وصفاً.') + '</div>' + 
+        '<div class="desc-full">' + esc(c.desc || 'لم يضف صاحب البطاقة وصفا.') + '</div>' + 
         '<div class="card-id" style="margin-bottom:.5rem">ID: ' + c.numId + '</div>' + 
         '<div class="detail-actions">' + actionsHtml + '</div>' + 
       '</div>' + 
@@ -1192,7 +1197,7 @@ async function saveEditedCard(id){
   if(profession === 'أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   
-  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملاً','error'); 
+  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
   if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
@@ -1235,7 +1240,7 @@ function quickDeleteCard(event, id){
     return toast('ليس لديك صلاحية لحذف هذه البطاقة','error'); 
   } 
   
-  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائياً؟ لا يمكن التراجع.')){ 
+  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')){ 
     deleteCardById(id); 
   } 
 }
@@ -1302,7 +1307,7 @@ function renderAdminList(q){
 }
 
 async function delCard(id){ 
-  if(!confirm('حذف هذه البطاقة نهائياً؟ لا يمكن التراجع.')) return; 
+  if(!confirm('حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) return; 
   try{ 
     await db.collection('cards').doc(id).delete(); 
     toast('تم حذف المنشور'); 
@@ -1318,8 +1323,8 @@ function openModal(id){ $(id).classList.add('open'); document.body.style.overflo
 function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
 $$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
-// ✅ Lightbox المحسن مع دعم اللمس وزر الرجوع
-let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
+// ✅ Lightbox المحسن والمستقل تماماً (بدون History API conflicts)
+let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 
 function initLightbox(){
   const stage = $('lbStage');
@@ -1332,10 +1337,10 @@ function initLightbox(){
   stage.addEventListener('pointercancel', handlePointerUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
   
-  // Back button support
+  // Back button support (using simple flag instead of pushState to avoid routing conflict)
   window.addEventListener('popstate', () => {
-    if($('lightbox').classList.contains('open')){
-      closeLightbox();
+    if($('lightbox').classList.contains('active')){
+      closeLightbox(true); // Force close without pushing history again
     }
   });
 }
@@ -1344,6 +1349,7 @@ function handlePointerDown(e){
   if(e.target.closest('.lb-btn')) return;
   const stage = $('lbStage');
   stage.setPointerCapture(e.pointerId);
+  stage.classList.add('grabbing');
   
   if(e.pointerType === 'touch'){
     // Touch logic
@@ -1356,11 +1362,12 @@ function handlePointerDown(e){
   } else {
     // Mouse drag start
     lbTouchStart = {x:e.clientX, y:e.clientY};
+    lbIsDragging = true;
   }
 }
 
 function handlePointerMove(e){
-  if(!lbTouchStart.x) return;
+  if(!lbTouchStart.x && !lbIsDragging) return;
   
   if(e.pointerType === 'touch'){
     if(lbPinchDist > 0){ // Pinching
@@ -1377,8 +1384,8 @@ function handlePointerMove(e){
       applyTransform();
     }
   } else {
-    // Mouse pan when zoomed
-    if(lbScale > 1){
+    // Mouse pan when zoomed or dragging
+    if(lbScale > 1 || lbIsDragging){
       const dx = e.clientX - lbTouchStart.x;
       const dy = e.clientY - lbTouchStart.y;
       lbX += dx; lbY += dy;
@@ -1391,6 +1398,7 @@ function handlePointerMove(e){
 function handlePointerUp(e){
   const stage = $('lbStage');
   stage.releasePointerCapture(e.pointerId);
+  stage.classList.remove('grabbing');
   
   if(e.pointerType === 'touch'){
     const now = Date.now();
@@ -1411,6 +1419,7 @@ function handlePointerUp(e){
     lbPinchDist = 0;
   } else {
     lbTouchStart = {x:0, y:0};
+    lbIsDragging = false;
   }
 }
 
@@ -1452,10 +1461,8 @@ function openLightbox(imgs, i){
   lbIdx = i || 0;
   resetZoom();
   
-  // Push history state so back button closes lightbox
-  history.pushState({lightbox:true}, '', '#lightbox-open');
-  
-  $('lightbox').classList.add('open');
+  // Show lightbox immediately
+  $('lightbox').classList.add('active');
   renderLightboxContent();
   icons();
 }
@@ -1469,11 +1476,11 @@ function renderLightboxContent(){
   navButtons.forEach(btn => btn.style.display = lbImgs.length > 1 ? '' : 'none');
 }
 
-function closeLightbox(){
-  $('lightbox').classList.remove('open');
-  // Remove the pushed history state if we're still in lightbox context
-  if(location.hash === '#lightbox-open'){
-    history.back();
+function closeLightbox(force = false){
+  $('lightbox').classList.remove('active');
+  // If forced (by back button), don't manipulate history further
+  if(!force && location.hash === '#lightbox-open'){
+     // This case shouldn't happen anymore as we removed pushState
   }
 }
 
