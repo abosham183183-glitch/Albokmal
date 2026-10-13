@@ -12,6 +12,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <style>
+/* ═══════ المتغيرات ═══════ */
 :root{--navy:#0A1E3C;--navy2:#122F5C;--blue:#1B4FA8;--sky:#3B82F6;--gold:#D4A017;--gold2:#F5C542;--bg:#EEF2F8;--surface:#FFFFFF;--ink:#101828;--muted:#5A6478;--line:#DCE3ED;--shadow:rgba(10,30,60,.14);--wa:#1FA855;--red:#DC2626}
 [data-theme="dark"]{--navy:#060D1C;--navy2:#0C1730;--blue:#1E4FB0;--sky:#5B9BF8;--gold:#E0AE2E;--gold2:#FFD86B;--bg:#080F1E;--surface:#101B31;--ink:#E8EDF6;--muted:#8A96AC;--line:#22314E;--shadow:rgba(0,0,0,.5)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -133,15 +134,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .cat-btn:hover svg{transform:scale(1.15) rotate(-8deg);color:var(--gold)}
 .cat-n{font-size:.62rem;color:var(--muted);font-weight:800}
 
-/* Cards */
-.cards-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
-.back-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:.5rem 1rem;font-weight:800;font-size:.85rem;color:var(--blue);transition:.2s;cursor:pointer}
-[data-theme="dark"] .back-btn{color:var(--sky)}
-.back-btn:hover{border-color:var(--blue);transform:translateX(4px)}
-.cards-meta{font-size:.8rem;color:var(--muted);font-weight:800}
-.cards-meta b{color:var(--gold)}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
-
+/* Cards Base */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
@@ -175,8 +168,17 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .cbtn.call{background:var(--navy2)}.cbtn.wa{background:var(--wa)}
 .cbtn.edit{background:var(--blue)}.cbtn.del{background:var(--red)}
 .cbtn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.empty-state{grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--muted)}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
 .empty-state svg{width:3.2rem;height:3.2rem;color:var(--gold);display:block;margin:0 auto .8rem}
+
+/* ═══════ نظام Bento Grid الجديد ═══════ */
+.bento-container{display:flex;flex-direction:column;gap:1.5rem}
+.bento-vertical{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
+.bento-horizontal{display:flex;gap:1.2rem;overflow-x:auto;padding:.5rem .2rem 1.5rem;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.bento-horizontal::-webkit-scrollbar{display:none}
+.bento-horizontal .card{min-width:290px;max-width:290px;flex:none;scroll-snap-align:start}
+.bento-label{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.bento-label svg{color:var(--gold);width:.9rem;height:.9rem}
 
 /* Report & Dhikr */
 .report-band{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:24px;padding:1.8rem 1.5rem;color:#fff;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;box-shadow:0 16px 40px var(--shadow)}
@@ -227,6 +229,29 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .abtn svg{width:.85rem;height:.85rem}
 .abtn.del{background:var(--red)}.abtn.wa{background:var(--wa)}.abtn.call{background:var(--navy2)}
 
+/* Profile Page */
+.profile-page{max-width:600px;margin:2rem auto;background:var(--surface);border-radius:24px;padding:2rem;box-shadow:0 20px 50px var(--shadow);position:relative;overflow:hidden}
+.profile-page::before{content:"";position:absolute;top:0;right:0;left:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.profile-header{text-align:center;margin-bottom:1.5rem}
+.profile-avatar-lg{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:0 auto 1rem;display:block;box-shadow:0 8px 20px var(--shadow);position:relative;cursor:pointer;transition:.3s}
+.profile-avatar-lg:hover{transform:scale(1.05);border-color:var(--blue)}
+.profile-avatar-edit{position:absolute;bottom:0;right:0;background:var(--blue);color:#fff;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.3);border:2px solid #fff}
+.profile-avatar-edit svg{width:.9rem;height:.9rem}
+.profile-info h2{font-size:1.4rem;color:var(--navy);margin-bottom:.3rem}
+[data-theme="dark"] .profile-info h2{color:var(--gold2)}
+.profile-info p{font-size:.85rem;color:var(--muted);font-weight:600}
+.profile-form{display:flex;flex-direction:column;gap:1rem}
+.profile-field label{display:flex;align-items:center;gap:.4rem;font-weight:800;font-size:.82rem;margin-bottom:.4rem;color:var(--navy)}
+[data-theme="dark"] .profile-field label{color:var(--gold2)}
+.profile-field label svg{color:var(--gold);width:.9rem;height:.9rem}
+.profile-field input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.7rem .85rem;outline:none;background:var(--surface);transition:.2s}
+.profile-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 20%,transparent)}
+.profile-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1200;border-radius:14px;padding:.9rem;font-weight:900;font-size:1.02rem;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 6px 18px rgba(212,160,23,.4);transition:.25s;margin-top:.5rem}
+.profile-submit:hover{transform:translateY(-2px)}
+.profile-back{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:.5rem 1rem;font-weight:800;font-size:.85rem;color:var(--blue);transition:.2s;cursor:pointer;margin-bottom:1rem}
+[data-theme="dark"] .profile-back{color:var(--sky)}
+.profile-back:hover{border-color:var(--blue);transform:translateX(4px)}
+
 /* Modals */
 .overlay{position:fixed;inset:0;background:rgba(6,13,28,.65);backdrop-filter:blur(5px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:3vh 1rem;overflow-y:auto}
 .overlay.open{display:flex}
@@ -276,45 +301,21 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .detail-actions a{border-radius:13px;padding:.85rem;font-weight:900;display:flex;align-items:center;justify-content:center;gap:.5rem;color:#fff;font-size:.95rem}
 .detail-actions svg{width:1.2rem;height:1.2rem}
 .da-call{background:var(--navy2)}.da-wa{background:var(--wa)}.da-edit{background:var(--blue)}.da-del{background:var(--red)}
-.lightbox{position:fixed;inset:0;z-index:400;background:rgba(4,10,22,.96);display:none}
-.lightbox.open{display:block}
-.lb-stage{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab}
-.lb-stage img{max-width:94%;max-height:90%;user-select:none;pointer-events:none;transition:transform .06s linear}
-.lb-x{position:absolute;top:14px;left:14px;z-index:5;background:rgba(255,255,255,.12);color:#fff;width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
-.lb-x:hover{background:var(--red)}
-.lb-tools{position:absolute;top:14px;right:14px;z-index:5;display:flex;gap:.5rem}
-.lb-tools button{background:rgba(255,255,255,.12);color:#fff;width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
-.lb-tools button:hover{background:var(--gold);color:#1a1200}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,.1);color:#fff;width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
-.lb-nav:hover{background:var(--gold);color:#1a1200}
-.lb-nav.prev{right:10px}.lb-nav.next{left:10px}
-.lb-count{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;border-radius:99px;padding:.25rem .9rem;font-size:.8rem;font-weight:800;z-index:5}
-.toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%) translateY(20px);background:var(--navy);color:#fff;padding:.8rem 1.5rem;border-radius:14px;font-weight:800;font-size:.9rem;z-index:500;opacity:0;transition:.35s;pointer-events:none;box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:88vw;display:flex;align-items:center;gap:.5rem}
-.toast.show{opacity:1;transform:translateX(50%) translateY(0)}
-.toast svg{color:var(--gold2);width:1.1rem;height:1.1rem}
-.toast.error{background:var(--red)}
-.toast.error svg{color:#fff}
-footer{background:var(--navy);color:#BFD0EA;margin-top:2rem}
-.fwrap{max-width:1240px;margin:auto;padding:2rem 1rem;display:grid;grid-template-columns:1.4fr 1fr;gap:2rem}
-footer h4{font-family:'Cairo';color:var(--gold2);font-size:1.15rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
-footer img{width:34px;height:34px;border-radius:9px;object-fit:contain;background:rgba(255,255,255,.08);padding:2px}
-footer a{display:flex;align-items:center;gap:.5rem;font-size:.85rem;padding:.2rem 0;color:#BFD0EA;transition:.2s}
-footer a svg{color:var(--gold2);width:.85rem;height:.85rem}
-footer a:hover{color:var(--gold2)}
-.fbottom{border-top:1px solid rgba(255,255,255,.1);text-align:center;padding:1.1rem;font-size:.8rem}
-.google-login-modal{max-width:420px}
-.google-login-header{text-align:center;margin-bottom:1.5rem}
-.google-login-header img{width:70px;height:70px;border-radius:16px;object-fit:contain;background:var(--bg);padding:4px;margin:0 auto 1rem;display:block;box-shadow:0 8px 20px var(--shadow)}
-.google-login-header h2{font-size:1.3rem;color:var(--navy);margin-bottom:.3rem}
-[data-theme="dark"] .google-login-header h2{color:var(--gold2)}
-.google-login-header p{font-size:.85rem;color:var(--muted);font-weight:600}
-.google-btn-container{display:flex;justify-content:center;margin:1.5rem 0}
-.google-signin-btn{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8rem 1.5rem;font-weight:800;font-size:.95rem;display:inline-flex;align-items:center;gap:.6rem;transition:.2s;box-shadow:0 4px 12px var(--shadow);cursor:pointer}
-.google-signin-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--shadow)}
-.google-icon{width:20px;height:20px}
-.login-note{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.8;margin-top:1rem;padding:0 .5rem}
+
+/* Lightbox المحسن */
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(4,10,22,.96);display:none;flex-direction:column}
+.lightbox.open{display:flex}
+.lb-header{display:flex;justify-content:space-between;align-items:center;padding:1rem;color:#fff;flex-shrink:0}
+.lb-counter{font-size:.9rem;font-weight:800;background:rgba(255,255,255,.1);padding:.3rem .8rem;border-radius:99px}
+.lb-controls{display:flex;gap:.5rem}
+.lb-btn{background:rgba(255,255,255,.12);color:#fff;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.2s}
+.lb-btn:hover{background:var(--gold);color:#1a1200}
+.lb-btn svg{width:1.1rem;height:1.1rem}
+.lb-stage{flex:1;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab;position:relative}
+.lb-stage img{max-width:94%;max-height:94%;user-select:none;pointer-events:none;transition:transform .1s ease-out;border-radius:8px}
+.lb-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.8rem;font-weight:700;text-align:center;pointer-events:none}
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}.fwrap{grid-template-columns:1fr}}
-@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.bento-horizontal .card{min-width:260px;max-width:260px}}
 </style>
 </head>
 <body data-theme="light">
@@ -345,6 +346,8 @@ footer a:hover{color:var(--gold2)}
     <a class="dr-item" href="#admin" id="adminLink" style="display:none"><i data-lucide="shield-check"></i> لوحة الإدارة</a>
     <a class="dr-item" href="#" onclick="doGoogleLogin();return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
     <a class="dr-item" href="#" onclick="doLogout();return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
+    <div class="dr-sep"></div>
+    <a class="dr-item" href="#profile" id="profileLink" style="display:none"><i data-lucide="user-circle"></i> ملفي الشخصي</a>
   </div>
   <div class="dr-foot">© 2026 الكل هنا — جميع الحقوق محفوظة</div>
 </nav>
@@ -389,7 +392,9 @@ footer a:hover{color:var(--gold2)}
     <section class="section" id="allCardsSec">
       <div class="sec-title"><i data-lucide="layers"></i> كل المعلمين والحرفيين</div>
       <p class="sec-sub">بطاقات تظهر بشكل عشوائي من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
-      <div class="cards-grid" id="allCardsGrid"><div class="loading-grid"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div></div>
+      <div id="allCardsContainer" class="bento-container">
+        <div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>
+      </div>
     </section>
     <section class="section" id="catSec">
       <div class="sec-title"><i data-lucide="layout-grid"></i> الأقسام والمهن</div>
@@ -414,7 +419,7 @@ footer a:hover{color:var(--gold2)}
       <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
       <div class="cards-meta"><span id="provinceTitle"></span> — <b id="provinceCount"></b></div>
     </div>
-    <div class="cards-grid" id="provinceGrid"></div>
+    <div id="provinceContainer" class="bento-container"></div>
   </div>
 
   <!-- صفحة المهنة المستقلة -->
@@ -423,7 +428,52 @@ footer a:hover{color:var(--gold2)}
       <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
       <div class="cards-meta"><span id="professionTitle"></span> — <b id="professionCount"></b></div>
     </div>
-    <div class="cards-grid" id="professionGrid"></div>
+    <div id="professionContainer" class="bento-container"></div>
+  </div>
+
+  <!-- صفحة الملف الشخصي -->
+  <div id="profileView" class="page-view" style="display:none">
+    <button class="profile-back" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
+    <div class="profile-page">
+      <div class="profile-header">
+        <div style="position:relative;display:inline-block">
+          <img class="profile-avatar-lg" id="pfAvatar" src="logo5.png" alt="">
+          <label class="profile-avatar-edit" for="pfAvatarInput" title="تغيير الصورة">
+            <i data-lucide="camera"></i>
+          </label>
+          <input type="file" id="pfAvatarInput" accept="image/*" hidden onchange="onProfileAvatarPick(this)">
+        </div>
+        <div class="profile-info">
+          <h2 id="pfNameDisplay">مرحبا بك</h2>
+          <p id="pfEmailDisplay">example@gmail.com</p>
+        </div>
+      </div>
+      
+      <form class="profile-form" onsubmit="saveProfile(event)">
+        <div class="profile-field">
+          <label><i data-lucide="user"></i> الاسم الكامل *</label>
+          <input type="text" id="pfName" required placeholder="مثال: محمد أحمد العلي">
+        </div>
+        <div class="profile-field">
+          <label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label>
+          <input type="tel" id="pfPhone" required pattern="^09\d{8}$" placeholder="09XXXXXXXX" style="direction:ltr">
+        </div>
+        <div class="profile-field">
+          <label><i data-lucide="mail"></i> البريد الإلكتروني</label>
+          <input type="email" id="pfEmail" placeholder="example@mail.com" style="direction:ltr" readonly>
+          <small style="color:var(--muted);font-size:.7rem;display:block;margin-top:.3rem">⚠️ البريد مرتبط بحساب Google ولا يمكن تغييره يدوياً</small>
+        </div>
+        
+        <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
+      </form>
+      
+      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px dashed var(--line)">
+        <h4 style="font-size:.95rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem">
+          <i data-lucide="refresh-cw" style="color:var(--gold);width:1rem;height:1rem"></i> مزامنة تلقائية
+        </h4>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.8">عند حفظ التعديلات هنا، سيتم تحديث بياناتك تلقائياً في <strong>جميع بطاقاتك المنشورة</strong> على المنصة فوراً.</p>
+      </div>
+    </div>
   </div>
 
   <!-- لوحة الإدارة -->
@@ -494,14 +544,21 @@ footer a:hover{color:var(--gold2)}
   </div>
 </div>
 
-<!-- Lightbox -->
+<!-- Lightbox المحسن -->
 <div class="lightbox" id="lightbox">
-  <button class="lb-x" onclick="closeLightbox()"><i data-lucide="x"></i></button>
-  <div class="lb-tools"><button onclick="lbZoom(1.25)"><i data-lucide="zoom-in"></i></button><button onclick="lbZoom(0.8)"><i data-lucide="zoom-out"></i></button><button onclick="lbReset()"><i data-lucide="maximize"></i></button></div>
-  <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
-  <button class="lb-nav prev" onclick="lbGo(-1)"><i data-lucide="chevron-right"></i></button>
-  <button class="lb-nav next" onclick="lbGo(1)"><i data-lucide="chevron-left"></i></button>
-  <div class="lb-count" id="lbCount"></div>
+  <div class="lb-header">
+    <div class="lb-counter" id="lbCounter">1 / 1</div>
+    <div class="lb-controls">
+      <button class="lb-btn" onclick="lbZoomIn()" title="تكبير"><i data-lucide="zoom-in"></i></button>
+      <button class="lb-btn" onclick="lbZoomOut()" title="تصغير"><i data-lucide="zoom-out"></i></button>
+      <button class="lb-btn" onclick="lbReset()" title="إعادة تعيين"><i data-lucide="maximize"></i></button>
+      <button class="lb-btn" onclick="closeLightbox()" title="إغلاق"><i data-lucide="x"></i></button>
+    </div>
+  </div>
+  <div class="lb-stage" id="lbStage">
+    <img id="lbImg" alt="">
+    <div class="lb-hint">اسحب لتحريك • قرّب إصبعيك للتكبير • انقر مرتين لإعادة التعيين</div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -518,7 +575,7 @@ const auth = firebase.auth();
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
+const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَهُ لَا شَرِيكَة لَهُ، لَهُ الْمُلْك وَلَهُ الْحَمْد وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوب إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْل وَلَا قُوَّة إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْد لِلَّهِ وَلَا إِلَه إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَه إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let currentUser = null;
@@ -527,7 +584,8 @@ let workImgs = [], avaImg = null;
 let curDetail = null;
 let dailyUsed = 0, totalUsed = 0;
 let editingCardId = null;
-let pendingAction = null; // لإدارة التدفق التلقائي بعد تسجيل الدخول
+let pendingAction = null;
+let profileAvatarData = null; // مؤقت للصورة الجديدة
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
@@ -569,6 +627,14 @@ function route(){
   }
   
   if(h==='admin'){ showAdmin(); return; }
+  
+  if(h==='profile'){ 
+    if(!currentUser){ toast('يجب تسجيل الدخول أولاً','error'); location.hash='#/'; return; }
+    $('profileView').style.display=''; 
+    loadProfileData();
+    window.scrollTo(0,0); 
+    return; 
+  }
   
   if(h.startsWith('province/')){ 
     const prov=decodeURIComponent(h.split('/')[1]); 
@@ -653,9 +719,43 @@ function cardHTML(c){
 }
 function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
 
+// ✅ نظام Bento Grid الذكي
+function renderBentoGrid(containerId, cardsList){
+  const container = $(containerId);
+  if(!cardsList.length){
+    container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!');
+    return;
+  }
+  
+  const sorted = shuffle([...cardsList]);
+  let html = '';
+  let idx = 0;
+  
+  while(idx < sorted.length){
+    const groupSize = Math.min(10, sorted.length - idx);
+    const group = sorted.slice(idx, idx + groupSize);
+    
+    // المجموعة الأولى (0-9): عمود رأسي
+    if(idx === 0){
+      html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزاً</div>';
+      html += '<div class="bento-vertical">' + group.map(cardHTML).join('') + '</div>';
+    } 
+    // باقي المجموعات: شرائط أفقية قابلة للتمرير
+    else {
+      const bandNum = Math.floor(idx / 10); // 1, 2, 3...
+      html += '<div class="bento-label"><i data-lucide="move-horizontal"></i> المزيد من الحرفيين #' + bandNum + '</div>';
+      html += '<div class="bento-horizontal">' + group.map(cardHTML).join('') + '</div>';
+    }
+    
+    idx += 10;
+  }
+  
+  container.innerHTML = html;
+  icons();
+}
+
 function renderAll(){ 
-  const list=shuffle(CARDS); 
-  $('allCardsGrid').innerHTML=list.length?list.map(cardHTML).join(''):emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); 
+  renderBentoGrid('allCardsContainer', CARDS);
   buildProvinces(); buildCategories(); 
 }
 function emptyState(icon,txt){ return '<div class="empty-state"><i data-lucide="'+icon+'"></i>'+txt+'</div>'; }
@@ -664,19 +764,19 @@ function renderProvinceCards(province){
   const cards=CARDS.filter(c=>c.province===province); 
   $('provinceTitle').textContent='بطاقات محافظة '+province; 
   $('provinceCount').textContent=cards.length+' بطاقة منشورة'; 
-  $('provinceGrid').innerHTML=cards.length?shuffle(cards).map(cardHTML).join(''):emptyState('map-pin','لا توجد بطاقات منشورة في هذه المحافظة بعد.'); 
+  renderBentoGrid('provinceContainer', cards);
   icons(); 
 }
 function renderProfessionCards(profession){ 
   const cards=CARDS.filter(c=>c.profession===profession); 
   $('professionTitle').textContent='بطاقات مهنة '+profession; 
   $('professionCount').textContent=cards.length+' بطاقة منشورة'; 
-  $('professionGrid').innerHTML=cards.length?shuffle(cards).map(cardHTML).join(''):emptyState('wrench','لا توجد بطاقات منشورة بهذه المهنة بعد.'); 
+  renderBentoGrid('professionContainer', cards);
   icons(); 
 }
 
 async function loadCards(){ 
-  $('allCardsGrid').innerHTML='<div class="loading-grid"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
+  $('allCardsContainer').innerHTML='<div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
   const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get(); 
   CARDS=snap.docs.map(d=>({id:d.id,...d.data()})); 
   renderAll(); 
@@ -728,13 +828,11 @@ function renderWorkPreviews(){
   icons(); 
 }
 
-// ✅ التعديل الرئيسي: تدفق تسجيل الدخول وإنشاء البطاقة
+// ✅ تدفق تسجيل الدخول وإنشاء البطاقة
 function requireLoginThenOpenCreate(){ 
   if(currentUser){ 
-    // إذا كان مسجلاً دخوله بالفعل، افتح نافذة الإنشاء مباشرة
     openCreate(); 
   } else { 
-    // إذا لم يكن مسجلاً دخوله، احفظ الإجراء المؤجل وافتح نافذة تسجيل الدخول
     pendingAction = 'createCard'; 
     openModal('googleLoginModal'); 
   } 
@@ -747,13 +845,11 @@ function performGoogleSignIn(){
   auth.signInWithPopup(provider).then(result => { 
     currentUser = result.user; 
     
-    // إغلاق نافذة تسجيل الدخول فوراً
     closeModal('googleLoginModal'); 
     
-    // التحقق من وجود إجراء مؤجل وفتحه تلقائياً
     if(pendingAction === 'createCard'){ 
-      pendingAction = null; // مسح الإجراء المؤجل
-      openCreate(); // فتح نافذة إنشاء البطاقة تلقائياً
+      pendingAction = null; 
+      openCreate(); 
     } 
     
     updateAuthUI(); 
@@ -783,7 +879,7 @@ async function doLogout(){
   await auth.signOut(); 
   currentUser = null; 
   session = null; 
-  pendingAction = null; // تنظيف الإجراء المؤجل عند الخروج
+  pendingAction = null; 
   updateAuthUI(); 
   toast('تم تسجيل الخروج'); 
 }
@@ -793,6 +889,7 @@ function updateAuthUI(){
   $('adminLink').style.display = isAdm ? '' : 'none'; 
   $('loginLink').style.display = session ? 'none' : ''; 
   $('logoutLink').style.display = session ? '' : 'none'; 
+  $('profileLink').style.display = currentUser ? '' : 'none'; // ✅ إظهار رابط الملف الشخصي
   
   const drHeadSmall = $('.dr-head small'); 
   if(drHeadSmall){ 
@@ -817,12 +914,91 @@ auth.onAuthStateChanged(user => {
   if(!session) hideAdmin(); 
 });
 
+// ✅ نظام الملف الشخصي
+function loadProfileData(){
+  if(!currentUser) return;
+  
+  $('pfName').value = currentUser.displayName || '';
+  $('pfEmail').value = currentUser.email || '';
+  $('pfNameDisplay').textContent = currentUser.displayName || 'مرحبا بك';
+  $('pfEmailDisplay').textContent = currentUser.email || '';
+  
+  // البحث عن أول بطاقة للمستخدم للحصول على الهاتف والصورة الحالية
+  const myFirstCard = CARDS.find(c => c.ownerUid === currentUser.uid);
+  if(myFirstCard){
+    $('pfPhone').value = myFirstCard.phone;
+    $('pfAvatar').src = myFirstCard.avatar || 'logo5.png';
+  } else {
+    $('pfPhone').value = '';
+    $('pfAvatar').src = 'logo5.png';
+  }
+  
+  profileAvatarData = null; // إعادة تعيين المؤقت
+  icons();
+}
+
+function onProfileAvatarPick(inp){
+  const f = inp.files[0]; inp.value='';
+  if(!f) return;
+  compress(f, 240, .72).then(d => {
+    profileAvatarData = d;
+    $('pfAvatar').src = d;
+    toast('تم تحميل الصورة الجديدة ✓');
+  }).catch(()=>toast('تعذرت معالجة الصورة','error'));
+}
+
+async function saveProfile(event){
+  event.preventDefault();
+  if(!currentUser) return toast('يجب تسجيل الدخول أولاً','error');
+  
+  const newName = $('pfName').value.trim();
+  const newPhone = $('pfPhone').value.trim().replace(/[\s()-]/g,'');
+  
+  if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملاً','error');
+  if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
+  
+  const btn = event.target.querySelector('button[type="submit"]');
+  const origText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
+  
+  try {
+    // 1. تحديث بيانات المستخدم في Firebase Auth
+    await currentUser.updateProfile({ displayName: newName });
+    
+    // 2. تحديث ALL cards belonging to this user
+    const userCards = CARDS.filter(c => c.ownerUid === currentUser.uid);
+    const batch = db.batch();
+    
+    userCards.forEach(cardDoc => {
+      const ref = db.collection('cards').doc(cardDoc.id);
+      const updates = { name: newName, phone: newPhone };
+      if(profileAvatarData) updates.avatar = profileAvatarData;
+      batch.update(ref, updates);
+    });
+    
+    await batch.commit();
+    
+    // 3. إعادة تحميل البيانات وتحديث الواجهة
+    await loadCards();
+    loadProfileData();
+    
+    toast('✅ تم حفظ التعديلات ومزامنتها مع ' + userCards.length + ' بطاقة بنجاح!');
+    
+  } catch(e){
+    console.error(e);
+    toast('تعذر الحفظ: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origText;
+    icons();
+  }
+}
+
 function openCreate(){ 
-  // تعبئة القوائم المنسدلة
   $('cProv').innerHTML = PROVINCES.map(p => '<option>' + p + '</option>').join(''); 
   $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join(''); 
   
-  // تصفير المتغيرات
   workImgs = []; 
   avaImg = null; 
   dailyUsed = 0; 
@@ -832,7 +1008,6 @@ function openCreate(){
   renderWorkPreviews(); 
   editingCardId = null; 
   
-  // تحديث عناصر النافذة بأمان
   const modalHeader = $('createModalTitle');
   if(modalHeader) {
     modalHeader.innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
@@ -889,7 +1064,7 @@ async function submitCard(){
       numId, name, phone, province, profession, desc,
       avatar: avaImg || null, 
       images: workImgs,
-      ownerUid: currentUser.uid, // ربط البطاقة بمستخدم Google الحالي
+      ownerUid: currentUser.uid,
       createdAt: Date.now()
     }); 
     
@@ -1143,26 +1318,167 @@ function openModal(id){ $(id).classList.add('open'); document.body.style.overflo
 function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
 $$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
-let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0;
-function lbApply(){ $('lbImg').style.transform='translate('+lbX+'px,'+lbY+'px) scale('+lbScale+')'; }
-function openLightbox(imgs,i){ if(!imgs||!imgs.length)return; lbImgs=imgs; lbIdx=i||0; lbScale=1;lbX=0;lbY=0; $('lightbox').classList.add('open'); lbRender(); icons(); }
-function lbRender(){ $('lbImg').src=lbImgs[lbIdx]; $('lbCount').textContent=(lbIdx+1)+' / '+lbImgs.length; $('lbCount').style.display=lbImgs.length>1?'':'none'; $$('.lb-nav').forEach(b=>b.style.display=lbImgs.length>1?'':'none'); lbApply(); }
-function lbReset(){ lbScale=1;lbX=0;lbY=0;lbApply(); }
-function lbZoom(f){ lbScale=Math.max(1,Math.min(6,lbScale*f)); if(lbScale===1){lbX=0;lbY=0;} lbApply(); }
-function lbGo(d){ lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length; lbReset(); lbRender(); }
-function closeLightbox(){ $('lightbox').classList.remove('open'); }
-(function(){ 
-  const pts=new Map(); let pinch0=0,scale0=1,moved=0,lastTap=0,lastX=0,lastY=0,px=0,py=0; 
-  const st=$('lbStage'); 
-  st.addEventListener('pointerdown',e=>{ if(e.target.closest('button'))return; st.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY}); moved=0;px=e.clientX;py=e.clientY; if(pts.size===2){const[a,b]=[...pts.values()];pinch0=Math.hypot(a.x-b.x,a.y-b.y);scale0=lbScale;} }); 
-  st.addEventListener('pointermove',e=>{ if(!pts.has(e.pointerId))return; pts.set(e.pointerId,{x:e.clientX,y:e.clientY}); 
-    if(pts.size===2){const[a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y); if(pinch0>0){lbScale=Math.max(1,Math.min(6,scale0*d/pinch0));lbApply();} moved=10;} 
-    else if(pts.size===1&&lbScale>1){lbX+=e.clientX-px;lbY+=e.clientY-py;px=e.clientX;py=e.clientY;moved=10;lbApply();} }); 
-  const up=e=>{ if(!pts.has(e.pointerId))return; pts.delete(e.pointerId); 
-    if(pts.size===0&&moved<6){const now=Date.now(); if(now-lastTap<300&&Math.hypot(e.clientX-lastX,e.clientY-lastY)<40){ if(lbScale>1)lbReset(); else{lbScale=2.5;lbApply();} lastTap=0;} else {lastTap=now;lastX=e.clientX;lastY=e.clientY;} } }; 
-  st.addEventListener('pointerup',up); st.addEventListener('pointercancel',up); 
-  st.addEventListener('wheel',e=>{e.preventDefault();lbZoom(e.deltaY<0?1.15:0.87);},{passive:false}); 
-})();
+// ✅ Lightbox المحسن مع دعم اللمس وزر الرجوع
+let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
+
+function initLightbox(){
+  const stage = $('lbStage');
+  const img = $('lbImg');
+  
+  // Pointer Events for unified mouse/touch handling
+  stage.addEventListener('pointerdown', handlePointerDown);
+  stage.addEventListener('pointermove', handlePointerMove);
+  stage.addEventListener('pointerup', handlePointerUp);
+  stage.addEventListener('pointercancel', handlePointerUp);
+  stage.addEventListener('wheel', handleWheel, {passive:false});
+  
+  // Back button support
+  window.addEventListener('popstate', () => {
+    if($('lightbox').classList.contains('open')){
+      closeLightbox();
+    }
+  });
+}
+
+function handlePointerDown(e){
+  if(e.target.closest('.lb-btn')) return;
+  const stage = $('lbStage');
+  stage.setPointerCapture(e.pointerId);
+  
+  if(e.pointerType === 'touch'){
+    // Touch logic
+    if(lbTouchStart.x === 0){ // First touch
+      lbTouchStart = {x:e.clientX, y:e.clientY};
+      lbLastTap = Date.now();
+    } else { // Second finger (pinch start)
+      lbPinchDist = getDistance(lbTouchStart, {x:e.clientX, y:e.clientY});
+    }
+  } else {
+    // Mouse drag start
+    lbTouchStart = {x:e.clientX, y:e.clientY};
+  }
+}
+
+function handlePointerMove(e){
+  if(!lbTouchStart.x) return;
+  
+  if(e.pointerType === 'touch'){
+    if(lbPinchDist > 0){ // Pinching
+      const dist = getDistance(lbTouchStart, {x:e.clientX, y:e.clientY});
+      const ratio = dist / lbPinchDist;
+      lbScale = Math.max(1, Math.min(5, lbScale * ratio));
+      applyTransform();
+      lbPinchDist = dist; // Update baseline
+    } else if(lbScale > 1){ // Panning single finger when zoomed
+      const dx = e.clientX - lbTouchStart.x;
+      const dy = e.clientY - lbTouchStart.y;
+      lbX += dx; lbY += dy;
+      lbTouchStart = {x:e.clientX, y:e.clientY};
+      applyTransform();
+    }
+  } else {
+    // Mouse pan when zoomed
+    if(lbScale > 1){
+      const dx = e.clientX - lbTouchStart.x;
+      const dy = e.clientY - lbTouchStart.y;
+      lbX += dx; lbY += dy;
+      lbTouchStart = {x:e.clientX, y:e.clientY};
+      applyTransform();
+    }
+  }
+}
+
+function handlePointerUp(e){
+  const stage = $('lbStage');
+  stage.releasePointerCapture(e.pointerId);
+  
+  if(e.pointerType === 'touch'){
+    const now = Date.now();
+    const wasQuickTap = (now - lbLastTap) < 300;
+    const movedLittle = Math.abs(e.clientX - lbTouchStart.x) < 10 && Math.abs(e.clientY - lbTouchStart.y) < 10;
+    
+    if(wasQuickTap && movedLittle && lbPinchDist === 0){
+      // Double tap detection
+      if(lbScale > 1){
+        resetZoom();
+      } else {
+        lbScale = 2.5;
+        applyTransform();
+      }
+    }
+    
+    lbTouchStart = {x:0, y:0};
+    lbPinchDist = 0;
+  } else {
+    lbTouchStart = {x:0, y:0};
+  }
+}
+
+function handleWheel(e){
+  e.preventDefault();
+  const factor = e.deltaY < 0 ? 1.15 : 0.87;
+  lbScale = Math.max(1, Math.min(5, lbScale * factor));
+  if(lbScale === 1){ lbX=0; lbY=0; }
+  applyTransform();
+}
+
+function getDistance(p1, p2){
+  return Math.sqrt(Math.pow(p2.x-p1.x,2) + Math.pow(p2.y-p1.y,2));
+}
+
+function applyTransform(){
+  $('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`;
+}
+
+function resetZoom(){
+  lbScale = 1; lbX = 0; lbY = 0;
+  applyTransform();
+}
+
+function lbZoomIn(){
+  lbScale = Math.min(5, lbScale * 1.3);
+  applyTransform();
+}
+
+function lbZoomOut(){
+  lbScale = Math.max(1, lbScale / 1.3);
+  if(lbScale === 1){ lbX=0; lbY=0; }
+  applyTransform();
+}
+
+function openLightbox(imgs, i){
+  if(!imgs || !imgs.length) return;
+  lbImgs = imgs;
+  lbIdx = i || 0;
+  resetZoom();
+  
+  // Push history state so back button closes lightbox
+  history.pushState({lightbox:true}, '', '#lightbox-open');
+  
+  $('lightbox').classList.add('open');
+  renderLightboxContent();
+  icons();
+}
+
+function renderLightboxContent(){
+  $('lbImg').src = lbImgs[lbIdx];
+  $('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
+  
+  // Hide nav buttons if only one image
+  const navButtons = document.querySelectorAll('.lb-nav');
+  navButtons.forEach(btn => btn.style.display = lbImgs.length > 1 ? '' : 'none');
+}
+
+function closeLightbox(){
+  $('lightbox').classList.remove('open');
+  // Remove the pushed history state if we're still in lightbox context
+  if(location.hash === '#lightbox-open'){
+    history.back();
+  }
+}
+
+// Initialize after DOM ready
+setTimeout(initLightbox, 100);
 
 let dhikrIdx=0,dhikrTimer=null;
 function buildDhikrDots(){ $('dhikrDots').innerHTML=DHIKR.map((_,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join(''); }
@@ -1187,7 +1503,7 @@ async function boot(){
   tickClock(); 
   $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
   startDhikr(); 
-  try{ await loadCards(); }catch(e){ console.error(e); $('allCardsGrid').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
+  try{ await loadCards(); }catch(e){ console.error(e); $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
   icons(); 
   route(); 
 }
