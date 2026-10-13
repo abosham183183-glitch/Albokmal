@@ -171,7 +171,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
 .empty-state svg{width:3.2rem;height:3.2rem;color:var(--gold);display:block;margin:0 auto .8rem}
 
-/* ═══════ Bento Grid الجديد ═══════ */
+/* Bento Grid */
 .bento-container{display:flex;flex-direction:column;gap:1.5rem}
 .bento-vertical{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
 .bento-horizontal{display:flex;gap:1.2rem;overflow-x:auto;padding:.5rem .2rem 1.5rem;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -254,19 +254,65 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .profile-logout-btn{width:100%;background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red);border:1.5px solid var(--red);border-radius:14px;padding:.85rem;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.25s;margin-top:1rem}
 .profile-logout-btn:hover{background:var(--red);color:#fff}
 
-/* Modals */
-.overlay{position:fixed;inset:0;background:rgba(6,13,28,.65);backdrop-filter:blur(5px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:3vh 1rem;overflow-y:auto}
+/* ✅ Modals - محسن للجوال (Full Screen on Mobile) */
+.overlay{position:fixed;inset:0;background:rgba(6,13,28,.75);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:0}
 .overlay.open{display:flex}
-.modal{background:var(--surface);border-radius:24px;width:100%;max-width:560px;animation:pop .35s cubic-bezier(.2,.9,.3,1.2) both;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4)}
-.modal.wide{max-width:760px}
-@keyframes pop{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:none}}
-.mhead{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center}
-.mhead h3{font-size:1.2rem;display:flex;align-items:center;gap:.5rem}
-.mhead h3 svg{color:var(--gold2);width:1.15rem;height:1.15rem}
-.xbtn{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;transition:.2s}
+.modal{background:var(--surface);border-radius:0;width:100%;max-width:900px;height:100vh;max-height:100vh;display:flex;flex-direction:column;animation:slideInUp .3s cubic-bezier(.2,.9,.3,1) both;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+@media(min-width:768px){
+  .modal{height:auto;max-height:90vh;border-radius:24px;margin:2rem}
+}
+@keyframes slideInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.mhead{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.mhead h3{font-size:1.2rem;display:flex;align-items:center;gap:.5rem;font-weight:900}
+.mhead h3 svg{color:var(--gold2);width:1.3rem;height:1.3rem}
+.xbtn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;transition:.2s;border:none}
 .xbtn:hover{background:var(--red);transform:rotate(90deg)}
-.xbtn svg{width:1.1rem;height:1.1rem}
-.mbody{padding:1.4rem}
+.xbtn svg{width:1.2rem;height:1.2rem}
+.mbody{padding:1.5rem;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+@media(max-width:767px){.mbody{padding:1rem}}
+
+/* ✅ تنسيق تفاصيل البطاقة الداخلية (Responsive Layout) */
+.detail-layout{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:768px){.detail-layout{grid-template-columns:1.2fr 1fr;gap:2rem}}
+
+.gallery-main{position:relative;width:100%;aspect-ratio:4/3;background:var(--bg);border-radius:16px;overflow:hidden;margin-bottom:.8rem;border:1px solid var(--line)}
+.gallery-main img{width:100%;height:100%;object-fit:contain;cursor:pointer;transition:.3s}
+.gallery-main img:hover{transform:scale(1.02)}
+.zoom-badge{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.7);color:#fff;padding:.3rem .8rem;border-radius:99px;font-size:.75rem;font-weight:700;display:flex;align-items:center;gap:.3rem;pointer-events:none}
+.zoom-badge svg{width:.9rem;height:.9rem;color:var(--gold2)}
+.thumbs-row{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+.thumbs-row::-webkit-scrollbar{display:none}
+.thumb-item{width:70px;height:55px;border-radius:10px;overflow:hidden;border:2px solid transparent;cursor:pointer;flex:none;transition:.2s}
+.thumb-item.active{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 30%,transparent)}
+.thumb-item img{width:100%;height:100%;object-fit:cover}
+
+.info-panel{display:flex;flex-direction:column;gap:1rem}
+.user-header{display:flex;align-items:center;gap:1rem;margin-bottom:.5rem}
+.user-avatar-lg{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);background:var(--bg);box-shadow:0 4px 12px var(--shadow)}
+.user-details h2{font-family:'Cairo';font-size:1.4rem;color:var(--navy);margin:0;line-height:1.2}
+[data-theme="dark"] .user-details h2{color:var(--gold2)}
+.user-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.badge-pill{font-size:.75rem;font-weight:800;padding:.25rem .7rem;border-radius:99px;display:inline-flex;align-items:center;gap:.3rem}
+.badge-prof{background:color-mix(in srgb,var(--blue) 15%,transparent);color:var(--blue)}
+[data-theme="dark"] .badge-prof{color:var(--sky)}
+.badge-prov{background:color-mix(in srgb,var(--gold) 15%,transparent);color:var(--gold)}
+.description-box{background:var(--bg);padding:1rem;border-radius:12px;border-right:3px solid var(--blue);font-size:.95rem;line-height:1.8;color:var(--ink);white-space:pre-wrap}
+[data-theme="dark"] .description-box{background:rgba(255,255,255,.03);color:#E2E8F0}
+.meta-data{display:flex;justify-content:space-between;align-items:center;padding-top:.5rem;border-top:1px dashed var(--line);font-size:.85rem;color:var(--muted);font-weight:700}
+.action-buttons{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:auto;padding-top:1rem}
+.act-btn{border-radius:14px;padding:1rem;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;color:#fff;text-decoration:none;transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.act-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.act-call{background:linear-gradient(135deg,#1e3a8a,#1e40af)} 
+.act-wa{background:linear-gradient(135deg,#1fa855,#15803d)} 
+.act-edit{background:var(--blue)}
+.act-del{background:var(--red)}
+.act-full{grid-column:1/-1}
+@media(max-width:767px){
+  .action-buttons{grid-template-columns:1fr;} 
+  .act-btn{width:100%}
+}
+
+/* حقول الإدخال العامة */
 .field{margin-bottom:1rem}
 .field label{display:flex;align-items:center;gap:.4rem;font-weight:800;font-size:.82rem;margin-bottom:.4rem;color:var(--navy)}
 [data-theme="dark"] .field label{color:var(--gold2)}
@@ -288,21 +334,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pv .rm svg{width:.55rem;height:.55rem}
 .note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7}
 .note.warn{color:var(--red)}
-.detail-gallery .main{height:300px;border-radius:16px;overflow:hidden;background:var(--bg);display:grid;place-items:center;position:relative}
-.detail-gallery .main img{width:100%;height:100%;object-fit:contain;cursor:zoom-in}
-.zoomhint{position:absolute;bottom:10px;left:10px;background:rgba(10,30,60,.8);color:#fff;border-radius:99px;padding:.3rem .8rem;font-size:.68rem;font-weight:800;display:flex;align-items:center;gap:.3rem;pointer-events:none}
-.zoomhint svg{width:.8rem;height:.8rem;color:var(--gold2)}
-.minis{display:flex;gap:.5rem;margin-top:.6rem;overflow-x:auto;scrollbar-width:none}
-.minis::-webkit-scrollbar{display:none}
-.minis img{width:60px;height:48px;object-fit:cover;border-radius:9px;cursor:pointer;border:2px solid transparent;flex:none}
-.minis img.on{border-color:var(--gold)}
-.detail-info h2{font-size:1.5rem;color:var(--navy);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-[data-theme="dark"] .detail-info h2{color:var(--gold2)}
-.detail-info .desc-full{color:var(--muted);font-size:.92rem;line-height:2;margin:1rem 0;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:1rem 0;font-weight:600}
-.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}
-.detail-actions a{border-radius:13px;padding:.85rem;font-weight:900;display:flex;align-items:center;justify-content:center;gap:.5rem;color:#fff;font-size:.95rem}
-.detail-actions svg{width:1.2rem;height:1.2rem}
-.da-call{background:var(--navy2)}.da-wa{background:var(--wa)}.da-edit{background:var(--blue)}.da-del{background:var(--red)}
 
 /* Lightbox المحسن */
 .lightbox {
@@ -617,7 +648,7 @@ const auth = firebase.auth();
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
+const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّه',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّم صَلِّ وَسَلِّمْ عَلىٰ نَبِيِّنا مُحمَّد',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللّه وَالْحَمْد لِلّه وَلَا إِلَه إِلَّا اللّه واللّه أَكْبَر',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللّه لَا إِلَه إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيم',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّار',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let currentUser = null;
@@ -978,53 +1009,99 @@ async function submitCard(){
   } 
 }
 
+// ✅ دالة openDetail المحدثة (Responsive & Clean)
 function openDetail(id){ 
-  const c = CARDS.find(x => x.id === id); if(!c) return; curDetail = id; 
+  const c = CARDS.find(x => x.id === id); 
+  if(!c) return; 
+  curDetail = id; 
+  
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   
-  const gallery = (c.images && c.images.length) ? 
-    '<div class="detail-gallery"><div class="main"><img id="detMain" src="' + c.images[0] + '" onclick="openLightboxById(\''+c.id+'\',0)"><span class="zoomhint"><i data-lucide="zoom-in"></i> اضغط للتكبير</span></div>' + 
-    (c.images.length > 1 ? '<div class="minis">' + c.images.map((u,i) => '<img src="'+u+'" class="'+(i===0?'on':'')+'" onclick="swapDet(this,\''+esc(u)+'\')">').join('') + '</div>' : '') + '</div>' : 
-    '<div class="detail-gallery"><div class="main"><i data-lucide="image-off" style="width:3rem;height:3rem;color:var(--muted)"></i></div></div>'; 
+  // بناء معرض الصور
+  let galleryHtml = '';
+  if(c.images && c.images.length > 0){
+    const mainImg = c.images[0];
+    const thumbs = c.images.map((img, idx) => 
+      `<div class="thumb-item ${idx===0?'active':''}" onclick="switchGalleryImage('${img}', this)">
+         <img src="${img}" alt="">
+       </div>`
+    ).join('');
     
-  let actionsHtml = ''; 
-  if(isOwner || isAdmin){ 
-    actionsHtml = '<a class="da-edit" href="#" onclick="quickEditCard(event,\''+c.id+'\')"><i data-lucide="edit-3"></i> تعديل البطاقة</a>' + 
-                  '<a class="da-del" href="#" onclick="quickDeleteCard(event,\''+c.id+'\')"><i data-lucide="trash-2"></i> حذف نهائي</a>'; 
-  } else { 
-    actionsHtml = '<a class="da-call" href="' + telLink(c.phone) + '"><i data-lucide="phone"></i> اتصال مباشر</a>' + 
-                  '<a class="da-wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> واتساب</a>'; 
-  } 
-  
-  $('detailBody').innerHTML = 
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4rem" class="detgrid">' + 
-      gallery + 
-      '<div class="detail-info">' + 
-        '<div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1rem">' + 
-          '<div class="card-ava-wrapper" style="width:70px;height:70px">' + 
-            '<img class="card-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' + 
-            '<div class="card-ava-ring"></div><div class="card-ava-ring r2"></div>' + 
-          '</div>' + 
-          '<div><h2>' + esc(c.name) + '</h2>' + 
-          '<div class="card-tags" style="margin-top:.4rem">' + 
-            '<span class="tag prof"><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span>' + 
-            '<span class="tag prov"><i data-lucide="map-pin"></i> ' + esc(c.province) + '</span>' + 
-          '</div></div>' + 
-        '</div>' + 
-        '<div class="desc-full">' + esc(c.desc || 'لم يضف صاحب البطاقة وصفا.') + '</div>' + 
-        '<div class="card-id" style="margin-bottom:.5rem">ID: ' + c.numId + '</div>' + 
-        '<div class="detail-actions">' + actionsHtml + '</div>' + 
-      '</div>' + 
-    '</div>'; 
-    
-  openModal('detailModal'); icons(); 
-}
+    galleryHtml = `
+      <div class="gallery-section">
+        <div class="gallery-main" onclick="openLightboxById('${c.id}', 0)">
+          <img id="detMainImg" src="${mainImg}" alt="عمل">
+          <span class="zoom-badge"><i data-lucide="zoom-in"></i> اضغط للتكبير</span>
+        </div>
+        <div class="thumbs-row">${thumbs}</div>
+      </div>
+    `;
+  } else {
+    galleryHtml = `<div class="gallery-main" style="display:grid;place-items:center;color:var(--muted)">
+                     <i data-lucide="image-off" style="width:3rem;height:3rem"></i> لا توجد صور
+                   </div>`;
+  }
 
-window.swapDet = function(el, url){ 
-  $('detMain').src = url; 
-  $$('.minis img').forEach(m => m.classList.remove('on')); 
-  el.classList.add('on'); 
+  // بناء الأزرار
+  let actionsHtml = '';
+  if(isOwner || isAdmin){
+    actionsHtml = `
+      <a href="#" onclick="quickEditCard(event,'${c.id}')" class="act-btn act-edit act-full"><i data-lucide="edit-3"></i> تعديل البطاقة</a>
+      <a href="#" onclick="quickDeleteCard(event,'${c.id}')" class="act-btn act-del act-full"><i data-lucide="trash-2"></i> حذف نهائي</a>
+    `;
+  } else {
+    actionsHtml = `
+      <a href="${telLink(c.phone)}" class="act-btn act-call"><i data-lucide="phone"></i> اتصال مباشر</a>
+      <a href="${waLink(c.phone, c.name)}" target="_blank" rel="noopener" class="act-btn act-wa"><i data-lucide="message-circle"></i> واتساب</a>
+    `;
+  }
+
+  // الحقن النهائي في الـ DOM
+  $('detailBody').innerHTML = `
+    <div class="detail-layout">
+      <!-- القسم الأول: الصور -->
+      <div>${galleryHtml}</div>
+      
+      <!-- القسم الثاني: المعلومات والأزرار -->
+      <div class="info-panel">
+        <div class="user-header">
+          <img src="${c.avatar || 'logo5.png'}" onerror="this.src='logo5.png'" class="user-avatar-lg" alt="avatar">
+          <div class="user-details">
+            <h2>${esc(c.name)}</h2>
+            <div class="user-badges">
+              <span class="badge-pill badge-prof"><i data-lucide="wrench"></i> ${esc(c.profession)}</span>
+              <span class="badge-pill badge-prov"><i data-lucide="map-pin"></i> ${esc(c.province)}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="description-box">${esc(c.desc || 'لم يضف صاحب البطاقة وصفاً تفصيلياً.')}</div>
+        
+        <div class="meta-data">
+          <span>ID: ${c.numId}</span>
+          <span><i data-lucide="calendar"></i> ${new Date(c.createdAt).toLocaleDateString('ar-SY')}</span>
+        </div>
+        
+        <div class="action-buttons">
+          ${actionsHtml}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  openModal('detailModal'); 
+  icons(); // تفعيل الأيقونات الجديدة
+} 
+
+// دالة مساعدة لتغيير الصورة الرئيسية عند الضغط على المصغرات
+window.switchGalleryImage = function(url, el){
+  const mainImg = document.getElementById('detMainImg');
+  if(mainImg) mainImg.src = url;
+  
+  // إزالة التفعيل من الكل وإضافته للعنصر المضغوط
+  document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
 };
 
 function quickEditCard(event, id){ 
