@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الكل هنا | منصة الحرفيين والمحافظات</title>
+<title>الكل هنا | منصة الحرفيين والمافظات</title>
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -101,6 +101,112 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pc-actions a{border-radius:11px;padding:.6rem;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;gap:.35rem;color:#fff}
 .pc-call{background:var(--navy2)}.pc-wa{background:var(--wa)}
 .pc-id{position:absolute;bottom:.7rem;left:.9rem;font-size:.62rem;color:var(--muted);font-weight:800}
+
+/* =========================================
+   ✅ SLIDER SECTION (سلايدر متحرك دخول يسار خروج يمين كل 3 ثواني)
+   ========================================= */
+.slider-section {
+    margin-top: -20px;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+}
+
+.slider-container {
+    width: min(800px, 95vw);
+    height: 380px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border: 3px solid var(--gold);
+    background: var(--surface);
+}
+
+.slider-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateX(-100%); /* البداية من اليسار خارج الشاشة */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* الصورة النشطة المنسكبة */
+.slider-slide.active {
+    opacity: 1;
+    transform: translateX(0); /* تدخل المنتصف */
+    z-index: 2;
+}
+
+/* الصورة القديمة التي تخرج نحو اليمين */
+.slider-slide.exit {
+    opacity: 0;
+    transform: translateX(100%); /* تخرج إلى اليمين */
+    z-index: 1;
+}
+
+.slider-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* تأثير الضل اللامع الساطع فوق الصورة */
+.slider-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-25deg);
+    animation: shine-sweep 3s infinite;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes shine-sweep {
+    0% { left: -150%; }
+    30% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* مؤشرات النقاط السفلية */
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 12;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-dot.active {
+    background: var(--gold2);
+    width: 26px;
+    border-radius: 10px;
+}
+
+@media(max-width:600px){
+    .slider-container { height: 220px; }
+}
 
 /* About */
 .about{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:2rem 1.6rem;box-shadow:0 12px 34px var(--shadow);position:relative;overflow:hidden}
@@ -350,7 +456,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .lb-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .8rem; font-weight: 700; text-align: center; pointer-events: none; animation: fadeInOut 4s forwards; }
 @keyframes fadeInOut { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
 
-/* ✅ FOOTER الجديد والمطور */
+/* FOOTER */
 footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid var(--gold)}
 .fwrap{max-width:1240px;margin:auto;padding:2.5rem 1rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
 @media(max-width:768px){.fwrap{grid-template-columns:1fr;text-align:center}}
@@ -368,83 +474,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 .fs-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;display:grid;place-items:center;transition:.3s}
 .fs-icon:hover{background:var(--gold);color:#1a1200;transform:scale(1.1)}
 .fbotttom{border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:1.5rem;font-size:.85rem;color:#6B7280;background:rgba(0,0,0,.2)}
-
-/* =========================================
-   ✅ MARQUEE SECTION (الشريط المتحرك المحدث)
-   ========================================= */
-.marquee-section {
-    margin-top: -30px;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 5;
-    overflow: hidden;
-    background: transparent;
-}
-
-.marquee-track {
-    display: flex;
-    width: fit-content;
-    /* التعديل: 15 ثانية لجعل الحركة متناسبة مع كل 3 ثواني لكل صورة */
-    animation: marquee-move 15s linear infinite; 
-}
-
-.marquee-track:hover {
-    animation-play-state: paused;
-}
-
-.marquee-item {
-    flex: 0 0 auto;
-    margin-left: 1.5rem;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    border: 2px solid rgba(255,255,255,0.1);
-    transition: transform 0.3s ease;
-}
-
-.marquee-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-    border-color: var(--gold);
-}
-
-.marquee-item img {
-    display: block;
-    height: 180px; 
-    width: 260px; /* تم توحيد العرض والارتفاع لجميع الصور */
-    object-fit: cover;
-}
-
-/* تأثير الضل اللامع فوق الصور (Shine Effect) */
-.marquee-item::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
-    transform: skewX(-25deg);
-    animation: shine-effect 3s infinite; /* يتكرر كل 3 ثواني */
-    pointer-events: none;
-}
-
-@keyframes shine-effect {
-    0% { left: -150%; }
-    50% { left: 150%; }
-    100% { left: 150%; }
-}
-
-@keyframes marquee-move {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-@media(max-width:600px){
-    .marquee-item img { height: 140px; width: 200px; }
-    .marquee-track { animation-duration: 12s; }
-}
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
 @media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.bento-horizontal .card{min-width:260px;max-width:260px}}
@@ -508,13 +537,18 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </section>
 
-    <!-- ✅ MARQUEE SECTION START -->
-    <section class="marquee-section">
-        <div class="marquee-track" id="marqueeTrack">
-            <!-- سيتم حقن الصور هنا بواسطة JavaScript تدريجياً من اليسار لليمين -->
+    <!-- ✅ SLIDER SECTION START (السلايدر المحدث) -->
+    <section class="slider-section">
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-slide active"><img src="abo1.png" alt="صورة 1" onerror="this.src='logo5.png'"></div>
+            <div class="slider-slide"><img src="abo2.png" alt="صورة 2" onerror="this.src='logo5.png'"></div>
+            <div class="slider-slide"><img src="abo3.png" alt="صورة 3" onerror="this.src='logo5.png'"></div>
+            <div class="slider-slide"><img src="abo4.png" alt="صورة 4" onerror="this.src='logo5.png'"></div>
+            <div class="slider-slide"><img src="abo5.png" alt="صورة 5" onerror="this.src='logo5.png'"></div>
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
     </section>
-    <!-- ✅ MARQUEE SECTION END -->
+    <!-- ✅ SLIDER SECTION END -->
 
     <section class="section about" id="aboutSec">
       <div class="sec-title"><i data-lucide="info"></i> لماذا «الكل هنا»؟</div>
@@ -600,7 +634,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
       
-      <!-- زر تسجيل الخروج داخل الملف الشخصي -->
       <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
@@ -1403,34 +1436,85 @@ function startDhikr(){
   dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); 
 }
 
-// ✅ تشغيل الشريط المتحرك للصور abo1.png إلى abo5.png
-function initMarquee() {
-    const track = document.getElementById('marqueeTrack');
-    if (!track) return;
+/* =========================================
+   ✅ SLIDER LOGIC (دخول يسار، خروج يمين كل 3 ثواني)
+   ========================================= */
+let currentSlideIndex = 0;
+let slideTimer = null;
 
-    const images = [
-        'abo1.png',
-        'abo2.png',
-        'abo3.png',
-        'abo4.png',
-        'abo5.png'
-    ];
+function initSlider() {
+    const slides = document.querySelectorAll('.slider-slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    if (!slides.length) return;
 
-    let htmlContent = '';
-    images.forEach(src => {
-        htmlContent += `
-            <div class="marquee-item">
-                <img src="${src}" alt="عمل حرفي" onerror="this.src='logo5.png'" loading="lazy">
-            </div>
-        `;
+    // بناء نقاط المؤشر
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
     });
 
-    // تكرار الصور لضمان سلاسة الدوران والتحرك المستمر من اليسار لليمين
-    track.innerHTML = htmlContent + htmlContent;
+    startSlideTimer();
+}
+
+function nextSlide() {
+    const slides = document.querySelectorAll('.slider-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    if (!slides.length) return;
+
+    const prevIndex = currentSlideIndex;
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+    // إعادة تعيين جميع الشريحة المخفية
+    slides.forEach((slide, idx) => {
+        slide.classList.remove('active', 'exit');
+        if (idx !== currentSlideIndex && idx !== prevIndex) {
+            slide.style.transform = 'translateX(-100%)'; // التحضير للدخول من اليسار
+        }
+    });
+
+    // الصورة القديمة تخرج لليمين
+    slides[prevIndex].classList.add('exit');
+
+    // الصورة الجديدة تدخل من اليسار لتعرض بالمركز
+    slides[currentSlideIndex].classList.add('active');
+
+    // تحديث النقاط
+    dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlideIndex);
+    });
+}
+
+function goToSlide(index) {
+    if (index === currentSlideIndex) return;
+    const slides = document.querySelectorAll('.slider-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+
+    const prevIndex = currentSlideIndex;
+    currentSlideIndex = index;
+
+    slides.forEach((slide) => slide.classList.remove('active', 'exit'));
+    slides[prevIndex].classList.add('exit');
+    slides[currentSlideIndex].classList.add('active');
+
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlideIndex));
+
+    restartSlideTimer();
+}
+
+function startSlideTimer() {
+    clearInterval(slideTimer);
+    slideTimer = setInterval(nextSlide, 3000); // الانتقال التلقائي كل 3 ثواني
+}
+
+function restartSlideTimer() {
+    startSlideTimer();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMarquee();
+    initSlider();
 });
 
 async function boot(){ 
