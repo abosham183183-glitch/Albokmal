@@ -251,6 +251,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .profile-back{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:.5rem 1rem;font-weight:800;font-size:.85rem;color:var(--blue);transition:.2s;cursor:pointer;margin-bottom:1rem}
 [data-theme="dark"] .profile-back{color:var(--sky)}
 .profile-back:hover{border-color:var(--blue);transform:translateX(4px)}
+.profile-logout-btn{width:100%;background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red);border:1.5px solid var(--red);border-radius:14px;padding:.85rem;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.25s;margin-top:1rem}
+.profile-logout-btn:hover{background:var(--red);color:#fff}
 
 /* Modals */
 .overlay{position:fixed;inset:0;background:rgba(6,13,28,.65);backdrop-filter:blur(5px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:3vh 1rem;overflow-y:auto}
@@ -302,7 +304,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .detail-actions svg{width:1.2rem;height:1.2rem}
 .da-call{background:var(--navy2)}.da-wa{background:var(--wa)}.da-edit{background:var(--blue)}.da-del{background:var(--red)}
 
-/* ✅ Lightbox المحسن والمستقل تماماً مع دعم زر الرجوع */
+/* Lightbox المحسن */
 .lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(4,10,22,.98); display: none; flex-direction: column; opacity: 0; transition: opacity .3s ease;
 }
@@ -463,6 +465,9 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
         </div>
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
+      
+      <!-- ✅ زر تسجيل الخروج المضاف داخل الملف الشخصي -->
+      <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
 
@@ -530,7 +535,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   </div>
 </div>
 
-<!-- ✅ Lightbox المحسن والمستقل مع زر الإغلاق والرجوع -->
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-counter" id="lbCounter">1 / 1</div>
@@ -636,7 +641,6 @@ function buildCategories(){
 }
 function navigateTo(path){ location.hash='#'+path; }
 
-// ✅ دالة توليد بطاقة العرض مع ربط الصور بـ ID البطاقة ومؤشرها لتفادي مشاكل الحذف والتكسير
 function cardHTML(c){ 
   const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
   const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
@@ -1079,8 +1083,9 @@ function openModal(id){ $(id).classList.add('open'); document.body.style.overflo
 function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
 $$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
-// ✅ نظام Lightbox الاحترافي مع دعم زر الرجوع الفعلي للهاتف وملء الشاشة والتكبير
+// ✅ نظام Lightbox المعدل: إغلاق الصورة فقط عند زر الرجوع دون الخروج من البطاقة
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
+let isLightboxActive = false;
 
 function initLightbox(){
   const stage = $('lbStage');
@@ -1092,10 +1097,13 @@ function initLightbox(){
   window.addEventListener('mouseup', handleMouseUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
   
-  // دعم زر الرجوع للرجوع للخلف وإغلاق الـ Lightbox
-  window.addEventListener('popstate', () => {
-    if($('lightbox').classList.contains('active')){
-      closeLightbox(false);
+  // معالجة زر الرجوع في الهاتف للـ Lightbox فقط
+  window.addEventListener('popstate', (e) => {
+    if(isLightboxActive){
+      isLightboxActive = false;
+      $('lightbox').classList.remove('active');
+      // منع انتقال الـ popstate للرئيسية عبر إعادة دفع حالة البطاقة الحالية للتاريخ
+      history.pushState({modalOpen: true}, '');
     }
   });
 }
@@ -1172,7 +1180,7 @@ function openLightboxById(cardId, imageIndex) {
   lbImgs = card.images; lbIdx = imageIndex || 0;
   resetZoom();
   
-  // دفع حالة للتاريخ حتى يستجيب زر الرجوع في الهاتف
+  isLightboxActive = true;
   history.pushState({lightbox: true}, '');
   $('lightbox').classList.add('active');
   renderLightboxContent(); icons();
@@ -1182,9 +1190,11 @@ function renderLightboxContent(){
   $('lbImg').src = lbImgs[lbIdx];$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
 }
 
-function closeLightbox(backHistory = true){
+function closeLightbox(goBack = true){
+  if(!isLightboxActive) return;
+  isLightboxActive = false;
   $('lightbox').classList.remove('active');
-  if(backHistory && history.state && history.state.lightbox){
+  if(goBack){
     history.back();
   }
 }
