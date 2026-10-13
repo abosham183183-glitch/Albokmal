@@ -370,31 +370,31 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 .fbotttom{border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:1.5rem;font-size:.85rem;color:#6B7280;background:rgba(0,0,0,.2)}
 
 /* =========================================
-   ✅ MARQUEE SECTION (الشريط المتحرك الجديد)
+   ✅ MARQUEE SECTION (الشريط المتحرك المحدث)
    ========================================= */
 .marquee-section {
-    margin-top: -30px; /* سحب للأعلى قليلاً ليتداخل مع الزاوية السفلية للـ Hero */
+    margin-top: -30px;
     margin-bottom: 2.5rem;
     position: relative;
     z-index: 5;
-    overflow: hidden; /* لمنع خروج الصور خارج الإطار */
+    overflow: hidden;
     background: transparent;
 }
 
 .marquee-track {
     display: flex;
     width: fit-content;
-    animation: marquee-move 25s linear infinite; /* السرعة: كلما قل الرقم زادت السرعة */
+    /* التعديل: 15 ثانية لجعل الحركة متناسبة مع كل 3 ثواني لكل صورة */
+    animation: marquee-move 15s linear infinite; 
 }
 
-/* إيقاف الحركة عند تمرير الماوس (اختياري لتحسين التجربة) */
 .marquee-track:hover {
     animation-play-state: paused;
 }
 
 .marquee-item {
     flex: 0 0 auto;
-    margin-left: 1.5rem; /* المسافة بين الصور */
+    margin-left: 1.5rem;
     position: relative;
     border-radius: 16px;
     overflow: hidden;
@@ -411,39 +411,39 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 
 .marquee-item img {
     display: block;
-    height: 180px; /* ارتفاع ثابت للصور لتناسب الشريط */
-    width: auto;
+    height: 180px; 
+    width: 260px; /* تم توحيد العرض والارتفاع لجميع الصور */
     object-fit: cover;
 }
 
-/* تأثير اللمعان (Shine Effect) */
+/* تأثير الضل اللامع فوق الصور (Shine Effect) */
 .marquee-item::after {
     content: "";
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 50%;
+    left: -150%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
     transform: skewX(-25deg);
-    animation: shine-effect 3s infinite;
+    animation: shine-effect 3s infinite; /* يتكرر كل 3 ثواني */
     pointer-events: none;
 }
 
 @keyframes shine-effect {
-    0% { left: -100%; }
-    20% { left: 150%; }
+    0% { left: -150%; }
+    50% { left: 150%; }
     100% { left: 150%; }
 }
 
 @keyframes marquee-move {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); } /* يتحرك نصف العرض لأننا كررنا العناصر مرتين */
+    to { transform: translateX(-50%); }
 }
 
 @media(max-width:600px){
-    .marquee-item img { height: 140px; }
-    .marquee-track { animation-duration: 20s; } /* أسرع قليلا على الجوال */
+    .marquee-item img { height: 140px; width: 200px; }
+    .marquee-track { animation-duration: 12s; }
 }
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
@@ -511,7 +511,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     <!-- ✅ MARQUEE SECTION START -->
     <section class="marquee-section">
         <div class="marquee-track" id="marqueeTrack">
-            <!-- سيتم حقن الصور هنا بواسطة JavaScript لضمان التكرار السلس -->
+            <!-- سيتم حقن الصور هنا بواسطة JavaScript تدريجياً من اليسار لليمين -->
         </div>
     </section>
     <!-- ✅ MARQUEE SECTION END -->
@@ -600,7 +600,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
       
-      <!-- ✅ زر تسجيل الخروج المضاف داخل الملف الشخصي -->
+      <!-- زر تسجيل الخروج داخل الملف الشخصي -->
       <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
@@ -619,10 +619,8 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </section>
 </main>
 
-<!-- ✅ FOOTER المطور والجديد -->
 <footer>
   <div class="fwrap">
-    <!-- العمود الأول: عن المنصة والشعار الصغير -->
     <div class="fcol">
       <h4><img src="logo5.png" alt="Logo" class="f-logo-small"> الكل هنا</h4>
       <p>منصة خدمية مجانية تجمع أصحاب المهن والحرفيين مع أصحاب العمل في كافة المحافظات السورية. أنشئ بطاقتك المهنية، اعرض أعمالك، وخلّي الزبون يوصلك مباشرة.</p>
@@ -633,7 +631,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </div>
 
-    <!-- العمود الثاني: روابط سريعة -->
     <div class="fcol">
       <h4>روابط سريعة</h4>
       <div class="fl-links">
@@ -644,7 +641,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </div>
 
-    <!-- العمود الثالث: تواصل معنا -->
     <div class="fcol">
       <h4>تواصل معنا</h4>
       <div class="fl-links">
@@ -701,7 +697,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-counter" id="lbCounter">1 / 1</div>
@@ -1093,7 +1088,6 @@ async function submitCard(){
   } 
 }
 
-// ✅ دالة openDetail المحدثة (Responsive & Clean)
 function openDetail(id){ 
   const c = CARDS.find(x => x.id === id); 
   if(!c) return; 
@@ -1102,7 +1096,6 @@ function openDetail(id){
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   
-  // بناء معرض الصور
   let galleryHtml = '';
   if(c.images && c.images.length > 0){
     const mainImg = c.images[0];
@@ -1127,7 +1120,6 @@ function openDetail(id){
                    </div>`;
   }
 
-  // بناء الأزرار
   let actionsHtml = '';
   if(isOwner || isAdmin){
     actionsHtml = `
@@ -1141,13 +1133,9 @@ function openDetail(id){
     `;
   }
 
-  // الحقن النهائي في الـ DOM
   $('detailBody').innerHTML = `
     <div class="detail-layout">
-      <!-- القسم الأول: الصور -->
       <div>${galleryHtml}</div>
-      
-      <!-- القسم الثاني: المعلومات والأزرار -->
       <div class="info-panel">
         <div class="user-header">
           <img src="${c.avatar || 'logo5.png'}" onerror="this.src='logo5.png'" class="user-avatar-lg" alt="avatar">
@@ -1159,31 +1147,24 @@ function openDetail(id){
             </div>
           </div>
         </div>
-        
         <div class="description-box">${esc(c.desc || 'لم يضف صاحب البطاقة وصفاً تفصيليا.')}</div>
-        
         <div class="meta-data">
           <span>ID: ${c.numId}</span>
           <span><i data-lucide="calendar"></i> ${new Date(c.createdAt).toLocaleDateString('ar-SY')}</span>
         </div>
-        
         <div class="action-buttons">
           ${actionsHtml}
         </div>
       </div>
     </div>
   `;
-  
   openModal('detailModal'); 
-  icons(); // تفعيل الأيقونات الجديدة
+  icons(); 
 } 
 
-// دالة مساعدة لتغيير الصورة الرئيسية عند الضغط على المصغرات
 window.switchGalleryImage = function(url, el){
   const mainImg = document.getElementById('detMainImg');
   if(mainImg) mainImg.src = url;
-  
-  // إزالة التفعيل من الكل وإضافته للعنصر المضغوط
   document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
 };
@@ -1221,7 +1202,7 @@ async function saveEditedCard(id){
   try{ 
     await db.collection('cards').doc(id).update({ name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs }); 
     closeModal('createModal'); 
-    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); $('cProf').selectedIndex = 0; 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');$('cProf').selectedIndex = 0; 
     toast('تم تحديث بطاقتك بنجاح! ✨'); await loadCards(); 
   } catch(e){ 
     toast('تعذر التحديث: '+e.message,'error'); 
@@ -1292,10 +1273,8 @@ async function delCard(id){
 }
 
 function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
-$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
+function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
-// ✅ نظام Lightbox المعدل: إغلاق الصورة فقط عند زر الرجوع دون الخروج من البطاقة
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 let isLightboxActive = false;
 
@@ -1309,12 +1288,10 @@ function initLightbox(){
   window.addEventListener('mouseup', handleMouseUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
   
-  // معالجة زر الرجوع في الهاتف للـ Lightbox فقط
   window.addEventListener('popstate', (e) => {
     if(isLightboxActive){
       isLightboxActive = false;
       $('lightbox').classList.remove('active');
-      // منع انتقال الـ popstate للرئيسية عبر إعادة دفع حالة البطاقة الحالية للتاريخ
       history.pushState({modalOpen: true}, '');
     }
   });
@@ -1426,12 +1403,11 @@ function startDhikr(){
   dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); 
 }
 
-// ✅ MARQUEE LOGIC (تشغيل الشريط المتحرك)
+// ✅ تشغيل الشريط المتحرك للصور abo1.png إلى abo5.png
 function initMarquee() {
     const track = document.getElementById('marqueeTrack');
     if (!track) return;
 
-    // قائمة الصور المطلوبة
     const images = [
         'abo1.png',
         'abo2.png',
@@ -1440,21 +1416,19 @@ function initMarquee() {
         'abo5.png'
     ];
 
-    // إنشاء مجموعة أولى من الصور
     let htmlContent = '';
     images.forEach(src => {
         htmlContent += `
             <div class="marquee-item">
-                <img src="${src}" alt="عمل حرفي" loading="lazy">
+                <img src="${src}" alt="عمل حرفي" onerror="this.src='logo5.png'" loading="lazy">
             </div>
         `;
     });
 
-    // تكرار المجموعة مرة أخرى لضمان استمرار الحركة بدون فجوات
+    // تكرار الصور لضمان سلاسة الدوران والتحرك المستمر من اليسار لليمين
     track.innerHTML = htmlContent + htmlContent;
 }
 
-// استدعاء الدالة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
     initMarquee();
 });
