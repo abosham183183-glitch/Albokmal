@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الكل هنا | منصة الحرفيين والمافظات</title>
+<title>الكل هنا | منصة الحرفيين والمحافظات</title>
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -103,7 +103,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pc-id{position:absolute;bottom:.7rem;left:.9rem;font-size:.62rem;color:var(--muted);font-weight:800}
 
 /* =========================================
-   ✅ SLIDER SECTION (سلايدر متحرك دخول يسار خروج يمين كل 3 ثواني)
+   ✅ SLIDER SECTION (مستقر تماماً وبدون أي فراغ أبيض)
    ========================================= */
 .slider-section {
     margin-top: -20px;
@@ -122,32 +122,24 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     border: 3px solid var(--gold);
-    background: var(--surface);
+    background: var(--navy);
 }
 
 .slider-slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transform: translateX(-100%); /* البداية من اليسار خارج الشاشة */
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* الصورة النشطة المنسكبة */
 .slider-slide.active {
     opacity: 1;
-    transform: translateX(0); /* تدخل المنتصف */
+    visibility: visible;
     z-index: 2;
-}
-
-/* الصورة القديمة التي تخرج نحو اليمين */
-.slider-slide.exit {
-    opacity: 0;
-    transform: translateX(100%); /* تخرج إلى اليمين */
-    z-index: 1;
 }
 
 .slider-slide img {
@@ -178,7 +170,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     100% { left: 150%; }
 }
 
-/* مؤشرات النقاط السفلية */
 .slider-dots {
     position: absolute;
     bottom: 15px;
@@ -360,7 +351,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .profile-logout-btn{width:100%;background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red);border:1.5px solid var(--red);border-radius:14px;padding:.85rem;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.25s;margin-top:1rem}
 .profile-logout-btn:hover{background:var(--red);color:#fff}
 
-/* Modals - محسن للجوال */
+/* Modals */
 .overlay{position:fixed;inset:0;background:rgba(6,13,28,.75);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:0}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:0;width:100%;max-width:900px;height:100vh;max-height:100vh;display:flex;flex-direction:column;animation:slideInUp .3s cubic-bezier(.2,.9,.3,1) both;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
@@ -377,7 +368,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .mbody{padding:1.5rem;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 @media(max-width:767px){.mbody{padding:1rem}}
 
-/* تنسيق تفاصيل البطاقة الداخلية */
 .detail-layout{display:grid;grid-template-columns:1fr;gap:1.5rem}
 @media(min-width:768px){.detail-layout{grid-template-columns:1.2fr 1fr;gap:2rem}}
 .gallery-main{position:relative;width:100%;aspect-ratio:4/3;background:var(--bg);border-radius:16px;overflow:hidden;margin-bottom:.8rem;border:1px solid var(--line)}
@@ -416,7 +406,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   .act-btn{width:100%}
 }
 
-/* حقول الإدخال العامة */
 .field{margin-bottom:1rem}
 .field label{display:flex;align-items:center;gap:.4rem;font-weight:800;font-size:.82rem;margin-bottom:.4rem;color:var(--navy)}
 [data-theme="dark"] .field label{color:var(--gold2)}
@@ -439,7 +428,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7}
 .note.warn{color:var(--red)}
 
-/* Lightbox المحسن */
 .lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(4,10,22,.98); display: none; flex-direction: column; opacity: 0; transition: opacity .3s ease;
 }
@@ -456,7 +444,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .lb-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .8rem; font-weight: 700; text-align: center; pointer-events: none; animation: fadeInOut 4s forwards; }
 @keyframes fadeInOut { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
 
-/* FOOTER */
 footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid var(--gold)}
 .fwrap{max-width:1240px;margin:auto;padding:2.5rem 1rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
 @media(max-width:768px){.fwrap{grid-template-columns:1fr;text-align:center}}
@@ -537,7 +524,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </section>
 
-    <!-- ✅ SLIDER SECTION START (السلايدر المحدث) -->
+    <!-- ✅ SLIDER SECTION START (تم تعديل السلايدر ليعمل بتلاشي مستقر بدون بياض) -->
     <section class="slider-section">
         <div class="slider-container" id="sliderContainer">
             <div class="slider-slide active"><img src="abo1.png" alt="صورة 1" onerror="this.src='logo5.png'"></div>
@@ -836,7 +823,7 @@ function buildCategories(){
 function navigateTo(path){ location.hash='#'+path; }
 
 function cardHTML(c){ 
-  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
+  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onerror="this.src=\'logo5.png\'" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
   const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
   const isOwner=currentUser&&currentUser.uid===c.ownerUid; 
   const isAdmin=session&&session.email===ADMIN_EMAIL; 
@@ -942,7 +929,7 @@ function compress(file,max,q){
 function onAvaPick(inp){ 
   const f=inp.files[0]; inp.value=''; if(!f)return; 
   compress(f,240,.72).then(d=>{ 
-    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
+    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
   }).catch(()=>toast('تعذرت معالجة الصورة','error')); 
 }
 
@@ -960,7 +947,7 @@ function onWorkPick(inp){
 function renderWorkPreviews(){ 
   const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
   $('workNote').innerHTML='اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة'+(remaining<=0?' — <span class="warn">لا يمكن إضافة المزيد اليوم</span>':''); 
-  $('previews').innerHTML=workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  $('previews').innerHTML=workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
   icons(); 
 }
 
@@ -1134,14 +1121,14 @@ function openDetail(id){
     const mainImg = c.images[0];
     const thumbs = c.images.map((img, idx) => 
       `<div class="thumb-item ${idx===0?'active':''}" onclick="switchGalleryImage('${img}', this)">
-         <img src="${img}" alt="">
+         <img src="${img}" onerror="this.src='logo5.png'" alt="">
        </div>`
     ).join('');
     
     galleryHtml = `
       <div class="gallery-section">
         <div class="gallery-main" onclick="openLightboxById('${c.id}', 0)">
-          <img id="detMainImg" src="${mainImg}" alt="عمل">
+          <img id="detMainImg" src="${mainImg}" onerror="this.src='logo5.png'" alt="عمل">
           <span class="zoom-badge"><i data-lucide="zoom-in"></i> اضغط للتكبير</span>
         </div>
         <div class="thumbs-row">${thumbs}</div>
@@ -1211,7 +1198,7 @@ function quickEditCard(event, id){
   
   $('cName').value = c.name; $('cPhone').value = c.phone; $('cProv').value = c.province; $('cProf').value = c.profession; $('cDesc').value = c.desc || ''; 
   avaImg = c.avatar; workImgs = [...(c.images || [])]; 
-  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '"></div>'; 
+  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"></div>'; 
   renderWorkPreviews(); 
   
   $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
@@ -1437,7 +1424,7 @@ function startDhikr(){
 }
 
 /* =========================================
-   ✅ SLIDER LOGIC (دخول يسار، خروج يمين كل 3 ثواني)
+   ✅ SLIDER LOGIC (تبديل سلس ومستقر عبر التلاشي Opacity)
    ========================================= */
 let currentSlideIndex = 0;
 let slideTimer = null;
@@ -1447,7 +1434,6 @@ function initSlider() {
     const dotsContainer = document.getElementById('sliderDots');
     if (!slides.length) return;
 
-    // بناء نقاط المؤشر
     dotsContainer.innerHTML = '';
     slides.forEach((_, i) => {
         const dot = document.createElement('div');
@@ -1464,24 +1450,10 @@ function nextSlide() {
     const dots = document.querySelectorAll('.slider-dot');
     if (!slides.length) return;
 
-    const prevIndex = currentSlideIndex;
+    slides[currentSlideIndex].classList.remove('active');
     currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-
-    // إعادة تعيين جميع الشريحة المخفية
-    slides.forEach((slide, idx) => {
-        slide.classList.remove('active', 'exit');
-        if (idx !== currentSlideIndex && idx !== prevIndex) {
-            slide.style.transform = 'translateX(-100%)'; // التحضير للدخول من اليسار
-        }
-    });
-
-    // الصورة القديمة تخرج لليمين
-    slides[prevIndex].classList.add('exit');
-
-    // الصورة الجديدة تدخل من اليسار لتعرض بالمركز
     slides[currentSlideIndex].classList.add('active');
 
-    // تحديث النقاط
     dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentSlideIndex);
     });
@@ -1492,11 +1464,8 @@ function goToSlide(index) {
     const slides = document.querySelectorAll('.slider-slide');
     const dots = document.querySelectorAll('.slider-dot');
 
-    const prevIndex = currentSlideIndex;
+    slides[currentSlideIndex].classList.remove('active');
     currentSlideIndex = index;
-
-    slides.forEach((slide) => slide.classList.remove('active', 'exit'));
-    slides[prevIndex].classList.add('exit');
     slides[currentSlideIndex].classList.add('active');
 
     dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlideIndex));
@@ -1506,7 +1475,7 @@ function goToSlide(index) {
 
 function startSlideTimer() {
     clearInterval(slideTimer);
-    slideTimer = setInterval(nextSlide, 3000); // الانتقال التلقائي كل 3 ثواني
+    slideTimer = setInterval(nextSlide, 3000);
 }
 
 function restartSlideTimer() {
