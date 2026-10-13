@@ -156,7 +156,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .tag.prov{color:var(--gold);background:color-mix(in srgb,var(--gold) 15%,transparent)}
 .card-strip{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem .1rem .8rem;scroll-snap-type:x mandatory;scrollbar-width:none}
 .card-strip::-webkit-scrollbar{display:none}
-.card-strip img{width:118px;height:88px;object-fit:cover;border-radius:12px;flex:none;scroll-snap-align:start;border:1px solid var(--line);transition:.25s}
+.card-strip img{width:118px;height:88px;object-fit:cover;border-radius:12px;flex:none;scroll-snap-align:start;border:1px solid var(--line);transition:.25s;cursor:pointer} /* ✅ Cursor pointer added */
 .card-strip img:hover{transform:scale(1.05);border-color:var(--gold)}
 .strip-empty{width:100%;height:88px;border-radius:12px;border:1.5px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:.75rem;font-weight:700;gap:.4rem}
 .card-desc{font-size:.82rem;color:var(--muted);line-height:1.9;font-weight:600;margin-bottom:.9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
@@ -580,7 +580,7 @@ const auth = firebase.auth();
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللّهَ وَأَتُوبُ إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
+const DHIKR = [{t:'سُبْحَانَ اللَهَ وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَ لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْهِ',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let currentUser = null;
@@ -686,8 +686,11 @@ function buildCategories(){
 }
 function navigateTo(path){ location.hash='#'+path; }
 
+// ✅ التعديل الجوهري: تمرير ID ورقم الصورة بدلاً من البحث المعقد
 function cardHTML(c){ 
-  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation();openLightbox(CARDS.find(x=>x.id==='+JSON.stringify(c.id)+').images,'+i+')">').join(''); 
+  // نقل الصور مع تمرير معرف البطاقة ومؤشر الصورة
+  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
+  
   const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
   const isOwner=currentUser&&currentUser.uid===c.ownerUid; 
   const isAdmin=session&&session.email===ADMIN_EMAIL; 
@@ -1103,8 +1106,9 @@ function openDetail(id){
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   
+  // ✅ استخدام openLightboxById هنا أيضاً للتنسيق الموحد
   const gallery = (c.images && c.images.length) ? 
-    '<div class="detail-gallery"><div class="main"><img id="detMain" src="' + c.images[0] + '" onclick="openLightbox(CARDS.find(x=>x.id==='+JSON.stringify(id)+').images,0)"><span class="zoomhint"><i data-lucide="zoom-in"></i> اضغط للتكبير</span></div>' + 
+    '<div class="detail-gallery"><div class="main"><img id="detMain" src="' + c.images[0] + '" onclick="openLightboxById(\''+c.id+'\',0)"><span class="zoomhint"><i data-lucide="zoom-in"></i> اضغط للتكبير</span></div>' + 
     (c.images.length > 1 ? '<div class="minis">' + c.images.map((u,i) => '<img src="'+u+'" class="'+(i===0?'on':'')+'" onclick="swapDet(this,\''+esc(u)+'\')">').join('') + '</div>' : '') + '</div>' : 
     '<div class="detail-gallery"><div class="main"><i data-lucide="image-off" style="width:3rem;height:3rem;color:var(--muted)"></i></div></div>'; 
     
@@ -1452,10 +1456,13 @@ function lbZoomOut(){
   applyTransform();
 }
 
-function openLightbox(imgs, i){
-  if(!imgs || !imgs.length) return;
-  lbImgs = imgs;
-  lbIdx = i || 0;
+// ✅ الدالة الجديدة والبسيطة لفتح الصور
+function openLightboxById(cardId, imageIndex) {
+  const card = CARDS.find(c => c.id === cardId);
+  if (!card || !card.images || !card.images.length) return;
+  
+  lbImgs = card.images;
+  lbIdx = imageIndex || 0;
   resetZoom();
   
   // Show lightbox immediately
