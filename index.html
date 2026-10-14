@@ -350,8 +350,10 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pv img{width:100%;height:100%;object-fit:cover}
 .pv .rm{position:absolute;top:2px;left:2px;background:var(--red);color:#fff;width:18px;height:18px;border-radius:50%;display:grid;place-items:center}
 .pv .rm svg{width:.55rem;height:.55rem}
-.note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7}
+.note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7;display:flex;flex-direction:column;gap:.4rem;align-items:center}
 .note.warn{color:var(--red)}
+.next-day-btn{background:var(--blue);color:#fff;border-radius:8px;padding:.3rem .7rem;font-size:.75rem;font-weight:800;display:inline-flex;align-items:center;gap:.3rem;cursor:pointer;transition:.2s}
+.next-day-btn:hover{background:var(--navy2)}
 
 /* Lightbox */
 .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(4,10,22,.98);display:none;flex-direction:column;opacity:0;transition:opacity .3s ease}
@@ -368,7 +370,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .lb-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.8rem;font-weight:700;text-align:center;pointer-events:none;animation:fadeInOut 4s forwards}
 @keyframes fadeInOut{0%{opacity:0}10%{opacity:1}90%{opacity:1}100%{opacity:0}}
 
-/* Toast + ✅ إصلاح العنصر العائم */
+/* Toast */
 .toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%) translateY(20px);background:var(--navy);color:#fff;padding:.8rem 1.5rem;border-radius:14px;font-weight:800;font-size:.9rem;z-index:500;opacity:0;visibility:hidden;transition:.35s;pointer-events:none;box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:88vw;display:flex;align-items:center;gap:.5rem}
 .toast.show{opacity:1;visibility:visible;transform:translateX(50%) translateY(0)}
 .toast:empty{display:none !important}
@@ -475,7 +477,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       <div class="about-grid">
         <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك.</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك.</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء.</li></ul></div>
         <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك.</li></ul></div>
-        <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
       </div>
     </section>
     <section class="section" id="provSec">
@@ -616,7 +618,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       <div class="field" id="profOtherWrap" style="display:none"><label><i data-lucide="pencil"></i> اكتب مهنتك *</label><input id="cProfOther" placeholder="مثال: صناعات رخام"></div>
       <div class="field"><label><i data-lucide="align-right"></i> وصف مختصر عنك وعن خبرتك</label><textarea id="cDesc" maxlength="600" placeholder="اكتب نبذة عن حرفتك وسنوات خبرتك والخدمات التي تقدمها..."></textarea></div>
       <div class="field"><label><i data-lucide="image"></i> صورتك الشخصية أو شعارك</label><div class="imgdrop" onclick="document.getElementById('cAvatar').click()"><i data-lucide="camera"></i> اختر الصورة الشخصية</div><input type="file" id="cAvatar" accept="image/*" hidden onchange="onAvaPick(this)"><div class="previews" id="avaPreview"></div></div>
-      <div class="field"><label><i data-lucide="images"></i> صور من أعمالك</label><div class="imgdrop" onclick="document.getElementById('cImgs').click()"><i data-lucide="plus"></i> أضف صور أعمال جديدة</div><input type="file" id="cImgs" accept="image/*" multiple hidden onchange="onWorkPick(this)"><div class="note" id="workNote">اليوم: 0 / 3 صور · المجموع الكلي: 0 / 50 صورة</div><div class="previews" id="previews"></div></div>
+      <div class="field"><label><i data-lucide="images"></i> صور من أعمالك</label><div class="imgdrop" onclick="document.getElementById('cImgs').click()"><i data-lucide="plus"></i> أضف صور أعمال جديدة</div><input type="file" id="cImgs" accept="image/*" multiple hidden onchange="onWorkPick(this)"><div class="note" id="workNote"></div><div class="previews" id="previews"></div></div>
       <button class="submit" id="saveBtn" onclick="submitCard()"><i data-lucide="rocket"></i> انشر بطاقتي</button>
     </div>
   </div>
@@ -863,7 +865,7 @@ function onAvaPick(inp){
 function onWorkPick(inp){ 
   const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
   const files=[...inp.files].slice(0,Math.max(0,room)); inp.value=''; 
-  if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50)','error'); return; } 
+  if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50). يمكنك طلب زيادة اليوم التالي','error'); return; } 
   files.forEach(f=>{ 
     if(!f.type.startsWith('image/')){ toast('ملف غير مدعوم','error'); return; } 
     compress(f,560,.62).then(d=>{ workImgs.push(d); renderWorkPreviews(); }) 
@@ -873,19 +875,45 @@ function onWorkPick(inp){
 
 function renderWorkPreviews(){ 
   const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
-  $('workNote').innerHTML='اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة'+(remaining<=0?' — <span class="warn">لا يمكن إضافة المزيد اليوم</span>':''); 
-  $('previews').innerHTML=workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  let noteHtml = 'اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة';
+  if(remaining<=0 || dailyUsed>=MAX_DAILY_IMGS){
+    noteHtml += ' · <button type="button" class="next-day-btn" onclick="requestNextDayImages()"><i data-lucide="sun"></i> رفع صور لليوم التالي</button>';
+  }
+  $('workNote').innerHTML = noteHtml; 
+  $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
   icons(); 
 }
 
-function requireLoginThenOpenCreate(){ if(currentUser){ openCreate(); } else { pendingAction='createCard'; openModal('googleLoginModal'); } }
+function requestNextDayImages(){
+  dailyUsed = 0;
+  toast('☀️ تم إعادة تعيين عداد اليوم! يمكنك رفع صور جديدة.');
+  renderWorkPreviews();
+}
+
+function requireLoginThenOpenCreate(){ 
+  if(currentUser){ 
+    const existing = CARDS.find(c => c.ownerUid === currentUser.uid);
+    if(existing){
+      toast('لديك بطاقة مسجلة مسبقا. جاري فتحها للتعديل...','error');
+      quickEditCard(new Event('click'), existing.id);
+      return;
+    }
+    openCreate(); 
+  } else { 
+    pendingAction='createCard'; 
+    openModal('googleLoginModal'); 
+  } 
+}
 
 function performGoogleSignIn(){ 
   const provider = new firebase.auth.GoogleAuthProvider(); 
   provider.setCustomParameters({ prompt: 'select_account' }); 
   auth.signInWithPopup(provider).then(result => { 
     currentUser = result.user; closeModal('googleLoginModal'); 
-    if(pendingAction==='createCard'){ pendingAction=null; openCreate(); } 
+    if(pendingAction==='createCard'){ 
+      pendingAction=null; 
+      requireLoginThenOpenCreate(); 
+    } 
     updateAuthUI(); 
   }).catch(err => { 
     if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
@@ -975,6 +1003,11 @@ async function saveProfile(event){
 }
 
 function openCreate(){ 
+  const existing = CARDS.find(c => c.ownerUid === currentUser?.uid);
+  if(existing){
+    quickEditCard(new Event('click'), existing.id);
+    return;
+  }
   $('cProv').innerHTML = PROVINCES.map(p => '<option>' + p + '</option>').join(''); 
   $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join(''); 
   workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0; 
@@ -989,6 +1022,12 @@ $('cProf').addEventListener('change', profChanged);
 
 async function submitCard(){ 
   if(!currentUser) return toast('يجب تسجيل الدخول أولا','error'); 
+  const existing = CARDS.find(c => c.ownerUid === currentUser.uid);
+  if(existing && !editingCardId){
+    toast('عذرا، مسموح بإنشاء بطاقة واحدة فقط لكل حساب Google. يمكنك تعديل بطاقتك الحالية.','error');
+    quickEditCard(new Event('click'), existing.id);
+    return;
+  }
   const name = $('cName').value.trim(); 
   const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
   const province = $('cProv').value; 
@@ -1005,7 +1044,7 @@ async function submitCard(){
     const dData = dSnap.exists ? dSnap.data() : {}; 
     const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0; 
     const usedTotal = dData.total || 0; 
-    if(usedToday + workImgs.length > MAX_DAILY_IMGS) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
+    if(usedToday + workImgs.length > MAX_DAILY_IMGS && !editingCardId) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
     if(usedTotal + workImgs.length > MAX_TOTAL_IMGS) return toast('وصلت للحد الكلي 50 صورة','error'); 
     const numId = 100000 + Math.floor(Math.random()*900000); 
     const id = 'k' + Date.now(); 
@@ -1196,8 +1235,7 @@ async function delCard(id){
 }
 
 function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }
-$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
+function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
 /* Lightbox */
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
