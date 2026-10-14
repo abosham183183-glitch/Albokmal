@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الكل هنا | منصة الحرفيين والمافظات</title>
+<title>الكل هنا | منصة الحرفيين والمحافظات</title>
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -460,7 +460,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </section>
 
-    <!-- SLIDER SECTION -->
     <section class="slider-section">
         <div class="slider-container" id="sliderContainer">
             <div class="slider-slide active"><img src="abo1.png" alt="صورة 1" onerror="this.src='logo5.png'"></div>
@@ -1150,8 +1149,7 @@ function quickEditCard(event, id){
   populateSelects();
   
   $('cName').value = c.name || ''; 
-  $('cPhone').value = c.phone || ''; 
-  $('cProv').value = c.province || PROVINCES[0]; 
+  $('cPhone').value = c.phone || '';$('cProv').value = c.province || PROVINCES[0]; 
   
   const isKnownProf = PROFESSIONS.some(pr => pr.name === c.profession);
   if(isKnownProf){
@@ -1191,14 +1189,22 @@ async function saveEditedCard(id){
   if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
+  
   const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
+  
   try{ 
-    await db.collection('cards').doc(id).update({ name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs }); 
+    const cardData = { name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs };
+    if(currentUser) {
+      cardData.ownerUid = currentUser.uid;
+    }
+    await db.collection('cards').doc(id).update(cardData); 
     closeModal('createModal'); 
     ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');$('cProf').selectedIndex = 0; 
-    toast('تم تحديث بطاقتك بنجاح! ✨'); await loadCards(); 
+    toast('تم تحديث بطاقتك بنجاح! ✨'); 
+    await loadCards(); 
   } catch(e){ 
-    toast('تعذر التحديث: '+e.message,'error'); 
+    console.error(e);
+    toast('تعذر التحديث: ' + (e.message || 'يرجى التأكد من الاتصال بالحساب الصحيح'), 'error'); 
   } finally{ 
     btn.disabled = false; btn.innerHTML = orig; icons(); 
   } 
