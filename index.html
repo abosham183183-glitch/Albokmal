@@ -716,21 +716,21 @@ function route(){
   const h=parseHash(); 
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
-  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo(0,0); return; }
+  if(!h || h===''){ $('homeView').style.display=''; return; }
   if(h==='admin'){ showAdmin(); return; }
   if(h==='profile'){ 
     if(!currentUser){ toast('يجب تسجيل الدخول أولا','error'); location.hash='#/'; return; }
-    $('profileView').style.display=''; loadProfileData(); window.scrollTo(0,0); return; 
+    $('profileView').style.display=''; loadProfileData(); return; 
   }
   if(h.startsWith('province/')){ 
     const prov=decodeURIComponent(h.split('/')[1]); 
-    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo(0,0); return; } 
+    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); return; } 
   }
   if(h.startsWith('profession/')){ 
     const prof=decodeURIComponent(h.split('/')[1]); 
-    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo(0,0); return; } 
+    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); return; } 
   }
-  $('homeView').style.display=''; window.scrollTo(0,0); 
+  $('homeView').style.display=''; 
 }
 window.addEventListener('hashchange',route);
 
@@ -834,10 +834,12 @@ function renderProfessionCards(profession){
 }
 
 async function loadCards(){ 
+  const scrollPos = window.scrollY; // حفظ موضع التمرير الحالي لمنع أي قفزة
   $('allCardsContainer').innerHTML='<div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
   const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get(); 
   CARDS=snap.docs.map(d=>({id:d.id,...d.data()})); 
   renderAll(); 
+  window.scrollTo(0, scrollPos); // استعادة موضع التمرير فوراً بثبات
 }
 
 function compress(file,max,q){ 
@@ -1149,7 +1151,8 @@ function quickEditCard(event, id){
   populateSelects();
   
   $('cName').value = c.name || ''; 
-  $('cPhone').value = c.phone || '';$('cProv').value = c.province || PROVINCES[0]; 
+  $('cPhone').value = c.phone || ''; 
+  $('cProv').value = c.province || PROVINCES[0]; 
   
   const isKnownProf = PROFESSIONS.some(pr => pr.name === c.profession);
   if(isKnownProf){
@@ -1157,7 +1160,8 @@ function quickEditCard(event, id){
     $('profOtherWrap').style.display = 'none';
   } else {
     $('cProf').value = 'أخرى';
-    $('cProfOther').value = c.profession || '';$('profOtherWrap').style.display = '';
+    $('cProfOther').value = c.profession || '';
+    $('profOtherWrap').style.display = '';
   }
   
   $('cDesc').value = c.desc || ''; 
