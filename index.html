@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الكل هنا | منصة الحرفيين والمحافظات</title>
+<title>الكل هنا | منصة الحرفيين والمافظات</title>
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@ h1,h2,h3,h4{font-family:'Cairo',sans-serif}
 svg.lucide{display:inline-block;vertical-align:-.15em;width:1em;height:1em;stroke-width:2;flex:none}
 a{color:inherit;text-decoration:none}
 
-/* ═══════ خلفية اللوغو: أزرق سماوي فاتح ═══════ */
+/* ═══════ خلفية اللوغو ═══════ */
 .logo-big{background:#DBEAFE !important;box-shadow:0 4px 12px rgba(0,0,0,0.15) !important;border:1.5px solid rgba(255,255,255,0.3) !important}
 .dr-head img{background:#DBEAFE !important;padding:3px !important}
 .f-logo-small{background:#DBEAFE !important;padding:3px !important}
@@ -116,7 +116,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .pc-call{background:var(--navy2)}.pc-wa{background:var(--wa)}
 .pc-id{position:absolute;bottom:.7rem;left:.9rem;font-size:.62rem;color:var(--muted);font-weight:800}
 
-/* ═══════ SLIDER SECTION ═══════ */
+/* SLIDER SECTION */
 .slider-section{margin-top:-20px;margin-bottom:2.5rem;position:relative;z-index:5;display:flex;justify-content:center}
 .slider-container{width:min(800px,95vw);height:380px;position:relative;border-radius:20px;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,0.2);border:3px solid var(--gold);background:var(--navy)}
 .slider-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 0.8s ease-in-out;display:flex;align-items:center;justify-content:center}
@@ -460,7 +460,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
     </section>
 
-    <!-- ✅ SLIDER SECTION -->
+    <!-- SLIDER SECTION -->
     <section class="slider-section">
         <div class="slider-container" id="sliderContainer">
             <div class="slider-slide active"><img src="abo1.png" alt="صورة 1" onerror="this.src='logo5.png'"></div>
@@ -749,6 +749,10 @@ function buildCategories(){
   }).join(''); 
   icons(); 
 }
+function populateSelects(){
+  $('cProv').innerHTML = PROVINCES.map(p => '<option value="' + p + '">' + p + '</option>').join(''); 
+  $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join('');
+}
 function navigateTo(path){ location.hash='#'+path; }
 
 function cardHTML(c){ 
@@ -1008,8 +1012,7 @@ function openCreate(){
     quickEditCard(new Event('click'), existing.id);
     return;
   }
-  $('cProv').innerHTML = PROVINCES.map(p => '<option>' + p + '</option>').join(''); 
-  $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join(''); 
+  populateSelects();
   workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0; 
   $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null; 
   $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
@@ -1137,18 +1140,45 @@ window.switchGalleryImage = function(url, el){
 };
 
 function quickEditCard(event, id){ 
-  event.preventDefault(); event.stopPropagation(); 
+  if(event) { event.preventDefault(); event.stopPropagation(); }
+  closeModal('detailModal');
   const c = CARDS.find(x => x.id === id); if(!c) return; 
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = session && session.email === ADMIN_EMAIL; 
   if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error'); 
-  $('cName').value = c.name; $('cPhone').value = c.phone; $('cProv').value = c.province; $('cProf').value = c.profession; $('cDesc').value = c.desc || ''; 
-  avaImg = c.avatar; workImgs = [...(c.images || [])]; 
-  if(avaImg) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"></div>'; 
+  
+  populateSelects();
+  
+  $('cName').value = c.name || ''; 
+  $('cPhone').value = c.phone || ''; 
+  $('cProv').value = c.province || PROVINCES[0]; 
+  
+  const isKnownProf = PROFESSIONS.some(pr => pr.name === c.profession);
+  if(isKnownProf){
+    $('cProf').value = c.profession;
+    $('profOtherWrap').style.display = 'none';
+  } else {
+    $('cProf').value = 'أخرى';
+    $('cProfOther').value = c.profession || '';$('profOtherWrap').style.display = '';
+  }
+  
+  $('cDesc').value = c.desc || ''; 
+  avaImg = c.avatar || null; 
+  workImgs = [...(c.images || [])]; 
+  
+  if(avaImg){
+    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+  } else {
+    $('avaPreview').innerHTML = '';
+  }
+  
   renderWorkPreviews(); 
   $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
-  $('saveBtn').onclick = () => saveEditedCard(id); $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
-  editingCardId = id; openModal('createModal'); icons(); 
+  $('saveBtn').onclick = () => saveEditedCard(id);$('saveBtn').disabled = false; 
+  $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
+  editingCardId = id; 
+  openModal('createModal'); 
+  icons(); 
 }
 
 async function saveEditedCard(id){ 
@@ -1186,6 +1216,7 @@ function quickDeleteCard(event, id){
 async function deleteCardById(id){ 
   try{ 
     await db.collection('cards').doc(id).delete(); 
+    closeModal('detailModal');
     toast('تم حذف البطاقة'); await loadCards(); 
     if(parseHash() === 'admin') renderAdminStats(); 
   } catch(e){ toast(e.message,'error'); } 
