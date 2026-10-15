@@ -164,18 +164,26 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* 🌟 بطاقة الأدمن المعدنية الفضية الفاخرة (Silver Metallic Gradient) لعرض عرضي كامل */
+/* 🌟 بطاقة الأدمن المعدنية الفضية الفاخرة (Silver Metallic Gradient) - تظهر بشكل أفقي */
 .card.admin-card{
   background: linear-gradient(135deg, #F0F4F8 0%, #D8E2EC 40%, #BCCCDC 100%) !important;
   border: 3px solid #627D98 !important;
   box-shadow: 0 16px 40px rgba(98,125,152,.35) !important;
   position: relative;
-  grid-column: 1 / -1 !important; /* تشغل العرض كاملاً كبطاقة عرضية */
+  width: 100%;
 }
 [data-theme="dark"] .card.admin-card{
   background: linear-gradient(135deg, #182232 0%, #24344D 50%, #334E68 100%) !important;
   border-color: #829AB1 !important;
   box-shadow: 0 16px 40px rgba(130,154,177,.25) !important;
+}
+
+/* حاوية بطاقات الأدمن الأفقية */
+.admin-horizontal-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 /* لمعة معدنية متحركة على بطاقة الأدمن الفضية */
@@ -876,13 +884,13 @@ function renderBentoGrid(containerId, cardsList){
   
   let html = '';
   
-  // عرض بطاقات الأدمن الفضية المميزة عرضياً أولاً
+  // 1. بطاقات الأدمن تظهر في الأعلى بشكل أفقي تماماً كما طلبت
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
-    html += '<div class="cards-chunk-grid">' + adminCards.map(cardHTML).join('') + '</div>';
+    html += '<div class="admin-horizontal-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
-  // تقسيم البطاقات العادية إلى مجموعات كل 10 بطاقات
+  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20، ولا تُحسب بطاقات الأدمن ضمنها
   const sorted = shuffle([...regularCards]);
   let idx = 0;
   let chunkNum = 1;
