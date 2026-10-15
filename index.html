@@ -164,13 +164,15 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* 🌟 بطاقة الأدمن المعدنية الفضية الفاخرة (Silver Metallic Gradient) - تظهر بشكل أفقي */
+/* 🌟 بطاقة الأدمن المعدنية الفضية الفاخرة (Silver Metallic Gradient) */
 .card.admin-card{
   background: linear-gradient(135deg, #F0F4F8 0%, #D8E2EC 40%, #BCCCDC 100%) !important;
   border: 3px solid #627D98 !important;
   box-shadow: 0 16px 40px rgba(98,125,152,.35) !important;
   position: relative;
-  width: 100%;
+  width: 300px; /* حافظنا على نفس حجم عرض البطاقة الطبيعي */
+  flex: none;   /* لتمنع تقلصها داخل الشريط الأفقي */
+  scroll-snap-align: start;
 }
 [data-theme="dark"] .card.admin-card{
   background: linear-gradient(135deg, #182232 0%, #24344D 50%, #334E68 100%) !important;
@@ -178,12 +180,22 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   box-shadow: 0 16px 40px rgba(130,154,177,.25) !important;
 }
 
-/* حاوية بطاقات الأدمن الأفقية */
+/* 🌟 شريط أفقي متحرك وسلس لبطاقات الأدمن الفضية مع الحفاظ على شكل وحجم البطاقة تماماً */
 .admin-horizontal-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  display: flex;
   gap: 1.2rem;
-  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding: .5rem .2rem 1.2rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--line);
+}
+.admin-horizontal-grid::-webkit-scrollbar{
+  height: 8px;
+}
+.admin-horizontal-grid::-webkit-scrollbar-thumb{
+  background: #829AB1;
+  border-radius: 99px;
 }
 
 /* لمعة معدنية متحركة على بطاقة الأدمن الفضية */
@@ -884,13 +896,13 @@ function renderBentoGrid(containerId, cardsList){
   
   let html = '';
   
-  // 1. بطاقات الأدمن تظهر في الأعلى بشكل أفقي تماماً كما طلبت
+  // 1. بطاقات الأدمن الفضية تظهر في شريط أفقي متحرك بالأعلى بنفس حجم البطاقة الطبيعي
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
     html += '<div class="admin-horizontal-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
-  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20، ولا تُحسب بطاقات الأدمن ضمنها
+  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20
   const sorted = shuffle([...regularCards]);
   let idx = 0;
   let chunkNum = 1;
