@@ -163,10 +163,21 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 
 /* Cards Base */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
-.card.admin-card{border:2px solid var(--gold);box-shadow:0 10px 30px rgba(212,160,23,.25)}
+
+/* بطاقة الأدمن الذهبية الفاخرة بالكامل */
+.card.admin-card{background:linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 50%, #FFE8A1 100%) !important;border:2.5px solid var(--gold) !important;box-shadow:0 15px 35px rgba(212,160,23,.35) !important}
+[data-theme="dark"] .card.admin-card{background:linear-gradient(135deg, #1A170C 0%, #29210B 50%, #3D300E 100%) !important;border-color:var(--gold2) !important}
+.card.admin-card .card-who h3{color:#7A5500 !important}
+[data-theme="dark"] .card.admin-card .card-who h3{color:var(--gold2) !important}
+.card.admin-card .card-desc{color:#5C4300 !important}
+[data-theme="dark"] .card.admin-card .card-desc{color:#E5C87E !important}
+.card.admin-card .card-foot{border-top-color:rgba(212,160,23,.4) !important}
+.card.admin-card .card-id{color:#8A6400 !important}
+[data-theme="dark"] .card.admin-card .card-id{color:#C9A94D !important}
+
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.card.admin-card .card-banner{background:linear-gradient(90deg,#D4A017,#FFD86B,#D4A017)}
+.card.admin-card .card-banner{background:linear-gradient(90deg,#D4A017,#FFD86B,#D4A017,#B8860B)}
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
