@@ -169,8 +169,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 [data-theme="dark"] .card.admin-card{background:linear-gradient(135deg, #1A170C 0%, #29210B 50%, #3D300E 100%) !important;border-color:var(--gold2) !important}
 .card.admin-card .card-who h3{color:#7A5500 !important}
 [data-theme="dark"] .card.admin-card .card-who h3{color:var(--gold2) !important}
-.card.admin-card .card-desc{color:#5C4300 !important}
-[data-theme="dark"] .card.admin-card .card-desc{color:#E5C87E !important}
+.card.admin-card .card-desc{background:rgba(212, 160, 23, 0.18) !important; border: 1px solid rgba(212, 160, 23, 0.35); padding: .5rem .7rem; border-radius: 10px; color:#5C4300 !important}
+[data-theme="dark"] .card.admin-card .card-desc{background:rgba(245, 197, 66, 0.12) !important; border-color: rgba(245, 197, 66, 0.3); color:#E5C87E !important}
 .card.admin-card .card-foot{border-top-color:rgba(212,160,23,.4) !important}
 .card.admin-card .card-id{color:#8A6400 !important}
 [data-theme="dark"] .card.admin-card .card-id{color:#C9A94D !important}
@@ -716,7 +716,7 @@ let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
-const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;n'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
 function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
@@ -832,21 +832,36 @@ function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Ma
 function renderBentoGrid(containerId, cardsList){
   const container = $(containerId);
   if(!cardsList.length){ container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); return; }
-  const sorted = shuffle([...cardsList]);
-  let html = ''; let idx = 0;
+  
+  // فصل بطاقات الأدمن عن البطاقات العادية
+  const adminCards = cardsList.filter(c => c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail));
+  const regularCards = cardsList.filter(c => !c.isAdminCard && c.ownerEmail !== ADMIN_EMAIL && !ASSISTANTS.includes(c.ownerEmail));
+  
+  let html = '';
+  
+  // إذا وجدت بطاقات أدمن، تظهر في الصف الأول بشكل أفقي بجانب بعضها
+  if(adminCards.length > 0){
+    html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
+    html += '<div class="bento-horizontal">' + adminCards.map(cardHTML).join('') + '</div>';
+  }
+  
+  // عرض البطاقات العادية بالطريقة المعتادة
+  const sorted = shuffle([...regularCards]);
+  let idx = 0;
   while(idx < sorted.length){
     const groupSize = Math.min(10, sorted.length - idx);
     const group = sorted.slice(idx, idx + groupSize);
-    if(idx === 0){
+    if(idx === 0 && adminCards.length === 0){
       html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزا</div>';
       html += '<div class="bento-vertical">' + group.map(cardHTML).join('') + '</div>';
     } else {
-      const bandNum = Math.floor(idx / 10);
+      const bandNum = Math.floor(idx / 10) + 1;
       html += '<div class="bento-label"><i data-lucide="move-horizontal"></i> المزيد من الحرفيين #' + bandNum + '</div>';
       html += '<div class="bento-horizontal">' + group.map(cardHTML).join('') + '</div>';
     }
     idx += 10;
   }
+  
   container.innerHTML = html;
   icons();
 }
