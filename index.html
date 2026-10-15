@@ -164,12 +164,13 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* 🌟 بطاقة الأدمن الذهبية الفاخرة اللامعة */
+/* 🌟 بطاقة الأدمن الذهبية الفاخرة اللامعة (تظهر بشكل عرضي كما طلبت) */
 .card.admin-card{
   background: linear-gradient(135deg, #FFF6D1 0%, #FFEA9F 40%, #F6D060 100%) !important;
   border: 3px solid #C6930A !important;
   box-shadow: 0 16px 40px rgba(212,160,23,.4) !important;
   position: relative;
+  grid-column: 1 / -1 !important; /* بطاقة الأدمن عرضية تشغل العرض كاملاً */
 }
 [data-theme="dark"] .card.admin-card{
   background: linear-gradient(135deg, #1C1708 0%, #31260C 50%, #4D3D10 100%) !important;
@@ -254,10 +255,17 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 
 /* Bento Grid */
 .bento-container{display:flex;flex-direction:column;gap:1.5rem}
-.bento-vertical{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
-.bento-horizontal{display:flex;gap:1.2rem;overflow-x:auto;padding:.5rem .2rem 1.5rem;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.bento-horizontal::-webkit-scrollbar{display:none}
-.bento-horizontal .card{min-width:290px;max-width:290px;flex:none;scroll-snap-align:start}
+
+/* 🌟 تخطيط بطاقات المعلمين حسب الطلب:
+   - عمودي إلى حد 10 بطاقات (كل 10 بطاقات في مجموعة شبكية منتظمة).
+   - توزع العشرات والمئات والآلاف بنفس الترتيب.
+*/
+.cards-chunk-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.2rem;
+}
+
 .bento-label{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .bento-label svg{color:var(--gold);width:.9rem;height:.9rem}
 
@@ -453,7 +461,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 .fbotttom{border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:1.5rem;font-size:.85rem;color:#6B7280;background:rgba(0,0,0,.2)}
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
-@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.bento-horizontal .card{min-width:260px;max-width:260px}}
+@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body data-theme="light">
@@ -540,7 +548,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     </section>
     <section class="section" id="allCardsSec">
       <div class="sec-title"><i data-lucide="layers"></i> كل المعلمين والحرفيين</div>
-      <p class="sec-sub">بطاقات تظهر بشكل عشوائي من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
+      <p class="sec-sub">بطاقات تظهر بشكل مرتب من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
       <div id="allCardsContainer" class="bento-container">
         <div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>
       </div>
@@ -878,25 +886,25 @@ function renderBentoGrid(containerId, cardsList){
   
   let html = '';
   
+  // عرض بطاقات الأدمن (شكل عرضي مميز) أولاً إذا وجدت
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
-    html += '<div class="bento-horizontal">' + adminCards.map(cardHTML).join('') + '</div>';
+    html += '<div class="cards-chunk-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
+  // تقسيم البطاقات العادية إلى مجموعات كل 10 بطاقات (من 0 إلى 10، ومن 10 إلى 20، ومن 20 إلى 30، وهكذا حتى المئات والآلاف)
   const sorted = shuffle([...regularCards]);
   let idx = 0;
+  let chunkNum = 1;
   while(idx < sorted.length){
     const groupSize = Math.min(10, sorted.length - idx);
     const group = sorted.slice(idx, idx + groupSize);
-    if(idx === 0 && adminCards.length === 0){
-      html += '<div class="bento-label"><i data-lucide="star"></i> الأكثر تميزا</div>';
-      html += '<div class="bento-vertical">' + group.map(cardHTML).join('') + '</div>';
-    } else {
-      const bandNum = Math.floor(idx / 10) + 1;
-      html += '<div class="bento-label"><i data-lucide="move-horizontal"></i> المزيد من الحرفيين #' + bandNum + '</div>';
-      html += '<div class="bento-horizontal">' + group.map(cardHTML).join('') + '</div>';
-    }
+    
+    html += '<div class="bento-label" style="margin-top:1.2rem"><i data-lucide="layers"></i> مجموعة البطاقات #' + chunkNum + ' (من ' + (idx + 1) + ' إلى ' + (idx + group.length) + ')</div>';
+    html += '<div class="cards-chunk-grid">' + group.map(cardHTML).join('') + '</div>';
+    
     idx += 10;
+    chunkNum++;
   }
   
   container.innerHTML = html;
