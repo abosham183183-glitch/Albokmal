@@ -162,26 +162,66 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .cat-n{font-size:.62rem;color:var(--muted);font-weight:800}
 
 /* Cards Base */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* بطاقة الأدمن الذهبية الفاخرة بالكامل */
-.card.admin-card{background:linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 50%, #FFE8A1 100%) !important;border:2.5px solid var(--gold) !important;box-shadow:0 15px 35px rgba(212,160,23,.35) !important}
-[data-theme="dark"] .card.admin-card{background:linear-gradient(135deg, #1A170C 0%, #29210B 50%, #3D300E 100%) !important;border-color:var(--gold2) !important}
-.card.admin-card .card-who h3{color:#7A5500 !important}
-[data-theme="dark"] .card.admin-card .card-who h3{color:var(--gold2) !important}
-.card.admin-card .card-desc{background:rgba(212, 160, 23, 0.18) !important; border: 1px solid rgba(212, 160, 23, 0.35); padding: .5rem .7rem; border-radius: 10px; color:#5C4300 !important}
-[data-theme="dark"] .card.admin-card .card-desc{background:rgba(245, 197, 66, 0.12) !important; border-color: rgba(245, 197, 66, 0.3); color:#E5C87E !important}
-.card.admin-card .card-foot{border-top-color:rgba(212,160,23,.4) !important}
-.card.admin-card .card-id{color:#8A6400 !important}
-[data-theme="dark"] .card.admin-card .card-id{color:#C9A94D !important}
+/* 🌟 بطاقة الأدمن الذهبية الفاخرة اللامعة */
+.card.admin-card{
+  background: linear-gradient(135deg, #FFF6D1 0%, #FFEA9F 40%, #F6D060 100%) !important;
+  border: 3px solid #C6930A !important;
+  box-shadow: 0 16px 40px rgba(212,160,23,.4) !important;
+  position: relative;
+}
+[data-theme="dark"] .card.admin-card{
+  background: linear-gradient(135deg, #1C1708 0%, #31260C 50%, #4D3D10 100%) !important;
+  border-color: #F3C643 !important;
+  box-shadow: 0 16px 40px rgba(245,197,66,.25) !important;
+}
+
+/* لمعة ساحرة متحركة على بطاقة الأدمن */
+.card.admin-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-150%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  transform:skewX(-25deg);
+  animation:cardShine 4s infinite;
+  pointer-events:none;
+}
+@keyframes cardShine{0%{left:-150%}30%{left:160%}100%{left:160%}}
+
+.card.admin-card .card-who h3{color:#5C4300 !important}
+[data-theme="dark"] .card.admin-card .card-who h3{color:#FFE89C !important}
+
+/* الوصف في بطاقة الأدمن بخلفية ذهبية صافية غير مشوهة */
+.card.admin-card .card-desc{
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(198, 147, 10, 0.35);
+  padding: .6rem .8rem;
+  border-radius: 12px;
+  color: #4A3500 !important;
+  font-weight: 700;
+}
+[data-theme="dark"] .card.admin-card .card-desc{
+  background: rgba(15, 12, 3, 0.55) !important;
+  border-color: rgba(243, 198, 67, 0.35);
+  color: #F7E194 !important;
+}
+
+.card.admin-card .card-foot{border-top-color:rgba(198, 147, 10, 0.3) !important}
+.card.admin-card .card-id{color:#7A5500 !important}
+[data-theme="dark"] .card.admin-card .card-id{color:#E5C87E !important}
 
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.card.admin-card .card-banner{background:linear-gradient(90deg,#D4A017,#FFD86B,#D4A017,#B8860B)}
+.card.admin-card .card-banner{background:linear-gradient(90deg,#C6930A,#FFEA9F,#F3C643,#B8860B)}
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
+.card.admin-card .card-ava{border-color:#A77A00 !important;box-shadow:0 0 12px rgba(212,160,23,.6)}
 .card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--wa);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
 .card-ava-ring.r2{animation-delay:1.1s;border-color:var(--green)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
@@ -716,7 +756,7 @@ let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
-const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;n'}[m] || m));
+const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
 function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
@@ -833,19 +873,16 @@ function renderBentoGrid(containerId, cardsList){
   const container = $(containerId);
   if(!cardsList.length){ container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); return; }
   
-  // فصل بطاقات الأدمن عن البطاقات العادية
   const adminCards = cardsList.filter(c => c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail));
   const regularCards = cardsList.filter(c => !c.isAdminCard && c.ownerEmail !== ADMIN_EMAIL && !ASSISTANTS.includes(c.ownerEmail));
   
   let html = '';
   
-  // إذا وجدت بطاقات أدمن، تظهر في الصف الأول بشكل أفقي بجانب بعضها
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
     html += '<div class="bento-horizontal">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
-  // عرض البطاقات العادية بالطريقة المعتادة
   const sorted = shuffle([...regularCards]);
   let idx = 0;
   while(idx < sorted.length){
