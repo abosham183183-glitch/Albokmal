@@ -164,63 +164,33 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* 🌟 بطاقة الأدمن / VIP الفاخرة (مزيج الأزرق الملكي والذهبي) */
-.card.admin-card {
-  background: linear-gradient(135deg, #0A1E3C 0%, #122F5C 40%, #1B4FA8 100%) !important;
-  border: 2.5px solid #D4A017 !important;
-  box-shadow: 0 16px 40px rgba(212, 160, 23, 0.25), 0 0 15px rgba(212, 160, 23, 0.1) !important;
-  position: relative;
-  width: 100%;
-}
-[data-theme="dark"] .card.admin-card {
-  background: linear-gradient(135deg, #050A14 0%, #0A1E3C 50%, #122F5C 100%) !important;
-  border-color: #F5C542 !important;
-  box-shadow: 0 16px 40px rgba(245, 197, 66, 0.2), 0 0 20px rgba(245, 197, 66, 0.1) !important;
+/* 🌟 بطاقة الأدمن (تستخدم نفس تصميم البطاقات العادية تماماً ولكن في شريط أفقي) */
+.card.admin-card{
+  width: 300px;
+  flex: none;
+  scroll-snap-align: start;
 }
 
-/* لمعة ذهبية معدنية متحركة على بطاقة VIP */
-.card.admin-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.4), rgba(255, 255, 255, 0.7), rgba(212, 160, 23, 0.4), transparent);
-  transform: skewX(-25deg);
-  animation: cardShine 4s infinite;
-  pointer-events: none;
+/* شريط أفقي متحرك لبطاقات الأدمن */
+.admin-horizontal-grid{
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding: .5rem .2rem 1.2rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--line);
 }
-@keyframes cardShine { 0% { left: -150% } 30% { left: 160% } 100% { left: 160% } }
-
-.card.admin-card .card-who h3 { color: #FFFFFF !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-[data-theme="dark"] .card.admin-card .card-who h3 { color: #F5C542 !important; text-shadow: 0 2px 8px rgba(245, 197, 66, 0.3); }
-
-/* الوصف في بطاقة VIP بخلفية زرقاء داكنة شفافة مع حدود ذهبية */
-.card.admin-card .card-desc {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(212, 160, 23, 0.4);
-  padding: .6rem .8rem;
-  border-radius: 12px;
-  color: #E8EDF6 !important;
-  font-weight: 700;
+.admin-horizontal-grid::-webkit-scrollbar{
+  height: 8px;
 }
-[data-theme="dark"] .card.admin-card .card-desc {
-  background: rgba(10, 30, 60, 0.5) !important;
-  border-color: rgba(245, 197, 66, 0.4);
-  color: #E2E8F0 !important;
+.admin-horizontal-grid::-webkit-scrollbar-thumb{
+  background: var(--blue);
+  border-radius: 99px;
 }
-
-.card.admin-card .card-foot { border-top-color: rgba(212, 160, 23, 0.3) !important; }
-.card.admin-card .card-id { color: #F5C542 !important; font-weight: 800; }
-[data-theme="dark"] .card.admin-card .card-id { color: #FFD86B !important; }
 
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.card.admin-card .card-banner { background: linear-gradient(90deg, #D4A017, #F5C542, #3B82F6, #D4A017) !important; }
-.card.admin-card .card-ava { border-color: #F5C542 !important; box-shadow: 0 0 15px rgba(245, 197, 66, 0.5) !important; }
-
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
@@ -231,7 +201,10 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-who{flex:1;min-width:0}
 .card-who h3{font-size:1.12rem;font-weight:900;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.35rem}
 [data-theme="dark"] .card-who h3{color:var(--gold2)}
-.verified-badge{color:#1D9BF0;width:1.05rem;height:1.05rem;flex:none;display:inline-flex}
+
+/* 🌟 شارة التوثيق المتعارف عليها (الصح الزرقاء) */
+.verified-badge{color:#1D9BF0;width:1.1rem;height:1.1rem;flex:none;display:inline-flex}
+
 .card-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}
 .tag{font-size:.66rem;font-weight:800;border-radius:99px;padding:.2rem .65rem;display:inline-flex;align-items:center;gap:.25rem}
 .tag svg{width:.72rem;height:.72rem}
@@ -841,7 +814,7 @@ function cardHTML(c){
                 '<a class="cbtn wa" href="'+waLink(c.phone,c.name)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i data-lucide="message-circle"></i> واتساب</a>'; 
   } 
 
-  const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.99 14.99-4.5-4.5 1.41-1.41 3.09 3.09 7.09-7.09 1.41 1.41-8.5 8.5z"/></svg></span>' : '';
+  const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="12" fill="#1D9BF0"/><path d="M7.5 12.5l3 3 6-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>' : '';
 
   return '<article class="card '+(isAdminCard?'admin-card':'')+'" onclick="openDetail(\''+c.id+'\')">' + 
     '<div class="card-banner"></div>' + 
@@ -878,13 +851,13 @@ function renderBentoGrid(containerId, cardsList){
   
   let html = '';
   
-  // 1. بطاقات الأدمن تظهر في الأعلى بشكل أفقي تماماً كما طلبت
+  // 1. بطاقات الأدمن تظهر في شريط أفقي متحرك بالأعلى بنفس تصميم باقي البطاقات تماماً
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
     html += '<div class="admin-horizontal-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
-  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20، ولا تُحسب بطاقات الأدمن ضمنها
+  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20
   const sorted = shuffle([...regularCards]);
   let idx = 0;
   let chunkNum = 1;
@@ -1199,7 +1172,7 @@ function openDetail(id){
       <a href="${telLink(c.phone)}" class="act-btn act-call"><i data-lucide="phone"></i> اتصال مباشر</a>
       <a href="${waLink(c.phone, c.name)}" target="_blank" rel="noopener" class="act-btn act-wa"><i data-lucide="message-circle"></i> واتساب</a>`;
   }
-  const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.99 14.99-4.5-4.5 1.41-1.41 3.09 3.09 7.09-7.09 1.41 1.41-8.5 8.5z"/></svg></span>' : '';
+  const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="12" fill="#1D9BF0"/><path d="M7.5 12.5l3 3 6-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>' : '';
 
   $('detailBody').innerHTML = `
     <div class="detail-layout">
