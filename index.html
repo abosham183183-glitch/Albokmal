@@ -195,7 +195,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
 
-/* 🌟 دوائر التفاعل النبضي باللون الذهبي الفاخر بدلاً من الأخضر والأسود */
+/* دوائر التفاعل النبضي باللون الذهبي الفاخر */
 .card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--gold);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
 .card-ava-ring.r2{animation-delay:1.1s;border-color:var(--gold2)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
@@ -204,7 +204,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-who h3{font-size:1.12rem;font-weight:900;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.35rem}
 [data-theme="dark"] .card-who h3{color:var(--gold2)}
 
-/* 🌟 شارة التوثيق النجمية الدائرية (Starburst) */
+/* شارة التوثيق النجمية الدائرية (Starburst) */
 .verified-badge{display:inline-flex;align-items:center;justify-content:center;width:1.2rem;height:1.2rem;flex:none;position:relative}
 .verified-badge svg{width:100%;height:100%}
 
@@ -763,6 +763,10 @@ function route(){
   const h=parseHash(); 
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
+  
+  // 🌟 ضبط التمرير إلى أعلى الصفحة فوراً عند الانتقال لأي قسم أو صفحة
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
   if(!h || h===''){ $('homeView').style.display=''; return; }
   if(h==='admin'){ showAdmin(); return; }
   if(h==='profile'){ 
