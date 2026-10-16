@@ -193,11 +193,11 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
-.card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
+.card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--sky);position:relative;z-index:2}
 
-/* دوائر التفاعل النبضي باللون الذهبي الفاخر */
-.card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--gold);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
-.card-ava-ring.r2{animation-delay:1.1s;border-color:var(--gold2)}
+/* 🌟 دوائر التفاعل النبضي باللونين الأخضر والأزرق بدلاً من الذهبي */
+.card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--wa);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
+.card-ava-ring.r2{animation-delay:1.1s;border-color:var(--sky)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
 
 .card-who{flex:1;min-width:0}
@@ -764,7 +764,7 @@ function route(){
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
   
-  // 🌟 ضبط التمرير إلى أعلى الصفحة فوراً عند الانتقال لأي قسم أو صفحة
+  // ضبط التمرير إلى أعلى الصفحة فوراً عند الانتقال لأي قسم أو صفحة
   window.scrollTo({ top: 0, behavior: 'instant' });
 
   if(!h || h===''){ $('homeView').style.display=''; return; }
