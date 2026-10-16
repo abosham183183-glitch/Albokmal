@@ -164,85 +164,67 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* 🌟 بطاقة الأدمن المعدنية الفضية الفاخرة (Silver Metallic Gradient) */
-.card.admin-card{
-  background: linear-gradient(135deg, #F0F4F8 0%, #D8E2EC 40%, #BCCCDC 100%) !important;
-  border: 3px solid #627D98 !important;
-  box-shadow: 0 16px 40px rgba(98,125,152,.35) !important;
+/* 🌟 بطاقة الأدمن / VIP الفاخرة (مزيج الأزرق الملكي والذهبي) */
+.card.admin-card {
+  background: linear-gradient(135deg, #0A1E3C 0%, #122F5C 40%, #1B4FA8 100%) !important;
+  border: 2.5px solid #D4A017 !important;
+  box-shadow: 0 16px 40px rgba(212, 160, 23, 0.25), 0 0 15px rgba(212, 160, 23, 0.1) !important;
   position: relative;
-  width: 300px; /* حافظنا على نفس حجم عرض البطاقة الطبيعي */
-  flex: none;   /* لتمنع تقلصها داخل الشريط الأفقي */
-  scroll-snap-align: start;
+  width: 100%;
 }
-[data-theme="dark"] .card.admin-card{
-  background: linear-gradient(135deg, #182232 0%, #24344D 50%, #334E68 100%) !important;
-  border-color: #829AB1 !important;
-  box-shadow: 0 16px 40px rgba(130,154,177,.25) !important;
+[data-theme="dark"] .card.admin-card {
+  background: linear-gradient(135deg, #050A14 0%, #0A1E3C 50%, #122F5C 100%) !important;
+  border-color: #F5C542 !important;
+  box-shadow: 0 16px 40px rgba(245, 197, 66, 0.2), 0 0 20px rgba(245, 197, 66, 0.1) !important;
 }
 
-/* 🌟 شريط أفقي متحرك وسلس لبطاقات الأدمن الفضية مع الحفاظ على شكل وحجم البطاقة تماماً */
-.admin-horizontal-grid{
-  display: flex;
-  gap: 1.2rem;
-  overflow-x: auto;
-  padding: .5rem .2rem 1.2rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gold) var(--line);
+/* لمعة ذهبية معدنية متحركة على بطاقة VIP */
+.card.admin-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.4), rgba(255, 255, 255, 0.7), rgba(212, 160, 23, 0.4), transparent);
+  transform: skewX(-25deg);
+  animation: cardShine 4s infinite;
+  pointer-events: none;
 }
-.admin-horizontal-grid::-webkit-scrollbar{
-  height: 8px;
-}
-.admin-horizontal-grid::-webkit-scrollbar-thumb{
-  background: #829AB1;
-  border-radius: 99px;
-}
+@keyframes cardShine { 0% { left: -150% } 30% { left: 160% } 100% { left: 160% } }
 
-/* لمعة معدنية متحركة على بطاقة الأدمن الفضية */
-.card.admin-card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-150%;
-  width:60%;
-  height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent);
-  transform:skewX(-25deg);
-  animation:cardShine 4s infinite;
-  pointer-events:none;
-}
-@keyframes cardShine{0%{left:-150%}30%{left:160%}100%{left:160%}}
+.card.admin-card .card-who h3 { color: #FFFFFF !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+[data-theme="dark"] .card.admin-card .card-who h3 { color: #F5C542 !important; text-shadow: 0 2px 8px rgba(245, 197, 66, 0.3); }
 
-.card.admin-card .card-who h3{color:#102A43 !important}
-[data-theme="dark"] .card.admin-card .card-who h3{color:#F0F4F8 !important}
-
-/* الوصف في بطاقة الأدمن بخلفية فضية صافية غير مشوهة */
-.card.admin-card .card-desc{
-  background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid rgba(98, 125, 152, 0.35);
+/* الوصف في بطاقة VIP بخلفية زرقاء داكنة شفافة مع حدود ذهبية */
+.card.admin-card .card-desc {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(212, 160, 23, 0.4);
   padding: .6rem .8rem;
   border-radius: 12px;
-  color: #24344D !important;
+  color: #E8EDF6 !important;
   font-weight: 700;
 }
-[data-theme="dark"] .card.admin-card .card-desc{
-  background: rgba(15, 23, 42, 0.6) !important;
-  border-color: rgba(130, 154, 177, 0.35);
+[data-theme="dark"] .card.admin-card .card-desc {
+  background: rgba(10, 30, 60, 0.5) !important;
+  border-color: rgba(245, 197, 66, 0.4);
   color: #E2E8F0 !important;
 }
 
-.card.admin-card .card-foot{border-top-color:rgba(98, 125, 152, 0.3) !important}
-.card.admin-card .card-id{color:#334E68 !important}
-[data-theme="dark"] .card.admin-card .card-id{color:#BCCCDC !important}
+.card.admin-card .card-foot { border-top-color: rgba(212, 160, 23, 0.3) !important; }
+.card.admin-card .card-id { color: #F5C542 !important; font-weight: 800; }
+[data-theme="dark"] .card.admin-card .card-id { color: #FFD86B !important; }
 
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.card.admin-card .card-banner{background:linear-gradient(90deg,#486581,#829AB1,#BCCCDC,#486581)}
+.card.admin-card .card-banner { background: linear-gradient(90deg, #D4A017, #F5C542, #3B82F6, #D4A017) !important; }
+.card.admin-card .card-ava { border-color: #F5C542 !important; box-shadow: 0 0 15px rgba(245, 197, 66, 0.5) !important; }
+
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
-.card.admin-card .card-ava{border-color:#486581 !important;box-shadow:0 0 12px rgba(98,125,152,.6)}
 .card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--wa);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
 .card-ava-ring.r2{animation-delay:1.1s;border-color:var(--green)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
@@ -896,13 +878,13 @@ function renderBentoGrid(containerId, cardsList){
   
   let html = '';
   
-  // 1. بطاقات الأدمن الفضية تظهر في شريط أفقي متحرك بالأعلى بنفس حجم البطاقة الطبيعي
+  // 1. بطاقات الأدمن تظهر في الأعلى بشكل أفقي تماماً كما طلبت
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
     html += '<div class="admin-horizontal-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
   
-  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20
+  // 2. باقي بطاقات المعلمين تظهر بشكل عمودي وبالترتيب المحدد من 10 إلى 20، ولا تُحسب بطاقات الأدمن ضمنها
   const sorted = shuffle([...regularCards]);
   let idx = 0;
   let chunkNum = 1;
