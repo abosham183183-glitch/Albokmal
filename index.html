@@ -654,9 +654,9 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </header>
 
-<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(true)"></div>
 <nav class="drawer" id="drawer">
-  <div class="dr-head"><img src="logo5.png" alt="" onerror="this.style.visibility='hidden'"><div><b>الكل هنا</b><small>MANUAL WORKERS HUB</small></div><button class="dr-close" id="drClose"><i data-lucide="x"></i></button></div>
+  <div class="dr-head"><img src="logo5.png" alt="" onerror="this.style.visibility='hidden'"><div><b>الكل هنا</b><small>MANUAL WORKERS HUB</small></div><button class="dr-close" id="drClose" onclick="closeDrawer(true)"><i data-lucide="x"></i></button></div>
   <div class="dr-nav">
     <a class="dr-item" href="#/" data-nav><i data-lucide="home"></i> الرئيسية</a>
     <a class="dr-item" href="#" onclick="requireLoginThenOpenCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
@@ -892,7 +892,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   <div class="fbotttom">© 2026 <strong>الكل هنا</strong> — جميع الحقوق محفوظة. صُنع بواسطة <strong>محمد أبو عبدالله 🇸🇾</strong></div>
 </footer>
 
-<div class="overlay" id="createModal">
+<div class="overlay" id="createModal" onclick="checkModalBgClick(event, 'createModal')">
   <div class="modal wide">
     <div class="mhead"><h3 id="createModalTitle"><i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية</h3><button class="xbtn" onclick="closeModal('createModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody">
@@ -911,14 +911,14 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </div>
 
-<div class="overlay" id="detailModal">
+<div class="overlay" id="detailModal" onclick="checkModalBgClick(event, 'detailModal')">
   <div class="modal wide">
     <div class="mhead"><h3><i data-lucide="contact"></i> تفاصيل البطاقة</h3><button class="xbtn" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody"><div id="detailBody"></div></div>
   </div>
 </div>
 
-<div class="overlay" id="googleLoginModal">
+<div class="overlay" id="googleLoginModal" onclick="checkModalBgClick(event, 'googleLoginModal')">
   <div class="modal google-login-modal">
     <div class="mhead"><h3><i data-lucide="log-in"></i> تسجيل الدخول</h3><button class="xbtn" onclick="closeModal('googleLoginModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody">
@@ -979,7 +979,7 @@ let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
-const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
+const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;P'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
 function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
@@ -998,12 +998,75 @@ function setTheme(mode){ document.body.setAttribute('data-theme',mode); localSto
 $('themeBtn').addEventListener('click',()=>{ setTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark'); });
 setTheme(localStorage.getItem('kl_theme')||'light');
 
-function openDrawer(){ $('drawer').classList.add('open'); $('drawerOverlay').classList.add('open'); }
-function closeDrawer(){ $('drawer').classList.remove('open'); $('drawerOverlay').classList.remove('open'); }
-$('menuBtn').addEventListener('click',openDrawer);
-$('drClose').addEventListener('click',closeDrawer);
-$('drawerOverlay').addEventListener('click',closeDrawer);
-$$('.dr-item[data-nav]').forEach(a=>a.addEventListener('click',()=>{ closeDrawer(); const hash=a.getAttribute('href'); if(hash.startsWith('#/'))location.hash=''; else if(hash.startsWith('#')){ setTimeout(()=>{ const el=$(hash.slice(1)); if(el)el.scrollIntoView({behavior:'smooth'}); },300); } }));
+/* نظام إدارة الحالة التاريخية وزر رجوع الهاتف الشامل */
+let activeModalId = null;
+let isDrawerOpen = false;
+
+function openDrawer(){ 
+  isDrawerOpen = true;
+  $('drawer').classList.add('open'); 
+  $('drawerOverlay').classList.add('open'); 
+  history.pushState({drawer: true}, '');
+}
+function closeDrawer(fromHistory = false){ 
+  if(!isDrawerOpen) return;
+  isDrawerOpen = false;
+  $('drawer').classList.remove('open'); 
+  $('drawerOverlay').classList.remove('open'); 
+  if(!fromHistory && history.state && history.state.drawer){
+    history.back();
+  }
+}
+$('menuBtn').addEventListener('click', openDrawer);
+
+function openModal(id){ 
+  activeModalId = id;
+  $(id).classList.add('open'); 
+  document.body.style.overflow = 'hidden'; 
+  history.pushState({modal: id}, '');
+}
+
+function closeModal(id, fromHistory = false){ 
+  if(activeModalId !== id) return;
+  activeModalId = null;
+  $(id).classList.remove('open'); 
+  document.body.style.overflow = ''; 
+  if(!fromHistory && history.state && history.state.modal === id){
+    history.back();
+  }
+}
+
+function checkModalBgClick(event, modalId){
+  if(event.target === $(modalId)){
+    closeModal(modalId);
+  }
+}
+
+window.addEventListener('popstate', (e) => {
+  // 1. إغلاق القائمة الجانبية إذا كانت مفتوحة
+  if(isDrawerOpen){
+    isDrawerOpen = false;
+    $('drawer').classList.remove('open'); 
+    $('drawerOverlay').classList.remove('open'); 
+    return;
+  }
+  // 2. إغلاق الـ Lightbox إذا كانت مفتوحة
+  if(isLightboxActive){
+    isLightboxActive = false;
+    $('lightbox').classList.remove('active');
+    return;
+  }
+  // 3. إغلاق أي Modal مفتوح (مثل تفاصيل البطاقة أو الإنشاء)
+  if(activeModalId){
+    const mId = activeModalId;
+    activeModalId = null;
+    $(mId).classList.remove('open');
+    document.body.style.overflow = '';
+    return;
+  }
+  // 4. التنقل العادي بين الصفحات
+  route();
+});
 
 function parseHash(){ return location.hash.replace(/^#\/?/,''); }
 function route(){ 
@@ -1233,7 +1296,7 @@ function performGoogleSignIn(){
   const provider = new firebase.auth.GoogleAuthProvider(); 
   provider.setCustomParameters({ prompt: 'select_account' }); 
   auth.signInWithPopup(provider).then(result => { 
-    currentUser = result.user; closeModal('googleLoginModal'); 
+    currentUser = result.user; closeModal('googleLoginModal', true); 
     if(pendingAction==='createCard'){ 
       pendingAction=null; 
       requireLoginThenOpenCreate(); 
@@ -1380,7 +1443,7 @@ async function submitCard(){
     await db.collection('daily').doc(phone).set({
       date: todayStr, count: usedToday + workImgs.length, total: usedTotal + workImgs.length
     }, { merge: true }); 
-    closeModal('createModal'); 
+    closeModal('createModal', true); 
     ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
     $('cProf').selectedIndex = 0; 
     toast('تم نشر بطاقتك بنجاح! 🎉'); await loadCards(); 
@@ -1467,7 +1530,7 @@ window.switchGalleryImage = function(url, el){
 
 function quickEditCard(event, id){ 
   if(event) { event.preventDefault(); event.stopPropagation(); }
-  closeModal('detailModal');
+  closeModal('detailModal', true);
   const c = CARDS.find(x => x.id === id); if(!c) return; 
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
@@ -1530,7 +1593,7 @@ async function saveEditedCard(id){
       cardData.ownerEmail = currentUser.email;
     }
     await db.collection('cards').doc(id).update(cardData); 
-    closeModal('createModal'); 
+    closeModal('createModal', true); 
     ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');
     $('cProf').selectedIndex = 0; 
     toast('تم تحديث بطاقتك بنجاح! ✨'); 
@@ -1555,7 +1618,7 @@ function quickDeleteCard(event, id){
 async function deleteCardById(id){ 
   try{ 
     await db.collection('cards').doc(id).delete(); 
-    closeModal('detailModal');
+    closeModal('detailModal', true);
     toast('تم حذف البطاقة'); await loadCards(); 
     if(parseHash() === 'admin') renderAdminStats(); 
   } catch(e){ toast(e.message,'error'); } 
@@ -1631,9 +1694,6 @@ async function delCard(id){
   } catch(e){ toast(e.message,'error'); } 
 }
 
-function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
-
 /* Lightbox */
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 let isLightboxActive = false;
@@ -1647,13 +1707,6 @@ function initLightbox(){
   window.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('mouseup', handleMouseUp);
   stage.addEventListener('wheel', handleWheel, {passive:false});
-  window.addEventListener('popstate', (e) => {
-    if(isLightboxActive){
-      isLightboxActive = false;
-      $('lightbox').classList.remove('active');
-      history.pushState({modalOpen: true}, '');
-    }
-  });
 }
 
 function handleTouchStart(e){
@@ -1741,7 +1794,7 @@ function closeLightbox(goBack = true){
   if(!isLightboxActive) return;
   isLightboxActive = false;
   $('lightbox').classList.remove('active');
-  if(goBack){ history.back(); }
+  if(goBack && history.state && history.state.lightbox){ history.back(); }
 }
 
 setTimeout(initLightbox, 100);
