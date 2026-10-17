@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الكل هنا | منصة الحرفيين والمحافظات في سوريا</title>
+<title>الكل هنا | منصة الحرفيين وأصحاب المهن الحرة في سوريا</title>
+<meta name="description" content="المنصة الأولى في سوريا لربط أصحاب المهن، الصنايعية، والحرفيين (معلم سباكة، بلاط، كهربائي، نجار) بأصحاب العمل والزبائن للتواصل المباشر وبدون عمولات.">
+<meta name="keywords" content="معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا, حرفيين دمشق حلب حمص">
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -20,20 +22,50 @@
   "name": "الكل هنا",
   "alternateName": "Al-Kol Hana - المنصة الأولى للحرفيين في سوريا",
   "url": "https://alkolhana.com",
-  "description": "منصة خدمية سورية تجمع أصحاب المهن الحرة والصنايعية (معلم سباكة، بلاط، كهربائي، نجار، حداد) مع أصحاب العمل للتوصل المباشر وعرض البطاقات المهنية.",
+  "description": "منصة خدمية سورية تجمع أصحاب المهن الحرة والصنايعية مع أصحاب العمل للتوصل المباشر وعرض البطاقات المهنية.",
   "inLanguage": "ar",
   "audience": {
     "@type": "Audience",
     "geographicArea": {
       "@type": "AdministrativeArea",
-      "name": "سوريا (جميع المحافظات: دمشق، ريف دمشق، حلب، حمص، حماة، اللاذقية، طرطوس، إدلب، درعا، السويداء، القنيطرة، الرقة، الحسكة، دير الزور)"
+      "name": "سوريا (جميع المحافظات)"
     }
   },
-  "keywords": "معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا, حرفيين سوريا",
-  "about": {
-    "@type": "Thing",
-    "name": "دليل الحرفيين وأصحاب المهن الحرة في سوريا"
-  }
+  "keywords": "معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا"
+}
+</script>
+
+<!-- ❓ بيانات مهيكلة للأسئلة الشائعة (FAQ Schema) لتعزيز ظهور محركات البحث والـ AI -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "ما هي منصة «الكل هنا»؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "هي المنصة الخدمية الرقمية الأولى في سوريا التي تجمع أصحاب المهن الحرة والصنايعية والحرفيين مع أصحاب العمل لتسهيل التواصل المباشر وعرض البطاقات المهنية ومعارض الأعمال دون وسطاء أو عمولات."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف يمكنني ايجاد معلم سباكة أو بلاط أو كهربائي في سوريا عبر المنصة؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "يمكنك تصفح الموقع إما حسب المحافظات السورية أو حسب الأقسام والمهن (مثل سباك، بلاط، كهربائي، نجار) واستعراض بطاقات الحرفيين مع صور أعمالهم والتواصل معهم مباشرة عبر الاتصال أو الواتساب."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "هل إنشاء بطاقة مهنية ونشرها على المنصة مجاني؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نعم، النشر وإنشاء البطاقات المهنية على منصة «الكل هنا» مجاني بالكامل بهدف دعم المجتمع المهني والحرفي في سوريا."
+      }
+    }
+  ]
 }
 </script>
 
@@ -129,7 +161,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 
-/* ═══════ الشعار المصغر مع الإطارات المتوهجة الساطعة بدون خلفية خضراء ═══════ */
+/* الشعار المصغر مع الإطارات المتوهجة الساطعة */
 .logo-wrapper {
     position: relative;
     width: 145px;
@@ -145,13 +177,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: conic-gradient(
-        from 0deg, 
-        #3b82f6 0deg,   /* أزرق ساطع */
-        #ffffff 120deg, /* أبيض */
-        #f5c542 240deg, /* ذهبي */
-        #3b82f6 360deg
-    );
+    background: conic-gradient(from 0deg, #3b82f6 0deg, #ffffff 120deg, #f5c542 240deg, #3b82f6 360deg);
     padding: 2.5px;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -171,10 +197,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    
     border: 2.5px solid transparent;
-    background-image: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%),
-                      conic-gradient(from 0deg, #3b82f6, #ffffff, #f5c542, #3b82f6);
+    background-image: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%), conic-gradient(from 0deg, #3b82f6, #ffffff, #f5c542, #3b82f6);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     animation: rotateRingReverse 10s linear infinite, ringGlowPulse 3s ease-in-out infinite;
@@ -198,40 +222,16 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     animation: slideUpAndGlow 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes rotateRing {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes rotateRingReverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-}
-
+@keyframes rotateRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rotateRingReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 @keyframes ringGlowPulse {
-    0%, 100% {
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.7);
-    }
-    50% {
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.95), 0 0 18px rgba(245, 197, 66, 0.9);
-    }
+    0%, 100% { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.7); }
+    50% { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.95), 0 0 18px rgba(245, 197, 66, 0.9); }
 }
-
 @keyframes slideUpAndGlow {
-    0% {
-        transform: translateY(60px) scale(0.6);
-        opacity: 0;
-        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
-    }
-    50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9));
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
-    }
+    0% { transform: translateY(60px) scale(0.6); opacity: 0; filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9)); }
+    100% { transform: translateY(0) scale(1); opacity: 1; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)); }
 }
 
 /* SLIDER SECTION */
@@ -256,6 +256,70 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .about-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
 .about-col li{font-size:.85rem;color:var(--muted);font-weight:700;display:flex;gap:.5rem;align-items:flex-start;line-height:1.8}
 .about-col li svg{color:var(--wa);width:1rem;height:1rem;flex:none;margin-top:.25rem}
+
+/* 🌟 قسم من نحن التفصيلي لتعزيز الـ SEO */
+.seo-about-box {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  padding: 2.2rem;
+  box-shadow: 0 12px 34px var(--shadow);
+  margin-bottom: 2.6rem;
+  line-height: 2;
+}
+.seo-about-box h3 {
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+[data-theme="dark"] .seo-about-box h3 { color: var(--gold2); }
+.seo-about-box p {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* 🌟 قسم الأسئلة الشائعة (FAQ) لتعزيز ظهور محركات البحث والـ AI */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.6rem;
+}
+.faq-item {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 6px 20px var(--shadow);
+  transition: .25s;
+}
+.faq-item:hover {
+  border-color: var(--gold);
+}
+.faq-q {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .5rem;
+}
+[data-theme="dark"] .faq-q { color: var(--gold2); }
+.faq-q svg { color: var(--gold); width: 1.2rem; height: 1.2rem; flex: none; }
+.faq-a {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.9;
+  font-weight: 600;
+  padding-inline-start: 1.8rem;
+}
 
 /* Grid Buttons */
 .prov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem}
@@ -298,13 +362,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   scrollbar-width: thin;
   scrollbar-color: var(--gold) var(--line);
 }
-.admin-horizontal-grid::-webkit-scrollbar{
-  height: 8px;
-}
-.admin-horizontal-grid::-webkit-scrollbar-thumb{
-  background: var(--blue);
-  border-radius: 99px;
-}
+.admin-horizontal-grid::-webkit-scrollbar{ height: 8px; }
+.admin-horizontal-grid::-webkit-scrollbar-thumb{ background: var(--blue); border-radius: 99px; }
 
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
@@ -313,7 +372,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
 
-/* 🌟 دوائر التفاعل النبضي باللون الأخضر فقط */
+/* دوائر التفاعل النبضي باللون الأخضر */
 .card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--wa);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
 .card-ava-ring.r2{animation-delay:1.1s;border-color:var(--wa)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
@@ -381,16 +440,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
   transition: .2s;
   cursor: pointer;
 }
-.back-btn:hover {
-  background: var(--navy2);
-  transform: translateX(4px);
-}
-.cards-meta {
-  font-family: 'Cairo', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--navy);
-}
+.back-btn:hover { background: var(--navy2); transform: translateX(4px); }
+.cards-meta { font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--navy); }
 [data-theme="dark"] .cards-meta { color: var(--gold2); }
 
 /* Report & Dhikr */
@@ -611,6 +662,8 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     <a class="dr-item" href="#" onclick="requireLoginThenOpenCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
     <a class="dr-item" href="#provinces" data-nav><i data-lucide="map-pin"></i> المحافظات</a>
     <a class="dr-item" href="#categories" data-nav><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
+    <a class="dr-item" href="#aboutSeo" data-nav><i data-lucide="info"></i> من نحن</a>
+    <a class="dr-item" href="#faqSec" data-nav><i data-lucide="help-circle"></i> الأسئلة الشائعة</a>
     <div class="dr-sep"></div>
     <a class="dr-item" href="#reports" data-nav><i data-lucide="shield-alert"></i> الشكاوى والدعم</a>
     <a class="dr-item" href="#admin" id="adminLink" style="display:none"><i data-lucide="shield-check"></i> لوحة الإدارة</a>
@@ -636,7 +689,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
           </div>
         </div>
         <div class="hero-card-wrap">
-          <!-- الشعار المتوهج المصغر والمحدث بتصميم أزرق متناسق -->
           <div class="logo-wrapper">
               <div class="outer-ring"></div>
               <div class="inner-circle"></div>
@@ -659,19 +711,29 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
     </section>
 
+    <!-- 🌟 قسم من نحن (About Us) الشامل والمكتوب لتحسين الـ SEO والظهور في محركات البحث والـ AI -->
+    <section class="section seo-about-box" id="aboutSeo">
+      <h3><i data-lucide="info"></i> من نحن — منصة «الكل هنا»</h3>
+      <p>تعتبر منصة <strong>«الكل هنا»</strong> الدليل الرقمي والمجتمعي الأول المخصص لخدمة الحرفيين، أصحاب المهن الحرة، والصنايعية (مثل: معلم سباكة، معلم بلاط وسيراميك، كهربائي، نجار، حداد، وغيرها من المهن) في كافة المحافظات السورية.</p>
+      <p>رؤيتنا هي كسر الحواجز وتسهيل وصول أصحاب العمل والزبائن إلى الكفاءات المهنية المناسبة مباشرة وبدون أي رسوم أو وسطاء. من خلال إنشاء بطاقة مهنية رقمية، يمتلك كل حرفي فرصة حقيقية لعرض مهاراته، خبراته، وصور أعماله السابقة أمام آلاف الزبائن الباحثين عن الجودة والموثوقية.</p>
+      <p>نحن ندعم السوق المحلي السوري عبر توفير بيئة رقمية سهلة وآمنة تعمل مباشرة من الهواتف المحمولة وتغطي مختلف المدن والمحافظات (دمشق، حلب، حمص، اللاذقية، حماة، وغيرها).</p>
+    </section>
+
     <section class="section about" id="aboutSec">
-      <div class="sec-title"><i data-lucide="info"></i> لماذا «الكل هنا»؟</div>
+      <div class="sec-title"><i data-lucide="sparkles"></i> لماذا «الكل هنا»؟</div>
       <div class="about-grid">
         <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك.</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك.</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء.</li></ul></div>
         <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك.</li></ul></div>
-        <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="award"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
       </div>
     </section>
+
     <section class="section" id="provSec">
       <div class="sec-title"><i data-lucide="map-pin"></i> تصفّح حسب المحافظة</div>
       <p class="sec-sub">اضغط على أي محافظة لعرض كل البطاقات المنشورة فيها في صفحة مستقلة.</p>
       <div class="prov-grid" id="provGrid"></div>
     </section>
+
     <section class="section" id="allCardsSec">
       <div class="sec-title"><i data-lucide="layers"></i> كل المعلمين والحرفيين</div>
       <p class="sec-sub">بطاقات تظهر بشكل مرتب من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
@@ -679,15 +741,42 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>
       </div>
     </section>
+
     <section class="section" id="catSec">
       <div class="sec-title"><i data-lucide="layout-grid"></i> الأقسام والمهن</div>
       <p class="sec-sub">اضغط على المهنة لعرض كل المسجلين بها في صفحة مستقلة.</p>
       <div class="cat-grid" id="catGrid"></div>
     </section>
+
+    <!-- 🌟 قسم الأسئلة الشائعة (FAQ Section) لتعزيز السيو وترشيح محركات الـ AI -->
+    <section class="section" id="faqSec">
+      <div class="sec-title"><i data-lucide="help-circle"></i> الأسئلة الشائعة (FAQ)</div>
+      <p class="sec-sub">إجابات عن أبرز الاستفسارات حول منصة الحرفيين وكيفية استخدامها.</p>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-q"><i data-lucide="help-circle"></i> ما هي منصة «الكل هنا»؟</div>
+          <div class="faq-a">هي المنصة الخدمية الرقمية الأولى في سوريا التي تجمع أصحاب المهن الحرة والصنايعية والحرفيين مع أصحاب العمل لتسهيل التواصل المباشر وعرض البطاقات المهنية ومعارض الأعمال دون وسطاء أو عمولات.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i data-lucide="help-circle"></i> كيف يمكنني إيجاد معلم سباكة أو بلاط أو كهربائي في سوريا عبر المنصة؟</div>
+          <div class="faq-a">يمكنك تصفح الموقع إما حسب المحافظات السورية (مثل دمشق، حلب، حمص) أو حسب الأقسام والمهن (مثل سباك، بلاط، كهربائي، نجار) واستعراض بطاقات الحرفيين مع صور أعمالهم والتواصل معهم مباشرة عبر الاتصال أو الواتساب.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i data-lucide="help-circle"></i> هل إنشاء بطاقة مهنية ونشرها على المنصة مجاني؟</div>
+          <div class="faq-a">نعم، النشر وإنشاء البطاقات المهنية على منصة «الكل هنا» مجاني بالكامل بهدف دعم المجتمع المهني والحرفي في سوريا وتسهيل وصول الزبائن إليهم.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i data-lucide="help-circle"></i> كيف يمكنني التواصل مع الحرفي أو صاحب العمل؟</div>
+          <div class="faq-a">يحتوي كل كارت أو بطاقة مهنية على أزرار تواصل مباشرة ومفعلة تشمل "اتصال مباشر" بالهاتف و"محادثة واتساب" فورية مع الحرفي.</div>
+        </div>
+      </div>
+    </section>
+
     <section class="section report-band" id="reports">
       <div class="rb-txt"><h3><i data-lucide="shield-alert"></i> قسم الشكاوى والدعم</h3><p>واجهت إعلانا مخالفاً أو محاولة احتيال؟ عندك مشكلة تقنية؟ راسل إدارة «الكل هنا» مباشرة عبر واتساب على الرقم المعتمد — بنراجع كل بلاغ ونتخذ الإجراء اللازم خلال وقت قصير.</p></div>
       <a class="report-wa" id="supportWa" href="#" target="_blank" rel="noopener" title="راسل الإدارة"><i data-lucide="message-circle"></i></a>
     </section>
+
     <section class="section dhikr-band" id="dhikrSec">
       <div class="dhikr-head"><i data-lucide="book-heart"></i><b>أذكار وتسبيحات</b></div>
       <div class="dhikr-quote" id="dhikrQuote">سُبْحَانَ اللَهَ وَبِحَمْدِه</div>
@@ -742,7 +831,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
-      <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
+      <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#FC';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
 
@@ -750,7 +839,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     <div class="sec-title"><i data-lucide="shield-check"></i> لوحة الإدارة</div>
     <div class="admin-hero"><h2><i data-lucide="shield-check"></i> مركز التحكم بالبطاقات</h2><p>ابحث عن أي بطاقة برقم الـ ID أو الاسم أو الهاتف، واحذف منشورات الأشخاص المخالفين نهائيا من المنصة.</p></div>
     
-    <!-- قسم إضافة مساعد -->
     <div style="background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 8px 24px var(--shadow)">
       <h3 style="font-size:1.1rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem"><i data-lucide="user-plus" style="color:var(--gold)"></i> إضافة مساعد جديد لوحة التحكم</h3>
       <div style="display:flex;gap:.6rem;flex-wrap:wrap">
@@ -788,6 +876,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <a href="#" onclick="requireLoginThenOpenCreate();return false" class="fl-link"><i data-lucide="plus-square"></i> أنشئ بطاقتك</a>
         <a href="#provinces" onclick="document.getElementById('provSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="map-pin"></i> المحافظات</a>
         <a href="#categories" onclick="document.getElementById('catSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
+        <a href="#aboutSeo" onclick="document.getElementById('aboutSeo').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="info"></i> من نحن</a>
         <a href="#reports" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="shield-alert"></i> الدعم والشكاوى</a>
       </div>
     </div>
