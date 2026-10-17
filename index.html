@@ -658,17 +658,17 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 <nav class="drawer" id="drawer">
   <div class="dr-head"><img src="logo5.png" alt="" onerror="this.style.visibility='hidden'"><div><b>الكل هنا</b><small>MANUAL WORKERS HUB</small></div><button class="dr-close" id="drClose" onclick="closeDrawer(true)"><i data-lucide="x"></i></button></div>
   <div class="dr-nav">
-    <a class="dr-item" href="#/" data-nav><i data-lucide="home"></i> الرئيسية</a>
-    <a class="dr-item" href="#" onclick="requireLoginThenOpenCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
-    <a class="dr-item" href="#provinces" data-nav><i data-lucide="map-pin"></i> المحافظات</a>
-    <a class="dr-item" href="#categories" data-nav><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
-    <a class="dr-item" href="#aboutSeo" data-nav><i data-lucide="info"></i> من نحن</a>
-    <a class="dr-item" href="#faqSec" data-nav><i data-lucide="help-circle"></i> الأسئلة الشائعة</a>
+    <a class="dr-item" href="#/" data-nav="homeView"><i data-lucide="home"></i> الرئيسية</a>
+    <a class="dr-item" href="#" onclick="closeDrawer(true); requireLoginThenOpenCreate(); return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
+    <a class="dr-item" href="#provinces" data-nav="provSec"><i data-lucide="map-pin"></i> المحافظات</a>
+    <a class="dr-item" href="#categories" data-nav="catSec"><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
+    <a class="dr-item" href="#about" data-nav="aboutSeo"><i data-lucide="info"></i> من نحن</a>
+    <a class="dr-item" href="#faq" data-nav="faqSec"><i data-lucide="help-circle"></i> الأسئلة الشائعة</a>
     <div class="dr-sep"></div>
-    <a class="dr-item" href="#reports" data-nav><i data-lucide="shield-alert"></i> الشكاوى والدعم</a>
+    <a class="dr-item" href="#reports" data-nav="reports"><i data-lucide="shield-alert"></i> الشكاوى والدعم</a>
     <a class="dr-item" href="#admin" id="adminLink" style="display:none"><i data-lucide="shield-check"></i> لوحة الإدارة</a>
-    <a class="dr-item" href="#" onclick="doGoogleLogin();return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
-    <a class="dr-item" href="#" onclick="doLogout();return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
+    <a class="dr-item" href="#" onclick="closeDrawer(true); doGoogleLogin(); return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
+    <a class="dr-item" href="#" onclick="closeDrawer(true); doLogout(); return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
     <div class="dr-sep"></div>
     <a class="dr-item" href="#profile" id="profileLink" style="display:none"><i data-lucide="user-circle"></i> ملفي الشخصي</a>
   </div>
@@ -979,7 +979,7 @@ let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
-const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;P'}[m] || m));
+const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
 function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
@@ -1019,6 +1019,31 @@ function closeDrawer(fromHistory = false){
 }
 $('menuBtn').addEventListener('click', openDrawer);
 
+/* تفعيل روابط القائمة الجانبية بسلاسة تامة */
+$$('.dr-item[data-nav]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDrawer(true);
+    const targetId = a.getAttribute('data-nav');
+    
+    // الانتقال للرئيسية أولاً في حال كنا في صفحة فرعية
+    if(parseHash() !== ''){
+      location.hash = '#/';
+    }
+    
+    setTimeout(() => {
+      if(targetId === 'homeView'){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const el = $(targetId);
+        if(el){
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }, 150);
+  });
+});
+
 function openModal(id){ 
   activeModalId = id;
   $(id).classList.add('open'); 
@@ -1043,20 +1068,17 @@ function checkModalBgClick(event, modalId){
 }
 
 window.addEventListener('popstate', (e) => {
-  // 1. إغلاق القائمة الجانبية إذا كانت مفتوحة
   if(isDrawerOpen){
     isDrawerOpen = false;
     $('drawer').classList.remove('open'); 
     $('drawerOverlay').classList.remove('open'); 
     return;
   }
-  // 2. إغلاق الـ Lightbox إذا كانت مفتوحة
   if(isLightboxActive){
     isLightboxActive = false;
     $('lightbox').classList.remove('active');
     return;
   }
-  // 3. إغلاق أي Modal مفتوح (مثل تفاصيل البطاقة أو الإنشاء)
   if(activeModalId){
     const mId = activeModalId;
     activeModalId = null;
@@ -1064,7 +1086,6 @@ window.addEventListener('popstate', (e) => {
     document.body.style.overflow = '';
     return;
   }
-  // 4. التنقل العادي بين الصفحات
   route();
 });
 
@@ -1327,7 +1348,7 @@ function updateAuthUI(){
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
   $('adminLink').style.display = isAdmin ? '' : 'none'; 
   $('loginLink').style.display = (currentUser || session) ? 'none' : ''; 
-  $('logoutLink').style.display = (currentUser || session) ? '' : 'none'; 
+  $('logoutLink').style.display = (currentUser || session) ? '' : ''; 
   $('profileLink').style.display = currentUser ? '' : 'none'; 
   const drHeadSmall = $('.dr-head small'); 
   if(drHeadSmall){ 
