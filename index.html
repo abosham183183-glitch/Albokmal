@@ -103,15 +103,15 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 
-/* ═══════ كود الشعار مع الإطارات المتوهجة ═══════ */
+/* ═══════ الشعار المصغر مع الإطارات المتوهجة الساطعة بدون خلفية خضراء ═══════ */
 .logo-wrapper {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 145px;
+    height: 145px;
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(0 0 15px rgba(0, 122, 61, 0.4));
+    filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.7)); /* توهج أزرق ساطع يتماشى مع تصميم الموقع */
 }
 
 .outer-ring {
@@ -121,37 +121,37 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     border-radius: 50%;
     background: conic-gradient(
         from 0deg, 
-        #007a3d 0deg,   /* أخضر */
+        #3b82f6 0deg,   /* أزرق ساطع */
         #ffffff 120deg, /* أبيض */
-        #000000 240deg, /* أسود */
-        #007a3d 360deg
+        #f5c542 240deg, /* ذهبي */
+        #3b82f6 360deg
     );
     padding: 2.5px;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: rotateRing 15s linear infinite;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4), inset 0 0 12px rgba(0, 122, 61, 0.5);
+    animation: rotateRing 12s linear infinite;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.7), inset 0 0 15px rgba(59, 130, 246, 0.8);
 }
 
 .inner-circle {
     position: absolute;
     width: 82%;
     height: 82%;
-    background: radial-gradient(circle, #16382c 0%, #0f2b20 100%);
+    background: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%);
     border-radius: 50%;
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 122, 61, 0.6);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     
     border: 2.5px solid transparent;
-    background-image: radial-gradient(circle, #16382c 0%, #0f2b20 100%),
-                      conic-gradient(from 0deg, #007a3d, #ffffff, #000000, #007a3d);
+    background-image: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%),
+                      conic-gradient(from 0deg, #3b82f6, #ffffff, #f5c542, #3b82f6);
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    animation: rotateRingReverse 12s linear infinite, ringGlowPulse 4s ease-in-out infinite;
+    animation: rotateRingReverse 10s linear infinite, ringGlowPulse 3s ease-in-out infinite;
 }
 
 .logo-container {
@@ -166,10 +166,10 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 }
 
 .logo-image {
-    width: 175px;
+    width: 110px;
     height: auto;
     object-fit: contain;
-    animation: slideUpAndGlow 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: slideUpAndGlow 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes rotateRing {
@@ -184,27 +184,27 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 
 @keyframes ringGlowPulse {
     0%, 100% {
-        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 122, 61, 0.5);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.7);
     }
     50% {
-        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 255, 255, 0.7), 0 0 10px rgba(0, 122, 61, 0.8);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.95), 0 0 18px rgba(245, 197, 66, 0.9);
     }
 }
 
 @keyframes slideUpAndGlow {
     0% {
-        transform: translateY(90px) scale(0.6);
+        transform: translateY(60px) scale(0.6);
         opacity: 0;
         filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
     }
     50% {
         opacity: 1;
-        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9));
     }
     100% {
         transform: translateY(0) scale(1);
         opacity: 1;
-        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     }
 }
 
@@ -327,6 +327,45 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .cards-chunk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
 .bento-label{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .bento-label svg{color:var(--gold);width:.9rem;height:.9rem}
+
+/* شريط العودة المخصص لصفحات المحافظات والمهن */
+.cards-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 24px var(--shadow);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.back-btn {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 12px;
+  padding: .6rem 1.2rem;
+  font-weight: 800;
+  font-size: .9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: .2s;
+  cursor: pointer;
+}
+.back-btn:hover {
+  background: var(--navy2);
+  transform: translateX(4px);
+}
+.cards-meta {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+[data-theme="dark"] .cards-meta { color: var(--gold2); }
 
 /* Report & Dhikr */
 .report-band{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:24px;padding:1.8rem 1.5rem;color:#fff;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;box-shadow:0 16px 40px var(--shadow)}
@@ -571,7 +610,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
           </div>
         </div>
         <div class="hero-card-wrap">
-          <!-- الشعار المتوهج بدلاً من بطاقة المعاينة السابقة -->
+          <!-- الشعار المتوهج المصغر والمحدث بتصميم أزرق متناسق -->
           <div class="logo-wrapper">
               <div class="outer-ring"></div>
               <div class="inner-circle"></div>
@@ -633,7 +672,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 
   <div id="provinceView" class="page-view" style="display:none">
     <div class="cards-bar">
-      <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
+      <button class="back-btn" onclick="goBackToSection('provSec')"><i data-lucide="arrow-right"></i> رجوع للمحافظات</button>
       <div class="cards-meta"><span id="provinceTitle"></span> — <b id="provinceCount"></b></div>
     </div>
     <div id="provinceContainer" class="bento-container"></div>
@@ -641,7 +680,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 
   <div id="professionView" class="page-view" style="display:none">
     <div class="cards-bar">
-      <button class="back-btn" onclick="location.hash='#/'"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
+      <button class="back-btn" onclick="goBackToSection('catSec')"><i data-lucide="arrow-right"></i> رجوع للأقسام والمهن</button>
       <div class="cards-meta"><span id="professionTitle"></span> — <b id="professionCount"></b></div>
     </div>
     <div id="professionContainer" class="bento-container"></div>
@@ -857,25 +896,31 @@ function route(){
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
   
-  window.scrollTo({ top: 0, behavior: 'instant' });
-
-  if(!h || h===''){ $('homeView').style.display=''; return; }
+  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); return; }
   if(h==='admin'){ showAdmin(); return; }
   if(h==='profile'){ 
     if(!currentUser){ toast('يجب تسجيل الدخول أولا','error'); location.hash='#/'; return; }
-    $('profileView').style.display=''; loadProfileData(); return; 
+    $('profileView').style.display=''; loadProfileData(); window.scrollTo({ top: 0, behavior: 'instant' }); return; 
   }
   if(h.startsWith('province/')){ 
     const prov=decodeURIComponent(h.split('/')[1]); 
-    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); return; } 
+    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
   if(h.startsWith('profession/')){ 
     const prof=decodeURIComponent(h.split('/')[1]); 
-    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); return; } 
+    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
-  $('homeView').style.display=''; 
+  $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); 
 }
 window.addEventListener('hashchange',route);
+
+function goBackToSection(sectionId){
+  location.hash = '#/';
+  setTimeout(() => {
+    const el = $(sectionId);
+    if(el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 100);
+}
 
 function buildProvinces(){ 
   $('provGrid').innerHTML=PROVINCES.map(p=>{ 
