@@ -102,19 +102,111 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-weight:800;padding:.85rem 1.6rem;border-radius:14px;display:inline-flex;align-items:center;gap:.5rem;transition:.25s}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
-.preview-card{width:min(320px,80vw);background:var(--surface);border-radius:22px;padding:1.3rem;color:var(--ink);box-shadow:0 30px 60px rgba(0,0,0,.4);transform:rotateY(-12deg) rotateX(6deg);transition:transform .6s;position:relative;overflow:hidden}
-.preview-card::before{content:"";position:absolute;top:0;right:0;left:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.pc-top{display:flex;align-items:center;gap:.9rem;margin-bottom:.9rem}
-.pc-ava{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
-.pc-name{font-family:'Cairo';font-weight:900;font-size:1.15rem;color:var(--navy)}
-[data-theme="dark"] .pc-name{color:var(--gold2)}
-.pc-prof{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;font-weight:800;color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,transparent);border-radius:99px;padding:.2rem .7rem;margin-top:.25rem}
-.pc-imgs{display:flex;gap:.5rem;overflow:hidden;margin-bottom:.9rem}
-.pc-imgs div{width:70px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--navy2),var(--blue));flex:none;display:grid;place-items:center;color:var(--gold2)}
-.pc-actions{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.pc-actions a{border-radius:11px;padding:.6rem;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;gap:.35rem;color:#fff}
-.pc-call{background:var(--navy2)}.pc-wa{background:var(--wa)}
-.pc-id{position:absolute;bottom:.7rem;left:.9rem;font-size:.62rem;color:var(--muted);font-weight:800}
+
+/* ═══════ كود الشعار مع الإطارات المتوهجة ═══════ */
+.logo-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 15px rgba(0, 122, 61, 0.4));
+}
+
+.outer-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg, 
+        #007a3d 0deg,   /* أخضر */
+        #ffffff 120deg, /* أبيض */
+        #000000 240deg, /* أسود */
+        #007a3d 360deg
+    );
+    padding: 2.5px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateRing 15s linear infinite;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4), inset 0 0 12px rgba(0, 122, 61, 0.5);
+}
+
+.inner-circle {
+    position: absolute;
+    width: 82%;
+    height: 82%;
+    background: radial-gradient(circle, #16382c 0%, #0f2b20 100%);
+    border-radius: 50%;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 122, 61, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+    border: 2.5px solid transparent;
+    background-image: radial-gradient(circle, #16382c 0%, #0f2b20 100%),
+                      conic-gradient(from 0deg, #007a3d, #ffffff, #000000, #007a3d);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    animation: rotateRingReverse 12s linear infinite, ringGlowPulse 4s ease-in-out infinite;
+}
+
+.logo-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.logo-image {
+    width: 175px;
+    height: auto;
+    object-fit: contain;
+    animation: slideUpAndGlow 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateRingReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes ringGlowPulse {
+    0%, 100% {
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 122, 61, 0.5);
+    }
+    50% {
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 255, 255, 0.7), 0 0 10px rgba(0, 122, 61, 0.8);
+    }
+}
+
+@keyframes slideUpAndGlow {
+    0% {
+        transform: translateY(90px) scale(0.6);
+        opacity: 0;
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    }
+}
 
 /* SLIDER SECTION */
 .slider-section{margin-top:-20px;margin-bottom:2.5rem;position:relative;z-index:5;display:flex;justify-content:center}
@@ -193,7 +285,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-body{padding:1.1rem}
 .card-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
-/* إطار الصورة الشخصية للبطاقة أصبح باللون الذهبي */
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
 
 /* 🌟 دوائر التفاعل النبضي باللون الأخضر فقط */
@@ -205,7 +296,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-who h3{font-size:1.12rem;font-weight:900;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.35rem}
 [data-theme="dark"] .card-who h3{color:var(--gold2)}
 
-/* شارة التوثيق النجمية الدائرية (Starburst) */
 .verified-badge{display:inline-flex;align-items:center;justify-content:center;width:1.2rem;height:1.2rem;flex:none;position:relative}
 .verified-badge svg{width:100%;height:100%}
 
@@ -481,11 +571,13 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
           </div>
         </div>
         <div class="hero-card-wrap">
-          <div class="preview-card">
-            <div class="pc-top"><img class="pc-ava" src="logo5.png" alt="" onerror="this.src=''"><div><div class="pc-name">محمد أحمد العلي</div><span class="pc-prof"><i data-lucide="wrench"></i> كهربائي عام</span></div></div>
-            <div class="pc-imgs"><div><i data-lucide="zap"></i></div><div><i data-lucide="plug-zap"></i></div><div><i data-lucide="cable"></i></div></div>
-            <div class="pc-actions"><a class="pc-call"><i data-lucide="phone"></i> اتصال</a><a class="pc-wa"><i data-lucide="message-circle"></i> واتساب</a></div>
-            <div class="pc-id">ID: 100042 · دمشق</div>
+          <!-- الشعار المتوهج بدلاً من بطاقة المعاينة السابقة -->
+          <div class="logo-wrapper">
+              <div class="outer-ring"></div>
+              <div class="inner-circle"></div>
+              <div class="logo-container">
+                  <img src="logo7.png" alt="شعار وزارة الاقتصاد والصناعة" class="logo-image" onerror="this.src='logo5.png'">
+              </div>
           </div>
         </div>
       </div>
