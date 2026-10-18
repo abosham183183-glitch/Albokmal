@@ -250,6 +250,19 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .slider-dot.active{background:var(--gold2);width:26px;border-radius:10px}
 @media(max-width:600px){.slider-container{height:220px}}
 
+/* About description and FAQ additions */
+.about-intro{color:var(--muted);font-size:1rem;line-height:2;max-width:1000px;margin:-.3rem 0 1.35rem;font-weight:600}
+.faq-section{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.5rem;box-shadow:0 12px 34px var(--shadow)}
+.faq-intro{color:var(--muted);line-height:1.9;margin:-.25rem 0 1rem}
+.faq-list{display:grid;gap:.8rem}
+.faq-item{border:1px solid var(--line);border-radius:15px;background:var(--bg);overflow:hidden}
+.faq-item summary{cursor:pointer;list-style:none;padding:1rem 1.1rem;font-weight:900;color:var(--text);display:flex;align-items:center;gap:.65rem}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:before{content:'+';display:inline-grid;place-items:center;width:1.65rem;height:1.65rem;flex:none;border-radius:50%;background:var(--gold);color:#17243a;font-size:1.15rem}
+.faq-item[open] summary:before{content:'−'}
+.faq-answer{padding:0 1.1rem 1rem 3.4rem;color:var(--muted);line-height:2;font-weight:600}
+@media(max-width:600px){.faq-section{padding:1rem}.faq-item summary{padding:.85rem;font-size:.94rem}.faq-answer{padding:0 .9rem .9rem 1rem}}
+
 /* About */
 .about{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:2rem 1.6rem;box-shadow:0 12px 34px var(--shadow);position:relative;overflow:hidden}
 .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;position:relative;z-index:1}
@@ -612,6 +625,8 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   <div class="dr-nav">
     <a class="dr-item" href="#/" data-nav><i data-lucide="home"></i> الرئيسية</a>
     <a class="dr-item" href="#" onclick="requireLoginThenOpenCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
+    <a class="dr-item" href="#aboutSec" onclick="document.getElementById('aboutSec').scrollIntoView({behavior:'smooth'});return false"><i data-lucide="info"></i> من نحن</a>
+    <a class="dr-item" href="#faqSec" onclick="document.getElementById('faqSec').scrollIntoView({behavior:'smooth'});return false"><i data-lucide="messages-square"></i> الأسئلة الشائعة</a>
     <a class="dr-item" href="#provinces" data-nav><i data-lucide="map-pin"></i> المحافظات</a>
     <a class="dr-item" href="#categories" data-nav><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
     <div class="dr-sep"></div>
@@ -663,11 +678,27 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     </section>
 
     <section class="section about" id="aboutSec">
-      <div class="sec-title"><i data-lucide="info"></i> لماذا «الكل هنا»؟</div>
+      <div class="sec-title"><i data-lucide="info"></i> من نحن؟ وما الذي تقدمه منصة «الكل هنا»؟</div>
+      <p class="about-intro">«الكل هنا» منصة خدمية إلكترونية تهدف إلى جمع الصنايعية والحرفيين وأصحاب المهن الحرة في مكان واحد، ومساعدة الناس على الوصول إلى المعلم المناسب بسهولة حسب المهنة والمحافظة. تتيح المنصة لكل صاحب مهنة إنشاء بطاقة تعريفية تعرض معلوماته وخبراته وصورًا من أعماله، وتمنح أصحاب العمل وسيلة أسهل للتعرّف على مقدمي الخدمات والتواصل معهم مباشرة.</p>
+      <p class="about-intro">تضم المنصة مجالات متنوعة مثل البلاط والسيراميك، والدهان، والبناء، والإكساء والتشطيبات، والكهرباء، والسباكة، والنجارة وغيرها من المهن. دور المنصة هو تسهيل العثور على أصحاب المهن وعرض أعمالهم؛ ويُنصح المستخدمون بالتأكد من التفاصيل والاتفاق على السعر والموعد مباشرة مع مقدم الخدمة قبل بدء العمل.</p>
       <div class="about-grid">
         <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك.</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك.</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء.</li></ul></div>
         <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك.</li></ul></div>
         <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
+      </div>
+    </section>
+    <section class="section faq-section" id="faqSec">
+      <div class="sec-title"><i data-lucide="messages-square"></i> الأسئلة الشائعة</div>
+      <p class="faq-intro">إجابات مختصرة عن أهم الأسئلة حول استخدام منصة «الكل هنا».</p>
+      <div class="faq-list">
+        <details class="faq-item"><summary>ما هي منصة «الكل هنا»؟</summary><div class="faq-answer">هي منصة إلكترونية تجمع الحرفيين والصنايعية وأصحاب المهن الحرة في سوريا، وتساعد الباحثين عن خدمة على استعراض البطاقات حسب المهنة والمحافظة والتواصل مع صاحب المهنة مباشرة.</div></details>
+        <details class="faq-item"><summary>ماذا تقدم المنصة لأصحاب المهن؟</summary><div class="faq-answer">تتيح لصاحب المهنة إنشاء بطاقة تعريفية تتضمن اسمه ومهنته ومحافظته ووسائل التواصل ووصفًا عن خبرته وصورًا من أعماله، ليتمكن الزبائن وأصحاب العمل من التعرف على خدماته.</div></details>
+        <details class="faq-item"><summary>كيف أجد معلمًا أو حرفيًا؟</summary><div class="faq-answer">تصفح البطاقات، أو اختر المحافظة أو قسم المهنة المناسب، ثم راجع معلومات البطاقة والصور المتاحة وتواصل مع صاحبها عبر وسيلة الاتصال المعروضة.</div></details>
+        <details class="faq-item"><summary>هل يمكنني التواصل مباشرة مع صاحب البطاقة؟</summary><div class="faq-answer">نعم، يمكن التواصل مباشرة باستخدام رقم الهاتف أو واتساب إذا كانت وسيلة التواصل متاحة في البطاقة. لا تتوسط المنصة في الاتفاق بين الطرفين.</div></details>
+        <details class="faq-item"><summary>هل إنشاء البطاقة مجاني؟</summary><div class="faq-answer">بحسب المزايا المعروضة حاليًا في الموقع، إنشاء البطاقة والنشر مجانيان ولا تُفرض عمولة من المنصة على الاتفاق بين صاحب العمل والحرفي. راجع أي تعليمات ظاهرة داخل الموقع عند النشر.</div></details>
+        <details class="faq-item"><summary>ما الصور والمعلومات التي يُفضّل إضافتها؟</summary><div class="faq-answer">أضف اسمًا واضحًا، والمهنة والمحافظة، ووصفًا صادقًا لخدماتك وخبرتك، وصورًا حقيقية لأعمالك. لا تنشر معلومات مضللة أو صورًا لا تملك حق استخدامها.</div></details>
+        <details class="faq-item"><summary>ماذا أفعل إذا وجدت بطاقة مخالفة أو اشتبهت بمحاولة احتيال؟</summary><div class="faq-answer">استخدم قسم الشكاوى والدعم في الموقع للتواصل مع الإدارة والإبلاغ عن المشكلة. تحقّق من هوية مقدم الخدمة واتفق على السعر والتفاصيل بوضوح قبل بدء العمل.</div></details>
+        <details class="faq-item"><summary>هل تضمن المنصة جودة العمل أو الاتفاق المالي؟</summary><div class="faq-answer">المنصة تساعد على عرض البطاقات والتواصل، لكنها لا تحل محل التحقق الشخصي ولا تضمن نتيجة العمل أو الاتفاق المالي. اطلب تفاصيل واضحة وراجع الأعمال السابقة واتفق مع مقدم الخدمة مباشرة.</div></details>
       </div>
     </section>
     <section class="section" id="provSec">
@@ -791,6 +822,8 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <a href="#" onclick="requireLoginThenOpenCreate();return false" class="fl-link"><i data-lucide="plus-square"></i> أنشئ بطاقتك</a>
         <a href="#provinces" onclick="document.getElementById('provSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="map-pin"></i> المحافظات</a>
         <a href="#categories" onclick="document.getElementById('catSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
+        <a href="#aboutSec" onclick="document.getElementById('aboutSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="info"></i> من نحن</a>
+        <a href="#faqSec" onclick="document.getElementById('faqSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="messages-square"></i> الأسئلة الشائعة</a>
         <a href="#reports" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="shield-alert"></i> الدعم والشكاوى</a>
       </div>
     </div>
