@@ -822,10 +822,24 @@ const firebaseConfig = {apiKey: "AIzaSyB4AdzLhVmwufXMWVHvxh4joNlhy9zrFno",authDo
 const ADMIN_EMAIL = 'abosham750750@gmail.com';
 const SUPPORT_WA = '380984907588';
 const MAX_TOTAL_IMGS = 50, MAX_DAILY_IMGS = 3;
-firebase.initializeApp(firebaseConfig);
+
+// تهيئة آمنة لفايربيس مع معالجة الأخطاء لضمان عدم انهيار الموقع
+try {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+} catch(e) {
+  console.error("Firebase Init Error:", e);
+}
+
 const db = firebase.firestore();
 const auth = firebase.auth();
-const storage = firebase.storage();
+let storage = null;
+try {
+  storage = firebase.storage();
+} catch(e) {
+  console.warn("Storage not available, using fallback.");
+}
 
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
@@ -849,7 +863,7 @@ const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
-function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
+function toast(msg, type=''){ const t=$('toast'); if(!t)return; t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
 function telLink(phone){ return 'tel:+963'+String(phone||'').replace(/\D/g,'').replace(/^0/,''); }
 function trunc(s,n){ s=String(s||''); return s.length>n?s.slice(0,n)+'…':s; }
@@ -859,18 +873,18 @@ function isUserAdmin(userObj){
   return userObj.email === ADMIN_EMAIL || ASSISTANTS.includes(userObj.email);
 }
 
-function tickClock(){ const now=new Date(); let h=now.getHours(),ampm=h>=12?'مساءً':'صباحا'; h=h%12||12; const hh=String(h).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0'),ss=String(now.getSeconds()).padStart(2,'0'); $('clkTime').textContent=hh+':'+mm+':'+ss+' '+ampm; try{ $('clkDate').textContent=now.toLocaleDateString('ar-SY',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }catch(e){ $('clkDate').textContent=now.toDateString(); } }
+function tickClock(){ const now=new Date(); let h=now.getHours(),ampm=h>=12?'مساءً':'صباحا'; h=h%12||12; const hh=String(h).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0'),ss=String(now.getSeconds()).padStart(2,'0'); if($('clkTime')) $('clkTime').textContent=hh+':'+mm+':'+ss+' '+ampm; try{ if($('clkDate')) $('clkDate').textContent=now.toLocaleDateString('ar-SY',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }catch(e){ if($('clkDate')) $('clkDate').textContent=now.toDateString(); } }
 setInterval(tickClock,1000);
 
-function setTheme(mode){ document.body.setAttribute('data-theme',mode); localStorage.setItem('kl_theme',mode); $('themeBtn').innerHTML=mode==='dark'?'<i data-lucide="sun-medium"></i>':'<i data-lucide="moon-star"></i>'; icons(); }
-$('themeBtn').addEventListener('click',()=>{ setTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark'); });
+function setTheme(mode){ document.body.setAttribute('data-theme',mode); localStorage.setItem('kl_theme',mode); if($('themeBtn')) $('themeBtn').innerHTML=mode==='dark'?'<i data-lucide="sun-medium"></i>':'<i data-lucide="moon-star"></i>'; icons(); }
+if($('themeBtn')) $('themeBtn').addEventListener('click',()=>{ setTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark'); });
 setTheme(localStorage.getItem('kl_theme')||'light');
 
-function openDrawer(){ $('drawer').classList.add('open'); $('drawerOverlay').classList.add('open'); }
-function closeDrawer(){ $('drawer').classList.remove('open'); $('drawerOverlay').classList.remove('open'); }
-$('menuBtn').addEventListener('click',openDrawer);
-$('drClose').addEventListener('click',closeDrawer);
-$('drawerOverlay').addEventListener('click',closeDrawer);
+function openDrawer(){ if($('drawer')) $('drawer').classList.add('open'); if($('drawerOverlay')) $('drawerOverlay').classList.add('open'); }
+function closeDrawer(){ if($('drawer')) $('drawer').classList.remove('open'); if($('drawerOverlay')) $('drawerOverlay').classList.remove('open'); }
+if($('menuBtn')) $('menuBtn').addEventListener('click',openDrawer);
+if($('drClose')) $('drClose').addEventListener('click',closeDrawer);
+if($('drawerOverlay')) $('drawerOverlay').addEventListener('click',closeDrawer);
 $$('.dr-item[data-nav]').forEach(a=>a.addEventListener('click',()=>{ closeDrawer(); const hash=a.getAttribute('href'); if(hash.startsWith('#/'))location.hash=''; else if(hash.startsWith('#')){ setTimeout(()=>{ const el=$(hash.slice(1)); if(el)el.scrollIntoView({behavior:'smooth'}); },300); } }));
 
 function parseHash(){ return location.hash.replace(/^#\/?/,''); }
@@ -879,21 +893,21 @@ function route(){
   hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
   
-  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); return; }
+  if(!h || h===''){ if($('homeView')) $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); return; }
   if(h==='admin'){ showAdmin(); return; }
   if(h==='profile'){ 
     if(!currentUser){ toast('يجب تسجيل الدخول أولا','error'); location.hash='#/'; return; }
-    $('profileView').style.display=''; loadProfileData(); window.scrollTo({ top: 0, behavior: 'instant' }); return; 
+    if($('profileView')) $('profileView').style.display=''; loadProfileData(); window.scrollTo({ top: 0, behavior: 'instant' }); return; 
   }
   if(h.startsWith('province/')){ 
     const prov=decodeURIComponent(h.split('/')[1]); 
-    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
+    if(PROVINCES.includes(prov)){ if($('provinceView')) $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
   if(h.startsWith('profession/')){ 
     const prof=decodeURIComponent(h.split('/')[1]); 
-    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
+    if(PROFESSIONS.some(p=>p.name===prof)){ if($('professionView')) $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
-  $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); 
+  if($('homeView')) $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); 
 }
 window.addEventListener('hashchange',route);
 
@@ -906,6 +920,7 @@ function goBackToSection(sectionId){
 }
 
 function buildProvinces(){ 
+  if(!$('provGrid')) return;
   $('provGrid').innerHTML=PROVINCES.map(p=>{ 
     const n=CARDS.filter(c=>c.province===p).length; 
     return '<button class="prov-btn" onclick="navigateTo(\'province/'+encodeURIComponent(p)+'\')"><i data-lucide="'+(PROV_ICONS[p]||'map-pin')+'"></i>'+p+'<span class="prov-count">'+n+' بطاقة</span></button>'; 
@@ -913,6 +928,7 @@ function buildProvinces(){
   icons(); 
 }
 function buildCategories(){ 
+  if(!$('catGrid')) return;
   $('catGrid').innerHTML=PROFESSIONS.map(pr=>{ 
     const n=CARDS.filter(c=>c.profession===pr.name).length; 
     return '<button class="cat-btn" onclick="navigateTo(\'profession/'+encodeURIComponent(pr.name)+'\')"><i data-lucide="'+pr.icon+'"></i>'+pr.name+'<span class="cat-n">'+n+'</span></button>'; 
@@ -920,8 +936,8 @@ function buildCategories(){
   icons(); 
 }
 function populateSelects(){
-  $('cProv').innerHTML = PROVINCES.map(p => '<option value="' + p + '">' + p + '</option>').join(''); 
-  $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join('');
+  if($('cProv')) $('cProv').innerHTML = PROVINCES.map(p => '<option value="' + p + '">' + p + '</option>').join(''); 
+  if($('cProf')) $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join('');
 }
 function navigateTo(path){ location.hash='#'+path; }
 
@@ -971,6 +987,7 @@ function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Ma
 
 function renderBentoGrid(containerId, cardsList){
   const container = $(containerId);
+  if(!container) return;
   if(!cardsList.length){ container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); return; }
   
   const adminCards = cardsList.filter(c => c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail));
@@ -1006,25 +1023,29 @@ function emptyState(icon,txt){ return '<div class="empty-state"><i data-lucide="
 
 function renderProvinceCards(province){ 
   const cards=CARDS.filter(c=>c.province===province); 
-  $('provinceTitle').textContent='بطاقات محافظة '+province; 
-  $('provinceCount').textContent=cards.length+' بطاقة منشورة'; 
+  if($('provinceTitle')) $('provinceTitle').textContent='بطاقات محافظة '+province; 
+  if($('provinceCount')) $('provinceCount').textContent=cards.length+' بطاقة منشورة'; 
   renderBentoGrid('provinceContainer', cards); 
   icons(); 
 }
 function renderProfessionCards(profession){ 
   const cards=CARDS.filter(c=>c.profession===profession); 
-  $('professionTitle').textContent='بطاقات مهنة '+profession; 
-  $('professionCount').textContent=cards.length+' بطاقة منشورة'; 
+  if($('professionTitle')) $('professionTitle').textContent='بطاقات مهنة '+profession; 
+  if($('professionCount')) $('professionCount').textContent=cards.length+' بطاقة منشورة'; 
   renderBentoGrid('professionContainer', cards); 
   icons(); 
 }
 
 async function loadCards(){ 
   const scrollPos = window.scrollY; 
-  $('allCardsContainer').innerHTML='<div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
-  const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get(); 
-  CARDS=snap.docs.map(d=>({id:d.id,...d.data()})); 
-  renderAll(); 
+  if($('allCardsContainer')) $('allCardsContainer').innerHTML='<div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
+  try {
+    const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get(); 
+    CARDS=snap.docs.map(d=>({id:d.id,...d.data()})); 
+    renderAll(); 
+  } catch(e) {
+    if($('allCardsContainer')) $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بقاعدة البيانات — تأكد من الاتصال.');
+  }
   window.scrollTo(0, scrollPos); 
 }
 
@@ -1053,7 +1074,7 @@ function onAvaPick(inp){
     const r = new FileReader();
     r.onload = e => {
       avaImg = e.target.result;
-      $('avaPreview').innerHTML='<div class="pv"><img src="'+avaImg+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaFile=null;avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+      if($('avaPreview')) $('avaPreview').innerHTML='<div class="pv"><img src="'+avaImg+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaFile=null;avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
       icons();
     };
     r.readAsDataURL(blob);
@@ -1063,7 +1084,7 @@ function onAvaPick(inp){
 function onWorkPick(inp){ 
   const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workFiles.length); 
   const files=[...inp.files].slice(0,Math.max(0,room)); inp.value=''; 
-  if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50). يمكنك طلب زيادة اليوم التالي','error'); return; } 
+  if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50).','error'); return; } 
   files.forEach(f=>{ 
     if(!f.type.startsWith('image/')){ toast('ملف غير مدعوم','error'); return; } 
     compress(f,560,.62).then(blob=>{ 
@@ -1084,8 +1105,8 @@ function renderWorkPreviews(){
   if(remaining<=0 || dailyUsed>=MAX_DAILY_IMGS){
     noteHtml += ' · <button type="button" class="next-day-btn" onclick="requestNextDayImages()"><i data-lucide="sun"></i> رفع صور لليوم التالي</button>';
   }
-  $('workNote').innerHTML = noteHtml; 
-  $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workFiles.splice('+i.',1);workImgs.splice('+i.',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  if($('workNote')) $('workNote').innerHTML = noteHtml; 
+  if($('previews')) $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workFiles.splice('+i.',1);workImgs.splice('+i.',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
   icons(); 
 }
 
@@ -1122,8 +1143,7 @@ function performGoogleSignIn(){
     } 
     updateAuthUI(); 
   }).catch(err => { 
-    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
-    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
+    if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
   }); 
 }
 
@@ -1133,8 +1153,7 @@ function doGoogleLogin(){
   auth.signInWithPopup(provider).then(result => { 
     currentUser = result.user; session = result.user; updateAuthUI(); toast('أهلا مديرنا 🛡️'); 
   }).catch(err => { 
-    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
-    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
+    if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
   }); 
 }
 
@@ -1144,10 +1163,10 @@ async function doLogout(){
 
 function updateAuthUI(){ 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
-  $('adminLink').style.display = isAdmin ? '' : 'none'; 
-  $('loginLink').style.display = (currentUser || session) ? 'none' : ''; 
-  $('logoutLink').style.display = (currentUser || session) ? '' : 'none'; 
-  $('profileLink').style.display = currentUser ? '' : 'none'; 
+  if($('adminLink')) $('adminLink').style.display = isAdmin ? '' : 'none'; 
+  if($('loginLink')) $('loginLink').style.display = (currentUser || session) ? 'none' : ''; 
+  if($('logoutLink')) $('logoutLink').style.display = (currentUser || session) ? '' : 'none'; 
+  if($('profileLink')) $('profileLink').style.display = currentUser ? '' : 'none'; 
   const drHeadSmall = $('.dr-head small'); 
   if(drHeadSmall){ 
     if(currentUser) drHeadSmall.textContent = 'مرحبا ' + (currentUser.displayName?.split(' ')[0] || 'بك'); 
@@ -1163,13 +1182,13 @@ auth.onAuthStateChanged(user => {
 
 function loadProfileData(){
   if(!currentUser) return;
-  $('pfName').value = currentUser.displayName || '';
-  $('pfEmail').value = currentUser.email || '';
-  $('pfNameDisplay').textContent = currentUser.displayName || 'مرحبا بك';
-  $('pfEmailDisplay').textContent = currentUser.email || '';
+  if($('pfName')) $('pfName').value = currentUser.displayName || '';
+  if($('pfEmail')) $('pfEmail').value = currentUser.email || '';
+  if($('pfNameDisplay')) $('pfNameDisplay').textContent = currentUser.displayName || 'مرحبا بك';
+  if($('pfEmailDisplay')) $('pfEmailDisplay').textContent = currentUser.email || '';
   const myFirstCard = CARDS.find(c => c.ownerUid === currentUser.uid);
-  if(myFirstCard){ $('pfPhone').value = myFirstCard.phone; $('pfAvatar').src = myFirstCard.avatar || 'logo5.png'; }
-  else { $('pfPhone').value = ''; $('pfAvatar').src = 'logo5.png'; }
+  if(myFirstCard){ if($('pfPhone')) $('pfPhone').value = myFirstCard.phone; if($('pfAvatar')) $('pfAvatar').src = myFirstCard.avatar || 'logo5.png'; }
+  else { if($('pfPhone')) $('pfPhone').value = ''; if($('pfAvatar')) $('pfAvatar').src = 'logo5.png'; }
   profileAvatarFile = null; profileAvatarData = null; icons();
 }
 
@@ -1180,7 +1199,7 @@ function onProfileAvatarPick(inp){
     const r = new FileReader();
     r.onload = e => {
       profileAvatarData = e.target.result;
-      $('pfAvatar').src = profileAvatarData; 
+      if($('pfAvatar')) $('pfAvatar').src = profileAvatarData; 
       toast('تم تحميل الصورة الجديدة ✓'); 
     };
     r.readAsDataURL(blob);
@@ -1192,16 +1211,20 @@ async function saveProfile(event){
   const newName = $('pfName').value.trim();
   const newPhone = $('pfPhone').value.trim().replace(/[\s()-]/g,'');
   if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
-  if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
+  if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح','error');
   const btn = event.target.querySelector('button[type="submit"]'); const origText = btn.innerHTML;
-  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
+  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الحفظ...';
   try {
     await currentUser.updateProfile({ displayName: newName });
     let finalAvatarUrl = null;
-    if(profileAvatarFile){
-      const storageRef = storage.ref().child('avatars/' + currentUser.uid + '_' + Date.now() + '.jpg');
-      await storageRef.put(profileAvatarFile);
-      finalAvatarUrl = await storageRef.getDownloadURL();
+    if(profileAvatarFile && storage){
+      try {
+        const storageRef = storage.ref().child('avatars/' + currentUser.uid + '_' + Date.now() + '.jpg');
+        await storageRef.put(profileAvatarFile);
+        finalAvatarUrl = await storageRef.getDownloadURL();
+      } catch(ex){ finalAvatarUrl = profileAvatarData; }
+    } else {
+      finalAvatarUrl = profileAvatarData;
     }
     const userCards = CARDS.filter(c => c.ownerUid === currentUser.uid);
     const batch = db.batch();
@@ -1213,7 +1236,7 @@ async function saveProfile(event){
     });
     await batch.commit();
     await loadCards(); loadProfileData();
-    toast('✅ تم حفظ التعديلات ومزامنتها مع ' + userCards.length + ' بطاقة بنجاح!');
+    toast('✅ تم حفظ التعديلات بنجاح!');
   } catch(e){
     toast('تعذر الحفظ: ' + e.message, 'error');
   } finally {
@@ -1231,21 +1254,24 @@ function openCreate(){
   }
   populateSelects();
   workFiles = []; workImgs = []; avaFile = null; avaImg = null; dailyUsed = 0; totalUsed = 0; 
-  $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null; 
-  $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
-  $('saveBtn').onclick = submitCard; $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي';
+  if($('previews')) $('previews').innerHTML = ''; 
+  if($('avaPreview')) $('avaPreview').innerHTML = ''; 
+  renderWorkPreviews(); 
+  editingCardId = null; 
+  if($('createModalTitle')) $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
+  if($('saveBtn')) { $('saveBtn').onclick = submitCard; $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي'; }
   openModal('createModal'); icons(); 
 }
 
-function profChanged(){ $('profOtherWrap').style.display = $('cProf').value === 'أخرى' ? '' : 'none'; }
-$('cProf').addEventListener('change', profChanged);
+function profChanged(){ if($('profOtherWrap')) $('profOtherWrap').style.display = $('cProf').value === 'أخرى' ? '' : 'none'; }
+if($('cProf')) $('cProf').addEventListener('change', profChanged);
 
 async function submitCard(){ 
   if(!currentUser) return toast('يجب تسجيل الدخول أولا','error'); 
   const isAdmin = isUserAdmin(currentUser);
   const existing = CARDS.find(c => c.ownerUid === currentUser.uid);
   if(existing && !isAdmin && !editingCardId){
-    toast('عذرا، مسموح بإنشاء بطاقة واحدة فقط لكل حساب Google. يمكنك تعديل بطاقتك الحالية.','error');
+    toast('عذرا، مسموح ببطاقة واحدة فقط لكل حساب.','error');
     quickEditCard(new Event('click'), existing.id);
     return;
   }
@@ -1255,35 +1281,43 @@ async function submitCard(){
   let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
-  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workFiles.length < 1 && workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
-  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الرفع والنشر...'; 
+  const btn = $('saveBtn'); const orig = btn ? btn.innerHTML : ''; 
+  if(btn) { btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري النشر...'; }
+  
   try{ 
     const todayStr = new Date().toISOString().slice(0,10); 
     const dSnap = await db.collection('daily').doc(phone).get(); 
     const dData = dSnap.exists ? dSnap.data() : {}; 
     const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0; 
-    const usedTotal = dData.total || 0; 
-    if(usedToday + workFiles.length > MAX_DAILY_IMGS && !editingCardId && !isAdmin) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
-    if(usedTotal + workFiles.length > MAX_TOTAL_IMGS && !isAdmin) return toast('وصلت للحد الكلي 50 صورة','error'); 
     
     let finalAvatarUrl = avaImg;
-    if(avaFile){
-      const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
-      await avRef.put(avaFile);
-      finalAvatarUrl = await avRef.getDownloadURL();
+    if(avaFile && storage){
+      try {
+        const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
+        await avRef.put(avaFile);
+        finalAvatarUrl = await avRef.getDownloadURL();
+      } catch(ex){ finalAvatarUrl = avaImg; }
     }
     
     let finalImageUrls = [];
     for(let i=0; i<workFiles.length; i++){
-      const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
-      await imgRef.put(workFiles[i]);
-      const url = await imgRef.getDownloadURL();
-      finalImageUrls.push(url);
+      if(storage){
+        try {
+          const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
+          await imgRef.put(workFiles[i]);
+          const url = await imgRef.getDownloadURL();
+          finalImageUrls.push(url);
+        } catch(ex) {
+          if(workImgs[i]) finalImageUrls.push(workImgs[i]);
+        }
+      } else if(workImgs[i]){
+        finalImageUrls.push(workImgs[i]);
+      }
     }
-    // Keep existing workImgs if editing and no new files added
     if(workFiles.length === 0 && workImgs.length > 0){
       finalImageUrls = workImgs;
     }
@@ -1295,16 +1329,19 @@ async function submitCard(){
       avatar: finalAvatarUrl||null, images: finalImageUrls, ownerUid: currentUser.uid, ownerEmail: currentUser.email, isAdminCard: isAdmin, createdAt: Date.now()
     }); 
     await db.collection('daily').doc(phone).set({
-      date: todayStr, count: usedToday + workFiles.length, total: usedTotal + workFiles.length
+      date: todayStr, count: usedToday + Math.max(1, workFiles.length), total: (dData.total||0) + Math.max(1, workFiles.length)
     }, { merge: true }); 
+    
     closeModal('createModal'); 
-    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
-    $('cProf').selectedIndex = 0; 
-    toast('تم نشر بطاقتك بنجاح! 🎉'); await loadCards(); 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => { if($(i)) $(i).value = ''; }); 
+    if($('cProf')) $('cProf').selectedIndex = 0; 
+    toast('تم نشر بطاقتك بنجاح! 🎉'); 
+    await loadCards(); 
   } catch(e){ 
     toast('تعذر النشر: '+e.message,'error'); 
   } finally{ 
-    btn.disabled = false; btn.innerHTML = orig; icons(); 
+    if(btn) { btn.disabled = false; btn.innerHTML = orig; }
+    icons(); 
   } 
 }
 
@@ -1349,28 +1386,30 @@ function openDetail(id){
   }
   const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 2.4 3.4-.6 1.2 3.2 3 1.6-.6 3.4 2 2.8-2 2.8.6 3.4-3 1.6-1.2 3.2-3.4-.6L12 22l-2.4-2.4-3.4.6-1.2-3.2-3-1.6.6-3.4-2-2.8 2-2.8-.6-3.4 3-1.6 1.2-3.2 3.4.6z" fill="#1D9BF0"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>' : '';
 
-  $('detailBody').innerHTML = `
-    <div class="detail-layout">
-      <div>${galleryHtml}</div>
-      <div class="info-panel">
-        <div class="user-header">
-          <img src="${c.avatar || 'logo5.png'}" onerror="this.src='logo5.png'" class="user-avatar-lg" alt="avatar">
-          <div class="user-details">
-            <h2>${esc(c.name)}${verifiedBadge}</h2>
-            <div class="user-badges">
-              <span class="badge-pill badge-prof"><i data-lucide="wrench"></i> ${esc(c.profession)}</span>
-              <span class="badge-pill badge-prov"><i data-lucide="map-pin"></i> ${esc(c.province)}</span>
+  if($('detailBody')) {
+    $('detailBody').innerHTML = `
+      <div class="detail-layout">
+        <div>${galleryHtml}</div>
+        <div class="info-panel">
+          <div class="user-header">
+            <img src="${c.avatar || 'logo5.png'}" onerror="this.src='logo5.png'" class="user-avatar-lg" alt="avatar">
+            <div class="user-details">
+              <h2>${esc(c.name)}${verifiedBadge}</h2>
+              <div class="user-badges">
+                <span class="badge-pill badge-prof"><i data-lucide="wrench"></i> ${esc(c.profession)}</span>
+                <span class="badge-pill badge-prov"><i data-lucide="map-pin"></i> ${esc(c.province)}</span>
+              </div>
             </div>
           </div>
+          <div class="description-box">${esc(c.desc || 'لم يضف صاحب البطاقة وصفاً تفصيليا.')}</div>
+          <div class="meta-data">
+            <span>ID: ${c.numId}</span>
+            <span><i data-lucide="calendar"></i> ${new Date(c.createdAt).toLocaleDateString('ar-SY')}</span>
+          </div>
+          <div class="action-buttons">${actionsHtml}</div>
         </div>
-        <div class="description-box">${esc(c.desc || 'لم يضف صاحب البطاقة وصفاً تفصيليا.')}</div>
-        <div class="meta-data">
-          <span>ID: ${c.numId}</span>
-          <span><i data-lucide="calendar"></i> ${new Date(c.createdAt).toLocaleDateString('ar-SY')}</span>
-        </div>
-        <div class="action-buttons">${actionsHtml}</div>
-      </div>
-    </div>`;
+      </div>`;
+  }
   openModal('detailModal'); 
   icons(); 
 } 
@@ -1392,37 +1431,35 @@ function quickEditCard(event, id){
   
   populateSelects();
   
-  $('cName').value = c.name || ''; 
-  $('cPhone').value = c.phone || ''; 
-  $('cProv').value = c.province || PROVINCES[0]; 
+  if($('cName')) $('cName').value = c.name || ''; 
+  if($('cPhone')) $('cPhone').value = c.phone || ''; 
+  if($('cProv')) $('cProv').value = c.province || PROVINCES[0]; 
   
   const isKnownProf = PROFESSIONS.some(pr => pr.name === c.profession);
   if(isKnownProf){
-    $('cProf').value = c.profession;
-    $('profOtherWrap').style.display = 'none';
+    if($('cProf')) $('cProf').value = c.profession;
+    if($('profOtherWrap')) $('profOtherWrap').style.display = 'none';
   } else {
-    $('cProf').value = 'أخرى';
-    $('cProfOther').value = c.profession || '';
-    $('profOtherWrap').style.display = '';
+    if($('cProf')) $('cProf').value = 'أخرى';
+    if($('cProfOther')) $('cProfOther').value = c.profession || '';
+    if($('profOtherWrap')) $('profOtherWrap').style.display = '';
   }
   
-  $('cDesc').value = c.desc || ''; 
+  if($('cDesc')) $('cDesc').value = c.desc || ''; 
   avaImg = c.avatar || null; 
   avaFile = null;
   workImgs = [...(c.images || [])]; 
   workFiles = [];
   
   if(avaImg){
-    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;avaFile=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+    if($('avaPreview')) $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;avaFile=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
   } else {
-    $('avaPreview').innerHTML = '';
+    if($('avaPreview')) $('avaPreview').innerHTML = '';
   }
   
   renderWorkPreviews(); 
-  $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
-  $('saveBtn').onclick = () => saveEditedCard(id); 
-  $('saveBtn').disabled = false; 
-  $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
+  if($('createModalTitle')) $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
+  if($('saveBtn')) { $('saveBtn').onclick = () => saveEditedCard(id); $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات'; }
   editingCardId = id; 
   openModal('createModal'); 
   icons(); 
@@ -1435,26 +1472,33 @@ async function saveEditedCard(id){
   let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
   const desc = $('cDesc').value.trim(); 
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
-  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
   if(workFiles.length < 1 && workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
-  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
+  const btn = $('saveBtn'); const orig = btn ? btn.innerHTML : ''; 
+  if(btn) { btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; }
   
   try{ 
     let finalAvatarUrl = avaImg;
-    if(avaFile){
-      const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
-      await avRef.put(avaFile);
-      finalAvatarUrl = await avRef.getDownloadURL();
+    if(avaFile && storage){
+      try {
+        const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
+        await avRef.put(avaFile);
+        finalAvatarUrl = await avRef.getDownloadURL();
+      } catch(ex){ finalAvatarUrl = avaImg; }
     }
 
     let finalImageUrls = [...workImgs];
     for(let i=0; i<workFiles.length; i++){
-      const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
-      await imgRef.put(workFiles[i]);
-      const url = await imgRef.getDownloadURL();
-      finalImageUrls.push(url);
+      if(storage){
+        try {
+          const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
+          await imgRef.put(workFiles[i]);
+          const url = await imgRef.getDownloadURL();
+          finalImageUrls.push(url);
+        } catch(ex){}
+      }
     }
 
     const isAdmin = isUserAdmin(currentUser);
@@ -1465,15 +1509,15 @@ async function saveEditedCard(id){
     }
     await db.collection('cards').doc(id).update(cardData); 
     closeModal('createModal'); 
-    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');
-    $('cProf').selectedIndex = 0; 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => { if($(i)) $(i).value = ''; });
+    if($('cProf')) $('cProf').selectedIndex = 0; 
     toast('تم تحديث بطاقتك بنجاح! ✨'); 
     await loadCards(); 
   } catch(e){ 
-    console.error(e);
-    toast('تعذر التحديث: ' + (e.message || 'يرجى التأكد من الاتصال بالحساب الصحيح'), 'error'); 
+    toast('تعذر التحديث: ' + e.message, 'error'); 
   } finally{ 
-    btn.disabled = false; btn.innerHTML = orig; icons(); 
+    if(btn) { btn.disabled = false; btn.innerHTML = orig; }
+    icons(); 
   } 
 }
 
@@ -1483,7 +1527,7 @@ function quickDeleteCard(event, id){
   const isOwner = currentUser && currentUser.uid === c.ownerUid; 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
   if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لحذف هذه البطاقة','error'); 
-  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) deleteCardById(id); 
+  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟')) deleteCardById(id); 
 }
 
 async function deleteCardById(id){ 
@@ -1498,18 +1542,21 @@ async function deleteCardById(id){
 function showAdmin(){ 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
   if(!isAdmin){ toast('هذه الصفحة للإدارة فقط','error'); location.hash = ''; return; } 
-  $('adminSec').style.display = ''; renderAdminStats(); renderAdminList($('adminQ').value.trim()); renderAssistantsList();
+  if($('adminSec')) $('adminSec').style.display = ''; 
+  renderAdminStats(); 
+  renderAdminList($('adminQ') ? $('adminQ').value.trim() : ''); 
+  renderAssistantsList();
   window.scrollTo({ top: $('adminSec').offsetTop - 80, behavior: 'smooth' }); 
 }
-function hideAdmin(){ $('adminSec').style.display = 'none'; }
+function hideAdmin(){ if($('adminSec')) $('adminSec').style.display = 'none'; }
 
 function addAssistant(){
   const email = $('newAssistantEmail').value.trim().toLowerCase();
   if(!email || !email.includes('@')) return toast('أدخل بريد إلكتروني صحيح','error');
-  if(ASSISTANTS.includes(email)) return toast('هذا البريد مضاف مسبقاً كمساعد','error');
+  if(ASSISTANTS.includes(email)) return toast('هذا البريد مضاف مسبقاً','error');
   ASSISTANTS.push(email);
   localStorage.setItem('kl_assistants', JSON.stringify(ASSISTANTS));
-  $('newAssistantEmail').value = '';
+  if($('newAssistantEmail')) $('newAssistantEmail').value = '';
   renderAssistantsList();
   toast('✅ تم إضافة المساعد بنجاح');
 }
@@ -1523,22 +1570,24 @@ function removeAssistant(email){
 
 function renderAssistantsList(){
   const listEl = $('assistantsList');
+  if(!listEl) return;
   if(!ASSISTANTS.length){ listEl.innerHTML = '<i>لا يوجد مساعدين إضافيين حالياً</i>'; return; }
   listEl.innerHTML = '<b>المساعدون الحاليون:</b><div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">' +
     ASSISTANTS.map(e => `<span style="background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:.2rem .8rem;font-size:.8rem;display:inline-flex;align-items:center;gap:.4rem">${e} <button onclick="removeAssistant('${e}')" style="color:var(--red);cursor:pointer">&times;</button></span>`).join('') + '</div>';
 }
 
 function renderAdminStats(){ 
-  $('adTotal').textContent = CARDS.length; 
-  $('adProvs').textContent = new Set(CARDS.map(c => c.province)).size; 
-  $('adCats').textContent = new Set(CARDS.map(c => c.profession)).size; 
-  $('adImgs').textContent = CARDS.reduce((s, c) => s + (c.images || []).length, 0); 
+  if($('adTotal'))$('adTotal').textContent = CARDS.length; 
+  if($('adProvs'))$('adProvs').textContent = new Set(CARDS.map(c => c.province)).size; 
+  if($('adCats'))$('adCats').textContent = new Set(CARDS.map(c => c.profession)).size; 
+  if($('adImgs'))$('adImgs').textContent = CARDS.reduce((s, c) => s + (c.images || []).length, 0); 
 }
 
 let adminDb = null;
 function adminSearch(v){ clearTimeout(adminDb); adminDb = setTimeout(() => renderAdminList(v.trim()), 200); }
 
 function renderAdminList(q){ 
+  if(!$('adminList')) return;
   let list = CARDS; 
   if(q){ 
     const query = q.toLowerCase().replace('id:', '').trim(); 
@@ -1558,15 +1607,15 @@ function renderAdminList(q){
 }
 
 async function delCard(id){ 
-  if(!confirm('حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) return; 
+  if(!confirm('حذف هذه البطاقة نهائيا؟')) return; 
   try{ 
     await db.collection('cards').doc(id).delete(); 
-    toast('تم حذف المنشور'); await loadCards(); renderAdminStats(); renderAdminList($('adminQ').value.trim()); 
+    toast('تم حذف المنشور'); await loadCards(); renderAdminStats(); renderAdminList($('adminQ') ?$('adminQ').value.trim() : ''); 
   } catch(e){ toast(e.message,'error'); } 
 }
 
-function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
+function openModal(id){ if($(id))$(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id){ if($(id)) $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
 /* Lightbox */
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
@@ -1574,6 +1623,7 @@ let isLightboxActive = false;
 
 function initLightbox(){
   const stage = $('lbStage');
+  if(!stage) return;
   stage.addEventListener('touchstart', handleTouchStart, {passive:false});
   stage.addEventListener('touchmove', handleTouchMove, {passive:false});
   stage.addEventListener('touchend', handleTouchEnd);
@@ -1584,7 +1634,7 @@ function initLightbox(){
   window.addEventListener('popstate', (e) => {
     if(isLightboxActive){
       isLightboxActive = false;
-      $('lightbox').classList.remove('active');
+      if($('lightbox'))$('lightbox').classList.remove('active');
       history.pushState({modalOpen: true}, '');
     }
   });
@@ -1628,7 +1678,7 @@ function handleTouchEnd(e){
 function handleMouseDown(e){
   if(e.button !== 0) return;
   lbTouchStart = {x:e.clientX, y:e.clientY}; lbIsDragging = true;
-  $('lbStage').classList.add('grabbing');
+  if($('lbStage'))$('lbStage').classList.add('grabbing');
 }
 
 function handleMouseMove(e){
@@ -1641,7 +1691,7 @@ function handleMouseMove(e){
   }
 }
 
-function handleMouseUp(){ lbIsDragging = false; $('lbStage').classList.remove('grabbing'); }
+function handleMouseUp(){ lbIsDragging = false; if($('lbStage'))$('lbStage').classList.remove('grabbing'); }
 function handleWheel(e){
   e.preventDefault();
   lbScale = Math.max(1, Math.min(5, lbScale * (e.deltaY < 0 ? 1.15 : 0.87)));
@@ -1650,7 +1700,7 @@ function handleWheel(e){
 }
 
 function getDistance(t1, t2){ return Math.sqrt(Math.pow(t2.clientX-t1.clientX,2) + Math.pow(t2.clientY-t1.clientY,2)); }
-function applyTransform(){ $('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`; }
+function applyTransform(){ if($('lbImg'))$('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`; }
 function resetZoom(){ lbScale = 1; lbX = 0; lbY = 0; applyTransform(); }
 function lbZoomIn(){ lbScale = Math.min(5, lbScale * 1.3); applyTransform(); }
 function lbZoomOut(){ lbScale = Math.max(1, lbScale / 1.3); if(lbScale === 1){ lbX=0; lbY=0; } applyTransform(); }
@@ -1663,18 +1713,19 @@ function openLightboxById(cardId, imageIndex) {
   resetZoom();
   isLightboxActive = true;
   history.pushState({lightbox: true}, '');
-  $('lightbox').classList.add('active');
+  if($('lightbox'))$('lightbox').classList.add('active');
   renderLightboxContent(); icons();
 }
 
 function renderLightboxContent(){
-  $('lbImg').src = lbImgs[lbIdx];$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
+  if($('lbImg'))$('lbImg').src = lbImgs[lbIdx];
+  if($('lbCounter'))$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
 }
 
 function closeLightbox(goBack = true){
   if(!isLightboxActive) return;
   isLightboxActive = false;
-  $('lightbox').classList.remove('active');
+  if($('lightbox'))$('lightbox').classList.remove('active');
   if(goBack){ history.back(); }
 }
 
@@ -1682,11 +1733,12 @@ setTimeout(initLightbox, 100);
 
 /* الأذكار */
 let dhikrIdx=0,dhikrTimer=null;
-function buildDhikrDots(){ $('dhikrDots').innerHTML=DHIKR.map((_,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join(''); }
+function buildDhikrDots(){ if($('dhikrDots'))$('dhikrDots').innerHTML=DHIKR.map((_,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join(''); }
 function showDhikr(i){ 
-  dhikrIdx=i; const q=$('dhikrQuote'); q.classList.add('fade'); 
+  dhikrIdx=i; const q=$('dhikrQuote'); if(!q) return;
+  q.classList.add('fade'); 
   setTimeout(()=>{ 
-    q.textContent=DHIKR[i].t; $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; q.classList.remove('fade');$$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); 
+    q.textContent=DHIKR[i].t; if($('dhikrSrc')) $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; q.classList.remove('fade');$$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); 
   },450); 
 }
 function startDhikr(){ 
@@ -1701,7 +1753,7 @@ let slideTimer = null;
 function initSlider() {
     const slides = document.querySelectorAll('.slider-slide');
     const dotsContainer = document.getElementById('sliderDots');
-    if (!slides.length) return;
+    if (!slides.length || !dotsContainer) return;
     dotsContainer.innerHTML = '';
     slides.forEach((_, i) => {
         const dot = document.createElement('div');
@@ -1726,6 +1778,7 @@ function goToSlide(index) {
     if (index === currentSlideIndex) return;
     const slides = document.querySelectorAll('.slider-slide');
     const dots = document.querySelectorAll('.slider-dot');
+    if (!slides.length) return;
     slides[currentSlideIndex].classList.remove('active');
     currentSlideIndex = index;
     slides[currentSlideIndex].classList.add('active');
@@ -1740,9 +1793,9 @@ document.addEventListener('DOMContentLoaded', () => { initSlider(); });
 
 async function boot(){ 
   tickClock(); 
-  $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
+  if($('supportWa'))$('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
   startDhikr(); 
-  try{ await loadCards(); }catch(e){ $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
+  try{ await loadCards(); }catch(e){ if($('allCardsContainer'))$('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم.'); } 
   icons(); route(); 
 }
 window.addEventListener('load',boot);
