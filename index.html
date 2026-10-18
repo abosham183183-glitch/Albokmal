@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">الكل هنا | منصة الحرفيين وأصحاب المهن الحرة في سوريا</title>
-<meta name="description" id="pageDesc" content="المنصة الأولى في سوريا لربط أصحاب المهن، الصنايعية، والحرفيين (معلم سباكة، بلاط، كهربائي، نجار) بأصحاب العمل والزبائن للتواصل المباشر وبدون عمولات.">
-<meta name="keywords" content="معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا, حرفيين دمشق حلب حمص">
+<title>الكل هنا | منصة الحرفيين والمحافظات في سوريا</title>
 <link rel="icon" type="image/png" href="logo5.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -13,7 +11,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
 <!-- 🧠 بيانات مهيكلة شاملة لمحركات البحث والذكاء الاصطناعي (AI & Schema Markup) -->
 <script type="application/ld+json">
@@ -23,16 +20,20 @@
   "name": "الكل هنا",
   "alternateName": "Al-Kol Hana - المنصة الأولى للحرفيين في سوريا",
   "url": "https://alkolhana.com",
-  "description": "منصة خدمية سورية تجمع أصحاب المهن الحرة والصنايعية مع أصحاب العمل للتوصل المباشر وعرض البطاقات المهنية.",
+  "description": "منصة خدمية سورية تجمع أصحاب المهن الحرة والصنايعية (معلم سباكة، بلاط، كهربائي، نجار، حداد) مع أصحاب العمل للتوصل المباشر وعرض البطاقات المهنية.",
   "inLanguage": "ar",
   "audience": {
     "@type": "Audience",
     "geographicArea": {
       "@type": "AdministrativeArea",
-      "name": "سوريا (جميع المحافظات)"
+      "name": "سوريا (جميع المحافظات: دمشق، ريف دمشق، حلب، حمص، حماة، اللاذقية، طرطوس، إدلب، درعا، السويداء، القنيطرة، الرقة، الحسكة، دير الزور)"
     }
   },
-  "keywords": "معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا"
+  "keywords": "معلم سباكة في سوريا, معلم بلاط سوري, صنايعية سوريا, كهربائي, نجار, بناء وديكور, الكل هنا, حرفيين سوريا",
+  "about": {
+    "@type": "Thing",
+    "name": "دليل الحرفيين وأصحاب المهن الحرة في سوريا"
+  }
 }
 </script>
 
@@ -128,7 +129,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 
-/* الشعار المصغر مع الإطارات المتوهجة الساطعة */
+/* الشعار المصغر */
 .logo-wrapper {
     position: relative;
     width: 145px;
@@ -224,70 +225,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .about-col li{font-size:.85rem;color:var(--muted);font-weight:700;display:flex;gap:.5rem;align-items:flex-start;line-height:1.8}
 .about-col li svg{color:var(--wa);width:1rem;height:1rem;flex:none;margin-top:.25rem}
 
-/* 🌟 قسم من نحن التفصيلي لتعزيز الـ SEO */
-.seo-about-box {
-  background: var(--surface);
-  border: 1.5px solid var(--line);
-  border-radius: 24px;
-  padding: 2.2rem;
-  box-shadow: 0 12px 34px var(--shadow);
-  margin-bottom: 2.6rem;
-  line-height: 2;
-}
-.seo-about-box h3 {
-  font-size: 1.4rem;
-  color: var(--navy);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-}
-[data-theme="dark"] .seo-about-box h3 { color: var(--gold2); }
-.seo-about-box p {
-  font-size: .95rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-/* 🌟 قسم الأسئلة الشائعة (FAQ) لتعزيز ظهور محركات البحث والـ AI */
-.faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2.6rem;
-}
-.faq-item {
-  background: var(--surface);
-  border: 1.5px solid var(--line);
-  border-radius: 18px;
-  padding: 1.2rem 1.5rem;
-  box-shadow: 0 6px 20px var(--shadow);
-  transition: .25s;
-}
-.faq-item:hover {
-  border-color: var(--gold);
-}
-.faq-q {
-  font-family: 'Cairo', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--navy);
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  margin-bottom: .5rem;
-}
-[data-theme="dark"] .faq-q { color: var(--gold2); }
-.faq-q svg { color: var(--gold); width: 1.2rem; height: 1.2rem; flex: none; }
-.faq-a {
-  font-size: .9rem;
-  color: var(--muted);
-  line-height: 1.9;
-  font-weight: 600;
-  padding-inline-start: 1.8rem;
-}
-
 /* Grid Buttons */
 .prov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem}
 .prov-btn{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:1rem .8rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;font-weight:800;font-size:.92rem;color:var(--ink);transition:.25s;position:relative;overflow:hidden;cursor:pointer}
@@ -380,7 +317,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .bento-label{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .bento-label svg{color:var(--gold);width:.9rem;height:.9rem}
 
-/* شريط العودة المخصص لصفحات المحافظات والمهن */
+/* شريط العودة المخصص */
 .cards-bar {
   display: flex;
   align-items: center;
@@ -550,11 +487,10 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .imgdrop:hover{border-color:var(--gold);color:var(--gold)}
 .imgdrop svg{color:var(--gold);width:1.2rem;height:1.2rem}
 .previews{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.7rem}
-.pv{position:relative;width:84px;height:70px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.pv{position:relative;width:74px;height:58px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
 .pv img{width:100%;height:100%;object-fit:cover}
 .pv .rm{position:absolute;top:2px;left:2px;background:var(--red);color:#fff;width:18px;height:18px;border-radius:50%;display:grid;place-items:center}
 .pv .rm svg{width:.55rem;height:.55rem}
-.pv input{position:absolute;bottom:0;left:0;right:0;font-size:9px;padding:2px;border:none;background:rgba(0,0,0,0.7);color:#fff;text-align:center}
 .note{font-size:.72rem;color:var(--muted);font-weight:700;text-align:center;margin-top:.5rem;line-height:1.7;display:flex;flex-direction:column;gap:.4rem;align-items:center}
 .note.warn{color:var(--red)}
 .next-day-btn{background:var(--blue);color:#fff;border-radius:8px;padding:.3rem .7rem;font-size:.75rem;font-weight:800;display:inline-flex;align-items:center;gap:.3rem;cursor:pointer;transition:.2s}
@@ -622,21 +558,19 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </header>
 
-<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(true)"></div>
+<div class="drawer-overlay" id="drawerOverlay"></div>
 <nav class="drawer" id="drawer">
-  <div class="dr-head"><img src="logo5.png" alt="" onerror="this.style.visibility='hidden'"><div><b>الكل هنا</b><small>MANUAL WORKERS HUB</small></div><button class="dr-close" id="drClose" onclick="closeDrawer(true)"><i data-lucide="x"></i></button></div>
+  <div class="dr-head"><img src="logo5.png" alt="" onerror="this.style.visibility='hidden'"><div><b>الكل هنا</b><small>MANUAL WORKERS HUB</small></div><button class="dr-close" id="drClose"><i data-lucide="x"></i></button></div>
   <div class="dr-nav">
-    <a class="dr-item" href="#/" data-nav="homeView"><i data-lucide="home"></i> الرئيسية</a>
-    <a class="dr-item" href="#" onclick="closeDrawer(true); requireLoginThenOpenCreate(); return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
-    <a class="dr-item" href="#provinces" data-nav="provSec"><i data-lucide="map-pin"></i> المحافظات</a>
-    <a class="dr-item" href="#categories" data-nav="catSec"><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
-    <a class="dr-item" href="#about" data-nav="aboutSeo"><i data-lucide="info"></i> من نحن</a>
-    <a class="dr-item" href="#faq" data-nav="faqSec"><i data-lucide="help-circle"></i> الأسئلة الشائعة</a>
+    <a class="dr-item" href="#/" data-nav><i data-lucide="home"></i> الرئيسية</a>
+    <a class="dr-item" href="#" onclick="requireLoginThenOpenCreate();return false"><i data-lucide="credit-card"></i> أنشئ بطاقتك</a>
+    <a class="dr-item" href="#provinces" data-nav><i data-lucide="map-pin"></i> المحافظات</a>
+    <a class="dr-item" href="#categories" data-nav><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
     <div class="dr-sep"></div>
-    <a class="dr-item" href="#reports" data-nav="reports"><i data-lucide="shield-alert"></i> الشكاوى والدعم</a>
+    <a class="dr-item" href="#reports" data-nav><i data-lucide="shield-alert"></i> الشكاوى والدعم</a>
     <a class="dr-item" href="#admin" id="adminLink" style="display:none"><i data-lucide="shield-check"></i> لوحة الإدارة</a>
-    <a class="dr-item" href="#" onclick="closeDrawer(true); doGoogleLogin(); return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
-    <a class="dr-item" href="#" onclick="closeDrawer(true); doLogout(); return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
+    <a class="dr-item" href="#" onclick="doGoogleLogin();return false" id="loginLink"><i data-lucide="log-in"></i> دخول الإدارة (Google)</a>
+    <a class="dr-item" href="#" onclick="doLogout();return false" id="logoutLink" style="display:none"><i data-lucide="log-out"></i> تسجيل الخروج</a>
     <div class="dr-sep"></div>
     <a class="dr-item" href="#profile" id="profileLink" style="display:none"><i data-lucide="user-circle"></i> ملفي الشخصي</a>
   </div>
@@ -679,95 +613,35 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
     </section>
 
-    <section class="section seo-about-box" id="aboutSeo">
-      <h3><i data-lucide="info"></i> من نحن — منصة «الكل هنا»</h3>
-      <p>تعتبر منصة <strong>«الكل هنا»</strong> الدليل الرقمي والمجتمعي الأول المخصص لخدمة الحرفيين، أصحاب المهن الحرة، والصنايعية (مثل: معلم سباكة، معلم بلاط وسيراميك، كهربائي، نجار، حداد، وغيرها من المهن) في كافة المحافظات السورية[span_0](start_span)[span_0](end_span).</p>
-      <p>رؤيتنا هي كسر الحواجز وتسهيل وصول أصحاب العمل والزبائن إلى الكفاءات المهنية المناسبة مباشرة وبدون أي رسوم أو وسطاء[span_1](start_span)[span_1](end_span). من خلال إنشاء بطاقة مهنية رقمية، يمتلك كل حرفي فرصة حقيقية لعرض مهاراته، خبراته، وصور أعماله السابقة أمام آلاف الزبائن الباحثين عن الجودة والموثوقية[span_2](start_span)[span_2](end_span).</p>
-    </section>
-
     <section class="section about" id="aboutSec">
-      <div class="sec-title"><i data-lucide="sparkles"></i> لماذا «الكل هنا»؟</div>
+      <div class="sec-title"><i data-lucide="info"></i> لماذا «الكل هنا»؟</div>
       <div class="about-grid">
-        <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك[span_3](start_span)[span_3](end_span).</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك[span_4](start_span)[span_4](end_span).</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء[span_5](start_span)[span_5](end_span).</li></ul></div>
-        <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل[span_6](start_span)[span_6](end_span).</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد[span_7](start_span)[span_7](end_span).</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك[span_8](start_span)[span_8](end_span).</li></ul></div>
-        <div class="about-col"><h3><i data-lucide="award"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات[span_9](start_span)[span_9](end_span).</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك.</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك.</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
       </div>
     </section>
-
-    <!-- قسم المحافظات متكامل ثابتاً لمنع الاختفاء -->
     <section class="section" id="provSec">
       <div class="sec-title"><i data-lucide="map-pin"></i> تصفّح حسب المحافظة</div>
       <p class="sec-sub">اضغط على أي محافظة لعرض كل البطاقات المنشورة فيها في صفحة مستقلة.</p>
-      <div class="prov-grid" id="provGrid">
-        <button class="prov-btn" onclick="navigateTo('province/دمشق')"><i data-lucide="landmark"></i>دمشق<span class="prov-count" id="pc-دمشق">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/ريف دمشق')"><i data-lucide="trees"></i>ريف دمشق<span class="prov-count" id="pc-ريف دمشق">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/حلب')"><i data-lucide="building-2"></i>حلب<span class="prov-count" id="pc-حلب">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/حمص')"><i data-lucide="mountain"></i>حمص<span class="prov-count" id="pc-حمص">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/حماة')"><i data-lucide="waves"></i>حماة<span class="prov-count" id="pc-حماة">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/اللاذقية')"><i data-lucide="palmtree"></i>اللاذقية<span class="prov-count" id="pc-اللاذقية">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/طرطوس')"><i data-lucide="anchor"></i>طرطوس<span class="prov-count" id="pc-طرطوس">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/إدلب')"><i data-lucide="castle"></i>إدلب<span class="prov-count" id="pc-إدلب">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/درعا')"><i data-lucide="wheat"></i>درعا<span class="prov-count" id="pc-درعا">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/السويداء')"><i data-lucide="volcano"></i>السويداء<span class="prov-count" id="pc-السويداء">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/القنيطرة')"><i data-lucide="flag"></i>القنيطرة<span class="prov-count" id="pc-القنيطرة">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/الرقة')"><i data-lucide="sun"></i>الرقة<span class="prov-count" id="pc-الرقة">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/الحسكة')"><i data-lucide="grapes"></i>الحسكة<span class="prov-count" id="pc-الحسكة">0 بطاقة</span></button>
-        <button class="prov-btn" onclick="navigateTo('province/دير الزور')"><i data-lucide="ship-wheel"></i>دير الزور<span class="prov-count" id="pc-دير الزور">0 بطاقة</span></button>
-      </div>
+      <div class="prov-grid" id="provGrid"></div>
     </section>
-
     <section class="section" id="allCardsSec">
       <div class="sec-title"><i data-lucide="layers"></i> كل المعلمين والحرفيين</div>
-      <p class="sec-sub">بطاقات تظهر بشكل مرتب من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل[span_10](start_span)[span_10](end_span).</p>
+      <p class="sec-sub">بطاقات تظهر بشكل مرتب من كل المحافظات والمهن — «الكل هنا» منصة خدمية تجمع أصحاب المهن مع أصحاب العمل.</p>
       <div id="allCardsContainer" class="bento-container">
-        <div class="loading-grid" style="grid-column:1/-1;text-align:center;padding:2rem"><span class="loader"></span> جاري جلب البطاقات...</div>
+        <div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>
       </div>
     </section>
-
-    <!-- قسم المهن والمهن متكامل ثابتاً لمنع الاختفاء -->
     <section class="section" id="catSec">
       <div class="sec-title"><i data-lucide="layout-grid"></i> الأقسام والمهن</div>
       <p class="sec-sub">اضغط على المهنة لعرض كل المسجلين بها في صفحة مستقلة.</p>
-      <div class="cat-grid" id="catGrid">
-        <button class="cat-btn" onclick="navigateTo('profession/كهربائي')"><i data-lucide="zap"></i>كهربائي<span class="cat-n" id="prc-كهربائي">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/سباك')"><i data-lucide="pipe"></i>سباك<span class="cat-n" id="prc-سباك">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/نجار')"><i data-lucide="hammer"></i>نجار<span class="cat-n" id="prc-نجار">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/حداد')"><i data-lucide="anvil"></i>حداد<span class="cat-n" id="prc-حداد">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/بناء وديكور')"><i data-lucide="brick-wall"></i>بناء وديكور<span class="cat-n" id="prc-بناء وديكور">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/دهان')"><i data-lucide="paint-roller"></i>دهان<span class="cat-n" id="prc-دهان">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/بلاط وسيراميك')"><i data-lucide="grid-3x3"></i>بلاط وسيراميك<span class="cat-n" id="prc-بلاط وسيراميك">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/ألمنيوم وزجاج')"><i data-lucide="panel-top"></i>ألمنيوم وزجاج<span class="cat-n" id="prc-ألمنيوم وزجاج">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/خياط')"><i data-lucide="scissors"></i>خياط<span class="cat-n" id="prc-خياط">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/حلاق')"><i data-lucide="scissors-line-dashed"></i>حلاق<span class="cat-n" id="prc-حلاق">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/ميكانيك سيارات')"><i data-lucide="car-front"></i>ميكانيك سيارات<span class="cat-n" id="prc-ميكانيك سيارات">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/صيانة موبايلات')"><i data-lucide="smartphone"></i>صيانة موبايلات<span class="cat-n" id="prc-صيانة موبايلات">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/تدفئة وتكييف')"><i data-lucide="air-vent"></i>تدفئة وتكييف<span class="cat-n" id="prc-تدفئة وتكييف">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/طاقة شمسية')"><i data-lucide="sun-medium"></i>طاقة شمسية<span class="cat-n" id="prc-طاقة شمسية">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/صيانة أجهزة منزلية')"><i data-lucide="refrigerator"></i>صيانة أجهزة منزلية<span class="cat-n" id="prc-صيانة أجهزة منزلية">0</span></button>
-        <button class="cat-btn" onclick="navigateTo('profession/أخرى')"><i data-lucide="wrench"></i>أخرى<span class="cat-n" id="prc-أخرى">0</span></button>
-      </div>
+      <div class="cat-grid" id="catGrid"></div>
     </section>
-
-    <section class="section" id="faqSec">
-      <div class="sec-title"><i data-lucide="help-circle"></i> الأسئلة الشائعة (FAQ)</div>
-      <p class="sec-sub">إجابات عن أبرز الاستفسارات حول منصة الحرفيين وكيفية استخدامها.</p>
-      <div class="faq-container">
-        <div class="faq-item">
-          <div class="faq-q"><i data-lucide="help-circle"></i> ما هي منصة «الكل هنا»؟</div>
-          <div class="faq-a">هي المنصة الخدمية الرقمية الأولى في سوريا التي تجمع أصحاب المهن الحرة والصنايعية والحرفيين مع أصحاب العمل لتسهيل التواصل المباشر وعرض البطاقات المهنية ومعارض الأعمال دون وسطاء أو عمولات[span_11](start_span)[span_11](end_span).</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q"><i data-lucide="help-circle"></i> كيف يمكنني إيجاد معلم سباكة أو بلاط أو كهربائي في سوريا عبر المنصة؟</div>
-          <div class="faq-a">يمكنك تصفح الموقع إما حسب المحافظات السورية أو حسب الأقسام والمهن واستعراض بطاقات الحرفيين مع صور أعمالهم والتواصل معهم مباشرة[span_12](start_span)[span_12](end_span).</div>
-        </div>
-      </div>
-    </section>
-
     <section class="section report-band" id="reports">
-      <div class="rb-txt"><h3><i data-lucide="shield-alert"></i> قسم الشكاوى والدعم</h3><p>واجهت إعلانا مخالفاً أو محاولة احتيال؟ راسل إدارة «الكل هنا» مباشرة عبر واتساب على الرقم المعتمد.</p></div>
+      <div class="rb-txt"><h3><i data-lucide="shield-alert"></i> قسم الشكاوى والدعم</h3><p>واجهت إعلانا مخالفاً أو محاولة احتيال؟ عندك مشكلة تقنية؟ راسل إدارة «الكل هنا» مباشرة عبر واتساب على الرقم المعتمد — بنراجع كل بلاغ ونتخذ الإجراء اللازم خلال وقت قصير.</p></div>
       <a class="report-wa" id="supportWa" href="#" target="_blank" rel="noopener" title="راسل الإدارة"><i data-lucide="message-circle"></i></a>
     </section>
-
     <section class="section dhikr-band" id="dhikrSec">
       <div class="dhikr-head"><i data-lucide="book-heart"></i><b>أذكار وتسبيحات</b></div>
       <div class="dhikr-quote" id="dhikrQuote">سُبْحَانَ اللَهَ وَبِحَمْدِه</div>
@@ -807,9 +681,19 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
       </div>
       <form class="profile-form" onsubmit="saveProfile(event)">
-        <div class="profile-field"><label><i data-lucide="user"></i> الاسم الكامل *</label><input type="text" id="pfName" required placeholder="مثال: محمد أحمد العلي"></div>
-        <div class="profile-field"><label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label><input type="tel" id="pfPhone" required pattern="^09\d{8}$" placeholder="09XXXXXXXX" style="direction:ltr"></div>
-        <div class="profile-field"><label><i data-lucide="mail"></i> البريد الإلكتروني</label><input type="email" id="pfEmail" style="direction:ltr" readonly></div>
+        <div class="profile-field">
+          <label><i data-lucide="user"></i> الاسم الكامل *</label>
+          <input type="text" id="pfName" required placeholder="مثال: محمد أحمد العلي">
+        </div>
+        <div class="profile-field">
+          <label><i data-lucide="phone"></i> رقم الهاتف (واتساب) *</label>
+          <input type="tel" id="pfPhone" required pattern="^09\d{8}$" placeholder="09XXXXXXXX" style="direction:ltr">
+        </div>
+        <div class="profile-field">
+          <label><i data-lucide="mail"></i> البريد الإلكتروني</label>
+          <input type="email" id="pfEmail" placeholder="example@mail.com" style="direction:ltr" readonly>
+          <small style="color:var(--muted);font-size:.7rem;display:block;margin-top:.3rem">⚠️ البريد مرتبط بحساب Google ولا يمكن تغييره يدويا</small>
+        </div>
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
       <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
@@ -819,6 +703,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   <section class="section" id="adminSec" style="display:none">
     <div class="sec-title"><i data-lucide="shield-check"></i> لوحة الإدارة</div>
     <div class="admin-hero"><h2><i data-lucide="shield-check"></i> مركز التحكم بالبطاقات</h2><p>ابحث عن أي بطاقة برقم الـ ID أو الاسم أو الهاتف، واحذف منشورات الأشخاص المخالفين نهائيا من المنصة.</p></div>
+    
     <div style="background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 8px 24px var(--shadow)">
       <h3 style="font-size:1.1rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem"><i data-lucide="user-plus" style="color:var(--gold)"></i> إضافة مساعد جديد لوحة التحكم</h3>
       <div style="display:flex;gap:.6rem;flex-wrap:wrap">
@@ -827,6 +712,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       </div>
       <div id="assistantsList" style="margin-top:1rem;font-size:.85rem;color:var(--muted)"></div>
     </div>
+
     <div class="admin-stats">
       <div class="astat"><i data-lucide="credit-card"></i><b id="adTotal">0</b><span>إجمالي البطاقات</span></div>
       <div class="astat"><i data-lucide="map-pin"></i><b id="adProvs">0</b><span>محافظات ممثلة</span></div>
@@ -842,7 +728,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   <div class="fwrap">
     <div class="fcol">
       <h4><img src="logo5.png" alt="Logo" class="f-logo-small"> الكل هنا</h4>
-      <p>منصة خدمية مجانية تجمع أصحاب المهن والحرفيين مع أصحاب العمل في كافة المحافظات السورية[span_13](start_span)[span_13](end_span).</p>
+      <p>منصة خدمية مجانية تجمع أصحاب المهن والحرفيين مع أصحاب العمل في كافة المحافظات السورية. أنشئ بطاقتك المهنية، اعرض أعمالك، وخلّي الزبون يوصلك مباشرة.</p>
       <div class="fsocial">
         <a href="#" class="fs-icon" title="Facebook"><i data-lucide="facebook"></i></a>
         <a href="#" class="fs-icon" title="Instagram"><i data-lucide="instagram"></i></a>
@@ -855,6 +741,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         <a href="#" onclick="requireLoginThenOpenCreate();return false" class="fl-link"><i data-lucide="plus-square"></i> أنشئ بطاقتك</a>
         <a href="#provinces" onclick="document.getElementById('provSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="map-pin"></i> المحافظات</a>
         <a href="#categories" onclick="document.getElementById('catSec').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="layout-grid"></i> الأقسام والمهن</a>
+        <a href="#reports" onclick="document.getElementById('reports').scrollIntoView({behavior:'smooth'});return false" class="fl-link"><i data-lucide="shield-alert"></i> الدعم والشكاوى</a>
       </div>
     </div>
     <div class="fcol">
@@ -862,13 +749,14 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       <div class="fl-links">
         <a href="mailto:support@alkolhana.com" class="fl-link"><i data-lucide="mail"></i> support@alkolhana.com</a>
         <a href="tel:+963999999999" class="fl-link"><i data-lucide="phone"></i> +963 9XX XXX XXX</a>
+        <span class="fl-link" style="cursor:default;color:#6B7280"><i data-lucide="clock"></i> السبت - الخميس: 9ص - 5م</span>
       </div>
     </div>
   </div>
   <div class="fbotttom">© 2026 <strong>الكل هنا</strong> — جميع الحقوق محفوظة. صُنع بواسطة <strong>محمد أبو عبدالله 🇸🇾</strong></div>
 </footer>
 
-<div class="overlay" id="createModal" onclick="checkModalBgClick(event, 'createModal')">
+<div class="overlay" id="createModal">
   <div class="modal wide">
     <div class="mhead"><h3 id="createModalTitle"><i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية</h3><button class="xbtn" onclick="closeModal('createModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody">
@@ -887,14 +775,14 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   </div>
 </div>
 
-<div class="overlay" id="detailModal" onclick="checkModalBgClick(event, 'detailModal')">
+<div class="overlay" id="detailModal">
   <div class="modal wide">
     <div class="mhead"><h3><i data-lucide="contact"></i> تفاصيل البطاقة</h3><button class="xbtn" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody"><div id="detailBody"></div></div>
   </div>
 </div>
 
-<div class="overlay" id="googleLoginModal" onclick="checkModalBgClick(event, 'googleLoginModal')">
+<div class="overlay" id="googleLoginModal">
   <div class="modal google-login-modal">
     <div class="mhead"><h3><i data-lucide="log-in"></i> تسجيل الدخول</h3><button class="xbtn" onclick="closeModal('googleLoginModal')"><i data-lucide="x"></i></button></div>
     <div class="mbody">
@@ -905,6 +793,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
           متابعة مع Google
         </button>
       </div>
+      <div class="login-note">بعد تسجيل الدخول ستتمكن من إنشاء بطاقتك المهنية وإدارتها.<br>لا نطلب كلمة مرور — كل شيء يتم عبر حسابك الآمن في Google.</div>
     </div>
   </div>
 </div>
@@ -935,20 +824,22 @@ const MAX_TOTAL_IMGS = 50, MAX_DAILY_IMGS = 3;
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
-const storage = firebase.storage();
 
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
+const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
 const PROFESSIONS = [{name:'كهربائي',icon:'zap'},{name:'سباك',icon:'pipe'},{name:'نجار',icon:'hammer'},{name:'حداد',icon:'anvil'},{name:'بناء وديكور',icon:'brick-wall'},{name:'دهان',icon:'paint-roller'},{name:'بلاط وسيراميك',icon:'grid-3x3'},{name:'ألمنيوم وزجاج',icon:'panel-top'},{name:'خياط',icon:'scissors'},{name:'حلاق',icon:'scissors-line-dashed'},{name:'ميكانيك سيارات',icon:'car-front'},{name:'صيانة موبايلات',icon:'smartphone'},{name:'تدفئة وتكييف',icon:'air-vent'},{name:'طاقة شمسية',icon:'sun-medium'},{name:'صيانة أجهزة منزلية',icon:'refrigerator'},{name:'أخرى',icon:'wrench'}];
-const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'}];
+const DHIKR = [{t:'سُبْحَانَ اللّه وَبِحَمْدِه، سُبْحَان اللَه العَظِيم',s:'ورد في الحديث: كلمتان خفيفتان على اللسان، ثقيلتان في الميزان'},{t:'لَا إِلَه إِلَّا اللَهَ وَحْدَه لَا شَرِيكَة لَه، لَه الُمْلَك وَلَه الَحْمَد وَهوَ عَلَى كُلِ شَيءٍ قَدِير',s:'أفضل الذكر — لا إله إلا الله'},{t:'أَسْتَغْفِرُ اللَهَ وَأَتُوبُ إِلَيْه',s:'من لزم الاستغفار جعل الله له من كل همٍّ فرجا ومن كل ضيقٍ مخرجا'},{t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّه',s:'كنز من كنوز الجنة'},{t:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّد',s:'من صلى عليَّ صلاة واحدة صلى الله عليه عشر صلوات'},{t:'سُبْحَانَ اللّه وَالْحَمْد لِلّه وَلَا إِلَه إِلَّا اللّه واللّه أَكْبَر',s:'أحب الكلام إلى الله هذه الأربع'},{t:'حَسْبِيَ اللّه لَا إِلَه إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيم',s:'من قالها كفاه الله ما أهمه من أمر الدنيا والآخرة'},{t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّار',s:'من أدعية القرآن الجامعة'}];
 
 let CARDS = [];
 let ASSISTANTS = JSON.parse(localStorage.getItem('kl_assistants') || '[]');
 let currentUser = null;
 let session = null;
-let workImgsData = [], avaImgData = null;
+let workImgs = [], avaImg = null;
+let curDetail = null;
 let dailyUsed = 0, totalUsed = 0;
 let editingCardId = null;
 let pendingAction = null;
+let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
@@ -971,131 +862,105 @@ function setTheme(mode){ document.body.setAttribute('data-theme',mode); localSto
 $('themeBtn').addEventListener('click',()=>{ setTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark'); });
 setTheme(localStorage.getItem('kl_theme')||'light');
 
-let isDrawerOpen = false;
-let activeModalId = null;
-
-function openDrawer(){ isDrawerOpen=true; $('drawer').classList.add('open'); $('drawerOverlay').classList.add('open'); history.pushState({drawer:true},''); }
-function closeDrawer(fromHistory=false){
-  if(!isDrawerOpen) return; isDrawerOpen=false; $('drawer').classList.remove('open'); $('drawerOverlay').classList.remove('open');
-  if(!fromHistory && history.state && history.state.drawer) history.back();
-}
-$('menuBtn').addEventListener('click', openDrawer);
-
-$$('.dr-item[data-nav]').forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    e.preventDefault(); closeDrawer(true);
-    const targetId=a.getAttribute('data-nav');
-    if(parseHash()!=='') location.hash='#/';
-    setTimeout(()=>{
-      if(targetId==='homeView') window.scrollTo({top:0,behavior:'smooth'});
-      else { const el=$(targetId); if(el) el.scrollIntoView({behavior:'smooth'}); }
-    },150);
-  });
-});
-
-function openModal(id){ activeModalId=id; $(id).classList.add('open'); document.body.style.overflow='hidden'; history.pushState({modal:id},''); }
-function closeModal(id, fromHistory=false){
-  if(activeModalId!==id) return; activeModalId=null; $(id).classList.remove('open'); document.body.style.overflow='';
-  if(!fromHistory && history.state && history.state.modal===id) history.back();
-}
-function checkModalBgClick(event, modalId){ if(event.target===$(modalId)) closeModal(modalId); }
-
-window.addEventListener('popstate', (e)=>{
-  if(isDrawerOpen){ closeDrawer(true); return; }
-  if(isLightboxActive){ closeLightbox(true); return; }
-  if(activeModalId){ const mId=activeModalId; activeModalId=null; $(mId).classList.remove('open'); document.body.style.overflow=''; return; }
-  route();
-});
+function openDrawer(){ $('drawer').classList.add('open'); $('drawerOverlay').classList.add('open'); }
+function closeDrawer(){ $('drawer').classList.remove('open'); $('drawerOverlay').classList.remove('open'); }
+$('menuBtn').addEventListener('click',openDrawer);
+$('drClose').addEventListener('click',closeDrawer);
+$('drawerOverlay').addEventListener('click',closeDrawer);
+$$('.dr-item[data-nav]').forEach(a=>a.addEventListener('click',()=>{ closeDrawer(); const hash=a.getAttribute('href'); if(hash.startsWith('#/'))location.hash=''; else if(hash.startsWith('#')){ setTimeout(()=>{ const el=$(hash.slice(1)); if(el)el.scrollIntoView({behavior:'smooth'}); },300); } }));
 
 function parseHash(){ return location.hash.replace(/^#\/?/,''); }
-function route(){
-  const h=parseHash(); hideAdmin();
+function route(){ 
+  const h=parseHash(); 
+  hideAdmin(); 
   document.querySelectorAll('.page-view').forEach(v=>v.style.display='none');
   
-  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo({top:0,behavior:'instant'}); document.title="الكل هنا | منصة الحرفيين وأصحاب المهن الحرة في سوريا"; return; }
+  if(!h || h===''){ $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); return; }
   if(h==='admin'){ showAdmin(); return; }
-  if(h.startsWith('province/')){
-    const prov=decodeURIComponent(h.split('/')[1]);
-    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo({top:0,behavior:'instant'}); return; }
+  if(h==='profile'){ 
+    if(!currentUser){ toast('يجب تسجيل الدخول أولا','error'); location.hash='#/'; return; }
+    $('profileView').style.display=''; loadProfileData(); window.scrollTo({ top: 0, behavior: 'instant' }); return; 
   }
-  if(h.startsWith('profession/')){
-    const prof=decodeURIComponent(h.split('/')[1]);
-    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo({top:0,behavior:'instant'}); return; }
+  if(h.startsWith('province/')){ 
+    const prov=decodeURIComponent(h.split('/')[1]); 
+    if(PROVINCES.includes(prov)){ $('provinceView').style.display=''; renderProvinceCards(prov); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
-  if(h.startsWith('card/')){
-    const cardId=h.split('/')[1];
-    $('homeView').style.display='';
-    setTimeout(()=>openDetail(cardId), 300);
-    return;
+  if(h.startsWith('profession/')){ 
+    const prof=decodeURIComponent(h.split('/')[1]); 
+    if(PROFESSIONS.some(p=>p.name===prof)){ $('professionView').style.display=''; renderProfessionCards(prof); window.scrollTo({ top: 0, behavior: 'instant' }); return; } 
   }
-  $('homeView').style.display=''; window.scrollTo({top:0,behavior:'instant'});
+  $('homeView').style.display=''; window.scrollTo({ top: 0, behavior: 'instant' }); 
 }
 window.addEventListener('hashchange',route);
 
 function goBackToSection(sectionId){
-  location.hash='#/';
-  setTimeout(()=>{ const el=$(sectionId); if(el) el.scrollIntoView({behavior:'smooth'}); }, 100);
+  location.hash = '#/';
+  setTimeout(() => {
+    const el = $(sectionId);
+    if(el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 100);
 }
 
-function updateCounts(){
-  PROVINCES.forEach(p => {
-    const el = $('pc-' + p);
-    if(el) el.textContent = CARDS.filter(c => c.province === p).length + ' بطاقة';
-  });
-  PROFESSIONS.forEach(pr => {
-    const el = $('prc-' + pr.name);
-    if(el) el.textContent = CARDS.filter(c => c.profession === pr.name).length;
-  });
+function buildProvinces(){ 
+  $('provGrid').innerHTML=PROVINCES.map(p=>{ 
+    const n=CARDS.filter(c=>c.province===p).length; 
+    return '<button class="prov-btn" onclick="navigateTo(\'province/'+encodeURIComponent(p)+'\')"><i data-lucide="'+(PROV_ICONS[p]||'map-pin')+'"></i>'+p+'<span class="prov-count">'+n+' بطاقة</span></button>'; 
+  }).join(''); 
+  icons(); 
 }
-
+function buildCategories(){ 
+  $('catGrid').innerHTML=PROFESSIONS.map(pr=>{ 
+    const n=CARDS.filter(c=>c.profession===pr.name).length; 
+    return '<button class="cat-btn" onclick="navigateTo(\'profession/'+encodeURIComponent(pr.name)+'\')"><i data-lucide="'+pr.icon+'"></i>'+pr.name+'<span class="cat-n">'+n+'</span></button>'; 
+  }).join(''); 
+  icons(); 
+}
 function populateSelects(){
-  $('cProv').innerHTML=PROVINCES.map(p=>'<option value="'+p+'">'+p+'</option>').join('');
-  $('cProf').innerHTML=PROFESSIONS.map(pr=>'<option value="'+pr.name+'">'+pr.name+'</option>').join('');
+  $('cProv').innerHTML = PROVINCES.map(p => '<option value="' + p + '">' + p + '</option>').join(''); 
+  $('cProf').innerHTML = PROFESSIONS.map(pr => '<option value="' + pr.name + '">' + pr.name + '</option>').join('');
 }
 function navigateTo(path){ location.hash='#'+path; }
 
-function cardHTML(c){
-  const imgs=(c.images||[]).slice(0,8).map((item,i)=>{
-    const url = typeof item==='string'?item:item.url;
-    const caption = typeof item==='string'? ('صورة عمل '+c.profession+' في '+c.province) : (item.caption || ('صورة عمل '+c.profession+' في '+c.province));
-    return '<img src="'+url+'" alt="'+esc(caption)+'" loading="lazy" onerror="this.src=\'logo5.png\'" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">';
-  }).join('');
-  const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>';
-  const isOwner=currentUser && currentUser.uid===c.ownerUid;
-  const isAdmin=isUserAdmin(currentUser)||isUserAdmin(session);
-  const isAdminCard=c.isAdminCard || c.ownerEmail===ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail);
+function cardHTML(c){ 
+  const imgs=(c.images||[]).slice(0,8).map((u,i)=>'<img src="'+u+'" loading="lazy" alt="" onerror="this.src=\'logo5.png\'" onclick="event.stopPropagation(); openLightboxById(\''+c.id+'\','+i+')">').join(''); 
+  const strip=imgs||'<div class="strip-empty"><i data-lucide="image-off"></i> لا توجد صور بعد</div>'; 
+  const isOwner = currentUser && currentUser.uid === c.ownerUid; 
+  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
+  const isAdminCard = c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail);
   
-  let actionsHtml='';
-  if(isOwner||isAdmin){
-    actionsHtml='<a class="cbtn edit" href="#" onclick="quickEditCard(event,\''+c.id+'\')"><i data-lucide="edit-3"></i> تعديل</a>' +
-                '<a class="cbtn del" href="#" onclick="quickDeleteCard(event,\''+c.id+'\')"><i data-lucide="trash-2"></i> حذف</a>';
-  } else {
-    actionsHtml='<a class="cbtn call" href="'+telLink(c.phone)+'" onclick="event.stopPropagation()"><i data-lucide="phone"></i> اتصال</a>' +
-                '<a class="cbtn wa" href="'+waLink(c.phone,c.name)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i data-lucide="message-circle"></i> واتساب</a>';
-  }
-  const verifiedBadge=isAdminCard?' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 2.4 3.4-.6 1.2 3.2 3 1.6-.6 3.4 2 2.8-2 2.8.6 3.4-3 1.6-1.2 3.2-3.4-.6L12 22l-2.4-2.4-3.4.6-1.2-3.2-3-1.6.6-3.4-2-2.8 2-2.8-.6-3.4 3-1.6 1.2-3.2 3.4.6z" fill="#1D9BF0"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>':'';
+  let actionsHtml=''; 
+  if(isOwner||isAdmin){ 
+    actionsHtml='<a class="cbtn edit" href="#" onclick="quickEditCard(event,\''+c.id+'\')" ><i data-lucide="edit-3"></i> تعديل</a>' + 
+                '<a class="cbtn del" href="#" onclick="quickDeleteCard(event,\''+c.id+'\')"><i data-lucide="trash-2"></i> حذف</a>'; 
+  } else { 
+    actionsHtml='<a class="cbtn call" href="'+telLink(c.phone)+'" onclick="event.stopPropagation()"><i data-lucide="phone"></i> اتصال</a>' + 
+                '<a class="cbtn wa" href="'+waLink(c.phone,c.name)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i data-lucide="message-circle"></i> واتساب</a>'; 
+  } 
 
-  return '<article class="card '+(isAdminCard?'admin-card':'')+'" onclick="navigateTo(\'card/'+c.id+'\')">' +
-    '<div class="card-banner"></div>' +
-    '<div class="card-body">' +
-      '<div class="card-top">' +
-        '<div class="card-ava-wrapper">' +
-          '<img class="card-ava" src="'+(c.avatar||'logo5.png')+'" alt="صورة المعلم '+esc(c.name)+'" onerror="this.src=\'logo5.png\'">' +
-          '<div class="card-ava-ring"></div><div class="card-ava-ring r2"></div>' +
-        '</div>' +
-        '<div class="card-who"><h3>'+esc(c.name)+verifiedBadge+'</h3>' +
-          '<div class="card-tags">' +
-            '<span class="tag prof"><i data-lucide="wrench"></i> '+esc(c.profession)+'</span>' +
-            '<span class="tag prov"><i data-lucide="map-pin"></i> '+esc(c.province)+'</span>' +
-          '</div></div>' +
-      '</div>' +
-      '<div class="card-strip">'+strip+'</div>' +
-      '<div class="card-desc">'+esc(trunc(c.desc,70))+'</div>' +
-      '<div class="card-foot">' +
-        '<span class="card-id">ID: '+c.numId+'</span>' +
-        '<div class="card-actions">'+actionsHtml+'</div>' +
-      '</div>' +
-    '</div></article>';
+  const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 2.4 3.4-.6 1.2 3.2 3 1.6-.6 3.4 2 2.8-2 2.8.6 3.4-3 1.6-1.2 3.2-3.4-.6L12 22l-2.4-2.4-3.4.6-1.2-3.2-3-1.6.6-3.4-2-2.8 2-2.8-.6-3.4 3-1.6 1.2-3.2 3.4.6z" fill="#1D9BF0"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>' : '';
+
+  return '<article class="card '+(isAdminCard?'admin-card':'')+'" onclick="openDetail(\''+c.id+'\')">' + 
+    '<div class="card-banner"></div>' + 
+    '<div class="card-body">' + 
+      '<div class="card-top">' + 
+        '<div class="card-ava-wrapper">' + 
+          '<img class="card-ava" src="'+(c.avatar||'logo5.png')+'" alt="" onerror="this.src=\'logo5.png\'">' + 
+          '<div class="card-ava-ring"></div>' + 
+          '<div class="card-ava-ring r2"></div>' + 
+        '</div>' + 
+        '<div class="card-who"><h3>'+esc(c.name)+verifiedBadge+'</h3>' + 
+          '<div class="card-tags">' + 
+            '<span class="tag prof"><i data-lucide="wrench"></i> '+esc(c.profession)+'</span>' + 
+            '<span class="tag prov"><i data-lucide="map-pin"></i> '+esc(c.province)+'</span>' + 
+          '</div></div>' + 
+      '</div>' + 
+      '<div class="card-strip">'+strip+'</div>' + 
+      '<div class="card-desc">'+esc(trunc(c.desc,70))+'</div>' + 
+      '<div class="card-foot">' + 
+        '<span class="card-id">ID: '+c.numId+'</span>' + 
+        '<div class="card-actions">'+actionsHtml+'</div>' + 
+      '</div>' + 
+    '</div></article>'; 
 }
 
 function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
@@ -1103,128 +968,117 @@ function shuffle(arr){ arr=[...arr]; for(let i=arr.length-1;i>0;i--){ const j=Ma
 function renderBentoGrid(containerId, cardsList){
   const container = $(containerId);
   if(!cardsList.length){ container.innerHTML = emptyState('layers','لا توجد بطاقات منشورة بعد — كن أول من ينضم للمنصة!'); return; }
+  
   const adminCards = cardsList.filter(c => c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail));
   const regularCards = cardsList.filter(c => !c.isAdminCard && c.ownerEmail !== ADMIN_EMAIL && !ASSISTANTS.includes(c.ownerEmail));
+  
   let html = '';
+  
   if(adminCards.length > 0){
     html += '<div class="bento-label"><i data-lucide="shield-check"></i> بطاقات الإدارة والمساعدين المميزة</div>';
     html += '<div class="admin-horizontal-grid">' + adminCards.map(cardHTML).join('') + '</div>';
   }
+  
   const sorted = shuffle([...regularCards]);
-  let idx = 0, chunkNum = 1;
+  let idx = 0;
+  let chunkNum = 1;
   while(idx < sorted.length){
     const groupSize = Math.min(10, sorted.length - idx);
     const group = sorted.slice(idx, idx + groupSize);
-    html += '<div class="bento-label" style="margin-top:1.2rem"><i data-lucide="layers"></i> مجموعة البطاقات #' + chunkNum + '</div>';
+    
+    html += '<div class="bento-label" style="margin-top:1.2rem"><i data-lucide="layers"></i> مجموعة البطاقات #' + chunkNum + ' (من ' + (idx + 1) + ' إلى ' + (idx + group.length) + ')</div>';
     html += '<div class="cards-chunk-grid">' + group.map(cardHTML).join('') + '</div>';
-    idx += 10; chunkNum++;
+    
+    idx += 10;
+    chunkNum++;
   }
+  
   container.innerHTML = html;
   icons();
 }
 
+function renderAll(){ renderBentoGrid('allCardsContainer', CARDS); buildProvinces(); buildCategories(); }
 function emptyState(icon,txt){ return '<div class="empty-state"><i data-lucide="'+icon+'"></i>'+txt+'</div>'; }
 
-function renderProvinceCards(province){
-  const cards=CARDS.filter(c=>c.province===province);
-  $('provinceTitle').textContent='بطاقات محافظة '+province;
-  $('provinceCount').textContent=cards.length+' بطاقة منشورة';
-  renderBentoGrid('provinceContainer', cards); icons();
+function renderProvinceCards(province){ 
+  const cards=CARDS.filter(c=>c.province===province); 
+  $('provinceTitle').textContent='بطاقات محافظة '+province; 
+  $('provinceCount').textContent=cards.length+' بطاقة منشورة'; 
+  renderBentoGrid('provinceContainer', cards); 
+  icons(); 
 }
-function renderProfessionCards(profession){
-  const cards=CARDS.filter(c=>c.profession===profession);
-  $('professionTitle').textContent='بطاقات مهنة '+profession;
-  $('professionCount').textContent=cards.length+' بطاقة منشورة';
-  renderBentoGrid('professionContainer', cards); icons();
-}
-
-async function loadCards(){
-  const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get();
-  CARDS=snap.docs.map(d=>({id:d.id,...d.data()}));
-  renderBentoGrid('allCardsContainer', CARDS);
-  updateCounts();
-  const h = parseHash();
-  if(h.startsWith('card/')){ openDetail(h.split('/')[1]); }
+function renderProfessionCards(profession){ 
+  const cards=CARDS.filter(c=>c.profession===profession); 
+  $('professionTitle').textContent='بطاقات مهنة '+profession; 
+  $('professionCount').textContent=cards.length+' بطاقة منشورة'; 
+  renderBentoGrid('professionContainer', cards); 
+  icons(); 
 }
 
-function compressToBlob(file, max, q){
-  return new Promise((res,rej)=>{
-    const r = new FileReader(); r.onerror=()=>rej(new Error('read'));
-    r.onload=e=>{
-      const im = new Image(); im.onerror=()=>rej(new Error('decode'));
-      im.onload=()=>{
-        const c = document.createElement('canvas');
-        const m = Math.min(1, max / Math.max(im.width, im.height));
-        c.width = Math.round(im.width * m); c.height = Math.round(im.height * m);
-        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
-        c.toBlob(blob => res(blob), 'image/jpeg', q);
-      };
-      im.src = e.target.result;
-    };
-    r.readAsDataURL(file);
-  });
+async function loadCards(){ 
+  const scrollPos = window.scrollY; 
+  $('allCardsContainer').innerHTML='<div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div><span>جاري جلب البطاقات...</span></div>'; 
+  const snap=await db.collection('cards').orderBy('createdAt','desc').limit(500).get(); 
+  CARDS=snap.docs.map(d=>({id:d.id,...d.data()})); 
+  renderAll(); 
+  window.scrollTo(0, scrollPos); 
 }
 
-async function uploadFileToStorage(blob, folder){
-  const filename = folder + '/' + Date.now() + '_' + Math.random().toString(36).substring(2,8) + '.jpg';
-  const ref = storage.ref().child(filename);
-  await ref.put(blob);
-  return await ref.getDownloadURL();
+function compress(file,max,q){ 
+  return new Promise((res,rej)=>{ 
+    const r=new FileReader(); r.onerror=()=>rej(new Error('read')); 
+    r.onload=e=>{ 
+      const im=new Image(); im.onerror=()=>rej(new Error('decode')); 
+      im.onload=()=>{ 
+        const c=document.createElement('canvas'); 
+        const m=Math.min(1,max/Math.max(im.width,im.height)); 
+        c.width=Math.round(im.width*m); c.height=Math.round(im.height*m); 
+        c.getContext('2d').drawImage(im,0,0,c.width,c.height); 
+        res(c.toDataURL('image/jpeg',q)); 
+      }; 
+      im.src=e.target.result; 
+    }; 
+    r.readAsDataURL(file); 
+  }); 
 }
 
-async function onAvaPick(inp){
-  const f = inp.files[0]; inp.value=''; if(!f) return;
-  try {
-    toast('جاري رفع الصورة الشخصية...');
-    const blob = await compressToBlob(f, 240, 0.75);
-    avaImgData = await uploadFileToStorage(blob, 'avatars');
-    $('avaPreview').innerHTML='<div class="pv"><img src="'+avaImgData+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImgData=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>';
-    toast('تم رفع الصورة الشخصية بنجاح ✓');
-    icons();
-  } catch(e){ toast('فشل رفع الصورة: '+e.message, 'error'); }
+function onAvaPick(inp){ 
+  const f=inp.files[0]; inp.value=''; if(!f)return; 
+  compress(f,240,.72).then(d=>{ 
+    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
+  }).catch(()=>toast('تعذرت معالجة الصورة','error')); 
 }
 
-async function onWorkPick(inp){
-  const room = Math.min(MAX_DAILY_IMGS - dailyUsed, MAX_TOTAL_IMGS - totalUsed - workImgsData.length);
-  const files = [...inp.files].slice(0, Math.max(0, room)); inp.value='';
-  if(files.length === 0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50).','error'); return; }
-  
-  const prof = $('cProf').value === 'أخرى' ? $('cProfOther').value : $('cProf').value;
-  const prov = $('cProv').value;
-
-  for(let f of files){
-    if(!f.type.startsWith('image/')){ continue; }
-    try {
-      toast('جاري رفع ومعالجة الصورة...');
-      const blob = await compressToBlob(f, 600, 0.65);
-      const url = await uploadFileToStorage(blob, 'works');
-      const defaultCaption = `صورة عمل ${prof || 'حرفي'} في محافظة ${prov || 'سوريا'} - منصة الكل هنا`;
-      workImgsData.push({ url, caption: defaultCaption });
-      renderWorkPreviews();
-      toast('تم رفع الصورة بنجاح ✓');
-    } catch(e){ toast('فشل رفع صورة: '+e.message, 'error'); }
-  }
+function onWorkPick(inp){ 
+  const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
+  const files=[...inp.files].slice(0,Math.max(0,room)); inp.value=''; 
+  if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50). يمكنك طلب زيادة اليوم التالي','error'); return; } 
+  files.forEach(f=>{ 
+    if(!f.type.startsWith('image/')){ toast('ملف غير مدعوم','error'); return; } 
+    compress(f,560,.62).then(d=>{ workImgs.push(d); renderWorkPreviews(); }) 
+      .catch(()=>toast('تعذرت معالجة صورة','error')); 
+  }); 
 }
 
-function renderWorkPreviews(){
-  const remaining = Math.min(MAX_DAILY_IMGS - dailyUsed, MAX_TOTAL_IMGS - totalUsed - workImgsData.length);
-  let noteHtml = 'اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgsData.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة';
+function renderWorkPreviews(){ 
+  const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
+  let noteHtml = 'اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة';
   if(remaining<=0 || dailyUsed>=MAX_DAILY_IMGS){
     noteHtml += ' · <button type="button" class="next-day-btn" onclick="requestNextDayImages()"><i data-lucide="sun"></i> رفع صور لليوم التالي</button>';
   }
-  $('workNote').innerHTML = noteHtml;
-  $('previews').innerHTML = workImgsData.map((item,i)=>
-    '<div class="pv"><img src="'+item.url+'" onerror="this.src=\'logo5.png\'">' +
-    '<input type="text" value="'+esc(item.caption)+'" oninput="workImgsData['+i.'].caption=this.value" placeholder="وصف الصورة للـ SEO">' +
-    '<button class="rm" onclick="workImgsData.splice('+i.',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>'
-  ).join('');
-  icons();
+  $('workNote').innerHTML = noteHtml; 
+  $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  icons(); 
 }
 
-function requestNextDayImages(){ dailyUsed=0; toast('☀️ تم إعادة تعيين عداد اليوم!'); renderWorkPreviews(); }
+function requestNextDayImages(){
+  dailyUsed = 0;
+  toast('☀️ تم إعادة تعيين عداد اليوم! يمكنك رفع صور جديدة.');
+  renderWorkPreviews();
+}
 
-function requireLoginThenOpenCreate(){
-  if(currentUser){
+function requireLoginThenOpenCreate(){ 
+  if(currentUser){ 
     const isAdmin = isUserAdmin(currentUser);
     const existing = CARDS.find(c => c.ownerUid === currentUser.uid);
     if(existing && !isAdmin){
@@ -1232,132 +1086,204 @@ function requireLoginThenOpenCreate(){
       quickEditCard(new Event('click'), existing.id);
       return;
     }
-    openCreate();
-  } else { pendingAction='createCard'; openModal('googleLoginModal'); }
+    openCreate(); 
+  } else { 
+    pendingAction='createCard'; 
+    openModal('googleLoginModal'); 
+  } 
 }
 
-function performGoogleSignIn(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
-  auth.signInWithPopup(provider).then(result => {
-    currentUser = result.user; closeModal('googleLoginModal', true);
-    if(pendingAction==='createCard'){ pendingAction=null; requireLoginThenOpenCreate(); }
-    updateAuthUI();
-  }).catch(err => { if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); });
+function performGoogleSignIn(){ 
+  const provider = new firebase.auth.GoogleAuthProvider(); 
+  provider.setCustomParameters({ prompt: 'select_account' }); 
+  auth.signInWithPopup(provider).then(result => { 
+    currentUser = result.user; closeModal('googleLoginModal'); 
+    if(pendingAction==='createCard'){ 
+      pendingAction=null; 
+      requireLoginThenOpenCreate(); 
+    } 
+    updateAuthUI(); 
+  }).catch(err => { 
+    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
+    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
+  }); 
 }
 
-function doGoogleLogin(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
-  auth.signInWithPopup(provider).then(result => {
-    currentUser = result.user; session = result.user; updateAuthUI(); toast('أهلا مديرنا 🛡️');
-  }).catch(err => { if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); });
+function doGoogleLogin(){ 
+  const provider = new firebase.auth.GoogleAuthProvider(); 
+  provider.setCustomParameters({ prompt: 'select_account' }); 
+  auth.signInWithPopup(provider).then(result => { 
+    currentUser = result.user; session = result.user; updateAuthUI(); toast('أهلا مديرنا 🛡️'); 
+  }).catch(err => { 
+    if(err.code==='auth/popup-blocked') toast('اسمح بالنوافذ المنبثقة للدخول','error'); 
+    else if(err.code!=='auth/popup-closed-by-user') toast('فشل الدخول: '+err.message,'error'); 
+  }); 
 }
 
-async function doLogout(){
-  await auth.signOut(); currentUser=null; session=null; pendingAction=null; updateAuthUI(); toast('تم تسجيل الخروج'); location.hash='#/';
+async function doLogout(){ 
+  await auth.signOut(); currentUser=null; session=null; pendingAction=null; updateAuthUI(); toast('تم تسجيل الخروج'); location.hash='#/'; 
 }
 
-function updateAuthUI(){
+function updateAuthUI(){ 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
-  $('adminLink').style.display = isAdmin ? '' : 'none';
-  $('loginLink').style.display = (currentUser || session) ? 'none' : '';
-  $('logoutLink').style.display = (currentUser || session) ? '' : '';
-  $('profileLink').style.display = currentUser ? '' : 'none';
+  $('adminLink').style.display = isAdmin ? '' : 'none'; 
+  $('loginLink').style.display = (currentUser || session) ? 'none' : ''; 
+  $('logoutLink').style.display = (currentUser || session) ? '' : 'none'; 
+  $('profileLink').style.display = currentUser ? '' : 'none'; 
+  const drHeadSmall = $('.dr-head small'); 
+  if(drHeadSmall){ 
+    if(currentUser) drHeadSmall.textContent = 'مرحبا ' + (currentUser.displayName?.split(' ')[0] || 'بك'); 
+    else drHeadSmall.textContent = 'MANUAL WORKERS HUB'; 
+  } 
 }
 
-auth.onAuthStateChanged(user => {
-  if(user){ currentUser=user; if(isUserAdmin(user)) session=user; }
-  else { currentUser=null; session=null; }
-  updateAuthUI(); if(!isUserAdmin(user) && parseHash() === 'admin') location.hash='#/';
+auth.onAuthStateChanged(user => { 
+  if(user){ currentUser=user; if(isUserAdmin(user)) session=user; } 
+  else { currentUser=null; session=null; } 
+  updateAuthUI(); if(!isUserAdmin(user) && parseHash() === 'admin') location.hash='#/'; 
 });
 
-function openCreate(){
+function loadProfileData(){
+  if(!currentUser) return;
+  $('pfName').value = currentUser.displayName || '';
+  $('pfEmail').value = currentUser.email || '';
+  $('pfNameDisplay').textContent = currentUser.displayName || 'مرحبا بك';
+  $('pfEmailDisplay').textContent = currentUser.email || '';
+  const myFirstCard = CARDS.find(c => c.ownerUid === currentUser.uid);
+  if(myFirstCard){ $('pfPhone').value = myFirstCard.phone; $('pfAvatar').src = myFirstCard.avatar || 'logo5.png'; }
+  else { $('pfPhone').value = ''; $('pfAvatar').src = 'logo5.png'; }
+  profileAvatarData = null; icons();
+}
+
+function onProfileAvatarPick(inp){
+  const f = inp.files[0]; inp.value=''; if(!f) return;
+  compress(f, 240, .72).then(d => { profileAvatarData = d; $('pfAvatar').src = d; toast('تم تحميل الصورة الجديدة ✓'); })
+    .catch(()=>toast('تعذرت معالجة الصورة','error'));
+}
+
+async function saveProfile(event){
+  event.preventDefault(); if(!currentUser) return toast('يجب تسجيل الدخول أولا','error');
+  const newName = $('pfName').value.trim();
+  const newPhone = $('pfPhone').value.trim().replace(/[\s()-]/g,'');
+  if(newName.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
+  if(!/^09\d{8}$/.test(newPhone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error');
+  const btn = event.target.querySelector('button[type="submit"]'); const origText = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
+  try {
+    await currentUser.updateProfile({ displayName: newName });
+    const userCards = CARDS.filter(c => c.ownerUid === currentUser.uid);
+    const batch = db.batch();
+    userCards.forEach(cardDoc => {
+      const ref = db.collection('cards').doc(cardDoc.id);
+      const updates = { name: newName, phone: newPhone };
+      if(profileAvatarData) updates.avatar = profileAvatarData;
+      batch.update(ref, updates);
+    });
+    await batch.commit();
+    await loadCards(); loadProfileData();
+    toast('✅ تم حفظ التعديلات ومزامنتها مع ' + userCards.length + ' بطاقة بنجاح!');
+  } catch(e){
+    toast('تعذر الحفظ: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.innerHTML = origText; icons();
+  }
+}
+
+function openCreate(){ 
   const isAdmin = isUserAdmin(currentUser);
   const existing = CARDS.find(c => c.ownerUid === currentUser?.uid);
-  if(existing && !isAdmin){ quickEditCard(new Event('click'), existing.id); return; }
-  populateSelects(); workImgsData = []; avaImgData = null; dailyUsed = 0; totalUsed = 0;
-  $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null;
+  if(existing && !isAdmin){
+    toast('لديك بطاقة مسجلة مسبقا. جاري فتحها للتعديل...','error');
+    quickEditCard(new Event('click'), existing.id);
+    return;
+  }
+  populateSelects();
+  workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0; 
+  $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null; 
   $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
   $('saveBtn').onclick = submitCard; $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي';
-  openModal('createModal'); icons();
+  openModal('createModal'); icons(); 
 }
 
 function profChanged(){ $('profOtherWrap').style.display = $('cProf').value === 'أخرى' ? '' : 'none'; }
 $('cProf').addEventListener('change', profChanged);
 
-async function submitCard(){
-  if(!currentUser) return toast('يجب تسجيل الدخول أولا','error');
+async function submitCard(){ 
+  if(!currentUser) return toast('يجب تسجيل الدخول أولا','error'); 
   const isAdmin = isUserAdmin(currentUser);
   const existing = CARDS.find(c => c.ownerUid === currentUser.uid);
-  if(existing && !isAdmin && !editingCardId){ quickEditCard(new Event('click'), existing.id); return; }
-  const name = $('cName').value.trim();
-  const phone = $('cPhone').value.trim().replace(/[\s()-]/g,'');
-  const province = $('cProv').value;
-  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim();
-  const desc = $('cDesc').value.trim();
-  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
-  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح','error');
-  if(!profession) return toast('اختر مهنتك','error');
-  if(workImgsData.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error');
-
-  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = 'جاري النشر...';
-  try{
-    const todayStr = new Date().toISOString().slice(0,10);
-    const dSnap = await db.collection('daily').doc(phone).get();
-    const dData = dSnap.exists ? dSnap.data() : {};
-    const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0;
-    const numId = 100000 + Math.floor(Math.random()*900000);
-    const id = 'k' + Date.now();
+  if(existing && !isAdmin && !editingCardId){
+    toast('عذرا، مسموح بإنشاء بطاقة واحدة فقط لكل حساب Google. يمكنك تعديل بطاقتك الحالية.','error');
+    quickEditCard(new Event('click'), existing.id);
+    return;
+  }
+  const name = $('cName').value.trim(); 
+  const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
+  const province = $('cProv').value; 
+  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
+  const desc = $('cDesc').value.trim(); 
+  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
+  if(!profession) return toast('اختر مهنتك','error'); 
+  if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
+  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري النشر...'; 
+  try{ 
+    const todayStr = new Date().toISOString().slice(0,10); 
+    const dSnap = await db.collection('daily').doc(phone).get(); 
+    const dData = dSnap.exists ? dSnap.data() : {}; 
+    const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0; 
+    const usedTotal = dData.total || 0; 
+    if(usedToday + workImgs.length > MAX_DAILY_IMGS && !editingCardId && !isAdmin) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
+    if(usedTotal + workImgs.length > MAX_TOTAL_IMGS && !isAdmin) return toast('وصلت للحد الكلي 50 صورة','error'); 
+    const numId = 100000 + Math.floor(Math.random()*900000); 
+    const id = 'k' + Date.now(); 
     await db.collection('cards').doc(id).set({
       numId, name, phone, province, profession, desc,
-      avatar: avaImgData||null, images: workImgsData, ownerUid: currentUser.uid, ownerEmail: currentUser.email, isAdminCard: isAdmin, createdAt: Date.now()
-    });
+      avatar: avaImg||null, images: workImgs, ownerUid: currentUser.uid, ownerEmail: currentUser.email, isAdminCard: isAdmin, createdAt: Date.now()
+    }); 
     await db.collection('daily').doc(phone).set({
-      date: todayStr, count: usedToday + workImgsData.length, total: (dData.total||0) + workImgsData.length
-    }, { merge: true });
-    closeModal('createModal', true);
-    toast('تم نشر بطاقتك بنجاح! 🎉'); await loadCards();
-    navigateTo('card/'+id);
-  } catch(e){ toast('تعذر النشر: '+e.message,'error'); }
-  finally{ btn.disabled = false; btn.innerHTML = orig; icons(); }
+      date: todayStr, count: usedToday + workImgs.length, total: usedTotal + workImgs.length
+    }, { merge: true }); 
+    closeModal('createModal'); 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
+    $('cProf').selectedIndex = 0; 
+    toast('تم نشر بطاقتك بنجاح! 🎉'); await loadCards(); 
+  } catch(e){ 
+    toast('تعذر النشر: '+e.message,'error'); 
+  } finally{ 
+    btn.disabled = false; btn.innerHTML = orig; icons(); 
+  } 
 }
 
-function openDetail(id){
-  const c = CARDS.find(x => x.id === id);
-  if(!c) { toast('هذه البطاقة غير موجودة أو تم حذفها','error'); location.hash='#/'; return; }
-  
-  document.title = `${c.name} - ${c.profession} في ${c.province} | الكل هنا`;
-  $('pageDesc').setAttribute('content', c.desc || `بطاقة المعلم الحرفي ${c.name} متخصص في ${c.profession} بمحافظة ${c.province}. تواصل مباشر عبر واتساب والهاتف.`);
-
-  const isOwner = currentUser && currentUser.uid === c.ownerUid;
-  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
+function openDetail(id){ 
+  const c = CARDS.find(x => x.id === id); 
+  if(!c) return; 
+  curDetail = id; 
+  const isOwner = currentUser && currentUser.uid === c.ownerUid; 
+  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
   const isAdminCard = c.isAdminCard || c.ownerEmail === ADMIN_EMAIL || ASSISTANTS.includes(c.ownerEmail);
 
   let galleryHtml = '';
   if(c.images && c.images.length > 0){
-    const mainItem = c.images[0];
-    const mainUrl = typeof mainItem==='string'?mainItem:mainItem.url;
-    const mainCaption = typeof mainItem==='string'?(`صورة عمل ${c.profession}`):mainItem.caption;
-    
-    const thumbs = c.images.map((item, idx) => {
-      const u = typeof item==='string'?item:item.url;
-      return `<div class="thumb-item ${idx===0?'active':''}" onclick="switchGalleryImage('${u}', this)">
-         <img src="${u}" onerror="this.src='logo5.png'" alt="">
-       </div>`;
-    }).join('');
+    const mainImg = c.images[0];
+    const thumbs = c.images.map((img, idx) => 
+      `<div class="thumb-item ${idx===0?'active':''}" onclick="switchGalleryImage('${img}', this)">
+         <img src="${img}" onerror="this.src='logo5.png'" alt="">
+       </div>`
+    ).join('');
     galleryHtml = `
       <div class="gallery-section">
         <div class="gallery-main" onclick="openLightboxById('${c.id}', 0)">
-          <img id="detMainImg" src="${mainUrl}" alt="${esc(mainCaption)}" onerror="this.src='logo5.png'">
+          <img id="detMainImg" src="${mainImg}" onerror="this.src='logo5.png'" alt="عمل">
           <span class="zoom-badge"><i data-lucide="zoom-in"></i> اضغط للتكبير</span>
         </div>
         <div class="thumbs-row">${thumbs}</div>
       </div>`;
   } else {
-    galleryHtml = `<div class="gallery-main" style="display:grid;place-items:center;color:var(--muted)"><i data-lucide="image-off" style="width:3rem;height:3rem"></i> لا توجد صور</div>`;
+    galleryHtml = `<div class="gallery-main" style="display:grid;place-items:center;color:var(--muted)">
+                     <i data-lucide="image-off" style="width:3rem;height:3rem"></i> لا توجد صور
+                   </div>`;
   }
-
   let actionsHtml = '';
   if(isOwner || isAdmin){
     actionsHtml = `
@@ -1371,10 +1297,6 @@ function openDetail(id){
   const verifiedBadge = isAdminCard ? ' <span class="verified-badge" title="حساب موثق إدارياً"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 2.4 3.4-.6 1.2 3.2 3 1.6-.6 3.4 2 2.8-2 2.8.6 3.4-3 1.6-1.2 3.2-3.4-.6L12 22l-2.4-2.4-3.4.6-1.2-3.2-3-1.6.6-3.4-2-2.8 2-2.8-.6-3.4 3-1.6 1.2-3.2 3.4.6z" fill="#1D9BF0"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>' : '';
 
   $('detailBody').innerHTML = `
-    <div class="cards-bar" style="margin-bottom:1rem">
-      <button class="back-btn" onclick="closeModal('detailModal'); location.hash='#/';"><i data-lucide="arrow-right"></i> رجوع للرئيسية</button>
-      <div class="cards-meta">رابط البطاقة المباشر: ID: ${c.numId}</div>
-    </div>
     <div class="detail-layout">
       <div>${galleryHtml}</div>
       <div class="info-panel">
@@ -1396,8 +1318,9 @@ function openDetail(id){
         <div class="action-buttons">${actionsHtml}</div>
       </div>
     </div>`;
-  openModal('detailModal'); icons();
-}
+  openModal('detailModal'); 
+  icons(); 
+} 
 
 window.switchGalleryImage = function(url, el){
   const mainImg = document.getElementById('detMainImg');
@@ -1406,209 +1329,353 @@ window.switchGalleryImage = function(url, el){
   el.classList.add('active');
 };
 
-function quickEditCard(event, id){
+function quickEditCard(event, id){ 
   if(event) { event.preventDefault(); event.stopPropagation(); }
-  closeModal('detailModal', true);
-  const c = CARDS.find(x => x.id === id); if(!c) return;
-  const isOwner = currentUser && currentUser.uid === c.ownerUid;
-  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
-  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error');
+  closeModal('detailModal');
+  const c = CARDS.find(x => x.id === id); if(!c) return; 
+  const isOwner = currentUser && currentUser.uid === c.ownerUid; 
+  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
+  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لتعديل هذه البطاقة','error'); 
   
   populateSelects();
-  $('cName').value = c.name || '';
-  $('cPhone').value = c.phone || '';
-  $('cProv').value = c.province || PROVINCES[0];
+  
+  $('cName').value = c.name || ''; 
+  $('cPhone').value = c.phone || ''; 
+  $('cProv').value = c.province || PROVINCES[0]; 
   
   const isKnownProf = PROFESSIONS.some(pr => pr.name === c.profession);
-  if(isKnownProf){ $('cProf').value = c.profession; $('profOtherWrap').style.display = 'none'; }
-  else { $('cProf').value = 'أخرى'; $('cProfOther').value = c.profession || ''; $('profOtherWrap').style.display = ''; }
+  if(isKnownProf){
+    $('cProf').value = c.profession;
+    $('profOtherWrap').style.display = 'none';
+  } else {
+    $('cProf').value = 'أخرى';
+    $('cProfOther').value = c.profession || '';
+    $('profOtherWrap').style.display = '';
+  }
   
-  $('cDesc').value = c.desc || '';
-  avaImgData = c.avatar || null;
-  workImgsData = [...(c.images || [])].map(item => typeof item==='string'?{url:item, caption:'صورة عمل'}:item);
+  $('cDesc').value = c.desc || ''; 
+  avaImg = c.avatar || null; 
+  workImgs = [...(c.images || [])]; 
   
-  if(avaImgData){ $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImgData + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImgData=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; }
-  else { $('avaPreview').innerHTML = ''; }
+  if(avaImg){
+    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+  } else {
+    $('avaPreview').innerHTML = '';
+  }
   
-  renderWorkPreviews();
+  renderWorkPreviews(); 
   $('createModalTitle').innerHTML = '<i data-lucide="edit-3"></i> تعديل البطاقة';
-  $('saveBtn').onclick = () => saveEditedCard(id);
-  $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
-  editingCardId = id; openModal('createModal'); icons();
+  $('saveBtn').onclick = () => saveEditedCard(id); 
+  $('saveBtn').disabled = false; 
+  $('saveBtn').innerHTML = '<i data-lucide="save"></i> حفظ التعديلات';
+  editingCardId = id; 
+  openModal('createModal'); 
+  icons(); 
 }
 
-async function saveEditedCard(id){
-  const name = $('cName').value.trim();
-  const phone = $('cPhone').value.trim().replace(/[\s()-]/g,'');
-  const province = $('cProv').value;
-  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim();
-  const desc = $('cDesc').value.trim();
-  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error');
-  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح','error');
-  if(!profession) return toast('اختر مهنتك','error');
-  if(workImgsData.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error');
+async function saveEditedCard(id){ 
+  const name = $('cName').value.trim(); 
+  const phone = $('cPhone').value.trim().replace(/[\s()-]/g,''); 
+  const province = $('cProv').value; 
+  let profession = $('cProf').value; if(profession==='أخرى') profession = $('cProfOther').value.trim(); 
+  const desc = $('cDesc').value.trim(); 
+  if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
+  if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
+  if(!profession) return toast('اختر مهنتك','error'); 
+  if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
-  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = 'جاري التحديث...';
-  try{
+  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
+  
+  try{ 
     const isAdmin = isUserAdmin(currentUser);
-    const cardData = { name, phone, province, profession, desc, avatar: avaImgData||null, images: workImgsData, isAdminCard: isAdmin };
-    if(currentUser) { cardData.ownerUid = currentUser.uid; cardData.ownerEmail = currentUser.email; }
-    await db.collection('cards').doc(id).update(cardData);
-    closeModal('createModal', true);
-    toast('تم تحديث بطاقتك بنجاح! ✨'); await loadCards();
-  } catch(e){ toast('تعذر التحديث: ' + e.message, 'error'); }
-  finally{ btn.disabled = false; btn.innerHTML = orig; icons(); }
+    const cardData = { name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs, isAdminCard: isAdmin };
+    if(currentUser) {
+      cardData.ownerUid = currentUser.uid;
+      cardData.ownerEmail = currentUser.email;
+    }
+    await db.collection('cards').doc(id).update(cardData); 
+    closeModal('createModal'); 
+    ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = '');
+    $('cProf').selectedIndex = 0; 
+    toast('تم تحديث بطاقتك بنجاح! ✨'); 
+    await loadCards(); 
+  } catch(e){ 
+    console.error(e);
+    toast('تعذر التحديث: ' + (e.message || 'يرجى التأكد من الاتصال بالحساب الصحيح'), 'error'); 
+  } finally{ 
+    btn.disabled = false; btn.innerHTML = orig; icons(); 
+  } 
 }
 
-function quickDeleteCard(event, id){
-  event.preventDefault(); event.stopPropagation();
-  const c = CARDS.find(x => x.id === id); if(!c) return;
-  const isOwner = currentUser && currentUser.uid === c.ownerUid;
+function quickDeleteCard(event, id){ 
+  event.preventDefault(); event.stopPropagation(); 
+  const c = CARDS.find(x => x.id === id); if(!c) return; 
+  const isOwner = currentUser && currentUser.uid === c.ownerUid; 
+  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session); 
+  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لحذف هذه البطاقة','error'); 
+  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) deleteCardById(id); 
+}
+
+async function deleteCardById(id){ 
+  try{ 
+    await db.collection('cards').doc(id).delete(); 
+    closeModal('detailModal');
+    toast('تم حذف البطاقة'); await loadCards(); 
+    if(parseHash() === 'admin') renderAdminStats(); 
+  } catch(e){ toast(e.message,'error'); } 
+}
+
+function showAdmin(){ 
   const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
-  if(!isOwner && !isAdmin) return toast('ليس لديك صلاحية لتعديل أو حذف هذه البطاقة','error');
-  if(confirm('هل أنت متأكد من حذف هذه البطاقة نهائيا؟')) deleteCardById(id);
-}
-
-async function deleteCardById(id){
-  try{
-    await db.collection('cards').doc(id).delete();
-    closeModal('detailModal', true);
-    toast('تم حذف البطاقة'); await loadCards();
-    if(parseHash() === 'admin') renderAdminStats();
-  } catch(e){ toast(e.message,'error'); }
-}
-
-function showAdmin(){
-  const isAdmin = isUserAdmin(currentUser) || isUserAdmin(session);
-  if(!isAdmin){ toast('هذه الصفحة للإدارة فقط','error'); location.hash = ''; return; }
+  if(!isAdmin){ toast('هذه الصفحة للإدارة فقط','error'); location.hash = ''; return; } 
   $('adminSec').style.display = ''; renderAdminStats(); renderAdminList($('adminQ').value.trim()); renderAssistantsList();
-  window.scrollTo({ top: $('adminSec').offsetTop - 80, behavior: 'smooth' });
+  window.scrollTo({ top: $('adminSec').offsetTop - 80, behavior: 'smooth' }); 
 }
 function hideAdmin(){ $('adminSec').style.display = 'none'; }
 
 function addAssistant(){
   const email = $('newAssistantEmail').value.trim().toLowerCase();
   if(!email || !email.includes('@')) return toast('أدخل بريد إلكتروني صحيح','error');
-  if(ASSISTANTS.includes(email)) return toast('هذا البريد مضاف مسبقاً','error');
-  ASSISTANTS.push(email); localStorage.setItem('kl_assistants', JSON.stringify(ASSISTANTS));
-  $('newAssistantEmail').value = ''; renderAssistantsList(); toast('✅ تم إضافة المساعد بنجاح');
+  if(ASSISTANTS.includes(email)) return toast('هذا البريد مضاف مسبقاً كمساعد','error');
+  ASSISTANTS.push(email);
+  localStorage.setItem('kl_assistants', JSON.stringify(ASSISTANTS));
+  $('newAssistantEmail').value = '';
+  renderAssistantsList();
+  toast('✅ تم إضافة المساعد بنجاح');
 }
+
 function removeAssistant(email){
-  ASSISTANTS = ASSISTANTS.filter(e => e !== email); localStorage.setItem('kl_assistants', JSON.stringify(ASSISTANTS));
-  renderAssistantsList(); toast('تم إزالة صلاحية المساعد');
+  ASSISTANTS = ASSISTANTS.filter(e => e !== email);
+  localStorage.setItem('kl_assistants', JSON.stringify(ASSISTANTS));
+  renderAssistantsList();
+  toast('تم إزالة صلاحية المساعد');
 }
+
 function renderAssistantsList(){
   const listEl = $('assistantsList');
   if(!ASSISTANTS.length){ listEl.innerHTML = '<i>لا يوجد مساعدين إضافيين حالياً</i>'; return; }
   listEl.innerHTML = '<b>المساعدون الحاليون:</b><div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">' +
-    ASSISTANTS.map(e => `<span style="background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:.2rem .8rem;font-size:.8rem">${e} <button onclick="removeAssistant('${e}')" style="color:var(--red);cursor:pointer">&times;</button></span>`).join('') + '</div>';
+    ASSISTANTS.map(e => `<span style="background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:.2rem .8rem;font-size:.8rem;display:inline-flex;align-items:center;gap:.4rem">${e} <button onclick="removeAssistant('${e}')" style="color:var(--red);cursor:pointer">&times;</button></span>`).join('') + '</div>';
 }
-function renderAdminStats(){
-  $('adTotal').textContent = CARDS.length;
-  $('adProvs').textContent = new Set(CARDS.map(c => c.province)).size;
-  $('adCats').textContent = new Set(CARDS.map(c => c.profession)).size;
-  $('adImgs').textContent = CARDS.reduce((s, c) => s + (c.images || []).length, 0);
+
+function renderAdminStats(){ 
+  $('adTotal').textContent = CARDS.length; 
+  $('adProvs').textContent = new Set(CARDS.map(c => c.province)).size; 
+  $('adCats').textContent = new Set(CARDS.map(c => c.profession)).size; 
+  $('adImgs').textContent = CARDS.reduce((s, c) => s + (c.images || []).length, 0); 
 }
+
 let adminDb = null;
 function adminSearch(v){ clearTimeout(adminDb); adminDb = setTimeout(() => renderAdminList(v.trim()), 200); }
-function renderAdminList(q){
-  let list = CARDS;
-  if(q){
-    const query = q.toLowerCase().replace('id:', '').trim();
-    list = list.filter(c => (String(c.numId).includes(query) || c.name.toLowerCase().includes(query) || c.phone.includes(query) || c.profession.toLowerCase().includes(query)));
-  }
-  $('adminList').innerHTML = list.map(c =>
-    '<div class="arow"><img class="mini-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' +
-    '<div class="awho"><b>' + esc(c.name) + '</b><span>' +
-    '<span>ID: ' + c.numId + '</span><span>' + esc(c.profession) + '</span><span>' + esc(c.province) + '</span><span>' + esc(c.phone) + '</span></span></div>' +
-    '<div style="display:flex;gap:.4rem"><button class="abtn del" onclick="delCard(\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف</button></div></div>'
-  ).join('') || '<div class="empty-state">لا نتائج مطابقة</div>';
-  icons();
+
+function renderAdminList(q){ 
+  let list = CARDS; 
+  if(q){ 
+    const query = q.toLowerCase().replace('id:', '').trim(); 
+    list = list.filter(c => (String(c.numId).includes(query) || c.name.toLowerCase().includes(query) || c.phone.includes(query) || c.profession.toLowerCase().includes(query))); 
+  } 
+  $('adminList').innerHTML = list.map(c => 
+    '<div class="arow"><img class="mini-ava" src="' + (c.avatar || 'logo5.png') + '" onerror="this.src=\'logo5.png\'">' + 
+    '<div class="awho"><b>' + esc(c.name) + '</b><span>' + 
+    '<span><i data-lucide="hash"></i> ID: ' + c.numId + '</span><span><i data-lucide="wrench"></i> ' + esc(c.profession) + '</span>' + 
+    '<span><i data-lucide="map-pin"></i> ' + esc(c.province) + '</span><span><i data-lucide="phone"></i> ' + esc(c.phone) + '</span>' + 
+    '<span><i data-lucide="images"></i> ' + (c.images || []).length + ' صورة</span></span></div>' + 
+    '<div style="display:flex;gap:.4rem;flex-wrap:wrap"><a class="abtn call" href="' + telLink(c.phone) + '"><i data-lucide="phone"></i> اتصال</a>' + 
+    '<a class="abtn wa" href="' + waLink(c.phone, c.name) + '" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> واتساب</a>' + 
+    '<button class="abtn del" onclick="delCard(\'' + c.id + '\')"><i data-lucide="trash-2"></i> حذف المنشور</button></div></div>' 
+  ).join('') || '<div class="empty-state"><i data-lucide="users"></i>لا نتائج مطابقة</div>'; 
+  icons(); 
 }
-async function delCard(id){
-  if(!confirm('حذف هذه البطاقة نهائيا؟')) return;
-  try{ await db.collection('cards').doc(id).delete(); toast('تم حذف المنشور'); await loadCards(); renderAdminStats(); renderAdminList($('adminQ').value.trim()); }
-  catch(e){ toast(e.message,'error'); }
+
+async function delCard(id){ 
+  if(!confirm('حذف هذه البطاقة نهائيا؟ لا يمكن التراجع.')) return; 
+  try{ 
+    await db.collection('cards').doc(id).delete(); 
+    toast('تم حذف المنشور'); await loadCards(); renderAdminStats(); renderAdminList($('adminQ').value.trim()); 
+  } catch(e){ toast(e.message,'error'); } 
 }
+
+function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id){ $(id).classList.remove('open'); document.body.style.overflow = ''; }$$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) closeModal(o.id); }));
 
 /* Lightbox */
 let lbImgs=[], lbIdx=0, lbScale=1, lbX=0, lbY=0, lbIsDragging=false, lbLastTap=0, lbTouchStart={x:0,y:0}, lbPinchDist=0;
 let isLightboxActive = false;
+
 function initLightbox(){
   const stage = $('lbStage');
-  stage.addEventListener('touchstart', e=>{
-    if(e.touches.length===1){ lbTouchStart={x:e.touches[0].clientX, y:e.touches[0].clientY}; lbLastTap=Date.now(); lbIsDragging=true; }
-    else if(e.touches.length===2){ lbPinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY); lbIsDragging=false; }
-  }, {passive:false});
-  stage.addEventListener('touchmove', e=>{
-    e.preventDefault();
-    if(e.touches.length===1 && lbIsDragging && lbScale>1){
-      lbX+=e.touches[0].clientX-lbTouchStart.x; lbY+=e.touches[0].clientY-lbTouchStart.y;
-      lbTouchStart={x:e.touches[0].clientX, y:e.touches[0].clientY}; applyTransform();
+  stage.addEventListener('touchstart', handleTouchStart, {passive:false});
+  stage.addEventListener('touchmove', handleTouchMove, {passive:false});
+  stage.addEventListener('touchend', handleTouchEnd);
+  stage.addEventListener('mousedown', handleMouseDown);
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
+  stage.addEventListener('wheel', handleWheel, {passive:false});
+  window.addEventListener('popstate', (e) => {
+    if(isLightboxActive){
+      isLightboxActive = false;
+      $('lightbox').classList.remove('active');
+      history.pushState({modalOpen: true}, '');
     }
-  }, {passive:false});
-  stage.addEventListener('touchend', ()=>{ lbIsDragging=false; lbPinchDist=0; });
-  stage.addEventListener('mousedown', e=>{ if(e.button===0){ lbTouchStart={x:e.clientX, y:e.clientY}; lbIsDragging=true; $('lbStage').classList.add('grabbing'); }});
-  window.addEventListener('mousemove', e=>{ if(!lbIsDragging || lbScale<=1) return; lbX+=e.clientX-lbTouchStart.x; lbY+=e.clientY-lbTouchStart.y; lbTouchStart={x:e.clientX, y:e.clientY}; applyTransform(); });
-  window.addEventListener('mouseup', ()=>{ lbIsDragging=false; $('lbStage').classList.remove('grabbing'); });
+  });
 }
+
+function handleTouchStart(e){
+  if(e.touches.length === 1){
+    lbTouchStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
+    lbLastTap = Date.now(); lbIsDragging = true;
+  } else if(e.touches.length === 2){
+    lbPinchDist = getDistance(e.touches[0], e.touches[1]); lbIsDragging = false;
+  }
+}
+
+function handleTouchMove(e){
+  e.preventDefault();
+  if(e.touches.length === 1 && lbIsDragging){
+    if(lbScale > 1){
+      lbX += e.touches[0].clientX - lbTouchStart.x;
+      lbY += e.touches[0].clientY - lbTouchStart.y;
+      lbTouchStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
+      applyTransform();
+    }
+  } else if(e.touches.length === 2){
+    const dist = getDistance(e.touches[0], e.touches[1]);
+    if(lbPinchDist > 0){
+      lbScale = Math.max(1, Math.min(5, lbScale * (dist / lbPinchDist)));
+      applyTransform(); lbPinchDist = dist;
+    }
+  }
+}
+
+function handleTouchEnd(e){
+  lbIsDragging = false; lbPinchDist = 0;
+  if((Date.now() - lbLastTap) < 300 && e.changedTouches.length === 1){
+    if(lbScale > 1) resetZoom();
+    else { lbScale = 2.5; applyTransform(); }
+  }
+}
+
+function handleMouseDown(e){
+  if(e.button !== 0) return;
+  lbTouchStart = {x:e.clientX, y:e.clientY}; lbIsDragging = true;
+  $('lbStage').classList.add('grabbing');
+}
+
+function handleMouseMove(e){
+  if(!lbIsDragging) return;
+  if(lbScale > 1){
+    lbX += e.clientX - lbTouchStart.x;
+    lbY += e.clientY - lbTouchStart.y;
+    lbTouchStart = {x:e.clientX, y:e.clientY};
+    applyTransform();
+  }
+}
+
+function handleMouseUp(){ lbIsDragging = false; $('lbStage').classList.remove('grabbing'); }
+function handleWheel(e){
+  e.preventDefault();
+  lbScale = Math.max(1, Math.min(5, lbScale * (e.deltaY < 0 ? 1.15 : 0.87)));
+  if(lbScale === 1){ lbX=0; lbY=0; }
+  applyTransform();
+}
+
+function getDistance(t1, t2){ return Math.sqrt(Math.pow(t2.clientX-t1.clientX,2) + Math.pow(t2.clientY-t1.clientY,2)); }
 function applyTransform(){ $('lbImg').style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`; }
-function resetZoom(){ lbScale=1; lbX=0; lbY=0; applyTransform(); }
-function lbZoomIn(){ lbScale=Math.min(5, lbScale*1.3); applyTransform(); }
-function lbZoomOut(){ lbScale=Math.max(1, lbScale/1.3); if(lbScale===1){lbX=0;lbY=0;} applyTransform(); }
+function resetZoom(){ lbScale = 1; lbX = 0; lbY = 0; applyTransform(); }
+function lbZoomIn(){ lbScale = Math.min(5, lbScale * 1.3); applyTransform(); }
+function lbZoomOut(){ lbScale = Math.max(1, lbScale / 1.3); if(lbScale === 1){ lbX=0; lbY=0; } applyTransform(); }
 function lbReset(){ resetZoom(); }
 
-function openLightboxById(cardId, imageIndex){
+function openLightboxById(cardId, imageIndex) {
   const card = CARDS.find(c => c.id === cardId);
   if (!card || !card.images || !card.images.length) return;
-  lbImgs = card.images.map(item => typeof item==='string'?item:item.url);
-  lbIdx = imageIndex || 0; resetZoom();
-  isLightboxActive = true; history.pushState({lightbox:true},'');
-  $('lightbox').classList.add('active'); renderLightboxContent(); icons();
+  lbImgs = card.images; lbIdx = imageIndex || 0;
+  resetZoom();
+  isLightboxActive = true;
+  history.pushState({lightbox: true}, '');
+  $('lightbox').classList.add('active');
+  renderLightboxContent(); icons();
 }
-function renderLightboxContent(){ $('lbImg').src = lbImgs[lbIdx];$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`; }
-function closeLightbox(goBack=true){
-  if(!isLightboxActive) return; isLightboxActive=false; $('lightbox').classList.remove('active');
-  if(goBack && history.state && history.state.lightbox) history.back();
+
+function renderLightboxContent(){
+  $('lbImg').src = lbImgs[lbIdx];$('lbCounter').textContent = `${lbIdx+1} / ${lbImgs.length}`;
 }
+
+function closeLightbox(goBack = true){
+  if(!isLightboxActive) return;
+  isLightboxActive = false;
+  $('lightbox').classList.remove('active');
+  if(goBack){ history.back(); }
+}
+
 setTimeout(initLightbox, 100);
 
-/* الأذكار والسلايدر */
+/* الأذكار */
 let dhikrIdx=0,dhikrTimer=null;
 function buildDhikrDots(){ $('dhikrDots').innerHTML=DHIKR.map((_,i)=>'<i class="'+(i===0?'on':'')+'"></i>').join(''); }
-function showDhikr(i){
-  dhikrIdx=i; const q=$('dhikrQuote'); q.classList.add('fade');
-  setTimeout(()=>{ q.textContent=DHIKR[i].t; $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; q.classList.remove('fade');$$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); },450);
+function showDhikr(i){ 
+  dhikrIdx=i; const q=$('dhikrQuote'); q.classList.add('fade'); 
+  setTimeout(()=>{ 
+    q.textContent=DHIKR[i].t; $('dhikrSrc').textContent='— '+DHIKR[i].s+' —'; q.classList.remove('fade');$$('#dhikrDots i').forEach((d,k)=>d.classList.toggle('on',k===i)); 
+  },450); 
 }
-function startDhikr(){ buildDhikrDots(); showDhikr(0); clearInterval(dhikrTimer); dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); }
+function startDhikr(){ 
+  buildDhikrDots(); showDhikr(0); clearInterval(dhikrTimer); 
+  dhikrTimer=setInterval(()=>showDhikr((dhikrIdx+1)%DHIKR.length),5000); 
+}
 
-let currentSlideIndex=0, slideTimer=null;
-function initSlider(){
-  const slides=document.querySelectorAll('.slider-slide'), dotsContainer=document.getElementById('sliderDots');
-  if(!slides.length) return; dotsContainer.innerHTML='';
-  slides.forEach((_,i)=>{ const dot=document.createElement('div'); dot.className=`slider-dot ${i===0?'active':''}`; dot.onclick=()=>goToSlide(i); dotsContainer.appendChild(dot); });
-  startSlideTimer();
-}
-function nextSlide(){
-  const slides=document.querySelectorAll('.slider-slide'), dots=document.querySelectorAll('.slider-dot');
-  if(!slides.length) return; slides[currentSlideIndex].classList.remove('active');
-  currentSlideIndex=(currentSlideIndex+1)%slides.length; slides[currentSlideIndex].classList.add('active');
-  dots.forEach((dot,idx)=>dot.classList.toggle('active', idx===currentSlideIndex));
-}
-function goToSlide(index){
-  const slides=document.querySelectorAll('.slider-slide'), dots=document.querySelectorAll('.slider-dot');
-  slides[currentSlideIndex].classList.remove('active'); currentSlideIndex=index; slides[currentSlideIndex].classList.add('active');
-  dots.forEach((dot,idx)=>dot.classList.toggle('active', idx===currentSlideIndex)); startSlideTimer();
-}
-function startSlideTimer(){ clearInterval(slideTimer); slideTimer=setInterval(nextSlide,3000); }
+/* Slider */
+let currentSlideIndex = 0;
+let slideTimer = null;
 
-async function boot(){
-  tickClock();
-  $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:');
-  startDhikr(); initSlider(); icons(); route();
-  try{ await loadCards(); }catch(e){ $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر جلب البيانات من الخادم.'); }
+function initSlider() {
+    const slides = document.querySelectorAll('.slider-slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    if (!slides.length) return;
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    });
+    startSlideTimer();
 }
-window.addEventListener('DOMContentLoaded', boot);
+
+function nextSlide() {
+    const slides = document.querySelectorAll('.slider-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    if (!slides.length) return;
+    slides[currentSlideIndex].classList.remove('active');
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    slides[currentSlideIndex].classList.add('active');
+    dots.forEach((dot, idx) => { dot.classList.toggle('active', idx === currentSlideIndex); });
+}
+
+function goToSlide(index) {
+    if (index === currentSlideIndex) return;
+    const slides = document.querySelectorAll('.slider-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    slides[currentSlideIndex].classList.remove('active');
+    currentSlideIndex = index;
+    slides[currentSlideIndex].classList.add('active');
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlideIndex));
+    restartSlideTimer();
+}
+
+function startSlideTimer() { clearInterval(slideTimer); slideTimer = setInterval(nextSlide, 3000); }
+function restartSlideTimer() { startSlideTimer(); }
+
+document.addEventListener('DOMContentLoaded', () => { initSlider(); });
+
+async function boot(){ 
+  tickClock(); 
+  $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
+  startDhikr(); 
+  try{ await loadCards(); }catch(e){ $('allCardsContainer').innerHTML=emptyState('wifi-off','تعذر الاتصال بالخادم — تأكد من الإنترنت وحدّث الصفحة.'); } 
+  icons(); route(); 
+}
+window.addEventListener('load',boot);
 </script>
 </body>
 </html>
