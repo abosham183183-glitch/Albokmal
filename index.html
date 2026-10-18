@@ -11,6 +11,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
 <!-- 🧠 بيانات مهيكلة شاملة لمحركات البحث والذكاء الاصطناعي (AI & Schema Markup) -->
 <script type="application/ld+json">
@@ -824,6 +825,7 @@ const MAX_TOTAL_IMGS = 50, MAX_DAILY_IMGS = 3;
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 const PROVINCES = ['دمشق','ريف دمشق','حلب','حمص','حماة','اللاذقية','طرطوس','إدلب','درعا','السويداء','القنيطرة','الرقة','الحسكة','دير الزور'];
 const PROV_ICONS = {'دمشق':'landmark','ريف دمشق':'trees','حلب':'building-2','حمص':'mountain','حماة':'waves','اللاذقية':'palmtree','طرطوس':'anchor','إدلب':'castle','درعا':'wheat','السويداء':'volcano','القنيطرة':'flag','الرقة':'sun','الحسكة':'grapes','دير الزور':'ship-wheel'};
@@ -834,11 +836,13 @@ let CARDS = [];
 let ASSISTANTS = JSON.parse(localStorage.getItem('kl_assistants') || '[]');
 let currentUser = null;
 let session = null;
+let workFiles = [], avaFile = null;
 let workImgs = [], avaImg = null;
 let curDetail = null;
 let dailyUsed = 0, totalUsed = 0;
 let editingCardId = null;
 let pendingAction = null;
+let profileAvatarFile = null;
 let profileAvatarData = null;
 
 const $ = id => document.getElementById(id);
@@ -1034,7 +1038,7 @@ function compress(file,max,q){
         const m=Math.min(1,max/Math.max(im.width,im.height)); 
         c.width=Math.round(im.width*m); c.height=Math.round(im.height*m); 
         c.getContext('2d').drawImage(im,0,0,c.width,c.height); 
-        res(c.toDataURL('image/jpeg',q)); 
+        c.toBlob(blob => { res(blob); }, 'image/jpeg', q);
       }; 
       im.src=e.target.result; 
     }; 
@@ -1044,30 +1048,44 @@ function compress(file,max,q){
 
 function onAvaPick(inp){ 
   const f=inp.files[0]; inp.value=''; if(!f)return; 
-  compress(f,240,.72).then(d=>{ 
-    avaImg=d; $('avaPreview').innerHTML='<div class="pv"><img src="'+d+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; icons(); 
+  compress(f,240,.72).then(blob=>{ 
+    avaFile = blob; 
+    const r = new FileReader();
+    r.onload = e => {
+      avaImg = e.target.result;
+      $('avaPreview').innerHTML='<div class="pv"><img src="'+avaImg+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaFile=null;avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+      icons();
+    };
+    r.readAsDataURL(blob);
   }).catch(()=>toast('تعذرت معالجة الصورة','error')); 
 }
 
 function onWorkPick(inp){ 
-  const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
+  const room=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workFiles.length); 
   const files=[...inp.files].slice(0,Math.max(0,room)); inp.value=''; 
   if(files.length===0){ toast('وصلت للحد اليومي (3 صور) أو الكلي (50). يمكنك طلب زيادة اليوم التالي','error'); return; } 
   files.forEach(f=>{ 
     if(!f.type.startsWith('image/')){ toast('ملف غير مدعوم','error'); return; } 
-    compress(f,560,.62).then(d=>{ workImgs.push(d); renderWorkPreviews(); }) 
-      .catch(()=>toast('تعذرت معالجة صورة','error')); 
+    compress(f,560,.62).then(blob=>{ 
+      workFiles.push(blob); 
+      const r = new FileReader();
+      r.onload = e => {
+        workImgs.push(e.target.result);
+        renderWorkPreviews();
+      };
+      r.readAsDataURL(blob);
+    }).catch(()=>toast('تعذرت معالجة صورة','error')); 
   }); 
 }
 
 function renderWorkPreviews(){ 
-  const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workImgs.length); 
-  let noteHtml = 'اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workImgs.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة';
+  const remaining=Math.min(MAX_DAILY_IMGS-dailyUsed,MAX_TOTAL_IMGS-totalUsed-workFiles.length); 
+  let noteHtml = 'اليوم: <b>'+dailyUsed+'</b> / '+MAX_DAILY_IMGS+' صور · المجموع الكلي: <b>'+(totalUsed+workFiles.length)+'</b> / '+MAX_TOTAL_IMGS+' صورة';
   if(remaining<=0 || dailyUsed>=MAX_DAILY_IMGS){
     noteHtml += ' · <button type="button" class="next-day-btn" onclick="requestNextDayImages()"><i data-lucide="sun"></i> رفع صور لليوم التالي</button>';
   }
   $('workNote').innerHTML = noteHtml; 
-  $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workImgs.splice('+i+',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
+  $('previews').innerHTML = workImgs.map((u,i)=>'<div class="pv"><img src="'+u+'" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="workFiles.splice('+i.',1);workImgs.splice('+i.',1);renderWorkPreviews()"><i data-lucide="x"></i></button></div>').join(''); 
   icons(); 
 }
 
@@ -1152,13 +1170,21 @@ function loadProfileData(){
   const myFirstCard = CARDS.find(c => c.ownerUid === currentUser.uid);
   if(myFirstCard){ $('pfPhone').value = myFirstCard.phone; $('pfAvatar').src = myFirstCard.avatar || 'logo5.png'; }
   else { $('pfPhone').value = ''; $('pfAvatar').src = 'logo5.png'; }
-  profileAvatarData = null; icons();
+  profileAvatarFile = null; profileAvatarData = null; icons();
 }
 
 function onProfileAvatarPick(inp){
   const f = inp.files[0]; inp.value=''; if(!f) return;
-  compress(f, 240, .72).then(d => { profileAvatarData = d; $('pfAvatar').src = d; toast('تم تحميل الصورة الجديدة ✓'); })
-    .catch(()=>toast('تعذرت معالجة الصورة','error'));
+  compress(f, 240, .72).then(blob => { 
+    profileAvatarFile = blob;
+    const r = new FileReader();
+    r.onload = e => {
+      profileAvatarData = e.target.result;
+      $('pfAvatar').src = profileAvatarData; 
+      toast('تم تحميل الصورة الجديدة ✓'); 
+    };
+    r.readAsDataURL(blob);
+  }).catch(()=>toast('تعذرت معالجة الصورة','error'));
 }
 
 async function saveProfile(event){
@@ -1171,12 +1197,18 @@ async function saveProfile(event){
   btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الحفظ والمزامنة...';
   try {
     await currentUser.updateProfile({ displayName: newName });
+    let finalAvatarUrl = null;
+    if(profileAvatarFile){
+      const storageRef = storage.ref().child('avatars/' + currentUser.uid + '_' + Date.now() + '.jpg');
+      await storageRef.put(profileAvatarFile);
+      finalAvatarUrl = await storageRef.getDownloadURL();
+    }
     const userCards = CARDS.filter(c => c.ownerUid === currentUser.uid);
     const batch = db.batch();
     userCards.forEach(cardDoc => {
       const ref = db.collection('cards').doc(cardDoc.id);
       const updates = { name: newName, phone: newPhone };
-      if(profileAvatarData) updates.avatar = profileAvatarData;
+      if(finalAvatarUrl) updates.avatar = finalAvatarUrl;
       batch.update(ref, updates);
     });
     await batch.commit();
@@ -1198,7 +1230,7 @@ function openCreate(){
     return;
   }
   populateSelects();
-  workImgs = []; avaImg = null; dailyUsed = 0; totalUsed = 0; 
+  workFiles = []; workImgs = []; avaFile = null; avaImg = null; dailyUsed = 0; totalUsed = 0; 
   $('previews').innerHTML = ''; $('avaPreview').innerHTML = ''; renderWorkPreviews(); editingCardId = null; 
   $('createModalTitle').innerHTML = '<i data-lucide="credit-card"></i> أنشئ بطاقتك المهنية';
   $('saveBtn').onclick = submitCard; $('saveBtn').disabled = false; $('saveBtn').innerHTML = '<i data-lucide="rocket"></i> انشر بطاقتي';
@@ -1225,24 +1257,45 @@ async function submitCard(){
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
   if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
-  if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
-  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري النشر...'; 
+  if(workFiles.length < 1 && workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
+  
+  const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري الرفع والنشر...'; 
   try{ 
     const todayStr = new Date().toISOString().slice(0,10); 
     const dSnap = await db.collection('daily').doc(phone).get(); 
     const dData = dSnap.exists ? dSnap.data() : {}; 
     const usedToday = (dData.date===todayStr) ? (dData.count||0) : 0; 
     const usedTotal = dData.total || 0; 
-    if(usedToday + workImgs.length > MAX_DAILY_IMGS && !editingCardId && !isAdmin) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
-    if(usedTotal + workImgs.length > MAX_TOTAL_IMGS && !isAdmin) return toast('وصلت للحد الكلي 50 صورة','error'); 
+    if(usedToday + workFiles.length > MAX_DAILY_IMGS && !editingCardId && !isAdmin) return toast('يمكنك رفع 3 صور فقط يوميا — لديك '+usedToday+' اليوم','error'); 
+    if(usedTotal + workFiles.length > MAX_TOTAL_IMGS && !isAdmin) return toast('وصلت للحد الكلي 50 صورة','error'); 
+    
+    let finalAvatarUrl = avaImg;
+    if(avaFile){
+      const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
+      await avRef.put(avaFile);
+      finalAvatarUrl = await avRef.getDownloadURL();
+    }
+    
+    let finalImageUrls = [];
+    for(let i=0; i<workFiles.length; i++){
+      const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
+      await imgRef.put(workFiles[i]);
+      const url = await imgRef.getDownloadURL();
+      finalImageUrls.push(url);
+    }
+    // Keep existing workImgs if editing and no new files added
+    if(workFiles.length === 0 && workImgs.length > 0){
+      finalImageUrls = workImgs;
+    }
+
     const numId = 100000 + Math.floor(Math.random()*900000); 
     const id = 'k' + Date.now(); 
     await db.collection('cards').doc(id).set({
       numId, name, phone, province, profession, desc,
-      avatar: avaImg||null, images: workImgs, ownerUid: currentUser.uid, ownerEmail: currentUser.email, isAdminCard: isAdmin, createdAt: Date.now()
+      avatar: finalAvatarUrl||null, images: finalImageUrls, ownerUid: currentUser.uid, ownerEmail: currentUser.email, isAdminCard: isAdmin, createdAt: Date.now()
     }); 
     await db.collection('daily').doc(phone).set({
-      date: todayStr, count: usedToday + workImgs.length, total: usedTotal + workImgs.length
+      date: todayStr, count: usedToday + workFiles.length, total: usedTotal + workFiles.length
     }, { merge: true }); 
     closeModal('createModal'); 
     ['cName','cPhone','cProfOther','cDesc'].forEach(i => $(i).value = ''); 
@@ -1355,10 +1408,12 @@ function quickEditCard(event, id){
   
   $('cDesc').value = c.desc || ''; 
   avaImg = c.avatar || null; 
+  avaFile = null;
   workImgs = [...(c.images || [])]; 
+  workFiles = [];
   
   if(avaImg){
-    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
+    $('avaPreview').innerHTML = '<div class="pv"><img src="' + avaImg + '" onerror="this.src=\'logo5.png\'"><button class="rm" onclick="avaImg=null;avaFile=null;this.parentElement.remove()"><i data-lucide="x"></i></button></div>'; 
   } else {
     $('avaPreview').innerHTML = '';
   }
@@ -1382,13 +1437,28 @@ async function saveEditedCard(id){
   if(name.split(/\s+/).filter(Boolean).length < 3) return toast('اكتب اسمك الثلاثي كاملا','error'); 
   if(!/^09\d{8}$/.test(phone)) return toast('رقم الهاتف غير صحيح — مثال 09XXXXXXXX','error'); 
   if(!profession) return toast('اختر مهنتك','error'); 
-  if(workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
+  if(workFiles.length < 1 && workImgs.length < 1) return toast('أضف صورة عمل واحدة على الأقل','error'); 
   
   const btn = $('saveBtn'); const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري التحديث...'; 
   
   try{ 
+    let finalAvatarUrl = avaImg;
+    if(avaFile){
+      const avRef = storage.ref().child('cards_avatars/' + Date.now() + '_' + Math.random() + '.jpg');
+      await avRef.put(avaFile);
+      finalAvatarUrl = await avRef.getDownloadURL();
+    }
+
+    let finalImageUrls = [...workImgs];
+    for(let i=0; i<workFiles.length; i++){
+      const imgRef = storage.ref().child('cards_works/' + Date.now() + '_' + i + '.jpg');
+      await imgRef.put(workFiles[i]);
+      const url = await imgRef.getDownloadURL();
+      finalImageUrls.push(url);
+    }
+
     const isAdmin = isUserAdmin(currentUser);
-    const cardData = { name, phone, province, profession, desc, avatar: avaImg||null, images: workImgs, isAdminCard: isAdmin };
+    const cardData = { name, phone, province, profession, desc, avatar: finalAvatarUrl||null, images: finalImageUrls, isAdminCard: isAdmin };
     if(currentUser) {
       cardData.ownerUid = currentUser.uid;
       cardData.ownerEmail = currentUser.email;
