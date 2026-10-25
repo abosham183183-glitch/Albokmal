@@ -7,6 +7,7 @@
 <link rel="canonical" href="https://alkolhana.com/">
 <title>الكل هنا | منصة الحرفيين والمحافظات في سوريا</title>
 <link rel="icon" type="image/png" href="logo5.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -682,8 +683,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
     </section>
 
-    
-    
     <section class="section" id="provSec">
       <div class="sec-title"><i data-lucide="map-pin"></i> تصفّح حسب المحافظة</div>
       <p class="sec-sub">اضغط على أي محافظة لعرض كل البطاقات المنشورة فيها في صفحة مستقلة.</p>
@@ -915,7 +914,14 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 let imageStorage = null;
-try { imageStorage = firebase.storage(); } catch (storageInitError) { console.warn('Firebase Storage غير متاح حالياً؛ سيبقى التوافق مع الصور القديمة.', storageInitError); }
+try { imageStorage = firebase.storage(); } catch (storageInitError) { console.warn('Firebase Storage غير متاح حالياً', storageInitError); }
+
+// تسجيل Service Worker تلقائياً لكي يكتشفه PWABuilder بنجاح
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed: ', err));
+  });
+}
 
 async function uploadImageIfPossible(value, folder, ownerUid) {
   if (!value || typeof value !== 'string' || !value.startsWith('data:image/')) return value || null;
@@ -929,7 +935,7 @@ async function uploadImageIfPossible(value, folder, ownerUid) {
     const snapshot = await ref.put(blob, { contentType: blob.type || 'image/jpeg' });
     return await snapshot.ref.getDownloadURL();
   } catch (storageError) {
-    console.warn('تعذر رفع الصورة إلى Firebase Storage؛ تم الاحتفاظ بالتوافق مع Base64.', storageError);
+    console.warn('تعذر رفع الصورة إلى Firebase Storage', storageError);
     return value;
   }
 }
