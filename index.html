@@ -608,9 +608,88 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
 @media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:50px;height:50px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ═══════ الزر العائم لتنزيل التطبيق من اليسار ═══════ */
+.floating-download-btn {
+  position: fixed;
+  left: -160px;
+  bottom: 35px;
+  z-index: 999;
+  background: var(--surface, #FFFFFF);
+  border: 2px solid var(--gold, #F5C542);
+  border-radius: 0 20px 20px 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  animation: slideInAndOut 14s infinite ease-in-out;
+}
+
+.floating-download-btn:hover {
+  left: 0px !important;
+  animation-play-state: paused;
+  transform: scale(1.05);
+}
+
+@keyframes slideInAndOut {
+  0%, 10% { left: -160px; }    /* مختفٍ تماماً على اليسار */
+  22%, 58% { left: 0px; }     /* يظهر ويستقر لعدة ثوانٍ */
+  70%, 100% { left: -160px; } /* يعود للخلف ويختفي لأكثر من 5 ثوانٍ */
+}
+
+.floating-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: colorAndPulse 2s infinite ease-in-out;
+}
+
+@keyframes colorAndPulse {
+  0%, 100% { color: #1FA855; transform: scale(1); }    /* أخضر */
+  50% { color: #F5C542; transform: scale(1.25); }     /* أصفر ذهبي مع تكبير نابض */
+}
+
+.floating-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.floating-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: var(--navy, #0A1E3C);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .floating-download-btn {
+  background: var(--surface, #101B31);
+  border-color: var(--gold2, #FFD86B);
+}
+[data-theme="dark"] .floating-title {
+  color: var(--gold2, #FFD86B);
+}
 </style>
 </head>
 <body data-theme="light">
+
+<!-- زر التنزيل العائم من الجانب الأيسر -->
+<a href="#" id="floatingDownloadWidget" class="floating-download-btn" onclick="triggerAppDownload(event)">
+  <div class="floating-arrow">
+    <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
+  <div class="floating-content">
+    <span class="floating-title">تنزيل التطبيق</span>
+    <span style="font-size:0.65rem; color:var(--muted); font-weight:700;">اضغط للتحميل الفوري</span>
+  </div>
+</a>
 
 <header class="topbar">
   <div class="tbwrap">
@@ -660,7 +739,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
           </div>
         </div>
         <div class="hero-card-wrap">
-          <!-- الشعار المتوهج المصغر والمحدث بتصميم أزرق متناسق -->
           <div class="logo-wrapper">
               <div class="outer-ring"></div>
               <div class="inner-circle"></div>
@@ -790,7 +868,6 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
     <div class="sec-title"><i data-lucide="shield-check"></i> لوحة الإدارة</div>
     <div class="admin-hero"><h2><i data-lucide="shield-check"></i> مركز التحكم بالبطاقات</h2><p>ابحث عن أي بطاقة برقم الـ ID أو الاسم أو الهاتف، واحذف منشورات الأشخاص المخالفين نهائيا من المنصة.</p></div>
     
-    <!-- قسم إضافة مساعد -->
     <div style="background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 8px 24px var(--shadow)">
       <h3 style="font-size:1.1rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem"><i data-lucide="user-plus" style="color:var(--gold)"></i> إضافة مساعد جديد لوحة التحكم</h3>
       <div style="display:flex;gap:.6rem;flex-wrap:wrap">
@@ -916,11 +993,25 @@ const auth = firebase.auth();
 let imageStorage = null;
 try { imageStorage = firebase.storage(); } catch (storageInitError) { console.warn('Firebase Storage غير متاح حالياً', storageInitError); }
 
-// تسجيل Service Worker تلقائياً لكي يكتشفه PWABuilder بنجاح
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed: ', err));
   });
+}
+
+// دالة تنزيل ملف الـ APK عند الضغط على الزر العائم
+function triggerAppDownload(e) {
+  e.preventDefault();
+  const apkFileName = "الكل هنا.apk"; 
+  const downloadLink = document.createElement('a');
+  downloadLink.href = apkFileName;
+  downloadLink.download = "الكل هنا.apk";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  downloadLink.remove();
+  if(typeof toast === 'function') {
+    toast('📥 جاري بدء تنزيل تطبيق «الكل هنا» على جهازك...');
+  }
 }
 
 async function uploadImageIfPossible(value, folder, ownerUid) {
