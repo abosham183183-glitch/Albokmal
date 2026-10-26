@@ -5,7 +5,7 @@
   "description": "منصة الكل هنا تجمع الحرفيين وأصحاب المهن في سوريا، وتتيح البحث حسب المهنة والمحافظة والتواصل المباشر.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./",
+  "start_url": "./?homescreen=1",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
