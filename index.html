@@ -133,7 +133,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 
-/* ═══════ الشعار المصغر مع الإطارات المتوهجة الساطعة بدون خلفية خضراء ═══════ */
+/* ═══════ الشعار المصغر مع الإطارات المتوهجة الساطعة ═══════ */
 .logo-wrapper {
     position: relative;
     width: 145px;
@@ -151,9 +151,9 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     border-radius: 50%;
     background: conic-gradient(
         from 0deg, 
-        #3b82f6 0deg,   /* أزرق ساطع */
-        #ffffff 120deg, /* أبيض */
-        #f5c542 240deg, /* ذهبي */
+        #3b82f6 0deg,   
+        #ffffff 120deg, 
+        #f5c542 240deg, 
         #3b82f6 360deg
     );
     padding: 2.5px;
@@ -213,29 +213,14 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 }
 
 @keyframes ringGlowPulse {
-    0%, 100% {
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.7);
-    }
-    50% {
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.95), 0 0 18px rgba(245, 197, 66, 0.9);
-    }
+    0%, 100% { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.7); }
+    50% { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.95), 0 0 18px rgba(245, 197, 66, 0.9); }
 }
 
 @keyframes slideUpAndGlow {
-    0% {
-        transform: translateY(60px) scale(0.6);
-        opacity: 0;
-        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
-    }
-    50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9));
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
-    }
+    0% { transform: translateY(60px) scale(0.6); opacity: 0; filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9)); }
+    100% { transform: translateY(0) scale(1); opacity: 1; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)); }
 }
 
 /* SLIDER SECTION */
@@ -251,7 +236,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .slider-dot.active{background:var(--gold2);width:26px;border-radius:10px}
 @media(max-width:600px){.slider-container{height:220px}}
 
-/* About description and FAQ additions */
+/* About & FAQ */
 .about-intro{color:var(--muted);font-size:1rem;line-height:2;max-width:1000px;margin:-.3rem 0 1.35rem;font-weight:600}
 .faq-section{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.5rem;box-shadow:0 12px 34px var(--shadow)}
 .faq-intro{color:var(--muted);line-height:1.9;margin:-.25rem 0 1rem}
@@ -264,7 +249,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .faq-answer{padding:0 1.1rem 1rem 3.4rem;color:var(--muted);line-height:2;font-weight:600}
 @media(max-width:600px){.faq-section{padding:1rem}.faq-item summary{padding:.85rem;font-size:.94rem}.faq-answer{padding:0 .9rem .9rem 1rem}}
 
-/* About */
 .about{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:2rem 1.6rem;box-shadow:0 12px 34px var(--shadow);position:relative;overflow:hidden}
 .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;position:relative;z-index:1}
 .about-col h3{font-size:1.15rem;color:var(--navy);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
@@ -299,29 +283,14 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 /* Cards Base */
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;transition:.3s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 8px 22px var(--shadow);cursor:pointer;position:relative}
 
-/* بطاقات الأدمن (في شريط أفقي متحرك) */
-.card.admin-card{
-  width: 300px;
-  flex: none;
-  scroll-snap-align: start;
-}
+.card.admin-card{ width: 300px; flex: none; scroll-snap-align: start; }
 
 .admin-horizontal-grid{
-  display: flex;
-  gap: 1.2rem;
-  overflow-x: auto;
-  padding: .5rem .2rem 1.2rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gold) var(--line);
+  display: flex; gap: 1.2rem; overflow-x: auto; padding: .5rem .2rem 1.2rem;
+  scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--gold) var(--line);
 }
-.admin-horizontal-grid::-webkit-scrollbar{
-  height: 8px;
-}
-.admin-horizontal-grid::-webkit-scrollbar-thumb{
-  background: var(--blue);
-  border-radius: 99px;
-}
+.admin-horizontal-grid::-webkit-scrollbar{ height: 8px; }
+.admin-horizontal-grid::-webkit-scrollbar-thumb{ background: var(--blue); border-radius: 99px; }
 
 .card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 24px 48px var(--shadow)}
 .card-banner{height:6px;background:linear-gradient(90deg,var(--gold),var(--blue))}
@@ -330,7 +299,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .card-ava-wrapper{position:relative;width:62px;height:62px;flex:none}
 .card-ava{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--gold);position:relative;z-index:2}
 
-/* 🌟 دوائر التفاعل النبضي باللون الأخضر فقط */
 .card-ava-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--wa);animation:ringBreath 2.2s ease-in-out infinite;pointer-events:none}
 .card-ava-ring.r2{animation-delay:1.1s;border-color:var(--wa)}
 @keyframes ringBreath{0%{transform:scale(1);opacity:.9}50%{transform:scale(1.28);opacity:.25}100%{transform:scale(1);opacity:.9}}
@@ -376,43 +344,18 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .bento-label{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .bento-label svg{color:var(--gold);width:.9rem;height:.9rem}
 
-/* شريط العودة المخصص لصفحات المحافظات والمهن */
+/* شريط العودة */
 .cards-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--surface);
-  border: 1.5px solid var(--line);
-  border-radius: 16px;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 8px 24px var(--shadow);
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px;
+  padding: 1rem 1.2rem; margin-bottom: 1.5rem; box-shadow: 0 8px 24px var(--shadow); gap: 1rem; flex-wrap: wrap;
 }
 .back-btn {
-  background: var(--blue);
-  color: #fff;
-  border-radius: 12px;
-  padding: .6rem 1.2rem;
-  font-weight: 800;
-  font-size: .9rem;
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  transition: .2s;
-  cursor: pointer;
+  background: var(--blue); color: #fff; border-radius: 12px; padding: .6rem 1.2rem;
+  font-weight: 800; font-size: .9rem; display: inline-flex; align-items: center; gap: .5rem; transition: .2s; cursor: pointer;
 }
-.back-btn:hover {
-  background: var(--navy2);
-  transform: translateX(4px);
-}
-.cards-meta {
-  font-family: 'Cairo', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--navy);
-}
+.back-btn:hover { background: var(--navy2); transform: translateX(4px); }
+.cards-meta { font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--navy); }
 [data-theme="dark"] .cards-meta { color: var(--gold2); }
 
 /* Report & Dhikr */
@@ -579,11 +522,11 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 @keyframes fadeInOut{0%{opacity:0}10%{opacity:1}90%{opacity:1}100%{opacity:0}}
 
 /* Toast */
-.toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%) translateY(20px);background:var(--navy);color:#fff;padding:.8rem 1.5rem;border-radius:14px;font-weight:800;font-size:.9rem;z-index:500;opacity:0;visibility:hidden;transition:.35s;pointer-events:none;box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:88vw;display:flex;align-items:center;gap:.5rem}
+.toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%) translateY(20px);background:var(--navy);color:#fff;padding:.8rem 1.5rem;border-radius:14px;font-weight:800;font-size:.9rem;z-index:500;opacity:0;visibility:hidden;transition:.35s;pointer-events:none;box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:88vw;display:flex;align-items:center;gap:.5rem;text-align:right;line-height:1.5}
 .toast.show{opacity:1;visibility:visible;transform:translateX(50%) translateY(0)}
 .toast:empty{display:none !important}
 .toast:not(.show){opacity:0 !important;visibility:hidden !important;pointer-events:none !important}
-.toast svg{color:var(--gold2);width:1.1rem;height:1.1rem}
+.toast svg{color:var(--gold2);width:1.1rem;height:1.1rem;flex:none}
 .toast.error{background:var(--red)}
 .toast.error svg{color:#fff}
 
@@ -635,10 +578,20 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
   transform: scale(1.05);
 }
 
+/* إخفاء الزر العائم تلقائياً إذا تم فتح الموقع من داخل التطبيق المثبت */
+@media display-mode: standalone {
+  .floating-download-btn {
+    display: none !important;
+  }
+}
+.in-standalone .floating-download-btn {
+  display: none !important;
+}
+
 @keyframes slideInAndOut {
-  0%, 10% { left: -160px; }    /* مختفٍ تماماً على اليسار */
-  22%, 58% { left: 0px; }     /* يظهر ويستقر لعدة ثوانٍ */
-  70%, 100% { left: -160px; } /* يعود للخلف ويختفي لأكثر من 5 ثوانٍ */
+  0%, 10% { left: -160px; }
+  22%, 58% { left: 0px; }
+  70%, 100% { left: -160px; }
 }
 
 .floating-arrow {
@@ -649,8 +602,8 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 }
 
 @keyframes colorAndPulse {
-  0%, 100% { color: #1FA855; transform: scale(1); }    /* أخضر */
-  50% { color: #F5C542; transform: scale(1.25); }     /* أصفر ذهبي مع تكبير نابض */
+  0%, 100% { color: #1FA855; transform: scale(1); }
+  50% { color: #F5C542; transform: scale(1.25); }
 }
 
 .floating-content {
@@ -999,7 +952,17 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// دالة تنزيل ملف الـ APK عند الضغط على الزر العائم
+// دالة فحص ما إذا كان المستخدم يفتح التطبيق المثبت (Standalone) لإخفاء أيقونة التنزيل
+function checkStandaloneMode() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone || document.referrer.includes('android-app://');
+  if (isStandalone) {
+    document.body.classList.add('in-standalone');
+    const floatBtn = $('floatingDownloadWidget');
+    if (floatBtn) floatBtn.style.display = 'none';
+  }
+}
+
+// دالة تنزيل ملف الـ APK عند الضغط على الزر العائم وإظهار إشعار التثبيت
 function triggerAppDownload(e) {
   e.preventDefault();
   const apkFileName = "الكل هنا.apk"; 
@@ -1009,8 +972,10 @@ function triggerAppDownload(e) {
   document.body.appendChild(downloadLink);
   downloadLink.click();
   downloadLink.remove();
+  
+  // إظهار إشعار تفاعلي ومفصل لتوجيه المستخدم بعد التنزيل
   if(typeof toast === 'function') {
-    toast('📥 جاري بدء تنزيل تطبيق «الكل هنا» على جهازك...');
+    toast('📥 جاري بدء التنزيل... عند الانتهاء افتح مجلد (التنزيلات / ملفاتي) على هاتفك واضغط على الملف لإكمال التثبيت!');
   }
 }
 
@@ -1084,7 +1049,7 @@ const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s||'').replace(/[<>"']/g, m => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
 function icons(){ if(window.lucide) lucide.createIcons(); }
-function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),4000); }
+function toast(msg, type=''){ const t=$('toast'); t.className='toast'+(type?' '+type:''); t.innerHTML='<i data-lucide="'+(type==='error'?'alert-circle':'check-circle')+'"></i> '+msg; icons(); t.classList.add('show'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('show'),6000); }
 function waLink(phone,name){ let d=String(phone||'').replace(/\D/g,''); if(/^09\d{8}$/.test(d))d='963'+d.slice(1); return 'https://wa.me/'+d+'?text='+encodeURIComponent('مرحبا أستاذ '+name+'، وصلت لبطاقتك على منصة «الكل هنا» وبدي أستفسر 🙏'); }
 function telLink(phone){ return 'tel:+963'+String(phone||'').replace(/\D/g,'').replace(/^0/,''); }
 function trunc(s,n){ s=String(s||''); return s.length>n?s.slice(0,n)+'…':s; }
@@ -1969,6 +1934,7 @@ function restartSlideTimer() { startSlideTimer(); }
 document.addEventListener('DOMContentLoaded', () => { initSlider(); });
 
 async function boot(){ 
+  checkStandaloneMode();
   tickClock(); 
   $('supportWa').href='https://wa.me/'+SUPPORT_WA+'?text='+encodeURIComponent('مرحبا إدارة «الكل هنا» ⚡\nأريد تقديم شكوى أو استفسار:'); 
   startDhikr(); 
