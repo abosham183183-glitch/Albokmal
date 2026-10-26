@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="منصة الكل هنا تجمع الحرفيين وأصحاب المهن في سوريا، وتتيح البحث حسب المهنة والمحافظة والتواصل المباشر.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="canonical" href="https://alkolhana.com/">
 <title>الكل هنا | منصة الحرفيين والمحافظات في سوريا</title>
 <link rel="icon" type="image/png" href="logo5.png">
@@ -133,7 +136,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
 .btn-outline:hover{background:rgba(255,255,255,.16)}
 .hero-card-wrap{perspective:1200px;display:grid;place-items:center}
 
-/* ═══════ الشعار المصغر مع الإطارات المتوهجة الساطعة ═══════ */
+/* الشعار المصغر */
 .logo-wrapper {
     position: relative;
     width: 145px;
@@ -149,13 +152,7 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: conic-gradient(
-        from 0deg, 
-        #3b82f6 0deg,   
-        #ffffff 120deg, 
-        #f5c542 240deg, 
-        #3b82f6 360deg
-    );
+    background: conic-gradient(from 0deg, #3b82f6 0deg, #ffffff 120deg, #f5c542 240deg, #3b82f6 360deg);
     padding: 2.5px;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -175,10 +172,8 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    
     border: 2.5px solid transparent;
-    background-image: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%),
-                      conic-gradient(from 0deg, #3b82f6, #ffffff, #f5c542, #3b82f6);
+    background-image: radial-gradient(circle, var(--navy2) 0%, var(--navy) 100%), conic-gradient(from 0deg, #3b82f6, #ffffff, #f5c542, #3b82f6);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     animation: rotateRingReverse 10s linear infinite, ringGlowPulse 3s ease-in-out infinite;
@@ -741,7 +736,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
       <p class="about-intro">تضم المنصة مجالات متنوعة مثل البلاط والسيراميك، والدهان، والبناء، والإكساء والتشطيبات، والكهرباء، والسباكة، والنجارة وغيرها من المهن. دور المنصة هو تسهيل العثور على أصحاب المهن وعرض أعمالهم؛ ويُنصح المستخدمون بالتأكد من التفاصيل والاتفاق على السعر والموعد مباشرة مع مقدم الخدمة قبل بدء العمل.</p>
       <div class="about-grid">
         <div class="about-col"><h3><i data-lucide="users"></i> للباحثين عن عمل</h3><ul><li><i data-lucide="check-circle-2"></i> بطاقة مهنية احترافية باسمك وصورك ومعلوماتك.</li><li><i data-lucide="check-circle-2"></i> ظهور مباشر أمام أصحاب العمل في محافظتك.</li><li><i data-lucide="check-circle-2"></i> تواصل فوري عبر الاتصال والواتساب بدون وسطاء.</li></ul></div>
-        <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر وفوري مع من يناسبك.</li></ul></div>
+        <div class="about-col"><h3><i data-lucide="briefcase"></i> لأصحاب العمل</h3><ul><li><i data-lucide="check-circle-2"></i> ابحث بالحرفة أو المحافظة وشوف الأعمال قبل التواصل.</li><li><i data-lucide="check-circle-2"></i> آلاف الصنايعية الموثوقين بمكان واحد.</li><li><i data-lucide="check-circle-2"></i> تواصل مباشر الفور مع من يناسبك.</li></ul></div>
         <div class="about-col"><h3><i data-lucide="sparkles"></i> مميزات المنصة</h3><ul><li><i data-lucide="check-circle-2"></i> نشر مجاني بالكامل وبدون عمولات.</li><li><i data-lucide="check-circle-2"></i> حتى 50 صورة لعملك (3 صور يوميا مع زر لليوم التالي).</li><li><i data-lucide="check-circle-2"></i> نظام حماية وإبلاغ ضد المخالفين.</li></ul></div>
       </div>
     </section>
@@ -813,7 +808,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
         </div>
         <button type="submit" class="profile-submit"><i data-lucide="save"></i> حفظ التعديلات</button>
       </form>
-      <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#/';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
+      <button type="button" class="profile-logout-btn" onclick="doLogout(); location.hash='#sh';"><i data-lucide="log-out"></i> تسجيل الخروج من الحساب</button>
     </div>
   </div>
 
@@ -952,7 +947,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// دالة فحص ما إذا كان المستخدم يفتح التطبيق المثبت (Standalone) لإخفاء أيقونة التنزيل
 function checkStandaloneMode() {
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone || document.referrer.includes('android-app://');
   if (isStandalone) {
@@ -962,7 +956,6 @@ function checkStandaloneMode() {
   }
 }
 
-// دالة تنزيل ملف الـ APK عند الضغط على الزر العائم وإظهار إشعار التثبيت
 function triggerAppDownload(e) {
   e.preventDefault();
   const apkFileName = "الكل هنا.apk"; 
@@ -973,7 +966,6 @@ function triggerAppDownload(e) {
   downloadLink.click();
   downloadLink.remove();
   
-  // إظهار إشعار تفاعلي ومفصل لتوجيه المستخدم بعد التنزيل
   if(typeof toast === 'function') {
     toast('📥 جاري بدء التنزيل... عند الانتهاء افتح مجلد (التنزيلات / ملفاتي) على هاتفك واضغط على الملف لإكمال التثبيت!');
   }
