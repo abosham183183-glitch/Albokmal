@@ -21,11 +21,10 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Android SDK packages
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -34,7 +33,7 @@ jobs:
 
       - name: Unpack native Android project
         run: |
-          test -f alkolhana_android_source.zip || (echo 'Missing alkolhana_android_source.zip in repository root' && exit 1)
+          test -f alkolhana_android_source.zip || (echo 'Missing alkolhana_android_source.zip' && exit 1)
           unzip -o alkolhana_android_source.zip -d .
           test -f alkolhana_android/app/build.gradle.kts
 
