@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.firestore.FirebaseFirestore
 
-// ألوان الهوية البصرية لـ ALO USTA / الكل هنا
+// ألوان الهوية البصرية (NavyBlue & SoftGold)
 val NavyBlue = Color(0xFF0A1E3C)
 val SoftGold = Color(0xFFD4A017)
 val LightBg = Color(0xFFEEF2F8)
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// قائمة التنقل الرئيسية في التطبيق
+// تعريف الشاشات المتاحة في التطبيق
 enum class Screen {
     HOME, CREATE_CARD, LOGIN
 }
@@ -62,12 +62,12 @@ fun MainScreenContainer(db: FirebaseFirestore) {
                 title = { 
                     Column {
                         Text("الكل هنا", color = White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                        Text("دليل الحرفيين في سوريا", color = SoftGold, fontSize = 11.sp)
+                        Text("دليل الحرفيين والمحافظات", color = SoftGold, fontSize = 11.sp)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = NavyBlue),
                 actions = {
-                    IconButton(onClick = { /* إشعارات */ }) {
+                    IconButton(onClick = { /* تنبيهات */ }) {
                         Icon(Icons.Default.Notifications, contentDescription = "تنبيهات", tint = White)
                     }
                 }
@@ -98,7 +98,7 @@ fun MainScreenContainer(db: FirebaseFirestore) {
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             when (currentScreen) {
-                Screen.HOME -> HomeScreen(db = db, onNavigateToCreate = { currentScreen = Screen.CREATE_CARD })
+                Screen.HOME -> HomeScreen(db = db)
                 Screen.CREATE_CARD -> CreateCardScreen(db = db, onCardCreated = { currentScreen = Screen.HOME })
                 Screen.LOGIN -> LoginScreen(onLoginSuccess = { currentScreen = Screen.HOME })
             }
@@ -107,14 +107,13 @@ fun MainScreenContainer(db: FirebaseFirestore) {
 }
 
 // ----------------------------------------------------
-// 1. شاشة الرئيسية (HomeScreen)
+// 1. الشاشة الرئيسية (HomeScreen)
 // ----------------------------------------------------
 @Composable
-fun HomeScreen(db: FirebaseFirestore, onNavigateToCreate: () -> Unit) {
+fun HomeScreen(db: FirebaseFirestore) {
     var craftsmen by remember { mutableStateOf(listOf>()) }
     var searchQuery by remember { mutableStateOf("") }
 
-    // جلب بطاقات الحرفيين من Firestore
     LaunchedEffect(Unit) {
         db.collection("cards").limit(30).get()
             .addOnSuccessListener { result ->
@@ -122,7 +121,6 @@ fun HomeScreen(db: FirebaseFirestore, onNavigateToCreate: () -> Unit) {
             }
     }
 
-    // تصفية البطاقات حسب البحث
     val filteredCraftsmen = craftsmen.filter { card ->
         val name = card["name"] as? String ?: ""
         val profession = card["profession"] as? String ?: ""
@@ -141,7 +139,6 @@ fun HomeScreen(db: FirebaseFirestore, onNavigateToCreate: () -> Unit) {
         Text("أهلاً بك في الكل هنا", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
         Text("اعثر على الحرفي المناسب، قريباً منك.", fontSize = 13.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 12.dp))
 
-        // شريط البحث
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
@@ -150,22 +147,6 @@ fun HomeScreen(db: FirebaseFirestore, onNavigateToCreate: () -> Unit) {
             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
             singleLine = true
         )
-
-        // الأزرار السريعة
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            ElevatedButton(onClick = { /* فتح تصفح المحافظات */ }) {
-                Icon(Icons.Default.LocationOn, contentDescription = null, tint = NavyBlue)
-                Spacer(modifier = Modifier.width(4.dp))
-                Text("كل المحافظات", color = NavyBlue)
-            }
-            ElevatedButton(onClick = { /* فتح تصفح المهن */ }) {
-                Icon(Icons.Default.Build, contentDescription = null, tint = NavyBlue)
-                Spacer(modifier = Modifier.width(4.dp))
-                Text("تصفح المهن", color = NavyBlue)
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -328,7 +309,7 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
 }
 
 // ----------------------------------------------------
-// 3. شاشة تسجيل الدخول / الأدمن (LoginScreen)
+// 3. شاشة تسجيل الدخول / حسابي (LoginScreen)
 // ----------------------------------------------------
 @Composable
 fun LoginScreen(onLoginSuccess: () -> Unit) {
