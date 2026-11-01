@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.firestore.FirebaseFirestore
 
-// ألوان الهوية البصرية (NavyBlue & SoftGold)
+// ألوان الهوية البصرية لـ ALO USTA
 val NavyBlue = Color(0xFF0A1E3C)
 val SoftGold = Color(0xFFD4A017)
 val LightBg = Color(0xFFEEF2F8)
@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // الاتصال بقاعدة بيانات Firestore
         val db = FirebaseFirestore.getInstance()
 
         setContent {
@@ -47,7 +46,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// تعريف الشاشات المتاحة في التطبيق
 enum class Screen {
     HOME, CREATE_CARD, LOGIN
 }
@@ -61,13 +59,13 @@ fun MainScreenContainer(db: FirebaseFirestore) {
             TopAppBar(
                 title = { 
                     Column {
-                        Text("الكل هنا", color = White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                        Text("دليل الحرفيين والمحافظات", color = SoftGold, fontSize = 11.sp)
+                        Text("ALO USTA", color = White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                        Text("دليل الحرفيين والخدمات", color = SoftGold, fontSize = 11.sp)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = NavyBlue),
                 actions = {
-                    IconButton(onClick = { /* تنبيهات */ }) {
+                    IconButton(onClick = { /* إشعارات */ }) {
                         Icon(Icons.Default.Notifications, contentDescription = "تنبيهات", tint = White)
                     }
                 }
@@ -107,18 +105,30 @@ fun MainScreenContainer(db: FirebaseFirestore) {
 }
 
 // ----------------------------------------------------
-// 1. الشاشة الرئيسية (HomeScreen)
+// 1. الشاشة الرئيسية مع زر التحديث الحقيقي
 // ----------------------------------------------------
 @Composable
 fun HomeScreen(db: FirebaseFirestore) {
     var craftsmen by remember { mutableStateOf(listOf>()) }
     var searchQuery by remember { mutableStateOf("") }
+    var isRefreshing by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
-        db.collection("cards").limit(30).get()
+    // دالة جلب البيانات المحدثة من Firestore
+    val fetchCards = {
+        isRefreshing = true
+        db.collection("cards").get()
             .addOnSuccessListener { result ->
                 craftsmen = result.documents.map { it.data ?: emptyMap() }
+                isRefreshing = false
             }
+            .addOnFailureListener {
+                isRefreshing = false
+            }
+    }
+
+    // جلب البيانات عند فتح الشاشة لأول مرة
+    LaunchedEffect(Unit) {
+        fetchCards()
     }
 
     val filteredCraftsmen = craftsmen.filter { card ->
@@ -136,13 +146,13 @@ fun HomeScreen(db: FirebaseFirestore) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("أهلاً بك في الكل هنا", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
-        Text("اعثر على الحرفي المناسب، قريباً منك.", fontSize = 13.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 12.dp))
+        Text("أهلاً بك في ALO USTA", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
+        Text("منصتك المباشرة للبحث عن أفضل الحرفيين", fontSize = 13.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 12.dp))
 
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            placeholder = { Text("ابحث عن حرفي أو مهنة أو محافظة") },
+            placeholder = { Text("ابحث عن حرفي، مهنة، أو محافظة") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = SoftGold) },
             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
             singleLine = true
@@ -153,14 +163,14 @@ fun HomeScreen(db: FirebaseFirestore) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("حرفيون وبطاقات حديثة", fontSize = 17.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
-            TextButton(onClick = {
-                db.collection("cards").limit(30).get()
-                    .addOnSuccessListener { result ->
-                        craftsmen = result.documents.map { it.data ?: emptyMap() }
-                    }
-            }) {
-                Text("تحديث 🔄", color = SoftGold)
+            Text("البطاقات المتاحة", fontSize = 17.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
+            
+            // زر التحديث الفعلي والنشط
+            TextButton(
+                onClick = { fetchCards() },
+                enabled = !isRefreshing
+            ) {
+                Text(if (isRefreshing) "جاري التحديث..." else "تحديث 🔄", color = SoftGold, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -229,7 +239,7 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("إضافة بطاقة حرفي جديدة", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = NavyBlue, modifier = Modifier.padding(vertical = 12.dp))
+        Text("إضافة بطاقة جديدة إلى ALO USTA", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = NavyBlue, modifier = Modifier.padding(vertical = 12.dp))
 
         OutlinedTextField(
             value = name,
@@ -243,7 +253,7 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
         OutlinedTextField(
             value = profession,
             onValueChange = { profession = it },
-            label = { Text("المهنة (مثال: كهربائي، بلاط وسيراميك)") },
+            label = { Text("المهنة (مثال: كهربائي، بلاط)") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -252,7 +262,7 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
         OutlinedTextField(
             value = province,
             onValueChange = { province = it },
-            label = { Text("المحافظة (مثال: دمشق، حمص، البوكمال)") },
+            label = { Text("المحافظة / المنطقة") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -291,14 +301,14 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
                             statusMessage = "فشل الحفظ: ${e.localizedMessage}"
                         }
                 } else {
-                    statusMessage = "يرجى ملء جميع الحقول المطلوبة."
+                    statusMessage = "يرجى ملء الحقول الأساسية."
                 }
             },
             modifier = Modifier.fillMaxWidth().height(48.dp),
             colors = ButtonDefaults.buttonColors(containerColor = SoftGold),
             enabled = !isLoading
         ) {
-            Text("نشر البطاقة في الموقع والتطبيق", color = NavyBlue, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+            Text("نشر البطاقة فوراً", color = NavyBlue, fontSize = 15.sp, fontWeight = FontWeight.Bold)
         }
 
         if (statusMessage.isNotEmpty()) {
@@ -309,7 +319,7 @@ fun CreateCardScreen(db: FirebaseFirestore, onCardCreated: () -> Unit) {
 }
 
 // ----------------------------------------------------
-// 3. شاشة تسجيل الدخول / حسابي (LoginScreen)
+// 3. شاشة تسجيل الدخول (LoginScreen)
 // ----------------------------------------------------
 @Composable
 fun LoginScreen(onLoginSuccess: () -> Unit) {
@@ -327,7 +337,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
     ) {
         Icon(Icons.Default.AccountCircle, contentDescription = null, tint = NavyBlue, modifier = Modifier.size(72.dp))
         Spacer(modifier = Modifier.height(12.dp))
-        Text("تسجيل الدخول", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
+        Text("تسجيل دخول المشرفين", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = NavyBlue)
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
@@ -354,7 +364,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                     message = "تم تسجيل الدخول بنجاح"
                     onLoginSuccess()
                 } else {
-                    message = "يرجى إدخال البيانات بشكل صحيح"
+                    message = "يرجى إدخال بيانات صحيحة"
                 }
             },
             modifier = Modifier.fillMaxWidth().height(48.dp),
