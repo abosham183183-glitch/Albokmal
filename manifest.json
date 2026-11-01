@@ -1,11 +1,11 @@
 {
-  "id": "/",
+  "id": "./",
   "name": "ALO USTA | منصة الحرفيين والمحافظات في سوريا",
   "short_name": "ALO USTA",
   "description": "منصة ALO USTA تجمع الحرفيين وأصحاب المهن في سوريا، وتتيح البحث حسب المهنة والمحافظة والتواصل المباشر.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./?homescreen=1",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
