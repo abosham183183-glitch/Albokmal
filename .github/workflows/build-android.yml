@@ -43,7 +43,7 @@ jobs:
       - name: Check and unpack updated Android source
         shell: bash
         run: |
-          SOURCE_ZIP="ALO_USTA_android_updated_source_v2.zip"
+          SOURCE_ZIP="ALO_USTA_android_updated_source.zip"
 
           if [ ! -f "$SOURCE_ZIP" ]; then
             echo "ERROR: $SOURCE_ZIP was not found in the repository root."
