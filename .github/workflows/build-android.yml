@@ -1,3 +1,4 @@
+
 name: Build ALO USTA Android APK
 
 on:
@@ -42,15 +43,25 @@ jobs:
       - name: Check and unpack updated Android source
         shell: bash
         run: |
-          test -f ALO_USTA_android_updated_source.zip || {
-            echo "ERROR: ALO_USTA_android_updated_source.zip was not found in the repository root."
+          SOURCE_ZIP="ALO_USTA_android_updated_source_v2.zip"
+
+          if [ ! -f "$SOURCE_ZIP" ]; then
+            echo "ERROR: $SOURCE_ZIP was not found in the repository root."
+            echo "Upload the updated ZIP to the repository root, then rerun."
             exit 1
-          }
+          fi
 
-          unzip -o ALO_USTA_android_updated_source.zip -d .
+          unzip -o "$SOURCE_ZIP" -d .
 
-          test -f alkolhana_android/app/build.gradle.kts
-          test -f alkolhana_android/app/google-services.json
+          if [ ! -f alkolhana_android/app/build.gradle.kts ]; then
+            echo "ERROR: Android Gradle project was not found after extraction."
+            exit 1
+          fi
+
+          if [ ! -f alkolhana_android/app/google-services.json ]; then
+            echo "ERROR: google-services.json is missing."
+            exit 1
+          fi
 
       - name: Build debug APK
         run: gradle -p alkolhana_android --no-daemon assembleDebug
