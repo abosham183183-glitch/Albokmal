@@ -1,5 +1,4 @@
-
-name: Build Alkolhana Android APK
+name: Build ALO USTA Android APK
 
 on:
   workflow_dispatch:
@@ -40,20 +39,26 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Unpack native Android project
+      - name: Check and unpack updated Android source
         shell: bash
         run: |
-          test -f alkolhana_android_source.zip
-          unzip -o alkolhana_android_source.zip -d .
+          test -f ALO_USTA_android_updated_source.zip || {
+            echo "ERROR: ALO_USTA_android_updated_source.zip was not found in the repository root."
+            exit 1
+          }
+
+          unzip -o ALO_USTA_android_updated_source.zip -d .
+
           test -f alkolhana_android/app/build.gradle.kts
+          test -f alkolhana_android/app/google-services.json
 
       - name: Build debug APK
         run: gradle -p alkolhana_android --no-daemon assembleDebug
 
-      - name: Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: alkolhana-debug-apk
+          name: ALO-USTA-debug-apk
           path: alkolhana_android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
