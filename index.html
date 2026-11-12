@@ -60,11 +60,12 @@ svg.lucide{display:inline-block;vertical-align:-.15em;width:1em;height:1em;strok
 a{color:inherit;text-decoration:none}
 
 /* ═══════ خلفية اللوغو ═══════ */
-.logo-big{background:#DBEAFE !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;border:2px solid rgba(255,255,255,0.4) !important}
+/* تم إزالة الخلفية البيضاء والحدود وخعل اللوغو شفاف وبدون مربعات */
+.logo-big{background:transparent !important;box-shadow:none !important;border:none !important}
 .dr-head img{background:#DBEAFE !important;padding:3px !important}
 .f-logo-small{background:#DBEAFE !important;padding:3px !important}
 .pc-ava,.profile-avatar-lg,.card-ava,.user-avatar-lg,.mini-ava{background:#DBEAFE !important}
-[data-theme="dark"] .logo-big,
+[data-theme="dark"] .logo-big{background:transparent !important;border-color:transparent !important}
 [data-theme="dark"] .dr-head img,
 [data-theme="dark"] .f-logo-small,
 [data-theme="dark"] .pc-ava,
@@ -78,8 +79,8 @@ a{color:inherit;text-decoration:none}
 .tbwrap{max-width:1240px;margin:auto;display:flex;align-items:center;gap:.9rem;padding:.55rem 1rem;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:transform .2s ease}
 .brand:hover{transform:scale(1.02)}
-/* تم تكبير شعار logo5.png هنا ليصبح بارزاً مع الحفاظ على مساحة الإطار */
-.logo-big{width:92px;height:92px;border-radius:18px;object-fit:contain;padding:2px}
+/* تم تكبير شعار logo5.png هنا وتوسيع المقاسات ليصبح أكبر وبارزاً تماماً بدون أي مربع أبيض محيط */
+.logo-big{width:115px;height:115px;object-fit:contain;padding:0}
 .brand-txt h1{font-size:1.65rem;line-height:1.1;font-weight:900}
 .brand-txt span{font-size:.7rem;color:var(--gold2);font-weight:700;letter-spacing:1.5px}
 .tb-space{flex:1}
@@ -99,7 +100,6 @@ a{color:inherit;text-decoration:none}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(320px,86vw);z-index:210;background:var(--surface);box-shadow:-10px 0 40px rgba(0,0,0,.35);transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.9,.25,1.1);display:flex;flex-direction:column;overflow-y:auto}
 .drawer.open{transform:translateX(0)}
 .dr-head{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:1.3rem 1.2rem;display:flex;align-items:center;gap:.8rem}
-/* تكبير logo5.png داخل القائمة الجانبية ليصبح بارزاً */
 .dr-head img{width:64px;height:64px;border-radius:13px;object-fit:contain;padding:1px}
 .dr-head b{font-family:'Cairo';font-size:1.25rem;display:block}
 .dr-head small{font-size:.68rem;color:var(--gold2);letter-spacing:1px}
@@ -193,7 +193,6 @@ main{max-width:1240px;margin:auto;padding:1.4rem 1rem 4rem}
     pointer-events: none;
 }
 
-/* logo7.png أبقيناه على حجمه القديم الطبيعي */
 .logo-image {
     width: 110px;
     height: auto;
@@ -549,7 +548,7 @@ footer{background:var(--navy);color:#BFD0EA;margin-top:2rem;border-top:4px solid
 .fbotttom{border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:1.5rem;font-size:.85rem;color:#6B7280;background:rgba(0,0,0,.2)}
 
 @media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{order:-1}}
-@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:76px;height:76px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.tbwrap{gap:.6rem}.brand-txt h1{font-size:1.25rem}.clockbox{padding:.4rem .7rem}.clock-date{display:none}.logo-big{width:90px;height:90px}.frow{grid-template-columns:1fr}.prov-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* ═══════ الزر العائم لتنزيل التطبيق من اليسار ═══════ */
 .floating-download-btn {
